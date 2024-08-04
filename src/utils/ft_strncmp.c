@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Created: 2024/04/17 16:22:37 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/04 23:26:21 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_error	*g_error;
-
-int	main(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char			*input;
+	size_t	i;
 
-	// g_error = NULL;
-	while (1)
+	i = 0;
+	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
 	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-        // temporary exit condition
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-        // ft_parse_input(input);
-        ft_lexer(input);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
 	return (0);
 }

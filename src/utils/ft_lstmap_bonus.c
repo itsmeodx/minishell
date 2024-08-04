@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Created: 2023/11/20 11:05:02 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/04 23:26:21 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_error	*g_error;
-
-int	main(void)
+t_link	*ft_lstmap(t_link *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char			*input;
+	t_link	*new_lst;
+	t_link	*new_node;
 
-	// g_error = NULL;
-	while (1)
+	if (!lst || !f || !del)
+		return (NULL);
+	new_lst = NULL;
+	while (lst)
 	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-        // temporary exit condition
-		if (ft_strncmp(input, "exit", 4) == 0)
+		new_node = ft_lstnew(f(&lst->command));
+		if (!new_node)
 		{
-			free(input);
-			break ;
+			ft_lstclear(&new_lst, del);
+			del(&new_node->command);
+			return (NULL);
 		}
-        // ft_parse_input(input);
-        ft_lexer(input);
+		ft_lstadd_back(&new_lst, new_node);
+		lst = lst->next;
 	}
-	return (0);
+	return (new_lst);
 }

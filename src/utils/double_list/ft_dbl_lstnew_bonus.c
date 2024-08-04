@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_dbl_lstnew_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Created: 2023/11/18 16:36:31 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/05 00:49:24 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_error	*g_error;
-
-int	main(void)
+t_link	*ft_dbl_lstnew(void *content)
 {
-	char			*input;
+	t_link	*node;
 
-	// g_error = NULL;
-	while (1)
-	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-        // temporary exit condition
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-        // ft_parse_input(input);
-        ft_lexer(input);
-	}
-	return (0);
+	node = malloc(sizeof(t_link));
+	if (node == NULL)
+		return (NULL);
+	node->command = ft_strdup(content);
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }

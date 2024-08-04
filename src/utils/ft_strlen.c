@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Created: 2024/05/22 19:31:49 by adam              #+#    #+#             */
+/*   Updated: 2024/08/05 00:19:36 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_error	*g_error;
-
-int	main(void)
+int	ft_strlen(const char *str)
 {
-	char			*input;
+	int	i;
 
-	// g_error = NULL;
-	while (1)
-	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-        // temporary exit condition
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-        // ft_parse_input(input);
-        ft_lexer(input);
-	}
-	return (0);
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
 }

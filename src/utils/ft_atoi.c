@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Created: 2023/11/09 20:54:32 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/04 23:26:21 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_error	*g_error;
-
-int	main(void)
+long	ft_atoi(const char *nptr)
 {
-	char			*input;
+	long	i;
+	long	n;
+	long	f;
 
-	// g_error = NULL;
-	while (1)
+	i = 0;
+	n = 0;
+	f = 1;
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-        // temporary exit condition
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-        // ft_parse_input(input);
-        ft_lexer(input);
+		if (nptr[i] == '-')
+			f = f * -1;
+		i++;
 	}
-	return (0);
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		n = n * 10 + (((char *)nptr)[i++] - 48);
+	}
+	return (n * f);
 }

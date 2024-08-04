@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Created: 2024/06/01 10:05:28 by adam              #+#    #+#             */
+/*   Updated: 2024/08/04 23:26:21 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_error	*g_error;
-
-int	main(void)
+void	ft_free(char **str)
 {
-	char			*input;
+	int	i;
 
-	// g_error = NULL;
-	while (1)
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
 	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-        // temporary exit condition
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-        // ft_parse_input(input);
-        ft_lexer(input);
+		free(str[i]);
+		i++;
 	}
-	return (0);
+	free(str);
 }

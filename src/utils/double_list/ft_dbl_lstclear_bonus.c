@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_dbl_lstclear_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Created: 2023/11/19 18:22:35 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/05 00:49:24 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-t_error	*g_error;
-
-int	main(void)
+void	ft_dbl_lstclear(t_link **lst)
 {
-	char			*input;
+	t_link	*current;
+	t_link	*twp;
 
-	// g_error = NULL;
-	while (1)
+	if (!lst)
+		return ;
+	current = *lst;
+	while (current)
 	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-        // temporary exit condition
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-        // ft_parse_input(input);
-        ft_lexer(input);
+		twp = current;
+		current = current->next;
+		if (twp->command)
+			free(twp->command);
+		if (twp)
+			free(twp);
 	}
-	return (0);
+	*lst = NULL;
 }
