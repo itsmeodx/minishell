@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/05 00:53:21 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/05 15:57:23 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ typedef enum e_type
 	GREAT,
 	LESSLESS,
 	GREATGREAT,
-	PIPE
+	PIPE,
+	OR,
+	AND,
+	OPEN_PAR,
+	CLOSE_PAR, // parenthesis	
 }                   t_type;
 
 typedef enum e_errorn
@@ -68,7 +72,7 @@ char						**ft_split(char *str, char *c);
 int                         check_quote(char *str, int a);
 int                           ft_strlen(const char *str);
 int							ft_strchr(int c, const char *s);
-// t_command					*ft_parser(char *input);
+void					ft_parsing(char *input);
 // t_link						*ft_def_type(char **input);
 // void						ft_check_command(t_link *link, t_command **command);
 // int							ft_check_redirections(t_link *link,

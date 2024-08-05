@@ -6,7 +6,7 @@
 #    By: adam <adam@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/05 00:56:06 by adam             ###   ########.fr        #
+#    Updated: 2024/08/05 15:46:29 by adam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS = #-Wall -Wextra -Werror
 SRC = src/main.c src/parsing/lexer.c \
 	src/utils/ft_strlen.c src/utils/ft_split.c\
 	src/utils/ft_strncmp.c src/utils/small_ft.c\
+	src/parsing/parser.c\
 	src/utils/ft_strchr.c src/utils/ft_strdup.c\
 	src/utils/double_list/ft_dbl_lstnew_bonus.c \
 	src/utils/double_list/ft_dbl_lstadd_back_bonus.c \

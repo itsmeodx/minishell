@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:12:17 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/05 15:43:33 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(void)
 			free(input);
 			break ;
 		}
-        // ft_parse_input(input);
-        ft_lexer(input);
+        ft_parsing(input);
+        // ft_lexer(input);
 	}
 	return (0);
 }
