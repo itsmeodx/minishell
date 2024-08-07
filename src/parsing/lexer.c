@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 15:59:48 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/05 17:01:29 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ char	*ft_add_spaces_bonus(char *input, int j)
 			tmp[++i] = input[j++];
 			if (input[j - 1] != '(' && ((input[j] == '&' && input[j - 1] != '|')
             || input[j] == '|'))
-			{
 				tmp[++i] = input[j++];
-			}
 			tmp[++i] = ' ';
 			i++;
 		}
@@ -79,9 +77,7 @@ char	*ft_add_spaces(char *input, int j)
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];
 			if (input[j - 1] != '|' && input[j - 1] != ')' && (input[j] == '<' || input[j] == '>'))
-			{
 				tmp[++i] = input[j++];
-			}
 			tmp[++i] = ' ';
 			i++;
 		}
