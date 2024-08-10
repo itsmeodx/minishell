@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/09 11:49:37 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/10 10:58:07 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef enum e_type
 	OR,
 	AND,
 	OPEN_PAR,
-	CLOSE_PAR, // parenthesis	
-}                   t_type;
+	CLOSE_PAR, // parenthesis
+}					t_type;
 
 typedef enum e_errorn
 {
@@ -64,27 +64,28 @@ typedef struct s_error
 // old linked list will be replaced by a new tree
 typedef struct s_link
 {
-	char					*command;
-	t_type					identifer;
-	struct s_link			*prev;
-	struct s_link			*next;
-}							t_link;
+	char			*command;
+	t_type			identifer;
+	struct s_link	*prev;
+	struct s_link	*next;
+}					t_link;
 
 /*Parsing*/
 // src
-char						**ft_lexer(char *input);
-char						**ft_split(char *str, char *c);
-int                         check_quote(char *str, int a);
-int                           ft_strlen(const char *str);
-int							ft_strchr(int c, const char *s);
-void					ft_parsing(char *input);
+char				**ft_lexer(char *input);
+char				**ft_split(char *str, char *c);
+int					check_quote(char *str, int a);
+int					ft_strlen(const char *str);
+int					ft_strchr(int c, const char *s);
+void				ft_parsing(char *input);
 // t_link						*ft_def_type(char **input);
 // void						ft_check_command(t_link *link, t_command **command);
 // int							ft_check_redirections(t_link *link,
 // 								t_redirection **redirectoin);
 // t_command					*ft_set_args(t_link *link, t_command *command);
-char						**ft_strjoin_pro(char **s1, char **s2);
-// int							ft_check_pipes(t_link *link, t_command **command);
+char				**ft_strjoin_pro(char **s1, char **s2);
+// int							ft_check_pipes(t_link *link,
+								// t_command **command);
 // void						ft_main_checker(t_link *link, t_command **command);
 // int							ft_quote_handler(t_link **list);
 
@@ -104,6 +105,8 @@ char						**ft_strjoin_pro(char **s1, char **s2);
 // // expand_ft
 // int	ft_base_expand(t_link **link, env_store *env);
 
+// src fts
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // // utils
 // size_t	ft_strlcat(char *dst, const char *src, size_t size);
@@ -111,20 +114,21 @@ char						**ft_strjoin_pro(char **s1, char **s2);
 // int							ft_count_strs(char **s);
 // int							check_quote(char *str, int a);
 // int							ft_error(void);
-void						free_str(char **tab, int c);
+void				free_str(char **tab, int c);
 // void						ft_free(char **str);
 // void						ft_putstr(char *s, int fd);
 // int							ft_isdigit(int c);
 // int							ft_strncmp(const char *s1, const char *s2,
 // 								size_t n);
-char						**ft_strdup_pro(char **s);
-char						*ft_strdup(const char *s);
-int							ft_count_strs(char **s);
+char				**ft_strdup_pro(char **s);
+char				*ft_strdup(const char *s);
+int					ft_count_strs(char **s);
 // int							ft_strlen(const char *str);
 // long						ft_atoi(const char *nptr);
-char						*ft_strjoin(char *s1, char const *s2);
+char				*ft_strjoin(char *s1, char const *s2);
 // char						*ft_strdup(const char *s);
-// size_t						ft_strlcpy(char *dst, const char *src, size_t size);
+// size_t						ft_strlcpy(char *dst, const char *src,
+							size_t size);
 
 // // rediction_ft
 // t_redirection				*ft_lstnew_redi(char *content);
@@ -135,9 +139,9 @@ char						*ft_strjoin(char *s1, char const *s2);
 // // link_ft
 
 // dbl link_ft
-void						ft_dbl_lstadd_back(t_link **lst, t_link *new);
-t_link						*ft_dbl_lstnew(void *content);
-t_link                      *ft_dbl_lstlast(t_link *lst);
+void				ft_dbl_lstadd_back(t_link **lst, t_link *new);
+t_link				*ft_dbl_lstnew(void *content);
+t_link				*ft_dbl_lstlast(t_link *lst);
 // void						ft_dbl_lstclear(t_link **lst);
 
 // t_link						*ft_create_node(int nbr);
@@ -151,6 +155,6 @@ t_link                      *ft_dbl_lstlast(t_link *lst);
 // void						ft_lstdelone(t_link *lst);
 // void						ft_lstiter(t_link *lst, void (*f)(void *));
 // t_link						*ft_lstmap(t_link *lst, void *(*f)(void *),
-								// void (*del)(void *));
+// void (*del)(void *));
 
-#endif //PARSING_H
+#endif // PARSING_H
