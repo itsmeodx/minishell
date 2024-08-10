@@ -23,9 +23,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stddef.h>
-
-// src fts
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-
+# include <string.h>
 
 #endif //MINISHELL_H

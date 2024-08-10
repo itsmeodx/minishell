@@ -99,6 +99,8 @@ char						**ft_strjoin_pro(char **s1, char **s2);
 // // expand_ft
 // int	ft_base_expand(t_link **link, env_store *env);
 
+// src fts
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // // utils
 // size_t	ft_strlcat(char *dst, const char *src, size_t size);
