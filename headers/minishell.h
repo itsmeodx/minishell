@@ -12,6 +12,7 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include "parsing.h"
 # include "execution.h"
 # include <stdio.h>
@@ -26,5 +27,7 @@
 # include <signal.h>
 # include <stropts.h>
 # include <termios.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 #endif //MINISHELL_H
