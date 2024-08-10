@@ -14,5 +14,17 @@
 # define MINISHELL_H
 # include "parsing.h"
 # include "execution.h"
+# include <stdio.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <signal.h>
+# include <stropts.h>
+# include <termios.h>
 
 #endif //MINISHELL_H

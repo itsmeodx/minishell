@@ -6,11 +6,12 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/07/30 13:00:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:30:19 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+# include "minishell.h"
 
 #endif //PARSING_H
