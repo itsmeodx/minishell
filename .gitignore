@@ -6,6 +6,7 @@
 *.ko
 *.obj
 *.elf
+obj/
 
 # Linker output
 *.ilk
@@ -31,17 +32,28 @@
 # Executables
 *.exe
 *.out
+out
 *.app
 *.i*86
 *.x86_64
 *.hex
-minishell
+test
+
+# Random .c files
+test.c
+#main.c
+.main.c
+main
+*blabla*
 
 # Debug files
 *.dSYM/
 *.su
 *.idb
 *.pdb
+imgui.ini
+vgcore.*
+.gdb*
 
 # Kernel Module Compile Results
 *.mod*
@@ -52,11 +64,33 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# CMake
-CMake*
+# Build folders
+build/
+includes/
+.cache/
 
-# Clion .idea/
+# Text files
+*.txt
+
+# .gitignore file
+#.gitignore
+
+# Random folder
+.vscode
 .idea
+cmake-build-debug
 
-# Test
-test.c
+# README file
+*.md
+
+# LICENSE file
+*LICENSE
+
+# Hidden files
+.*
+
+# git
+git/
+
+# MiniShell
+minishell
