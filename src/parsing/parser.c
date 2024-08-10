@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 16:59:45 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/09 11:41:11 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_link	*ft_def_type(char **input)
 	}
 	return (link);
 }
-
 
 void ft_parsing(char *input)
 {

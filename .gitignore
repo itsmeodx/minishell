@@ -62,3 +62,6 @@ test.c
 
 # program
 minishell
+
+# .vscode
+.vscode/

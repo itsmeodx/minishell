@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/05 15:57:23 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/09 11:49:37 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ typedef enum e_errorn
 	ERROR_GREATGREAT,
 	ERROR_PIPE,
 	ERROR_COMMAND,
-	ERROR_QUOTE
+	ERROR_QUOTE,
+	ERROR_OR,
+	ERROR_AND,
+	ERROR_OPEN_PAR,
+	ERROR_CLOSE_PAR,
 }							t_errorn;
-
 /* error guide
 	0: error in less(in) redirection
 	1: error in lessless(out) redirection
@@ -46,6 +49,10 @@ typedef enum e_errorn
 	3: error in greatgreat(append) redirection
 	4: error in pipe redirection
 	5: error in command (no command found)
+	6 : error in or (||)
+	7 : error in and (&&)
+	8 : error in open parenthesis
+	9 : error in close parenthesis
 */
 
 typedef struct s_error
@@ -54,8 +61,7 @@ typedef struct s_error
 	struct s_error			*next;
 }							t_error;
 
-
-
+// old linked list will be replaced by a new tree
 typedef struct s_link
 {
 	char					*command;
@@ -65,7 +71,6 @@ typedef struct s_link
 }							t_link;
 
 /*Parsing*/
-
 // src
 char						**ft_lexer(char *input);
 char						**ft_split(char *str, char *c);

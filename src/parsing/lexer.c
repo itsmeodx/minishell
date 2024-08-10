@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 17:01:29 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/09 11:35:51 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	ft_count_spaces(char *input)
 	}
 	return (count);
 }
-// this ft should be optimized to add spaces to
-// || and && operators plus parenthesis
 
 char	*ft_add_spaces_bonus(char *input, int j)
 {
