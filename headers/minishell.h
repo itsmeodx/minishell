@@ -20,14 +20,21 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <ctype.h>
 # include <fcntl.h>
 # include <string.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <unistd.h>
 # include <signal.h>
-# include <stropts.h>
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+typedef struct s_cmd
+{
+	int		argc;
+	char	**argv;
+}	t_cmd;
 
 #endif //MINISHELL_H
