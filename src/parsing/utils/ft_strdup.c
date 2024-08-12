@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:17:07 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/04 23:26:21 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 int	ft_count_strs(char **s)
 {
@@ -46,7 +46,7 @@ char	*ft_strdup(const char *s)
 	return (put);
 }
 
-char	**ft_strdup_pro(char **ptr)
+char	**ft_strdup_2d(char **ptr)
 {
 	char	**put;
 	int		size;

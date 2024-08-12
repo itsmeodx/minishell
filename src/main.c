@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 15:43:33 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:52:30 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+# include "parsing.h"
 
 t_error	*g_error;
 
@@ -21,7 +21,7 @@ int	main(void)
 	// g_error = NULL;
 	while (1)
 	{
-		input = readline("minishell>");
+		input = readline("parsing>");
 		if (input)
 			add_history(input);
         // temporary exit condition

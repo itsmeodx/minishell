@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dbl_lstadd_back_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:05:30 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/05 00:51:03 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 void	ft_dbl_lstadd_back(t_link **lst, t_link *new)
 {

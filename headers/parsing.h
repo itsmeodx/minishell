@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/10 11:01:17 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/11 20:45:41 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-# include "minishell.h"
-
-typedef enum e_type
-{
-	STR,
-	LESS,
-	GREAT,
-	LESSLESS,
-	GREATGREAT,
-	PIPE,
-	OR,
-	AND,
-	OPEN_PAR,
-	CLOSE_PAR, // parenthesis
-}					t_type;
+# include <stddef.h>
 
 typedef enum e_errorn
 {
@@ -42,6 +28,7 @@ typedef enum e_errorn
 	ERROR_OPEN_PAR,
 	ERROR_CLOSE_PAR,
 }							t_errorn;
+
 /* error guide
 	0: error in less(in) redirection
 	1: error in lessless(out) redirection
@@ -61,15 +48,18 @@ typedef struct s_error
 	struct s_error			*next;
 }							t_error;
 
+extern t_error	*g_error; //global variable to store errors
+
 // old linked list will be replaced by a new tree
 typedef struct s_link
 {
 	char			*command;
-	t_type			identifer;
+	int 			identifer;
 	struct s_link	*prev;
 	struct s_link	*next;
 }					t_link;
 
+# include "minishell.h"
 /*Parsing*/
 // src
 char				**ft_lexer(char *input);
@@ -83,11 +73,12 @@ void				ft_parsing(char *input);
 // int							ft_check_redirections(t_link *link,
 // 								t_redirection **redirectoin);
 // t_command					*ft_set_args(t_link *link, t_command *command);
-char				**ft_strjoin_pro(char **s1, char **s2);
+char				**ft_strjoin_2d(char **s1, char **s2);
 // int							ft_check_pipes(t_link *link,
 								// t_command **command);
 // void						ft_main_checker(t_link *link, t_command **command);
 // int							ft_quote_handler(t_link **list);
+
 
 // // error_ft
 // t_error						*ft_lstnew_error(t_errorn num_error);
@@ -114,13 +105,13 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 // int							ft_count_strs(char **s);
 // int							check_quote(char *str, int a);
 // int							ft_error(void);
-void				free_str(char **tab, int c);
+void				free_2d(char **tab, int c);
 // void						ft_free(char **str);
 // void						ft_putstr(char *s, int fd);
 // int							ft_isdigit(int c);
 // int							ft_strncmp(const char *s1, const char *s2,
 // 								size_t n);
-char				**ft_strdup_pro(char **s);
+char				**ft_strdup_2d(char **s);
 char				*ft_strdup(const char *s);
 int					ft_count_strs(char **s);
 // int							ft_strlen(const char *str);
@@ -128,7 +119,7 @@ int					ft_count_strs(char **s);
 char				*ft_strjoin(char *s1, char const *s2);
 // char						*ft_strdup(const char *s);
 // size_t						ft_strlcpy(char *dst, const char *src,
-							size_t size);
+							// size_t size);
 
 // // rediction_ft
 // t_redirection				*ft_lstnew_redi(char *content);

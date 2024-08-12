@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   small_ft.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:16:23 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/04 23:26:21 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
-void	free_str(char **tab, int c)
+void	free_2d(char **tab, int c)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	return (p);
 }
 
-char	**ft_strjoin_pro(char **s1, char **s2)
+char	**ft_strjoin_2d(char **s1, char **s2)
 {
 	char	**tmp;
 	int		i[2];
@@ -82,9 +82,9 @@ char	**ft_strjoin_pro(char **s1, char **s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (free_str(s1, ft_count_strs(s1)), ft_strdup_pro(s2));
+		return (free_2d(s1, ft_count_strs(s1)), ft_strdup_2d(s2));
 	if (!s2)
-		return (ft_strdup_pro(s1));
+		return (ft_strdup_2d(s1));
 	tmp = (char **)malloc(sizeof(char *) * (ft_count_strs(s1)
 				+ ft_count_strs(s2) + 1));
 	while (s1[i[0]])
@@ -98,6 +98,6 @@ char	**ft_strjoin_pro(char **s1, char **s2)
 		tmp[i[0]++] = ft_strdup(s2[i[1]++]);
 	}
 	tmp[i[0]] = NULL;
-	free_str(s1, ft_count_strs(s1));
+	free_2d(s1, ft_count_strs(s1));
 	return (tmp);
 }

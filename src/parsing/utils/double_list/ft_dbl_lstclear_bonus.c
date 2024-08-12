@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dbl_lstclear_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:22:35 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/05 00:49:24 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 void	ft_dbl_lstclear(t_link **lst)
 {

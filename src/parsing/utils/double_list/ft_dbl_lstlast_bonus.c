@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dbl_lstlast_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:52:32 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 00:53:04 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h" 
+# include "parsing.h" 
 
 t_link	*ft_dbl_lstlast(t_link *lst)
 {

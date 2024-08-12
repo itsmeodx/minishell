@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/10 18:08:34 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/11 20:51:25 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_set_type(t_link **node, char *input)
 	if (*node == NULL)
 		return ;
 	if (!ft_strncmp(input, "<", ft_strlen(input)))
-		(*node)->identifer = LESS;
+		(*node)->identifer = IN;
 	else if (!ft_strncmp(input, ">", ft_strlen(input)))
-		(*node)->identifer = GREAT;
+		(*node)->identifer = OUT;
 	else if (!ft_strncmp(input, "<<", ft_strlen(input)))
-		(*node)->identifer = LESSLESS;
+		(*node)->identifer = HERDOC;
 	else if (!ft_strncmp(input, ">>", ft_strlen(input)))
-		(*node)->identifer = GREATGREAT;
+		(*node)->identifer = APPEND;
 	else if (!ft_strncmp(input, "|", ft_strlen(input)))
 		(*node)->identifer = PIPE;
 	else if (!ft_strncmp(input, "||", ft_strlen(input)))
@@ -63,11 +63,12 @@ void ft_parsing(char *input)
 	
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
-    t_link *tmp = link;
-    while(tmp)
-    {
-        printf("command: %s\n", tmp->command);
-        printf("type: %d\n", tmp->identifer);
-        tmp = tmp->next;
-    }
+	ft_create_tree(link);
+    // t_link *tmp = link;
+    // while(tmp)
+    // {
+    //     printf("command: %s\n", tmp->command);
+    //     printf("type: %d\n", tmp->identifer);
+    //     tmp = tmp->next;
+    // }
 }
