@@ -13,43 +13,42 @@
 #ifndef parsing_H
 # define parsing_H
 
-# include <stdio.h>
-# include <sys/wait.h>
-# include <sys/types.h>
 # include <dirent.h>
-# include <sys/stat.h>
 # include <fcntl.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <signal.h>
-# include <termios.h>
-# include <readline/readline.h>
 # include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <termios.h>
+# include <unistd.h>
 
 typedef struct s_link
 {
 	char			*command;
-	int 			identifer;
+	int				identifer;
 	struct s_link	*prev;
 	struct s_link	*next;
 }					t_link;
 
 typedef struct s_cmd
 {
-    int     argc;
-    char    **argv;
-}               t_cmd;
+	int				argc;
+	char			**argv;
+}					t_cmd;
 
 typedef struct s_tree
 {
-    int                  type;
-    t_cmd				*cmd; 
-    int                 exit_status;
-    struct s_tree		*prev;
-    struct s_tree		*left;
-    struct s_tree		*right;
-}               t_tree;
-
+	int				type;
+	t_cmd			*cmd;
+	int				exit_status;
+	struct s_tree	*prev;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}					t_tree;
 
 #endif

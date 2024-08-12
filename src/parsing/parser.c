@@ -60,8 +60,8 @@ void	ft_parsing(char *input)
 {
 	t_link	*link;
 	char	**split_input;
-	t_link *tmp;
-	t_link *target;
+	t_link	*tmp;
+	t_link	*target;
 
 	target = NULL;
 	split_input = ft_lexer(input);
@@ -70,7 +70,7 @@ void	ft_parsing(char *input)
 	target = ft_find_hightest_proirity(tmp);
 	if (tmp)
 		printf("target: %s\n", target->command);
-	else 
+	else
 		printf("null\n");
 	// ft_create_tree(link);
 	// t_link *tmp = link;

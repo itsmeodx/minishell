@@ -21,10 +21,11 @@ int	ft_count_spaces_bonus(char *input)
 	count = 0;
 	while (input[i])
 	{
-		if (input[i] == '&' || input[i] == '(' || input[i] == '|' || input[i] == ')')
+		if (input[i] == '&' || input[i] == '(' || input[i] == '|'
+			|| input[i] == ')')
 			count++;
-		if (input[i + 1] && ((input[i] == '&' && input[i + 1] == '&') 
-			|| (input[i] == '|' && input[i + 1] == '|')))
+		if (input[i + 1] && ((input[i] == '&' && input[i + 1] == '&')
+				|| (input[i] == '|' && input[i + 1] == '|')))
 			count--;
 		i++;
 	}

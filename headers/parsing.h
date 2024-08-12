@@ -15,18 +15,17 @@
 # include "minishell.h"
 typedef enum e_type
 {
-	STR, //0
-	IN, //1
-	OUT, //2
-	APPEND, //3
-	HERDOC, //4
-	PIPE, //5
-	OR, //6
-	AND, //7
-    CLOSE_PAR, //9
-    OPEN_PAR //8
+	STR,       //0
+	IN,        //1
+	OUT,       //2
+	APPEND,    //3
+	HERDOC,    //4
+	PIPE,      //5
+	OR,        //6
+	AND,       //7
+	CLOSE_PAR, //9
+	OPEN_PAR   //8
 }					t_type;
-
 
 typedef enum e_errorn
 {
@@ -41,7 +40,7 @@ typedef enum e_errorn
 	ERROR_AND,
 	ERROR_OPEN_PAR,
 	ERROR_CLOSE_PAR,
-}							t_errorn;
+}					t_errorn;
 
 /* error guide
 	0: error in less(in) redirection
@@ -58,11 +57,11 @@ typedef enum e_errorn
 
 typedef struct s_error
 {
-	t_errorn				error;
-	struct s_error			*next;
-}							t_error;
+	t_errorn		error;
+	struct s_error	*next;
+}					t_error;
 
-extern t_error	*g_error; //global variable to store errors
+extern t_error *g_error; //global variable to store errors
 
 // old linked list will be replaced by a new tree
 
@@ -82,17 +81,17 @@ t_link				*ft_find_hightest_proirity(t_link *head);
 // t_command					*ft_set_args(t_link *link, t_command *command);
 char				**ft_strjoin_2d(char **s1, char **s2);
 // int							ft_check_pipes(t_link *link,
-								// t_command **command);
+// t_command **command);
 // void						ft_main_checker(t_link *link, t_command **command);
 // int							ft_quote_handler(t_link **list);
 
 // **tree_ft**
-void ft_treeadd_back_left(t_tree **tree, t_tree *new);
-t_tree *ft_treenew(char **cmd, int type);
-t_cmd *ft_cmdnew(char **cmd);
-void ft_treeadd_back_right(t_tree **tree, t_tree *new);
-void ft_free_tree(t_tree *node);
-t_tree *ft_create_tree(t_tree **tree, t_link *link);
+void				ft_treeadd_back_left(t_tree **tree, t_tree *new);
+t_tree				*ft_treenew(char **cmd, int type);
+t_cmd				*ft_cmdnew(char **cmd);
+void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
+void				ft_free_tree(t_tree *node);
+t_tree				*ft_create_tree(t_tree **tree, t_link *link);
 
 // // error_ft
 // t_error						*ft_lstnew_error(t_errorn num_error);
@@ -133,7 +132,7 @@ int					ft_count_strs(char **s);
 char				*ft_strjoin(char *s1, char const *s2);
 // char						*ft_strdup(const char *s);
 // size_t						ft_strlcpy(char *dst, const char *src,
-							// size_t size);
+// size_t size);
 
 // // rediction_ft
 // t_redirection				*ft_lstnew_redi(char *content);
@@ -147,7 +146,7 @@ char				*ft_strjoin(char *s1, char const *s2);
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);
 t_link				*ft_dbl_lstnew(void *content);
 t_link				*ft_dbl_lstlast(t_link *lst);
-void						ft_dbl_lstclear(t_link **lst);
+void				ft_dbl_lstclear(t_link **lst);
 
 // t_link						*ft_create_node(int nbr);
 // t_link						*ft_create_node(int nbr);
