@@ -12,7 +12,21 @@
 
 #ifndef PARSING_H
 # define PARSING_H
-# include <stddef.h>
+# include "minishell.h"
+typedef enum e_type
+{
+	STR, //0
+	IN, //1
+	OUT, //2
+	APPEND, //3
+	HERDOC, //4
+	PIPE, //5
+	OR, //6
+	AND, //7
+    CLOSE_PAR, //9
+    OPEN_PAR //8
+}					t_type;
+
 
 typedef enum e_errorn
 {
@@ -51,15 +65,7 @@ typedef struct s_error
 extern t_error	*g_error; //global variable to store errors
 
 // old linked list will be replaced by a new tree
-typedef struct s_link
-{
-	char			*command;
-	int 			identifer;
-	struct s_link	*prev;
-	struct s_link	*next;
-}					t_link;
 
-# include "minishell.h"
 /*Parsing*/
 // src
 char				**ft_lexer(char *input);
@@ -68,7 +74,8 @@ int					check_quote(char *str, int a);
 int					ft_strlen(const char *str);
 int					ft_strchr(int c, const char *s);
 void				ft_parsing(char *input);
-// t_link						*ft_def_type(char **input);
+t_link				*ft_def_type(char **input);
+t_link				*ft_find_hightest_proirity(t_link *head);
 // void						ft_check_command(t_link *link, t_command **command);
 // int							ft_check_redirections(t_link *link,
 // 								t_redirection **redirectoin);
@@ -79,6 +86,13 @@ char				**ft_strjoin_2d(char **s1, char **s2);
 // void						ft_main_checker(t_link *link, t_command **command);
 // int							ft_quote_handler(t_link **list);
 
+// **tree_ft**
+void ft_treeadd_back_left(t_tree **tree, t_tree *new);
+t_tree *ft_treenew(char **cmd, int type);
+t_cmd *ft_cmdnew(char **cmd);
+void ft_treeadd_back_right(t_tree **tree, t_tree *new);
+void ft_free_tree(t_tree *node);
+t_tree *ft_create_tree(t_tree **tree, t_link *link);
 
 // // error_ft
 // t_error						*ft_lstnew_error(t_errorn num_error);
@@ -133,7 +147,7 @@ char				*ft_strjoin(char *s1, char const *s2);
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);
 t_link				*ft_dbl_lstnew(void *content);
 t_link				*ft_dbl_lstlast(t_link *lst);
-// void						ft_dbl_lstclear(t_link **lst);
+void						ft_dbl_lstclear(t_link **lst);
 
 // t_link						*ft_create_node(int nbr);
 // t_link						*ft_create_node(int nbr);

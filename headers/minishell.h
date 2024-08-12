@@ -6,15 +6,13 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/11 20:49:32 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:56:05 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef parsing_H
 # define parsing_H
 
-# include "execution.h"
-# include "parsing.h"
 # include <stdio.h>
 # include <sys/wait.h>
 # include <sys/types.h>
@@ -29,25 +27,18 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef enum e_type
+typedef struct s_link
 {
-	STR, //0
-	IN, //1
-	OUT, //2
-	APPEND, //3
-	HERDOC, //4
-	PIPE, //5
-	OR, //6
-	AND, //7
-    OPEN_PAR, //8
-    CLOSE_PAR //9
-}					t_type;
+	char			*command;
+	int 			identifer;
+	struct s_link	*prev;
+	struct s_link	*next;
+}					t_link;
 
-// value of each type are important to make a binary search tree
 typedef struct s_cmd
 {
-    int     argsc;
-    char    **args;
+    int     argc;
+    char    **argv;
 }               t_cmd;
 
 typedef struct s_tree
@@ -60,12 +51,5 @@ typedef struct s_tree
     struct s_tree		*right;
 }               t_tree;
 
-// tree_ft
-void ft_treeadd_back_left(t_tree **tree, t_tree *new);
-t_tree *ft_treenew(char **cmd, int type);
-t_cmd *ft_cmdnew(char **cmd);
-void ft_treeadd_back_right(t_tree **tree, t_tree *new);
-void ft_free_tree(t_tree *node);
-t_tree *ft_create_tree(t_link *link);
 
 #endif

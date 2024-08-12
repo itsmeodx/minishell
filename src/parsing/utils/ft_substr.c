@@ -31,7 +31,7 @@ static char	*ft_fill(char const *s, unsigned int start, size_t len)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*ptr;
+	char *ptr;
 
 	if (!s)
 		return (NULL);

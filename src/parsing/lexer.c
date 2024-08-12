@@ -6,11 +6,30 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/08/11 20:46:25 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/12 20:41:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
+#include "parsing.h"
+
+int	ft_count_spaces_bonus(char *input)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (input[i])
+	{
+		if (input[i] == '&' || input[i] == '(' || input[i] == '|' || input[i] == ')')
+			count++;
+		if (input[i + 1] && ((input[i] == '&' && input[i + 1] == '&') 
+			|| (input[i] == '|' && input[i + 1] == '|')))
+			count--;
+		i++;
+	}
+	return (count);
+}
 
 int	ft_count_spaces(char *input)
 {
@@ -24,7 +43,8 @@ int	ft_count_spaces(char *input)
 		if (input[i] == '<' || input[i] == '>' || input[i] == '|')
 			count++;
 		if (input[i + 1] && ((input[i] == '<' && input[i + 1] == '<')
-				|| (input[i] == '>' && input[i + 1] == '>')))
+				|| (input[i] == '>' && input[i + 1] == '>') || (input[i] == '|'
+					&& input[i + 1] == '|')))
 			count--;
 		i++;
 	}
@@ -37,7 +57,9 @@ char	*ft_add_spaces_bonus(char *input, int j)
 	char	*tmp;
 
 	i = ft_count_spaces(input) * 2;
-	tmp = malloc(ft_strlen(input) + i + 1);
+	if (!i)
+		return (ft_strdup(input));
+	tmp = malloc(ft_strlen(input) + (i + 1));
 	i = 0;
 	while (input[j])
 	{
@@ -47,7 +69,7 @@ char	*ft_add_spaces_bonus(char *input, int j)
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];
 			if (input[j - 1] != '(' && ((input[j] == '&' && input[j - 1] != '|')
-            || input[j] == '|'))
+					|| input[j] == '|'))
 				tmp[++i] = input[j++];
 			tmp[++i] = ' ';
 			i++;
@@ -65,7 +87,12 @@ char	*ft_add_spaces(char *input, int j)
 	char	*tmp;
 
 	i = ft_count_spaces(input) * 2;
-	tmp = malloc(ft_strlen(input) + i + 1);
+	if (!i)
+		return (ft_strdup(input));
+	printf("num of spaces: %d\n", i);
+	printf("input: %s\n", input);
+	printf("\n\n\n\n\n");
+	tmp = malloc(ft_strlen(input) + (i + 1));
 	i = 0;
 	while (input[j])
 	{
@@ -74,7 +101,8 @@ char	*ft_add_spaces(char *input, int j)
 		{
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];
-			if (input[j - 1] != '|' && input[j - 1] != ')' && (input[j] == '<' || input[j] == '>'))
+			if (input[j - 1] != '|' && input[j - 1] != ')' && (input[j] == '<'
+					|| input[j] == '>'))
 				tmp[++i] = input[j++];
 			tmp[++i] = ' ';
 			i++;

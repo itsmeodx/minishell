@@ -6,11 +6,11 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/11 20:51:25 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/12 18:52:31 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
+#include "parsing.h"
 
 void	ft_set_type(t_link **node, char *input)
 {
@@ -56,19 +56,29 @@ t_link	*ft_def_type(char **input)
 	return (link);
 }
 
-void ft_parsing(char *input)
+void	ft_parsing(char *input)
 {
-	t_link		*link;
-	char		**split_input;
-	
+	t_link	*link;
+	char	**split_input;
+	t_link *tmp;
+	t_link *target;
+
+	target = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
-	ft_create_tree(link);
-    // t_link *tmp = link;
-    // while(tmp)
-    // {
-    //     printf("command: %s\n", tmp->command);
-    //     printf("type: %d\n", tmp->identifer);
-    //     tmp = tmp->next;
-    // }
+	tmp = link;
+	target = ft_find_hightest_proirity(tmp);
+	if (tmp)
+		printf("target: %s\n", target->command);
+	else 
+		printf("null\n");
+	// ft_create_tree(link);
+	// t_link *tmp = link;
+	// while(tmp)
+	// {
+	//     printf("command: %s\n", tmp->command);
+	//     printf("type: %d\n", tmp->identifer);
+	//     tmp = tmp->next;
+	// }
+	ft_dbl_lstclear(&link);
 }

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:21:06 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:13:22 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	char_sep(char *str, char *charset)
 	return (i);
 }
 
-static char	*ft_words(char *str, char *charset)
+char	*ft_words(char *str, char *charset)
 {
 	int		len;
 	int		i;
