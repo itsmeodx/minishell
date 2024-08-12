@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/11 12:46:25 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:09:21 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	cd_tilde(t_cmd *cmd)
 		return (dprintf(STDERR_FILENO, "minishell: cd: HOME not set\n"), false);
 	if (chdir(cmd->argv[1] + 2) == -1)
 		return (dprintf(STDERR_FILENO,
-				"minishell: cd: %s%s: no such file or directory\n",
+				"minishell: cd: %s%s: "NSFOD"\n",
 				getenv("HOME"), cmd->argv[1] + 1), false);
 	return (true);
 }
@@ -52,7 +52,7 @@ bool	cd_dir(t_cmd *cmd)
 {
 	if (chdir(cmd->argv[1]) == -1)
 		return (dprintf(STDERR_FILENO,
-				"minishell: cd: %s: no such file or directory\n", cmd->argv[1]),
+				"minishell: cd: %s: "NSFOD"\n", cmd->argv[1]),
 			false);
 	return (true);
 }
@@ -85,15 +85,3 @@ bool	cd(t_cmd *cmd)
 	update_env("PWD", getcwd(NULL, 0));
 	return (true);
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	t_cmd	cmd;
-
-	cmd.argc = argc;
-	cmd.argv = argv;
-	cd(&cmd);
-	return (0);
-}
-*/

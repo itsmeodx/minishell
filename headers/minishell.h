@@ -12,9 +12,6 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-# include "parsing.h"
-# include "execution.h"
 # include <stdio.h>
 # include <sys/wait.h>
 # include <sys/types.h>
@@ -30,6 +27,18 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# define NAME "minishell: "
+# define PROMPT "\033[1;32mminishell\033[0m$ "
+# define PROMPT_SIZE 11
+# define MAX_PATH 4096
+# define MAX_CMD 4096
+# define MAX_ENV 4096
+# define MAX_HISTORY 1000
+# define MAX_BUILTINS 7
+# define MAX_REDIRECT 3
+# define MAX_PIPE 2
+# define NSFOD "No such file or directory"
 
 typedef struct s_cmd
 {

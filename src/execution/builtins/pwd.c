@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/07/30 16:30:48 by oouaadic         ###   ########.fr       */
+/*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
+/*   Updated: 2024/08/12 16:59:59 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
-# include "minishell.h"
-# include "parsing.h"
+#include "../../../headers/execution.h"
 
-// builtins
-bool	cd(t_cmd *cmd);
-bool	echo(t_cmd *cmd);
-bool	pwd(void);
+bool	pwd(void)
+{
+	char	*cwd;
 
-#endif //EXECUTION_H
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (dprintf(STDERR_FILENO,
+				NAME"pwd: error retrieving current directory: "),
+			dprintf(STDERR_FILENO,
+				"getcwd: cannot access parent directories: "NSFOD"\n"),
+			false);
+	printf("%s\n", cwd);
+	free(cwd);
+	return (true);
+}
