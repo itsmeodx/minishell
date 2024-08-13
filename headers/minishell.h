@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 09:59:19 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 typedef struct s_link
 {
 	char			*command;
-	int				identifer;
+	int				identifier;
 	struct s_link	*prev;
 	struct s_link	*next;
 }					t_link;

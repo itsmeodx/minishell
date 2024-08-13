@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/13 10:13:28 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ void	ft_set_type(t_link **node, char *input)
 	if (*node == NULL)
 		return ;
 	if (!ft_strncmp(input, "<", ft_strlen(input)))
-		(*node)->identifer = IN;
+		(*node)->identifier = IN;
 	else if (!ft_strncmp(input, ">", ft_strlen(input)))
-		(*node)->identifer = OUT;
+		(*node)->identifier = OUT;
 	else if (!ft_strncmp(input, "<<", ft_strlen(input)))
-		(*node)->identifer = HERDOC;
+		(*node)->identifier = HERDOC;
 	else if (!ft_strncmp(input, ">>", ft_strlen(input)))
-		(*node)->identifer = APPEND;
+		(*node)->identifier = APPEND;
 	else if (!ft_strncmp(input, "|", ft_strlen(input)))
-		(*node)->identifer = PIPE;
+		(*node)->identifier = PIPE;
 	else if (!ft_strncmp(input, "||", ft_strlen(input)))
-		(*node)->identifer = OR;
+		(*node)->identifier = OR;
 	else if (!ft_strncmp(input, "&&", ft_strlen(input)))
-		(*node)->identifer = AND;
+		(*node)->identifier = AND;
 	else if (!ft_strncmp(input, "(", ft_strlen(input)))
-		(*node)->identifer = OPEN_PAR;
+		(*node)->identifier = OPEN_PAR;
 	else if (!ft_strncmp(input, ")", ft_strlen(input)))
-		(*node)->identifer = CLOSE_PAR;
+		(*node)->identifier = CLOSE_PAR;
 	else
-		(*node)->identifer = STR;
+		(*node)->identifier = STR;
 }
 
 t_link	*ft_def_type(char **input)
@@ -79,6 +79,6 @@ void	ft_parsing(char *input)
 	// while(tmp)
 	// {
 	//     printf("command: %s\n", tmp->command);
-	//     printf("type: %d\n", tmp->identifer);
+	//     printf("type: %d\n", tmp->identifier);
 	//     tmp = tmp->next;
 	// }
