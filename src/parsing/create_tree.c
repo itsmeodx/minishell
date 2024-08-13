@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/12 16:00:07 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_tree	*ft_create_tree(t_tree **tree, t_link *link)
 	tmp = link;
 	while (tmp)
 	{
-		node = ft_treenew(&tmp->command, tmp->identifer);
+		node = ft_treenew(&tmp->command, tmp->identifier);
 		if (!*tree)
 			ft_treeadd_back_right(tree, node);
 		if (*tree)

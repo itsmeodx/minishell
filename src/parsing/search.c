@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 14:26:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/12 18:59:33 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ t_link	*ft_search_target(t_link *head, int target)
 	tmp = head;
 	while (tmp)
 	{
-		if (tmp->identifer == OPEN_PAR)
+		if (tmp->identifier == OPEN_PAR)
 		{
-			while (tmp->identifer != CLOSE_PAR)
+			while (tmp->identifier != CLOSE_PAR)
 			{
 				tmp = tmp->next;
 				if (!tmp)
 					return (NULL);
 			}
 		}
-		if (tmp->identifer == target)
+		if (tmp->identifier == target)
 			return (tmp);
 		tmp = tmp->next;
 	}

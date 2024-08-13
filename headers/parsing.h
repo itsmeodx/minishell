@@ -87,7 +87,7 @@ char				**ft_strjoin_2d(char **s1, char **s2);
 // int							ft_quote_handler(t_link **list);
 // **tree_ft**
 void				ft_treeadd_back_left(t_tree **tree, t_tree *new);
-// t_tree				*ft_treenew(char **cmd, int type);
+t_tree				*ft_treenew(char **cmd, int type);
 t_cmd				*ft_cmdnew(char **cmd);
 void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
 void				ft_free_tree(t_tree *node);
