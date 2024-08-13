@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:25:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/13 10:12:37 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 11:02:48 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_tree(t_tree *node)
 {
-	free_2d(node->cmd->argv, ft_count_strs(node->cmd->argv));
+	free_2d(node->cmd->argv);
 	free(node->cmd);
 	free(node);
 }

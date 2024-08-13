@@ -6,18 +6,18 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:16:23 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 11:03:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	free_2d(char **tab, int c)
+void	free_2d(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (i < c)
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;
@@ -82,7 +82,7 @@ char	**ft_strjoin_2d(char **s1, char **s2)
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (free_2d(s1, ft_count_strs(s1)), ft_strdup_2d(s2));
+		return (free_2d(s1), ft_strdup_2d(s2));
 	if (!s2)
 		return (ft_strdup_2d(s1));
 	tmp = (char **)malloc(sizeof(char *) * (ft_count_strs(s1)
@@ -98,6 +98,6 @@ char	**ft_strjoin_2d(char **s1, char **s2)
 		tmp[i[0]++] = ft_strdup(s2[i[1]++]);
 	}
 	tmp[i[0]] = NULL;
-	free_2d(s1, ft_count_strs(s1));
+	free_2d(s1);
 	return (tmp);
 }

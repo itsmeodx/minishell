@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing                                            :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 11:43:43 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:03:44 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 // int							ft_count_strs(char **s);
 // int							check_quote(char *str, int a);
 // int							ft_error(void);
-void				free_2d(char **tab, int c);
+void				free_2d(char **tab);
 // void						ft_free(char **str);
 // void						ft_putstr(char *s, int fd);
 // int							ft_isdigit(int c);

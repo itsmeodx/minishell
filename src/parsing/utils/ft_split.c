@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:21:06 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/12 15:13:22 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 11:03:01 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_words(char *str, char *charset)
 	{
 		word[i] = str[i];
 		if (!str[i])
-			return (free_2d(&str, i), NULL);
+			return (free_2d(&str), NULL);
 		i++;
 	}
 	word[i] = '\0';
