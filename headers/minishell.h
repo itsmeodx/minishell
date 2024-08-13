@@ -25,11 +25,12 @@
 # include <unistd.h>
 # include <signal.h>
 # include <termios.h>
+# include <bsd/string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 # define NAME "minishell: "
-# define PROMPT "\033[1;32mminishell\033[0m$ "
+# define PROMPT "\033[1;32mminishell:>\033[0m "
 # define PROMPT_SIZE 11
 # define MAX_PATH 4096
 # define MAX_CMD 4096

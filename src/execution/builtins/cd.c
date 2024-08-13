@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../../headers/execution.h"
+
+char	*ft_strjoin(char *s1, char *s2);
 
 bool	cd_home(void)
 {
@@ -21,12 +23,28 @@ bool	cd_home(void)
 
 bool	cd_tilde(t_cmd *cmd)
 {
-	if (chdir(getenv("HOME")) == -1)
+	int		i;
+	char	*home;
+	char	*path;
+
+	i = 1;
+	if (cmd->argv[1][0] == '~' && cmd->argv[1][1] == '~')
+		return (dprintf(STDERR_FILENO, "minishell: cd: %s: "NSFOD"\n",
+				cmd->argv[1]), false);
+	home = getenv("HOME");
+	if (!home)
 		return (dprintf(STDERR_FILENO, "minishell: cd: HOME not set\n"), false);
-	if (chdir(cmd->argv[1] + 2) == -1)
-		return (dprintf(STDERR_FILENO,
-				"minishell: cd: %s%s: "NSFOD"\n",
-				getenv("HOME"), cmd->argv[1] + 1), false);
+	home = ft_strjoin(home, "/");
+	while (cmd->argv[1][i] == '/')
+		i++;
+	path = ft_strjoin(home, cmd->argv[1] + i);
+	free(home);
+	if (!path)
+		return (false);
+	if (chdir(path) == -1)
+		return (dprintf(STDERR_FILENO, "minishell: cd: %s: "NSFOD"\n", path),
+			free(path), false);
+	free(path);
 	return (true);
 }
 
@@ -82,6 +100,6 @@ bool	cd(t_cmd *cmd)
 		if (!cd_dir(cmd))
 			return (false);
 	}
-	update_env("PWD", getcwd(NULL, 0));
+//	update_pwd("PWD", getcwd(NULL, 0));
 	return (true);
 }

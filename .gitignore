@@ -41,7 +41,7 @@ test
 
 # Random .c files
 test.c
-#main.c
+emain.c
 .main.c
 main
 *blabla*

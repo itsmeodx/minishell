@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minishell.h"
+#include "../../../headers/execution.h"
 
 bool	echo(t_cmd *cmd)
 {
