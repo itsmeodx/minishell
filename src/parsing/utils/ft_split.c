@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:21:06 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/04 23:26:21 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/12 15:13:22 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 int	check_quote(char *str, int a)
 {
@@ -68,7 +68,7 @@ static int	char_sep(char *str, char *charset)
 	return (i);
 }
 
-static char	*ft_words(char *str, char *charset)
+char	*ft_words(char *str, char *charset)
 {
 	int		len;
 	int		i;
@@ -81,7 +81,7 @@ static char	*ft_words(char *str, char *charset)
 	{
 		word[i] = str[i];
 		if (!str[i])
-			return (free_str(&str, i), NULL);
+			return (free_2d(&str, i), NULL);
 		i++;
 	}
 	word[i] = '\0';

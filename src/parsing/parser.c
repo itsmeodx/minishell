@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 16:59:45 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/13 10:13:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
+#include "parsing.h"
 
 void	ft_set_type(t_link **node, char *input)
 {
 	if (*node == NULL)
 		return ;
 	if (!ft_strncmp(input, "<", ft_strlen(input)))
-		(*node)->identifer = LESS;
+		(*node)->identifer = IN;
 	else if (!ft_strncmp(input, ">", ft_strlen(input)))
-		(*node)->identifer = GREAT;
+		(*node)->identifer = OUT;
 	else if (!ft_strncmp(input, "<<", ft_strlen(input)))
-		(*node)->identifer = LESSLESS;
+		(*node)->identifer = HERDOC;
 	else if (!ft_strncmp(input, ">>", ft_strlen(input)))
-		(*node)->identifer = GREATGREAT;
+		(*node)->identifer = APPEND;
 	else if (!ft_strncmp(input, "|", ft_strlen(input)))
 		(*node)->identifer = PIPE;
 	else if (!ft_strncmp(input, "||", ft_strlen(input)))
@@ -56,19 +56,29 @@ t_link	*ft_def_type(char **input)
 	return (link);
 }
 
-
-void ft_parsing(char *input)
+void	ft_parsing(char *input)
 {
-	t_link		*link;
-	char		**split_input;
-	
+	t_link	*link;
+	char	**split_input;
+	t_link	*tmp;
+	t_link	*target;
+
+	target = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
-    t_link *tmp = link;
-    while(tmp)
-    {
-        printf("command: %s\n", tmp->command);
-        printf("type: %d\n", tmp->identifer);
-        tmp = tmp->next;
-    }
+	tmp = link;
+	target = ft_find_hightest_proirity(tmp);
+	if (tmp)
+		printf("target: %s\n", target->command);
+	else
+		printf("null\n");
+	ft_dbl_lstclear(&link);
 }
+	// ft_create_tree(link);
+	// t_link *tmp = link;
+	// while(tmp)
+	// {
+	//     printf("command: %s\n", tmp->command);
+	//     printf("type: %d\n", tmp->identifer);
+	//     tmp = tmp->next;
+	// }

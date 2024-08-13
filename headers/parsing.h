@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/05 15:57:23 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:45:41 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 
 typedef enum e_type
 {
-	STR,
-	LESS,
-	GREAT,
-	LESSLESS,
-	GREATGREAT,
-	PIPE,
-	OR,
-	AND,
-	OPEN_PAR,
-	CLOSE_PAR, // parenthesis
-}					t_type;
+	STR, //0
+	IN, //1
+	OUT, //2
+	APPEND, //3
+	HERDOC, //4
+	PIPE, //5
+	OR, //6
+	AND, //7
+	CLOSE_PAR, //9
+	OPEN_PAR, //8
+}				t_type;
 
 typedef enum e_errorn
 {
@@ -36,7 +36,11 @@ typedef enum e_errorn
 	ERROR_GREATGREAT,
 	ERROR_PIPE,
 	ERROR_COMMAND,
-	ERROR_QUOTE
+	ERROR_QUOTE,
+	ERROR_OR,
+	ERROR_AND,
+	ERROR_OPEN_PAR,
+	ERROR_CLOSE_PAR,
 }					t_errorn;
 
 /* error guide
@@ -46,6 +50,10 @@ typedef enum e_errorn
 	3: error in greatgreat(append) redirection
 	4: error in pipe redirection
 	5: error in command (no command found)
+	6 : error in or (||)
+	7 : error in and (&&)
+	8 : error in open parenthesis
+	9 : error in close parenthesis
 */
 
 typedef struct s_error
@@ -54,16 +62,11 @@ typedef struct s_error
 	struct s_error	*next;
 }					t_error;
 
-typedef struct s_link
-{
-	char			*command;
-	t_type			identifer;
-	struct s_link	*prev;
-	struct s_link	*next;
-}					t_link;
+extern t_error	*g_error; //global variable to store errors
+
+// old linked list will be replaced by a new tree
 
 /*Parsing*/
-
 // src
 char				**ft_lexer(char *input);
 char				**ft_split(char *str, char *c);
@@ -71,16 +74,24 @@ int					check_quote(char *str, int a);
 int					ft_strlen(const char *str);
 int					ft_strchr(int c, const char *s);
 void				ft_parsing(char *input);
-// t_link						*ft_def_type(char **input);
+t_link				*ft_def_type(char **input);
+t_link				*ft_find_hightest_proirity(t_link *head);
 // void						ft_check_command(t_link *link, t_command **command);
 // int							ft_check_redirections(t_link *link,
 // 								t_redirection **redirectoin);
 // t_command					*ft_set_args(t_link *link, t_command *command);
-char				**ft_strjoin_pro(char **s1, char **s2);
+char				**ft_strjoin_2d(char **s1, char **s2);
 // int							ft_check_pipes(t_link *link,
-								t_command **command);
+// t_command **command);
 // void						ft_main_checker(t_link *link, t_command **command);
 // int							ft_quote_handler(t_link **list);
+// **tree_ft**
+void				ft_treeadd_back_left(t_tree **tree, t_tree *new);
+// t_tree				*ft_treenew(char **cmd, int type);
+t_cmd				*ft_cmdnew(char **cmd);
+void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
+void				ft_free_tree(t_tree *node);
+t_tree				*ft_create_tree(t_tree **tree, t_link *link);
 
 // // error_ft
 // t_error						*ft_lstnew_error(t_errorn num_error);
@@ -107,13 +118,13 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 // int							ft_count_strs(char **s);
 // int							check_quote(char *str, int a);
 // int							ft_error(void);
-void				free_str(char **tab, int c);
+void				free_2d(char **tab, int c);
 // void						ft_free(char **str);
 // void						ft_putstr(char *s, int fd);
 // int							ft_isdigit(int c);
 // int							ft_strncmp(const char *s1, const char *s2,
 // 								size_t n);
-char				**ft_strdup_pro(char **s);
+char				**ft_strdup_2d(char **s);
 char				*ft_strdup(const char *s);
 int					ft_count_strs(char **s);
 // int							ft_strlen(const char *str);
@@ -121,7 +132,7 @@ int					ft_count_strs(char **s);
 char				*ft_strjoin(char *s1, char const *s2);
 // char						*ft_strdup(const char *s);
 // size_t						ft_strlcpy(char *dst, const char *src,
-							size_t size);
+// size_t size);
 
 // // rediction_ft
 // t_redirection				*ft_lstnew_redi(char *content);
@@ -135,7 +146,7 @@ char				*ft_strjoin(char *s1, char const *s2);
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);
 t_link				*ft_dbl_lstnew(void *content);
 t_link				*ft_dbl_lstlast(t_link *lst);
-// void						ft_dbl_lstclear(t_link **lst);
+void				ft_dbl_lstclear(t_link **lst);
 
 // t_link						*ft_create_node(int nbr);
 // t_link						*ft_create_node(int nbr);

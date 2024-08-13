@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/05 15:43:33 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/13 10:29:22 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
-
-t_error	*g_error;
+#include "execution.h"
+#include "parsing.h"
 
 int	main(void)
 {
-	char			*input;
+	char	*input;
 
 	// g_error = NULL;
 	while (1)
 	{
-		input = readline("minishell>");
+		input = readline("parsing>");
 		if (input)
 			add_history(input);
-        // temporary exit condition
+		// temporary exit condition
 		if (ft_strncmp(input, "exit", 4) == 0)
 		{
 			free(input);
 			break ;
 		}
-        ft_parsing(input);
-        // ft_lexer(input);
+		ft_parsing(input);
+		// ft_lexer(input);
 	}
 	return (0);
 }
