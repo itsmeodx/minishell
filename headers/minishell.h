@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/07/30 11:52:02 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:59:19 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,28 @@
 # define MAX_PIPE 2
 # define NSFOD "No such file or directory"
 
+typedef struct s_link
+{
+	char			*command;
+	int				identifer;
+	struct s_link	*prev;
+	struct s_link	*next;
+}					t_link;
+
 typedef struct s_cmd
 {
-	int		argc;
-	char	**argv;
-}	t_cmd;
+	int				argc;
+	char			**argv;
+}					t_cmd;
 
-#endif //MINISHELL_H
+typedef struct s_tree
+{
+	int				type;
+	t_cmd			*cmd;
+	int				exit_status;
+	struct s_tree	*prev;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}					t_tree;
+
+#endif
