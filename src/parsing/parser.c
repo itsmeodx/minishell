@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/12 18:52:31 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:13:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	ft_parsing(char *input)
 		printf("target: %s\n", target->command);
 	else
 		printf("null\n");
+	ft_dbl_lstclear(&link);
+}
 	// ft_create_tree(link);
 	// t_link *tmp = link;
 	// while(tmp)
@@ -80,5 +82,3 @@ void	ft_parsing(char *input)
 	//     printf("type: %d\n", tmp->identifer);
 	//     tmp = tmp->next;
 	// }
-	ft_dbl_lstclear(&link);
-}

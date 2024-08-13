@@ -13,19 +13,20 @@
 #ifndef PARSING_H
 # define PARSING_H
 # include "minishell.h"
+
 typedef enum e_type
 {
-	STR,       //0
-	IN,        //1
-	OUT,       //2
-	APPEND,    //3
-	HERDOC,    //4
-	PIPE,      //5
-	OR,        //6
-	AND,       //7
+	STR, //0
+	IN, //1
+	OUT, //2
+	APPEND, //3
+	HERDOC, //4
+	PIPE, //5
+	OR, //6
+	AND, //7
 	CLOSE_PAR, //9
-	OPEN_PAR   //8
-}					t_type;
+	OPEN_PAR, //8
+}				t_type;
 
 typedef enum e_errorn
 {
@@ -61,7 +62,7 @@ typedef struct s_error
 	struct s_error	*next;
 }					t_error;
 
-extern t_error *g_error; //global variable to store errors
+extern t_error	*g_error; //global variable to store errors
 
 // old linked list will be replaced by a new tree
 
@@ -84,10 +85,9 @@ char				**ft_strjoin_2d(char **s1, char **s2);
 // t_command **command);
 // void						ft_main_checker(t_link *link, t_command **command);
 // int							ft_quote_handler(t_link **list);
-
 // **tree_ft**
 void				ft_treeadd_back_left(t_tree **tree, t_tree *new);
-t_tree				*ft_treenew(char **cmd, int type);
+// t_tree				*ft_treenew(char **cmd, int type);
 t_cmd				*ft_cmdnew(char **cmd);
 void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
 void				ft_free_tree(t_tree *node);

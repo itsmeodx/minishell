@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 08:48:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:09:21 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*ft_fill(char const *s, unsigned int start, size_t len)
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *ptr;
+	char	*ptr;
 
 	if (!s)
 		return (NULL);

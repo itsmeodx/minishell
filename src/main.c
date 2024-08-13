@@ -6,14 +6,12 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:20:04 by adam              #+#    #+#             */
-/*   Updated: 2024/08/12 15:55:00 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 10:29:22 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parsing.h"
-
-t_error	*g_error;
 
 int	main(void)
 {

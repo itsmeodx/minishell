@@ -6,12 +6,12 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/12 15:56:05 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 09:59:19 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef parsing_H
-# define parsing_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <dirent.h>
 # include <fcntl.h>
