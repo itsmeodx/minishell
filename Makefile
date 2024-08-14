@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/12 15:56:34 by akhobba          ###   ########.fr        #
+#    Updated: 2024/08/14 10:58:46 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,6 @@ SRC = src/main.c \
 	src/parsing/utils/ft_strncmp.c src/parsing/utils/small_ft.c\
 	src/parsing/search.c\
 
-
-
-
-
 OBJ = ${SRC:.c=.o}
 
 INC = -I./headers
@@ -40,7 +36,7 @@ NAME = minishell
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -lreadline 
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -lreadline
 
 %.o: %.c
 	${CC} ${CFLAGS} $(INC) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 14:26:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 16:15:44 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	*ft_fill_priority(void)
 	int	i;
 	int	j;
 
-	priority = malloc(4 * 10);
+	priority = malloc(LEN_ENUM * sizeof(int));
 	memset(priority, 0, sizeof(int));
 	if (!priority)
 		return (NULL);
 	i = 0;
-	j = 9;
-	while (i < 10)
+	j = 7;
+	while (i < LEN_ENUM)
 	{
 		priority[i] = j;
 		i++;
@@ -65,7 +65,7 @@ t_link	*ft_find_hightest_proirity(t_link *head)
 	i = 0;
 	target = NULL;
 	priority = ft_fill_priority();
-	while (i < 10)
+	while (i < LEN_ENUM)
 	{
 		target = ft_search_target(head, priority[i]);
 		if (target)

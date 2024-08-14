@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/14 10:39:06 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,20 @@ void	ft_parsing(char *input)
 	char	**split_input;
 	t_link	*tmp;
 	t_link	*target;
+	t_tree *tree;
 
 	target = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
-	target = ft_find_hightest_proirity(tmp);
-	if (tmp)
-		printf("target: %s\n", target->command);
-	else
-		printf("null\n");
+	tree = ft_create_tree(&tree, link);
+	t_tree *tmp_tree = tree;
+	while(tmp_tree)
+	{
+	    printf("command: %s\n", tmp_tree->cmd->argv[0]);
+	    printf("type: %d\n", tmp_tree->cmd->argc);
+	    tmp_tree = tmp_tree->right;
+	}
 	ft_dbl_lstclear(&link);
 }
-	// ft_create_tree(link);
-	// t_link *tmp = link;
-	// while(tmp)
-	// {
-	//     printf("command: %s\n", tmp->command);
-	//     printf("type: %d\n", tmp->identifier);
-	//     tmp = tmp->next;
-	// }
+

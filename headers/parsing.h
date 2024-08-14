@@ -6,14 +6,14 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 11:03:44 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/14 10:34:43 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 # include "minishell.h"
-
+# define LEN_ENUM 8
 typedef enum e_type
 {
 	STR, //0
@@ -24,8 +24,8 @@ typedef enum e_type
 	PIPE, //5
 	OR, //6
 	AND, //7
-	CLOSE_PAR, //9
-	OPEN_PAR, //8
+	CLOSE_PAR, //8
+	OPEN_PAR, //9
 }				t_type;
 
 typedef enum e_errorn
@@ -87,8 +87,8 @@ char				**ft_strjoin_2d(char **s1, char **s2);
 // int							ft_quote_handler(t_link **list);
 // **tree_ft**
 void				ft_treeadd_back_left(t_tree **tree, t_tree *new);
-t_tree				*ft_treenew(char **cmd, int type);
-t_cmd				*ft_cmdnew(char **cmd);
+t_tree				*ft_treenew(char *cmd, int type);
+t_cmd				*ft_cmdnew(char *cmd);
 void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
 void				ft_free_tree(t_tree *node);
 t_tree				*ft_create_tree(t_tree **tree, t_link *link);
