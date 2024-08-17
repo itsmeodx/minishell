@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/17 14:33:55 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 18:39:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,11 @@ void ft_printf_tree(t_tree *tree, int space)
 	{
 		ft_generate_spaces(space);
 		printf("str: %s type :%d", tree->cmd->argv[0], tree->type);
-		ft_generate_spaces(space);
-		printf("|\n");
 	}
 	if (tree->left)
 	{
 		printf("\n");
-		space += 10;
-		// ft_generate_spaces(space);
+		space += 8;
 		ft_printf_tree(tree->left, space) ;
 	}
 	if (tree->right)
@@ -104,7 +101,7 @@ void	ft_parsing(char *input)
 	tmp = link;
 	tree = ft_create_tree(&tree, tmp);
 	// t_tree *tmp_tree = tree;
-	printf("                               ");
+	printf("                          ");
 	ft_printf_tree(tree, 0);
 	printf("\n");
 	// ft_dbl_lstclear(&link);
