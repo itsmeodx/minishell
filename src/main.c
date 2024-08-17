@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 16:11:28 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/14 11:24:29 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(void)
 	// g_error = NULL;
 	while (1)
 	{
-		input = readline("parsing>");
+		input = readline("minishell>");
 		if (input)
 			add_history(input);
 		// temporary exit condition

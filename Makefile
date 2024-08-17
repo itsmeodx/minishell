@@ -6,13 +6,13 @@
 #    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/14 10:58:46 by akhobba          ###   ########.fr        #
+#    Updated: 2024/08/16 15:48:29 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 SRC = src/main.c \
 	src/parsing/lexer.c \

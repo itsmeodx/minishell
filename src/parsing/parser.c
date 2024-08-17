@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/14 10:39:06 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/17 13:22:14 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,49 @@ t_link	*ft_def_type(char **input)
 	}
 	return (link);
 }
+void	ft_generate_spaces(int n)
+{
+	int i;
+
+	i = 0;
+	while (i < n)
+	{
+		printf(" ");
+		i++;
+	}
+}
+void ft_printf_tree(t_tree *tree, int space)
+{
+	if (tree)
+	{
+		printf("  ");
+		ft_generate_spaces(space++);
+		printf("str: %s type :%d\n", tree->cmd->argv[0], tree->type);
+	}
+	if (tree->left)
+	{
+		printf("           ");
+		ft_printf_tree(tree->left);
+	}
+	if (tree->right)
+		ft_printf_tree(tree->right);
+}
+
 
 void	ft_parsing(char *input)
 {
 	t_link	*link;
 	char	**split_input;
 	t_link	*tmp;
-	t_link	*target;
 	t_tree *tree;
 
-	target = NULL;
+	tree = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
-	tree = ft_create_tree(&tree, link);
-	t_tree *tmp_tree = tree;
-	while(tmp_tree)
-	{
-	    printf("command: %s\n", tmp_tree->cmd->argv[0]);
-	    printf("type: %d\n", tmp_tree->cmd->argc);
-	    tmp_tree = tmp_tree->right;
-	}
-	ft_dbl_lstclear(&link);
+	tree = ft_create_tree(&tree, tmp);
+	// t_tree *tmp_tree = tree;
+	ft_printf_tree(tree);
+	// ft_dbl_lstclear(&link);
 }
 

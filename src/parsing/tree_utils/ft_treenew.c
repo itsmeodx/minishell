@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:25:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/14 10:34:25 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/14 18:38:21 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_treeadd_back_right(t_tree **tree, t_tree *new)
 {
 	t_tree	*tmp;
 
-	if (!(*tree))
+	if (!tree || !new)
 		return ;
 	if (!(*tree))
 	{
@@ -68,7 +68,7 @@ void	ft_treeadd_back_left(t_tree **tree, t_tree *new)
 {
 	t_tree	*tmp;
 
-	if (!tree)
+	if (!tree || !new)
 		return ;
 	if (!(*tree))
 	{

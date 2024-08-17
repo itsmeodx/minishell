@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/14 10:34:43 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/15 17:02:02 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ typedef enum e_type
 
 typedef enum e_errorn
 {
-	ERROR_LESS,
-	ERROR_LESSLESS,
-	ERROR_GREAT,
-	ERROR_GREATGREAT,
+	ERROR_IN,
+	ERROR_APPEND,
+	ERROR_OUT,
+	ERROR_HERDOC,
 	ERROR_PIPE,
 	ERROR_COMMAND,
 	ERROR_QUOTE,
@@ -141,6 +141,8 @@ char				*ft_strjoin(char *s1, char const *s2);
 // void						ft_lstclear_redi(t_redirection **list);
 
 // // link_ft
+t_link	*ft_create_new_link(t_link *link, t_link *limit);
+t_link	*ft_search_target(t_link *head, int target[2]);
 
 // dbl link_ft
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);
