@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/15 17:02:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:44:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 # define PARSING_H
 # include "minishell.h"
 # define LEN_ENUM 8
+
 typedef enum e_type
 {
-	STR, //0
-	IN, //1
-	OUT, //2
-	APPEND, //3
-	HERDOC, //4
-	PIPE, //5
-	OR, //6
-	AND, //7
-	CLOSE_PAR, //8
-	OPEN_PAR, //9
-}				t_type;
+	STR,
+	IN,
+	OUT,
+	APPEND,
+	HERDOC,
+	PIPE,
+	OR,
+	AND,
+	CLOSE_PAR,
+	OPEN_PAR,
+}					t_type;
 
 typedef enum e_errorn
 {
@@ -141,8 +142,8 @@ char				*ft_strjoin(char *s1, char const *s2);
 // void						ft_lstclear_redi(t_redirection **list);
 
 // // link_ft
-t_link	*ft_create_new_link(t_link *link, t_link *limit);
-t_link	*ft_search_target(t_link *head, int target[2]);
+t_link				*ft_create_new_link(t_link *link, t_link *limit);
+t_link				*ft_search_target(t_link *head, int target[2]);
 
 // dbl link_ft
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);

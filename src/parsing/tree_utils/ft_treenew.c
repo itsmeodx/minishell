@@ -26,7 +26,7 @@ t_cmd	*ft_cmdnew(char *cmd)
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->argv = (char **)malloc(sizeof(char *) *  1);
+	new->argv = (char **)malloc(sizeof(char *) * 1);
 	new->argv[0] = ft_strdup(cmd);
 	new->argc = 1;
 	return (new);

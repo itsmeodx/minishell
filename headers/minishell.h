@@ -12,22 +12,22 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include <stdio.h>
-# include <sys/wait.h>
-# include <sys/types.h>
-# include <dirent.h>
-# include <sys/stat.h>
 # include <ctype.h>
+# include <dirent.h>
 # include <fcntl.h>
-# include <string.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <unistd.h>
 # include <signal.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <termios.h>
+# include <unistd.h>
 // # include <bsd/string.h>
-# include <readline/readline.h>
 # include <readline/history.h>
+# include <readline/readline.h>
 
 # define NAME "minishell: "
 # define PROMPT "\033[1;32mminishell:>\033[0m "

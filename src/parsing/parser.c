@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/17 18:39:28 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:46:10 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ t_link	*ft_def_type(char **input)
 	}
 	return (link);
 }
+
 void	ft_generate_spaces(int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n)
@@ -67,7 +68,7 @@ void	ft_generate_spaces(int n)
 	}
 }
 
-void ft_printf_tree(t_tree *tree, int space)
+void	ft_printf_tree(t_tree *tree, int space)
 {
 	if (tree)
 	{
@@ -78,7 +79,7 @@ void ft_printf_tree(t_tree *tree, int space)
 	{
 		printf("\n");
 		space += 8;
-		ft_printf_tree(tree->left, space) ;
+		ft_printf_tree(tree->left, space);
 	}
 	if (tree->right)
 	{
@@ -87,23 +88,20 @@ void ft_printf_tree(t_tree *tree, int space)
 	}
 }
 
-
 void	ft_parsing(char *input)
 {
 	t_link	*link;
 	char	**split_input;
 	t_link	*tmp;
-	t_tree *tree;
+	t_tree	*tree;
 
 	tree = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
 	tree = ft_create_tree(&tree, tmp);
-	// t_tree *tmp_tree = tree;
 	printf("                          ");
 	ft_printf_tree(tree, 0);
 	printf("\n");
-	// ft_dbl_lstclear(&link);
+	ft_dbl_lstclear(&link);
 }
-

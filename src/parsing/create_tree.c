@@ -12,12 +12,12 @@
 
 #include "parsing.h"
 
-t_tree *ft_parse_cmd(t_tree **tree, t_link *link)
+t_tree	*ft_parse_cmd(t_tree **tree, t_link *link)
 {
 	t_tree	*new;
 	t_link	*target;
-	int goal[2];
-	int i;
+	int		goal[2];
+	int		i;
 
 	i = 0;
 	goal[0] = STR;
@@ -51,8 +51,8 @@ t_tree	*ft_parse_pipe(t_tree **tree, t_link *link)
 {
 	t_tree	*new;
 	t_link	*target;
-	int goal[2];
-	int i;
+	int		goal[2];
+	int		i;
 
 	i = 0;
 	goal[0] = PIPE;
@@ -77,20 +77,20 @@ t_tree	*ft_parse_pipe(t_tree **tree, t_link *link)
 		i = 1;
 		*tree = new;
 	}
-		target->prev->next = NULL;
-		ft_treeadd_back_left(&new, ft_parse_cmd(&new,link));
-		ft_treeadd_back_right(&new, ft_parse_pipe(&new, target->next));
+	target->prev->next = NULL;
+	ft_treeadd_back_left(&new, ft_parse_cmd(&new, link));
+	ft_treeadd_back_right(&new, ft_parse_pipe(&new, target->next));
 	if (i)
 		return (*tree);
 	return (new);
 }
 
-t_tree *ft_parse_and_or(t_tree **tree, t_link *link)
+t_tree	*ft_parse_and_or(t_tree **tree, t_link *link)
 {
 	t_tree	*new;
 	t_link	*target;
-	int goal[2];
-	int i;
+	int		goal[2];
+	int		i;
 
 	i = 0;
 	goal[0] = OR;
@@ -118,7 +118,6 @@ t_tree *ft_parse_and_or(t_tree **tree, t_link *link)
 
 t_tree	*ft_create_tree(t_tree **tree, t_link *link)
 {
-
 	ft_parse_and_or(tree, link);
 	return (*tree);
 }
