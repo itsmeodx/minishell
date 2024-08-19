@@ -69,13 +69,18 @@ bool	cd_dash(t_cmd *cmd)
 bool	cd_dir(t_cmd *cmd)
 {
 	if (chdir(cmd->argv[1]) == -1)
-		return (dprintf(STDERR_FILENO,
-				"minishell: cd: %s: "NSFOD"\n", cmd->argv[1]),
-			false);
+	{
+		if (access(cmd->argv[1], F_OK) == -1)
+			return (dprintf(STDERR_FILENO,
+					"minishell: cd: %s: "NSFOD"\n", cmd->argv[1]), false);
+		else
+			return (dprintf(STDERR_FILENO,
+					"minishell: cd: %s: "PD"\n", cmd->argv[1]), false);
+	}
 	return (true);
 }
 
-bool	cd(t_cmd *cmd)
+bool	builtin_cd(t_cmd *cmd)
 {
 	if (cmd->argc > 2)
 		return (dprintf(STDERR_FILENO, "minishell: cd: too many arguments\n"),
@@ -100,6 +105,5 @@ bool	cd(t_cmd *cmd)
 		if (!cd_dir(cmd))
 			return (false);
 	}
-//	update_pwd("PWD", getcwd(NULL, 0));
 	return (true);
 }

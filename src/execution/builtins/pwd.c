@@ -12,7 +12,7 @@
 
 #include "../../../headers/execution.h"
 
-bool	pwd(void)
+bool	builtin_pwd(void)
 {
 	char	*cwd;
 
