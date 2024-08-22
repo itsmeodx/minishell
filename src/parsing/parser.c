@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:46:10 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,52 @@ t_link	*ft_def_type(char **input)
 	return (link);
 }
 
+void	ft_generate_spaces(int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		printf(" ");
+		i++;
+	}
+}
+
+void	ft_printf_tree(t_tree *tree, int space)
+{
+	if (tree)
+	{
+		ft_generate_spaces(space);
+		printf("str: %s type :%d", tree->cmd->argv[0], tree->type);
+	}
+	if (tree->left)
+	{
+		printf("\n");
+		space += 8;
+		ft_printf_tree(tree->left, space);
+	}
+	if (tree->right)
+	{
+		printf("       ");
+		ft_printf_tree(tree->right, space);
+	}
+}
+
 void	ft_parsing(char *input)
 {
 	t_link	*link;
 	char	**split_input;
 	t_link	*tmp;
-	t_link	*target;
+	t_tree	*tree;
 
-	target = NULL;
+	tree = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
-	target = ft_find_hightest_proirity(tmp);
-	if (tmp)
-		printf("target: %s\n", target->command);
-	else
-		printf("null\n");
+	tree = ft_create_tree(&tree, tmp);
+	printf("                          ");
+	ft_printf_tree(tree, 0);
+	printf("\n");
 	ft_dbl_lstclear(&link);
 }
-	// ft_create_tree(link);
-	// t_link *tmp = link;
-	// while(tmp)
-	// {
-	//     printf("command: %s\n", tmp->command);
-	//     printf("type: %d\n", tmp->identifier);
-	//     tmp = tmp->next;
-	// }

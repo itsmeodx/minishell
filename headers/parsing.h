@@ -6,34 +6,35 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 11:03:44 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:44:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 # include "minishell.h"
+# define LEN_ENUM 8
 
 typedef enum e_type
 {
-	STR, //0
-	IN, //1
-	OUT, //2
-	APPEND, //3
-	HERDOC, //4
-	PIPE, //5
-	OR, //6
-	AND, //7
-	CLOSE_PAR, //9
-	OPEN_PAR, //8
-}				t_type;
+	STR,
+	IN,
+	OUT,
+	APPEND,
+	HERDOC,
+	PIPE,
+	OR,
+	AND,
+	CLOSE_PAR,
+	OPEN_PAR,
+}					t_type;
 
 typedef enum e_errorn
 {
-	ERROR_LESS,
-	ERROR_LESSLESS,
-	ERROR_GREAT,
-	ERROR_GREATGREAT,
+	ERROR_IN,
+	ERROR_APPEND,
+	ERROR_OUT,
+	ERROR_HERDOC,
 	ERROR_PIPE,
 	ERROR_COMMAND,
 	ERROR_QUOTE,
@@ -87,8 +88,8 @@ char				**ft_strjoin_2d(char **s1, char **s2);
 // int							ft_quote_handler(t_link **list);
 // **tree_ft**
 void				ft_treeadd_back_left(t_tree **tree, t_tree *new);
-t_tree				*ft_treenew(char **cmd, int type);
-t_cmd				*ft_cmdnew(char **cmd);
+t_tree				*ft_treenew(char *cmd, int type);
+t_cmd				*ft_cmdnew(char *cmd);
 void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
 void				ft_free_tree(t_tree *node);
 t_tree				*ft_create_tree(t_tree **tree, t_link *link);
@@ -141,6 +142,8 @@ char				*ft_strjoin(char *s1, char const *s2);
 // void						ft_lstclear_redi(t_redirection **list);
 
 // // link_ft
+t_link				*ft_create_new_link(t_link *link, t_link *limit);
+t_link				*ft_search_target(t_link *head, int target[2]);
 
 // dbl link_ft
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);

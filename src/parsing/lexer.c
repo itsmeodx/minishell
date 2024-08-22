@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/08/12 20:47:34 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/18 11:49:24 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ char	*ft_add_spaces_bonus(char *input, int j)
 	i = ft_count_spaces_bonus(input) * 2;
 	if (!i)
 		return (ft_strdup(input));
-	printf("num of spaces: %d\n", i / 2);
-	printf("input: %s\n", input);
-	printf("\n\n\n\n\n");
 	tmp = malloc(ft_strlen(input) + (i + 1));
 	i = 0;
 	while (input[j])
@@ -81,8 +78,7 @@ char	*ft_add_spaces_bonus(char *input, int j)
 		else
 			tmp[i++] = input[j++];
 	}
-	tmp[i] = '\0';
-	return (tmp);
+	return (tmp[i] = '\0', tmp);
 }
 
 char	*ft_add_spaces(char *input, int j)
@@ -111,8 +107,7 @@ char	*ft_add_spaces(char *input, int j)
 		else
 			tmp[i++] = input[j++];
 	}
-	tmp[i] = '\0';
-	return (tmp);
+	return (tmp[i] = '\0', tmp);
 }
 
 char	**ft_lexer(char *input)

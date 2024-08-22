@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/13 16:12:10 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@
 # define MAX_REDIRECT 3
 # define MAX_PIPE 2
 # define NSFOD "No such file or directory"
-# define CNF "command not found"
-# define PD "Permission denied"
 
 typedef struct s_link
 {

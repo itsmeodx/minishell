@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:25:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/13 11:02:48 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/14 18:38:21 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@ void	ft_free_tree(t_tree *node)
 	free(node);
 }
 
-t_cmd	*ft_cmdnew(char **cmd)
+t_cmd	*ft_cmdnew(char *cmd)
 {
 	t_cmd	*new;
 
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->argv = ft_strdup_2d(cmd);
-	new->argc = ft_count_strs(cmd);
+	new->argv = (char **)malloc(sizeof(char *) * 1);
+	new->argv[0] = ft_strdup(cmd);
+	new->argc = 1;
 	return (new);
 }
 
-t_tree	*ft_treenew(char **cmd, int type)
+t_tree	*ft_treenew(char *cmd, int type)
 {
 	t_tree	*tree;
 
@@ -51,7 +52,7 @@ void	ft_treeadd_back_right(t_tree **tree, t_tree *new)
 {
 	t_tree	*tmp;
 
-	if (!(*tree))
+	if (!tree || !new)
 		return ;
 	if (!(*tree))
 	{
@@ -67,7 +68,7 @@ void	ft_treeadd_back_left(t_tree **tree, t_tree *new)
 {
 	t_tree	*tmp;
 
-	if (!(*tree))
+	if (!tree || !new)
 		return ;
 	if (!(*tree))
 	{

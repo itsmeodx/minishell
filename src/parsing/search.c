@@ -6,13 +6,13 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 14:26:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/13 10:40:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/15 17:04:45 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_link	*ft_search_target(t_link *head, int target)
+t_link	*ft_search_target(t_link *head, int target[2])
 {
 	t_link	*tmp;
 
@@ -28,52 +28,49 @@ t_link	*ft_search_target(t_link *head, int target)
 					return (NULL);
 			}
 		}
-		if (tmp->identifier == target)
+		if (tmp->identifier == target[0] || tmp->identifier == target[1])
 			return (tmp);
 		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
-int	*ft_fill_priority(void)
-{
-	int	*priority;
-	int	i;
-	int	j;
+// int	*ft_fill_priority(void)
+// {
+// 	int	*priority;
+// 	int	i;
+// 	int	j;
 
-	priority = malloc(4 * 10);
-	memset(priority, 0, sizeof(int));
-	if (!priority)
-		return (NULL);
-	i = 0;
-	j = 9;
-	while (i < 10)
-	{
-		priority[i] = j;
-		i++;
-		j--;
-	}
-	return (priority);
-}
+// 	priority = malloc(LEN_ENUM * sizeof(int));
+// 	memset(priority, 0, sizeof(int));
+// 	if (!priority)
+// 		return (NULL);
+// 	i = 0;
+// 	j = 7;
+// 	while (i < LEN_ENUM)
+// 	{
+// 		priority[i] = j;
+// 		i++;
+// 		j--;
+// 	}
+// 	return (priority);
+// }
 
-t_link	*ft_find_hightest_proirity(t_link *head)
-{
-	t_link	*target;
-	int		*priority;
-	int		i;
+// t_link	*ft_find_hightest_proirity(t_link *head)
+// {
+// 	t_link	*target;
+// 	int		*priority;
+// 	int		i;
 
-	i = 0;
-	target = NULL;
-	priority = ft_fill_priority();
-	while (i < 10)
-	{
-		target = ft_search_target(head, priority[i]);
-		if (target)
-		{
-			printf("target 1 %s\n", target->command);
-			return (free(priority), target);
-		}
-		i++;
-	}
-	return (free(priority), target);
-}
+// 	i = 0;
+// 	target = NULL;
+// 	priority = ft_fill_priority();
+// 	while (i < LEN_ENUM)
+// 	{
+// 		target = ft_search_target(head, priority[i]);
+// 		if (target)
+// 			return (free(priority), target);
+// 		i++;
+// 	}
+// 	return (free(priority), target);
+// }
