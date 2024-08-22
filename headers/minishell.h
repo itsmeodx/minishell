@@ -49,6 +49,8 @@
 # define MAX_REDIRECT 3
 # define MAX_PIPE 2
 # define NSFOD "No such file or directory"
+# define CNF "command not found"
+# define PD "Permission denied"
 
 typedef struct s_link
 {
