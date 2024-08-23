@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/23 11:15:14 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/23 11:42:20 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_tree	*ft_parse_cmd(t_tree **tree, t_link *link)
 		return (*tree);
 	target = ft_search_target(link, goal);
 	if (!target)
-		return (NULL); // bad interpretation
+		return (NULL);
 	new = ft_treenew(target->command, target->identifier);
 	if (!*tree)
 		*tree = new;

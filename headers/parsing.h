@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/20 18:55:04 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/23 11:41:26 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_cmd				*ft_cmdnew(char *cmd);
 void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
 void				ft_free_tree(t_tree *node);
 t_tree				*ft_create_tree(t_tree **tree, t_link *link);
-void 				ft_print_cmd(t_tree *tree);
+void				ft_print_cmd(t_tree *tree);
 void				ft_printf_tree(t_tree *tree, int space, int option);
 void				ft_generate_spaces(int n);
 void				ft_add_to_argv(t_tree **new, char *command);
@@ -142,7 +142,7 @@ void				ft_lstclear_redi(t_redirection **list);
 // // link_ft
 t_link				*ft_create_new_link(t_link *link, t_link *limit);
 t_link				*ft_search_target(t_link *head, int target[2]);
-void 				ft_printf_link(t_link *link);
+void				ft_printf_link(t_link *link);
 
 // dbl link_ft
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);

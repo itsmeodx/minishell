@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:40:27 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/20 18:56:20 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/23 11:42:55 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_check_lessless(t_link *link, t_redirection **file)
 		}
 		else
 		{
-			// error
 			return (0);
 		}
 	}
@@ -70,7 +69,6 @@ int	ft_check_great(t_link *link, t_redirection **file)
 		}
 		else
 		{
-			// error
 			return (0);
 		}
 	}
@@ -92,7 +90,6 @@ int	ft_check_greatgreat(t_link *link, t_redirection **file)
 		}
 		else
 		{
-			// error
 			return (0);
 		}
 	}
