@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 16:12:10 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/23 11:13:40 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,19 @@ typedef struct s_cmd
 	char			**argv;
 }					t_cmd;
 
+typedef struct s_redirection
+{
+	int						identifier;
+	char					*file;
+	struct s_redirection	*next;
+}					t_redirection;
+
 typedef struct s_tree
 {
 	int				type;
 	t_cmd			*cmd;
 	int				exit_status;
+	t_redirection	*redirection;
 	struct s_tree	*prev;
 	struct s_tree	*left;
 	struct s_tree	*right;

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/18 11:44:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/23 11:41:26 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,9 @@ int					ft_strchr(int c, const char *s);
 void				ft_parsing(char *input);
 t_link				*ft_def_type(char **input);
 t_link				*ft_find_hightest_proirity(t_link *head);
-// void						ft_check_command(t_link *link, t_command **command);
-// int							ft_check_redirections(t_link *link,
-// 								t_redirection **redirectoin);
-// t_command					*ft_set_args(t_link *link, t_command *command);
+int					ft_redirections(t_link *link, t_redirection **redirectoin);
 char				**ft_strjoin_2d(char **s1, char **s2);
-// int							ft_check_pipes(t_link *link,
-// t_command **command);
-// void						ft_main_checker(t_link *link, t_command **command);
-// int							ft_quote_handler(t_link **list);
+
 // **tree_ft**
 void				ft_treeadd_back_left(t_tree **tree, t_tree *new);
 t_tree				*ft_treenew(char *cmd, int type);
@@ -93,7 +87,11 @@ t_cmd				*ft_cmdnew(char *cmd);
 void				ft_treeadd_back_right(t_tree **tree, t_tree *new);
 void				ft_free_tree(t_tree *node);
 t_tree				*ft_create_tree(t_tree **tree, t_link *link);
-
+void				ft_print_cmd(t_tree *tree);
+void				ft_printf_tree(t_tree *tree, int space, int option);
+void				ft_generate_spaces(int n);
+void				ft_add_to_argv(t_tree **new, char *command);
+void				ft_cmd_create(t_tree **new, t_link *link);
 // // error_ft
 // t_error						*ft_lstnew_error(t_errorn num_error);
 // void						ft_lstadd_back_error(t_error **list, t_error *node);
@@ -136,14 +134,15 @@ char				*ft_strjoin(char *s1, char const *s2);
 // size_t size);
 
 // // rediction_ft
-// t_redirection				*ft_lstnew_redi(char *content);
-// void						ft_lstadd_back_redi(t_redirection **list,
-// 								t_redirection *node);
-// void						ft_lstclear_redi(t_redirection **list);
+t_redirection		*ft_lstnew_redi(char *content);
+void				ft_lstadd_back_redi(t_redirection **list,
+						t_redirection *node);
+void				ft_lstclear_redi(t_redirection **list);
 
 // // link_ft
 t_link				*ft_create_new_link(t_link *link, t_link *limit);
 t_link				*ft_search_target(t_link *head, int target[2]);
+void				ft_printf_link(t_link *link);
 
 // dbl link_ft
 void				ft_dbl_lstadd_back(t_link **lst, t_link *new);
