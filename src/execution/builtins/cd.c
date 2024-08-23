@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/execution.h"
+#include "execution.h"
 
 char	*ft_strjoin(char *s1, char *s2);
 

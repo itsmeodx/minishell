@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/execution.h"
+#include "execution.h"
 
 bool	builtin_echo(t_cmd *cmd)
 {
