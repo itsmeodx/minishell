@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/16 15:48:29 by akhobba          ###   ########.fr        #
+#    Updated: 2024/08/23 12:01:28 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC = src/main.c \
 	src/parsing/utils/double_list/ft_dbl_lstlast_bonus.c \
 	src/parsing/utils/double_list/ft_dbl_lstclear_bonus.c \
 	src/parsing/utils/ft_strncmp.c src/parsing/utils/small_ft.c \
-	src/parsing/search.c\
+	src/parsing/search.c src/parsing/printf_tree.c src/parsing/create_cmd.c \
+	src/parsing/redirections.c src/parsing/utils/ft_lst_redi.c \
 
 OBJ = ${SRC:.c=.o}
 
