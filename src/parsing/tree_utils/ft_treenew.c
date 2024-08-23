@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:25:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/14 18:38:21 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/19 15:45:06 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_tree	*ft_treenew(char *cmd, int type)
 	tree->type = type;
 	tree->cmd = ft_cmdnew(cmd);
 	tree->exit_status = -1;
+	tree->redirection = NULL;
 	tree->prev = NULL;
 	tree->left = NULL;
 	tree->right = NULL;
