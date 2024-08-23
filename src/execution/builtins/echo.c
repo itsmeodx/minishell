@@ -6,13 +6,13 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/12 10:55:47 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/08/17 19:30:53 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/execution.h"
 
-bool	echo(t_cmd *cmd)
+bool	builtin_echo(t_cmd *cmd)
 {
 	int	i;
 	int	n_flag;

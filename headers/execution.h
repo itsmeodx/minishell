@@ -15,8 +15,11 @@
 # include "minishell.h"
 
 // builtins
-bool	cd(t_cmd *cmd);
-bool	echo(t_cmd *cmd);
-bool	pwd(void);
+bool	is_builtin(t_cmd *cmd);
+bool	execute_builtin(t_cmd *cmd);
+bool	builtin_cd(t_cmd *cmd);
+bool	builtin_echo(t_cmd *cmd);
+bool	builtin_pwd(void);
+bool	builtin_exit(t_cmd *cmd);
 
 #endif //EXECUTION_H

@@ -6,28 +6,37 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/20 14:31:41 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/23 11:13:40 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include <ctype.h>
-# include <dirent.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <stdbool.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <sys/types.h>
 # include <sys/wait.h>
-# include <termios.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <ctype.h>
+# include <fcntl.h>
+# include <string.h>
+# include <stdlib.h>
+# include <stdbool.h>
 # include <unistd.h>
+# include <signal.h>
+# include <termios.h>
 # include <bsd/string.h>
-# include <readline/history.h>
 # include <readline/readline.h>
+# include <readline/history.h>
+# include <errno.h>
+
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define BLUE "\033[1;34m"
+# define MAGENTA "\033[1;35m"
+# define CYAN "\033[1;36m"
+# define RESET "\033[0m"
 
 # define NAME "minishell: "
 # define PROMPT "\033[1;32mminishell:>\033[0m "
@@ -40,6 +49,8 @@
 # define MAX_REDIRECT 3
 # define MAX_PIPE 2
 # define NSFOD "No such file or directory"
+# define CNF "command not found"
+# define PD "Permission denied"
 
 typedef struct s_link
 {
