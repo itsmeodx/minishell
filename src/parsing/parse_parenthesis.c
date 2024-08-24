@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search.c                                           :+:      :+:    :+:   */
+/*   parse_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 14:26:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/24 12:58:41 by akhobba          ###   ########.fr       */
+/*   Created: 2024/08/24 20:59:39 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/24 21:00:03 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_link	*ft_search_target(t_link *head, int target[2])
+void	ft_limit_link(t_link **link)
 {
 	t_link	*tmp;
 
-	tmp = head;
+	tmp = *link;
 	while (tmp)
 	{
-		if (tmp->identifier == OPEN_PAR)
-		{
-			if (target[1] == OPEN_PAR)
-				return (tmp);
-			while (tmp->identifier != CLOSE_PAR)
-			{
-				tmp = tmp->next;
-				if (!tmp)
-					return (NULL);
-			}
-		}
-		if (tmp->identifier == target[0] || tmp->identifier == target[1])
-			return (tmp);
+		if (tmp->identifier == CLOSE_PAR)
+			tmp->prev->next = NULL;
+		break ;
 		tmp = tmp->next;
 	}
-	return (NULL);
+}
+
+t_tree	*ft_parse_parenthesis(t_tree **tree, t_link *link)
+{
+	t_tree	*new;
+
+	new = NULL;
+	if (!tree)
+		return (NULL);
+	if (!link)
+		return (*tree);
+	ft_parse_and_or(&new, link);
+	if (new)
+		ft_treeadd_back_left(tree, new);
+	return (*tree);
 }

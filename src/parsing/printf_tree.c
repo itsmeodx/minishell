@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/23 11:44:26 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/24 21:01:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	ft_print_cmd(t_tree *tree)
 
 void	ft_printf_tree(t_tree *tree, int space, int option)
 {
+	if (!tree)
+	{
+		printf("empty");
+		return ;
+	}
 	if (tree)
 	{
 		ft_generate_spaces(space);
@@ -68,19 +73,16 @@ void	ft_printf_tree(t_tree *tree, int space, int option)
 		ft_generate_spaces(space);
 		if (option == 2)
 			ft_generate_spaces(20);
-		printf("    /             \\");
 		if (option)
 			printf("\n");
 	}
 	if (tree->left)
 	{
 		space += 10;
-		option = 0;
-		ft_printf_tree(tree->left, space, option);
+		ft_printf_tree(tree->left, space, 0);
 	}
 	if (tree->right)
 	{
-		option = 1;
-		ft_printf_tree(tree->right, space, option);
+		ft_printf_tree(tree->right, space, 1);
 	}
 }

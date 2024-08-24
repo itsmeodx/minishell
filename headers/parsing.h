@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/23 11:41:26 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/24 21:00:55 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef enum e_type
 	PIPE,
 	OR,
 	AND,
-	CLOSE_PAR,
 	OPEN_PAR,
+	CLOSE_PAR
 }					t_type;
 
 typedef enum e_errorn
@@ -92,6 +92,9 @@ void				ft_printf_tree(t_tree *tree, int space, int option);
 void				ft_generate_spaces(int n);
 void				ft_add_to_argv(t_tree **new, char *command);
 void				ft_cmd_create(t_tree **new, t_link *link);
+t_tree				*ft_parse_and_or(t_tree **tree, t_link *link);
+t_tree				*ft_parse_parenthesis(t_tree **tree, t_link *link);
+void				ft_limit_link(t_link **link);
 // // error_ft
 // t_error						*ft_lstnew_error(t_errorn num_error);
 // void						ft_lstadd_back_error(t_error **list, t_error *node);

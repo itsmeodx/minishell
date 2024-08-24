@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 00:43:23 by adam              #+#    #+#             */
-/*   Updated: 2024/08/20 18:56:47 by akhobba          ###   ########.fr       */
+/*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/24 20:57:29 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_parsing(char *input)
 	tree = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
+	// ft_printf_link(link);
 	tmp = link;
 	tree = ft_create_tree(&tree, tmp);
 	ft_generate_spaces(20);

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/23 11:42:20 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/24 21:01:10 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_tree	*ft_parse_cmd(t_tree **tree, t_link *link)
 	int		goal[2];
 
 	goal[0] = STR;
-	goal[1] = LEN_ENUM;
+	goal[1] = OPEN_PAR;
 	if (!tree)
 		return (NULL);
 	if (!link)
@@ -27,13 +27,16 @@ t_tree	*ft_parse_cmd(t_tree **tree, t_link *link)
 	target = ft_search_target(link, goal);
 	if (!target)
 		return (NULL);
-	new = ft_treenew(target->command, target->identifier);
-	if (!*tree)
-		*tree = new;
+	*tree = new;
 	if (link->next)
 	{
 		ft_cmd_create(&new, link->next);
 		ft_redirections(link->next, &new->redirection);
+	}
+	if (target->identifier == OPEN_PAR)
+	{
+		ft_limit_link(&link);
+		ft_parse_parenthesis(&new, link->next);
 	}
 	return (new);
 }
@@ -45,7 +48,7 @@ t_tree	*ft_parse_pipe(t_tree **tree, t_link *link)
 	int		goal[2];
 
 	goal[0] = PIPE;
-	goal[1] = LEN_ENUM;
+	goal[1] = LEN_ENUM + 2;
 	if (!tree)
 		return (NULL);
 	if (!link)
