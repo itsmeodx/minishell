@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/08/18 11:49:24 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/24 10:33:58 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	ft_count_spaces_bonus(char *input)
 	count = 0;
 	while (input[i])
 	{
-		if (input[i] == '&' || input[i] == '(' || input[i] == '|'
-			|| input[i] == ')')
+		if (input[i] == '&' || input[i] == '|' || input[i] == ')')
 			count++;
 		if (input[i + 1] && ((input[i] == '&' && input[i + 1] == '&')
 				|| (input[i] == '|' && input[i + 1] == '|')))
@@ -41,11 +40,10 @@ int	ft_count_spaces(char *input)
 	count = 0;
 	while (input[i])
 	{
-		if (input[i] == '<' || input[i] == '>' || input[i] == '|')
+		if (input[i] == '<' || input[i] == '>' || input[i] == ')')
 			count++;
 		if (input[i + 1] && ((input[i] == '<' && input[i + 1] == '<')
-				|| (input[i] == '>' && input[i + 1] == '>') || (input[i] == '|'
-					&& input[i + 1] == '|')))
+				|| (input[i] == '>' && input[i + 1] == '>')))
 			count--;
 		i++;
 	}
@@ -70,7 +68,7 @@ char	*ft_add_spaces_bonus(char *input, int j)
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];
 			if (input[j - 1] != '(' && ((input[j] == '&' && input[j - 1] != '|')
-					|| input[j] == '|'))
+					|| (input[j] == '|' && input[j - 1] != '&')))
 				tmp[++i] = input[j++];
 			tmp[++i] = ' ';
 			i++;
@@ -93,7 +91,7 @@ char	*ft_add_spaces(char *input, int j)
 	i = 0;
 	while (input[j])
 	{
-		if ((input[j] == '<' || input[j] == '>' || input[j] == ')')
+		if ((input[j] == ')' || input[j] == '<' || input[j] == '>')
 			&& !check_quote(input, j))
 		{
 			tmp[i] = ' ';
@@ -118,6 +116,7 @@ char	**ft_lexer(char *input)
 
 	input_spaces = ft_add_spaces(input, 0);
 	input_spaces_b = ft_add_spaces_bonus(input_spaces, 0);
+	printf("input_spaces: %s\n", input_spaces_b);
 	split_input = ft_split(input_spaces_b, " \n\t\v\f\r");
 	free(input_spaces);
 	free(input_spaces_b);

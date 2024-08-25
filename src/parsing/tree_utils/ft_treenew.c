@@ -6,18 +6,11 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:25:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/19 15:45:06 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/25 10:23:12 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-void	ft_free_tree(t_tree *node)
-{
-	free_2d(node->cmd->argv);
-	free(node->cmd);
-	free(node);
-}
 
 t_cmd	*ft_cmdnew(char *cmd)
 {
@@ -26,8 +19,9 @@ t_cmd	*ft_cmdnew(char *cmd)
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->argv = (char **)malloc(sizeof(char *) * 1);
+	new->argv = (char **)malloc(sizeof(char *) * 2);
 	new->argv[0] = ft_strdup(cmd);
+	new->argv[1] = NULL;
 	new->argc = 1;
 	return (new);
 }

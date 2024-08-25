@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 14:26:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/15 17:04:45 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/24 12:58:41 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_link	*ft_search_target(t_link *head, int target[2])
 	{
 		if (tmp->identifier == OPEN_PAR)
 		{
+			if (target[1] == OPEN_PAR)
+				return (tmp);
 			while (tmp->identifier != CLOSE_PAR)
 			{
 				tmp = tmp->next;
@@ -34,43 +36,3 @@ t_link	*ft_search_target(t_link *head, int target[2])
 	}
 	return (NULL);
 }
-
-// int	*ft_fill_priority(void)
-// {
-// 	int	*priority;
-// 	int	i;
-// 	int	j;
-
-// 	priority = malloc(LEN_ENUM * sizeof(int));
-// 	memset(priority, 0, sizeof(int));
-// 	if (!priority)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 7;
-// 	while (i < LEN_ENUM)
-// 	{
-// 		priority[i] = j;
-// 		i++;
-// 		j--;
-// 	}
-// 	return (priority);
-// }
-
-// t_link	*ft_find_hightest_proirity(t_link *head)
-// {
-// 	t_link	*target;
-// 	int		*priority;
-// 	int		i;
-
-// 	i = 0;
-// 	target = NULL;
-// 	priority = ft_fill_priority();
-// 	while (i < LEN_ENUM)
-// 	{
-// 		target = ft_search_target(head, priority[i]);
-// 		if (target)
-// 			return (free(priority), target);
-// 		i++;
-// 	}
-// 	return (free(priority), target);
-// }

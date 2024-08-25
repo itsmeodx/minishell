@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/25 10:46:35 by akhobba          ###   ########.fr       */
+/*   Created: 2024/08/24 20:59:39 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/25 09:59:51 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
 #include "parsing.h"
 
-int	main(void)
+void	ft_limit_link(t_link **link)
 {
-	char	*input;
-	t_tree	*tree;
+	t_link	*tmp;
 
-	tree = NULL;
-	while (1)
+	tmp = *link;
+	while (tmp)
 	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-		tree = ft_parsing(input);
+		if (tmp->identifier == CLOSE_PAR)
+			tmp->prev->next = NULL;
+		break ;
+		tmp = tmp->next;
 	}
-	ft_treeclear(tree);
-	return (0);
+}
+
+t_tree	*ft_parse_parenthesis(t_tree **tree, t_link *link)
+{
+	t_tree	*new;
+
+	new = NULL;
+	if (!tree)
+		return (NULL);
+	if (!link)
+		return (*tree);
+	ft_limit_link(&link);
+	new = ft_parse_and_or(&new, link);
+	if (new)
+		ft_treeadd_back_left(tree, new);
+	return (*tree);
 }

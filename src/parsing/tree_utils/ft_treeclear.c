@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_treeclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/25 10:46:35 by akhobba          ###   ########.fr       */
+/*   Created: 2024/08/25 10:12:27 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/25 13:33:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
 #include "parsing.h"
 
-int	main(void)
+void	ft_treeclear_node(t_tree *tree)
 {
-	char	*input;
-	t_tree	*tree;
+	if (!tree)
+		return ;
+	free_2d(tree->cmd->argv);
+	free(tree->cmd);
+	if (tree->redirection)
+		ft_lstclear_redi(&tree->redirection);
+}
 
-	tree = NULL;
-	while (1)
-	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-		tree = ft_parsing(input);
-	}
-	ft_treeclear(tree);
-	return (0);
+void	ft_treeclear(t_tree *tree)
+{
+	if (!tree)
+		return ;
+	ft_treeclear_node(tree);
+	ft_treeclear(tree->left);
+	ft_treeclear(tree->right);
+	free(tree);
 }

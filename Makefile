@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/23 12:01:28 by akhobba          ###   ########.fr        #
+#    Updated: 2024/08/25 10:43:42 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = src/main.c \
 	src/parsing/utils/ft_strncmp.c src/parsing/utils/small_ft.c \
 	src/parsing/search.c src/parsing/printf_tree.c src/parsing/create_cmd.c \
 	src/parsing/redirections.c src/parsing/utils/ft_lst_redi.c \
+	src/parsing/parse_parenthesis.c src/parsing/tree_utils/ft_treeclear.c \
 
 OBJ = ${SRC:.c=.o}
 
