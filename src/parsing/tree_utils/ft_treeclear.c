@@ -1,43 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_parenthesis.c                                :+:      :+:    :+:   */
+/*   ft_treeclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/24 20:59:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/25 09:59:51 by akhobba          ###   ########.fr       */
+/*   Created: 2024/08/25 10:12:27 by akhobba           #+#    #+#             */
+/*   Updated: 2024/08/25 13:33:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	ft_limit_link(t_link **link)
+void	ft_treeclear_node(t_tree *tree)
 {
-	t_link	*tmp;
-
-	tmp = *link;
-	while (tmp)
-	{
-		if (tmp->identifier == CLOSE_PAR)
-			tmp->prev->next = NULL;
-		break ;
-		tmp = tmp->next;
-	}
+	if (!tree)
+		return ;
+	free_2d(tree->cmd->argv);
+	free(tree->cmd);
+	if (tree->redirection)
+		ft_lstclear_redi(&tree->redirection);
 }
 
-t_tree	*ft_parse_parenthesis(t_tree **tree, t_link *link)
+void	ft_treeclear(t_tree *tree)
 {
-	t_tree	*new;
-
-	new = NULL;
 	if (!tree)
-		return (NULL);
-	if (!link)
-		return (*tree);
-	ft_limit_link(&link);
-	new = ft_parse_and_or(&new, link);
-	if (new)
-		ft_treeadd_back_left(tree, new);
-	return (*tree);
+		return ;
+	ft_treeclear_node(tree);
+	ft_treeclear(tree->left);
+	ft_treeclear(tree->right);
+	free(tree);
 }
