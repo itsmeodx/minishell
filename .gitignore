@@ -93,6 +93,9 @@ cmake-build-debug
 # git
 git/
 
+# readline
+readline.supp
+
 # MiniShell
 minishell
 minishell_tester

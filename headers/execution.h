@@ -14,7 +14,7 @@
 # define EXECUTION_H
 # include "minishell.h"
 
-// builtins
+// builtins/
 bool	is_builtin(t_cmd *cmd);
 bool	execute_builtin(t_cmd *cmd);
 bool	builtin_cd(t_cmd *cmd);

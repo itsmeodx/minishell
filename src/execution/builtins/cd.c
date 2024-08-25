@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include "execution.h"
-
-char	*ft_strjoin(char *s1, char *s2);
+#include "parsing.h"
 
 bool	cd_home(void)
 {
