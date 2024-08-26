@@ -116,7 +116,6 @@ char	**ft_lexer(char *input)
 
 	input_spaces = ft_add_spaces(input, 0);
 	input_spaces_b = ft_add_spaces_bonus(input_spaces, 0);
-	printf("input_spaces: %s\n", input_spaces_b);
 	split_input = ft_split(input_spaces_b, " \n\t\v\f\r");
 	free(input_spaces);
 	free(input_spaces_b);

@@ -66,12 +66,8 @@ t_tree	*ft_parsing(char *input)
 	tree = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
-	ft_printf_link(link);
 	tmp = link;
 	tree = ft_create_tree(&tree, tmp);
-	ft_generate_spaces(10);
-	ft_printf_tree(tree, 0, 2);
-	printf("\n");
 	free_2d(split_input);
 	ft_dbl_lstclear(&link);
 	return (tree);
