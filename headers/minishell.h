@@ -30,6 +30,8 @@
 # include <readline/history.h>
 # include <errno.h>
 
+# define NAME "\033[1;31mminishell: \033[0m"
+# define PROMPT "\033[1;32mminishell:>\033[0m "
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[1;33m"
@@ -38,8 +40,6 @@
 # define CYAN "\033[1;36m"
 # define RESET "\033[0m"
 
-# define NAME "minishell: "
-# define PROMPT "\033[1;32mminishell:>\033[0m "
 # define PROMPT_SIZE 11
 # define MAX_PATH 4096
 # define MAX_CMD 4096
@@ -48,9 +48,12 @@
 # define MAX_BUILTINS 7
 # define MAX_REDIRECT 3
 # define MAX_PIPE 2
+
 # define NSFOD "No such file or directory"
 # define CNF "command not found"
 # define PD "Permission denied"
+# define TMA "too many arguments"
+# define NAR "numeric argument required"
 
 typedef struct s_link
 {

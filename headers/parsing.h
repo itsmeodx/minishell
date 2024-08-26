@@ -122,7 +122,8 @@ char				*ft_strjoin(char *s1, char const *s2);
 
 // // rediction_ft
 t_redirection		*ft_lstnew_redi(char *content);
-void				ft_lstadd_back_redi(t_redirection **list, t_redirection *node);
+void				ft_lstadd_back_redi(t_redirection **list,
+						 t_redirection *node);
 void				ft_lstclear_redi(t_redirection **list);
 
 // // link_ft

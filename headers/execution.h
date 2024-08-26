@@ -16,10 +16,36 @@
 
 // builtins/
 bool	is_builtin(t_cmd *cmd);
-bool	execute_builtin(t_cmd *cmd);
+int		execute_builtin(t_cmd *cmd);
 bool	builtin_cd(t_cmd *cmd);
 bool	builtin_echo(t_cmd *cmd);
 bool	builtin_pwd(void);
 bool	builtin_exit(t_cmd *cmd);
+
+// execute_and_or.c
+int		execute_and(t_tree *tree);
+int		execute_or(t_tree *tree);
+
+// execute_par.c
+int		execute_par(t_tree *tree);
+
+// execute_pipe.c
+int		first_child(int *fd, t_tree *tree);
+int		second_child(int *fd, t_tree *tree);
+int		execute_pipe(t_tree *tree);
+
+// execute_str.c
+int		execute_cmd(t_cmd *cmd);
+int		execute_str(t_tree *tree);
+
+// execution.c
+int		ft_execution(t_tree *tree);
+
+// prompt.c
+char	*colorize(char *str, char *color);
+char	*ft_getprompt(void);
+
+// sysutils.c
+int		close_pipe(int *fd);
 
 #endif //EXECUTION_H
