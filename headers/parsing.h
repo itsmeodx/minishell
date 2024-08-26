@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/25 11:41:55 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/26 19:57:45 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void				ft_printf_tree(t_tree *tree, int space, int option);
 void				ft_generate_spaces(int n);
 void				ft_add_to_argv(t_tree **new, char *command);
 void				ft_cmd_create(t_tree **new, t_link *link);
-t_tree				*ft_parse_and_or(t_tree **tree, t_link *link);
+t_tree				*ft_parse_and_or(t_link *link);
 t_tree				*ft_parse_parenthesis(t_tree **tree, t_link *link);
 void				ft_limit_link(t_link **link);
 void				ft_treeclear(t_tree *tree);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:59:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/25 09:59:51 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/26 19:58:16 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ t_tree	*ft_parse_parenthesis(t_tree **tree, t_link *link)
 		return (NULL);
 	if (!link)
 		return (*tree);
-	ft_limit_link(&link);
-	new = ft_parse_and_or(&new, link);
+	new = ft_parse_and_or(link);
 	if (new)
 		ft_treeadd_back_left(tree, new);
 	return (*tree);
