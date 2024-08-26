@@ -25,15 +25,15 @@ bool	is_builtin(t_cmd *cmd)
 	return (false);
 }
 
-bool	execute_builtin(t_cmd *cmd)
+int	execute_builtin(t_cmd *cmd)
 {
 	if (!strcmp(cmd->argv[0], "cd"))
-		return (builtin_cd(cmd));
+		return (!builtin_cd(cmd));
 	if (!strcmp(cmd->argv[0], "echo"))
-		return (builtin_echo(cmd));
+		return (!builtin_echo(cmd));
 	if (!strcmp(cmd->argv[0], "pwd"))
-		return (builtin_pwd());
+		return (!builtin_pwd());
 	if (!strcmp(cmd->argv[0], "exit"))
-		return (builtin_exit(cmd));
-	return (false);
+		return (!builtin_exit(cmd));
+	return (EXIT_FAILURE);
 }

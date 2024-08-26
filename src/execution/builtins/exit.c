@@ -12,9 +12,6 @@
 
 #include "execution.h"
 
-#define TMA "too many arguments"
-#define NAR "numeric argument required"
-
 static bool	check_status(char *str)
 {
 	int	i;
@@ -43,14 +40,14 @@ bool	builtin_exit(t_cmd *cmd)
 	if (cmd->argc > 2)
 	{
 		dprintf(STDERR_FILENO, "exit\n");
-		dprintf(STDERR_FILENO, "minishell: exit: "TMA"\n");
+		dprintf(STDERR_FILENO, NAME"exit: "TMA"\n");
 		return (false);
 	}
 	if (!check_status(cmd->argv[1]))
 	{
 		dprintf(STDERR_FILENO, "exit\n");
 		dprintf(STDERR_FILENO,
-			"minishell: exit: %s: "NAR"\n", cmd->argv[1]);
+			NAME"exit: %s: "NAR"\n", cmd->argv[1]);
 		exit(2);
 	}
 	else
