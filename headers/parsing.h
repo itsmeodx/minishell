@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/27 12:44:31 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/27 23:00:58 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum e_type
 
 typedef enum e_errorn
 {
+	NONE,
 	ERROR_IN,
 	ERROR_APPEND,
 	ERROR_OUT,
@@ -99,26 +100,17 @@ void				ft_treeclear(t_tree *tree);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // // utils
-// size_t	ft_strlcat(char *dst, const char *src, size_t size);
-// char	*ft_strchr_v2(const char *s, int c);
-// int							ft_count_strs(char **s);
-// int							check_quote(char *str, int a);
-// int							ft_error(void);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+char	*ft_strchr_v2(const char *s, int c);
 void				free_2d(char **tab);
-// void						ft_free(char **str);
-// void						ft_putstr(char *s, int fd);
-// int							ft_isdigit(int c);
-// int							ft_strncmp(const char *s1, const char *s2,
-// 								size_t n);
 char				**ft_strdup_2d(char **s);
 char				*ft_strdup(const char *s);
 int					ft_count_strs(char **s);
-// int							ft_strlen(const char *str);
-// long						ft_atoi(const char *nptr);
+int							ft_strlen(const char *str);
 char				*ft_strjoin(char *s1, char const *s2);
-// char						*ft_strdup(const char *s);
-// size_t						ft_strlcpy(char *dst, const char *src,
-// size_t size);
+char						*ft_strdup(const char *s);
+size_t						ft_strlcpy(char *dst, const char *src,
+						size_t size);
 
 // // rediction_ft
 t_redirection		*ft_lstnew_redi(char *content);
@@ -136,5 +128,8 @@ void				ft_dbl_lstadd_back(t_link **lst, t_link *new);
 t_link				*ft_dbl_lstnew(void *content);
 t_link				*ft_dbl_lstlast(t_link *lst);
 void				ft_dbl_lstclear(t_link **lst);
+
+// Syntax error fts
+t_errorn ft_check_quotes(t_link *link);
 
 #endif // PARSING_H
