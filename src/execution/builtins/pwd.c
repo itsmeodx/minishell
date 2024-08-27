@@ -12,7 +12,7 @@
 
 #include "execution.h"
 
-bool	builtin_pwd(void)
+bool	builtin_pwd(t_cmd *cmd __attribute__((unused)))
 {
 	char	*cwd;
 

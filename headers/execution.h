@@ -21,7 +21,7 @@ bool	builtin_cd(t_cmd *cmd);
 bool	builtin_echo(t_cmd *cmd);
 bool	builtin_exit(t_cmd *cmd);
 bool	builtin_export(t_cmd *cmd);
-bool	builtin_pwd(void);
+bool	builtin_pwd(t_cmd *cmd);
 
 // utils/
 void	*extend_2d(char **ptr, size_t size);
