@@ -19,8 +19,17 @@ bool	is_builtin(t_cmd *cmd);
 int		execute_builtin(t_cmd *cmd);
 bool	builtin_cd(t_cmd *cmd);
 bool	builtin_echo(t_cmd *cmd);
-bool	builtin_pwd(void);
 bool	builtin_exit(t_cmd *cmd);
+bool	builtin_export(t_cmd *cmd);
+bool	builtin_pwd(void);
+
+// utils/
+void	*extend_2d(char **ptr, size_t size);
+char	*ft_itoa(int n);
+
+// env.c
+void	update_shlvl(char **env);
+void	update_env(char **env, char *key, char *value);
 
 // execute_and_or.c
 int		execute_and(t_tree *tree);
