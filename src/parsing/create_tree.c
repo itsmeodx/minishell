@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/26 19:57:29 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/27 12:36:17 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_tree	*ft_parse_cmd(t_link *link)
 	}
 	if (target->identifier == OPEN_PAR)
 	{
-		printf("new->command %s\n", new->cmd->argv[0]);
 		ft_limit_link(&link);
 		ft_parse_parenthesis(&new, link->next);
 	}
