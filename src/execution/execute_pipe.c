@@ -22,11 +22,9 @@ int	first_child(int *fd, t_tree *tree)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
-		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		status = ft_execution(tree);
 		close_pipe(fd);
+		status = ft_execution(tree);
 		exit(status);
 	}
 //	waitpid(pid, &status, 0);
@@ -53,9 +51,8 @@ int	second_child(int *fd, t_tree *tree)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
-		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+		close_pipe(fd);
 		status = ft_execution(tree);
 		exit(status);
 	}
@@ -81,7 +78,8 @@ int	execute_pipe(t_tree *tree)
 		return (EXIT_FAILURE);
 	first_child(fd, tree->left);
 	second_child(fd, tree->right);
+	close_pipe(fd);
 	while (wait(NULL) != -1)
 		;
-	return (close_pipe(fd), EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

@@ -30,8 +30,8 @@
 # include <readline/history.h>
 # include <errno.h>
 
-# define NAME "\033[1;31mminishell: \033[0m"
-# define PROMPT "\033[1;32mminishell:>\033[0m "
+# define NAME "\033[1;31mminishell\033[0m: "
+# define PROMPT "\033[1;36mminishell\033[0m:> "
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[1;33m"
