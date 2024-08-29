@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/27 23:00:58 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/28 00:19:58 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ typedef enum e_errorn
 	ERROR_QUOTE,
 	ERROR_OR,
 	ERROR_AND,
-	ERROR_OPEN_PAR,
-	ERROR_CLOSE_PAR,
+	ERROR_PAREN,
 }					t_errorn;
 
 /* error guide
@@ -58,11 +57,11 @@ typedef enum e_errorn
 	9 : error in close parenthesis
 */
 
-typedef struct s_error
-{
-	t_errorn		error;
-	struct s_error	*next;
-}					t_error;
+// typedef struct s_error
+// {
+// 	t_errorn		error;
+// 	struct s_error	*next;
+// }					t_error;
 
 extern t_error	*g_error; //global variable to store errors
 
