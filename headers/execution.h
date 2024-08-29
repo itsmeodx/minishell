@@ -50,6 +50,10 @@ int		execute_str(t_tree *tree);
 // execution.c
 int		ft_execution(t_tree *tree);
 
+// history.c
+void	ft_add_history(char *line);
+void	restore_history(void);
+
 // prompt.c
 char	*colorize(char *str, char *color);
 char	*ft_getprompt(void);

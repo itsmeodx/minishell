@@ -41,7 +41,7 @@ test
 
 # Random .c files
 test.c
-emain.c
+#emain.c
 #main.c
 .main.c
 main
@@ -98,4 +98,5 @@ readline.supp
 
 # MiniShell
 minishell
+.minishell_history
 minishell_tester
