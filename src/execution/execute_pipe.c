@@ -27,17 +27,6 @@ int	first_child(int *fd, t_tree *tree)
 		status = ft_execution(tree);
 		exit(status);
 	}
-//	waitpid(pid, &status, 0);
-//	if (WIFEXITED(status))
-//	{
-//		if (WEXITSTATUS(status) != 0)
-//			return (EXIT_FAILURE);
-//	}
-//	else if (WIFSIGNALED(status))
-//	{
-//		if (WTERMSIG(status) + 128 != 0)
-//			return (EXIT_FAILURE);
-//	}
 	return (EXIT_SUCCESS);
 }
 
@@ -56,23 +45,12 @@ int	second_child(int *fd, t_tree *tree)
 		status = ft_execution(tree);
 		exit(status);
 	}
-//	waitpid(pid, &status, 0);
-//	if (WIFEXITED(status))
-//	{
-//		if (WEXITSTATUS(status) != 0)
-//			return (EXIT_FAILURE);
-//	}
-//	else if (WIFSIGNALED(status))
-//	{
-//		if (WTERMSIG(status) + 128 != 0)
-//			return (EXIT_FAILURE);
-//	}
 	return (EXIT_SUCCESS);
 }
 
 int	execute_pipe(t_tree *tree)
 {
-	int		fd[2];
+	int	fd[2];
 
 	if (pipe(fd) == -1)
 		return (EXIT_FAILURE);

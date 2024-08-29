@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
+#    By: adam <adam@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/25 10:43:42 by akhobba          ###   ########.fr        #
+#    Updated: 2024/08/27 21:03:03 by adam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRC = src/main.c \
 	src/parsing/lexer.c \
@@ -28,6 +28,7 @@ SRC = src/main.c \
 	src/parsing/search.c src/parsing/printf_tree.c src/parsing/create_cmd.c \
 	src/parsing/redirections.c src/parsing/utils/ft_lst_redi.c \
 	src/parsing/parse_parenthesis.c src/parsing/tree_utils/ft_treeclear.c \
+	src/parsing/quotes_checker.c \
 
 OBJ = ${SRC:.c=.o}
 

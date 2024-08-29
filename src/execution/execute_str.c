@@ -33,8 +33,7 @@ int	execute_cmd(t_cmd *cmd)
 			}
 			else
 			{
-				dprintf(STDERR_FILENO, NAME"%s: "PD"\n",
-					cmd->argv[0]);
+				dprintf(STDERR_FILENO, NAME "%s: " PD "\n", cmd->argv[0]);
 				exit(126);
 			}
 		}
@@ -42,11 +41,9 @@ int	execute_cmd(t_cmd *cmd)
 		{
 			execvp(cmd->argv[0], cmd->argv);
 			if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
-				dprintf(STDERR_FILENO, NAME"%s: "NSFOD"\n",
-					cmd->argv[0]);
+				dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
 			else
-				dprintf(STDERR_FILENO, "%s: "CNF"\n",
-					cmd->argv[0]);
+				dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
 			exit(127);
 		}
 		exit(1);

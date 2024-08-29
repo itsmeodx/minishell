@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/25 13:32:47 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/27 12:41:24 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ void	ft_print_cmd(t_tree *tree)
 
 	tmp = tree->cmd->argv;
 	i = 0;
-	printf("str: %s type :%d", tree->cmd->argv[0], tree->type);
+	printf("str: %s type :%d agrc: %d", tree->cmd->argv[0],
+		tree->type, tree->cmd->argc);
 	while (tmp[i])
 	{
-		printf("  args :%s", tmp[i]);
+		printf("  args :%s,", tmp[i]);
 		i++;
 	}
 	redi = tree->redirection;

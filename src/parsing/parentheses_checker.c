@@ -1,38 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_cmd.c                                       :+:      :+:    :+:   */
+/*   parentheses_checker.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 18:52:55 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/27 12:39:06 by adam             ###   ########.fr       */
+/*   Created: 2024/08/28 00:20:34 by adam              #+#    #+#             */
+/*   Updated: 2024/08/28 00:32:44 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	ft_add_to_argv(t_tree **new, char *command)
+bool	ft_index_parentheses(char *input)
 {
-	char	**tmp;
+	int	i;
+	int	valider;
 
-	if (!command)
-		return ;
-	tmp = malloc(sizeof(char *) * 2);
-	tmp[0] = ft_strdup(command);
-	tmp[1] = NULL;
-	(*new)->cmd->argv = ft_strjoin_2d((*new)->cmd->argv, tmp);
-	(*new)->cmd->argc++;
+	valider = 0;
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '(')
+			valider++;
+		else if (input[i] == ')')
+			valider--;
+	}
+	if (valider)
+		return (false);
+	return (true);
 }
 
-void	ft_cmd_create(t_tree **new, t_link *link)
+t_errorn	ft_check_parentheses(t_link *link)
 {
-	while (link)
+	t_link	*tmp;
+
+	tmp = link;
+	while (tmp)
 	{
-		if (link->prev->identifier == STR && link->identifier == STR)
-		{
-			ft_add_to_argv(new, link->command);
-		}
-		link = link->next;
+		if (ft_index_parentheses(tmp->command) == false)
+			return (ERROR_PAREN);
+		tmp = tmp->next;
 	}
+	return (NONE);
 }
