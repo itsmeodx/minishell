@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/25 10:56:28 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/31 13:02:11 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ t_tree	*ft_parsing(char *input)
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
-	error = ft_check_quotes(link);
+	ft_printf_link(link);
+	// error = ft_check_quotes(link);
+	// printf("error=%d\n", error);
 	tree = ft_create_tree(&tree, tmp);
 	free_2d(split_input);
 	ft_dbl_lstclear(&link);

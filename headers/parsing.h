@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/29 15:26:51 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/08/31 13:37:55 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef enum e_errorn
 // 	struct s_error	*next;
 // }					t_error;
 
-extern t_errorn	*g_error; // global variable to store errors
+// extern t_errorn	*g_error; // global variable to store errors
 
 // old linked list will be replaced by a new tree
 
