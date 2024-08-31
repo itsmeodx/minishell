@@ -3,39 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/31 17:11:55 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/31 18:40:21 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
 #include "parsing.h"
+#include "execution.h"
 
-int	main(void)
+// global variable
+struct s_data	g_data;
+
+void	init_minishell(char **env)
 {
-	char	*input;
-	t_tree	*tree;
-
-	tree = NULL;
-	while (1)
+	g_data = (struct s_data){0};
+	restore_history();
+	g_data.environ = ft_strdup_2d(env);
+	if (!g_data.environ)
 	{
-		input = readline("minishell>");
-		if (input)
-			add_history(input);
-		if (!input)
-			return (1);
-		if (ft_strncmp(input, "exit", 4) == 0)
-		{
-			free(input);
-			break ;
-		}
-		tree = ft_parsing(input);
-		free(input);
-		ft_treeclear(tree);
+		g_data.environ = malloc(sizeof(char *));
+		if (!g_data.environ)
+			ft_exit(EXIT_FAILURE);
+		g_data.environ[0] = NULL;
 	}
-	if (!tree)
-		ft_treeclear(tree);
-	return (0);
+	update_shlvl(g_data.environ);
+	check_path();
+}
+
+int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
+			char **env)
+{
+	init_minishell(env);
+	while (true)
+	{
+		g_data.prompt = ft_getprompt();
+		g_data.input = readline(g_data.prompt);
+		free(g_data.prompt);
+		if (!g_data.input)
+			break ;
+		if (*g_data.input)
+			ft_add_history(g_data.input);
+		g_data.tree = ft_parsing(g_data.input);
+		free(g_data.input);
+		if (g_data.tree)
+			ft_execution(g_data.tree);
+		ft_treeclear(g_data.tree);
+	}
+	free_2d(g_data.environ);
+	printf("exit\n");
+	return (EXIT_SUCCESS);
 }

@@ -26,7 +26,6 @@ void	ft_dbl_lstclear(t_link **lst)
 		current = current->next;
 		if (twp->command)
 			free(twp->command);
-		// if (twp)
 		free(twp);
 	}
 	*lst = NULL;

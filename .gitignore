@@ -98,4 +98,5 @@ readline.supp
 
 # MiniShell
 minishell
+.minishell_history
 minishell_tester

@@ -11,6 +11,35 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
+
+bool	set_redirections(t_redirection *redirections)
+{
+	int	fd;
+
+	while (redirections)
+	{
+		if (redirections->identifier == IN)
+			fd = open(redirections->file, O_RDONLY);
+		else if (redirections->identifier == OUT)
+			fd = open(redirections->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		else if (redirections->identifier == APPEND)
+			fd = open(redirections->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		if (fd == -1)
+			return (dprintf(STDERR_FILENO,
+					NAME "%s: "NSFOD"\n", redirections->file), false);
+		else
+		{
+			if (redirections->identifier == IN)
+				dup2(fd, STDIN_FILENO);
+			else
+				dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
+		redirections = redirections->next;
+	}
+	return (true);
+}
 
 int	execute_cmd(t_cmd *cmd)
 {
@@ -24,17 +53,19 @@ int	execute_cmd(t_cmd *cmd)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
+		if (!set_redirections(cmd->redirections))
+			exit(1);
 		if ((cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 			&& access(cmd->argv[0], F_OK) != -1)
 		{
 			if (access(cmd->argv[0], X_OK) != -1)
 			{
-				execv(cmd->argv[0], cmd->argv);
+				execve(cmd->argv[0], cmd->argv, g_data.environ);
 			}
 			else
 			{
 				dprintf(STDERR_FILENO, NAME "%s: " PD "\n", cmd->argv[0]);
-				exit(126);
+				ft_exit(126);
 			}
 		}
 		else
@@ -44,9 +75,9 @@ int	execute_cmd(t_cmd *cmd)
 				dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
 			else
 				dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
-			exit(127);
+			ft_exit(127);
 		}
-		exit(1);
+		ft_exit(1);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
@@ -60,6 +91,7 @@ int	execute_str(t_tree *tree)
 {
 	int	status;
 
+	tree->cmd->redirections = tree->redirection;
 	if (is_builtin(tree->cmd))
 		status = execute_builtin(tree->cmd);
 	else

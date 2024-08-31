@@ -18,6 +18,8 @@ char	*colorize(char *str, char *color)
 	char	*colored;
 	char	*reset;
 
+	if (!str)
+		return (NULL);
 	colored = ft_strjoin(color, str);
 	reset = ft_strjoin(colored, RESET);
 	free(colored);
@@ -35,8 +37,11 @@ char	*ft_getprompt(void)
 	tmp = cwd;
 	cwd = ft_strjoin(cwd, " ");
 	free(tmp);
-	if (strncmp(cwd, getenv("HOME"), strlen(getenv("HOME"))) == 0)
-		prompt = ft_strjoin("~", cwd + strlen(getenv("HOME")));
+	if (ft_getenv("HOME")
+		&& strncmp(cwd, ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
+		prompt = ft_strjoin("~", cwd + strlen(ft_getenv("HOME")));
+	else
+		prompt = ft_strdup(cwd);
 	tmp = prompt;
 	prompt = colorize(prompt, GREEN);
 	free(tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/31 12:04:26 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/31 17:57:34 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <readline/history.h>
 # include <errno.h>
 
+// Prompt stuff & colors
 # define NAME "\033[1;31mminishell\033[0m: "
 # define PROMPT "\033[1;36mminishell\033[0m:> "
 # define RED "\033[1;31m"
@@ -40,20 +41,11 @@
 # define CYAN "\033[1;36m"
 # define RESET "\033[0m"
 
-# define PROMPT_SIZE 11
-# define MAX_PATH 4096
-# define MAX_CMD 4096
-# define MAX_ENV 4096
-# define MAX_HISTORY 1000
-# define MAX_BUILTINS 7
-# define MAX_REDIRECT 3
-# define MAX_PIPE 2
+// Define default PATH
+# define PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# define NSFOD "No such file or directory"
-# define CNF "command not found"
-# define PD "Permission denied"
-# define TMA "too many arguments"
-# define NAR "numeric argument required"
+// global variable
+extern struct s_data	g_data;
 
 typedef struct s_link
 {
@@ -63,29 +55,38 @@ typedef struct s_link
 	struct s_link	*next;
 }					t_link;
 
-typedef struct s_cmd
-{
-	int						argc;
-	char					**argv;
-	struct s_redirection	*redirections;
-}					t_cmd;
-
 typedef struct s_redirection
 {
 	int						identifier;
 	char					*file;
 	struct s_redirection	*next;
-}					t_redirection;
+}							t_redirection;
+
+typedef struct s_cmd
+{
+	int						argc;
+	char					**argv;
+	struct s_redirection	*redirections;
+}							t_cmd;
 
 typedef struct s_tree
 {
 	int						type;
 	struct s_cmd			*cmd;
-	int						exit_status;
-	struct s_redirection	*redirection;
 	struct s_tree			*prev;
 	struct s_tree			*left;
 	struct s_tree			*right;
-}					t_tree;
+	struct s_redirection	*redirection;
+}							t_tree;
+
+typedef struct s_data
+{
+	char			*path;
+	struct s_tree	*tree;
+	char			**environ;
+	char			*input;
+	char			*prompt;
+	int				exit_status;
+}					t_data;
 
 #endif

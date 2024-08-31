@@ -14,8 +14,8 @@
 
 bool	ft_check_each_node(char *input)
 {
-	int i;
-	char lock;
+	int		i;
+	char	lock;
 
 	i = 0;
 	while (input[i])
