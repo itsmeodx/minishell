@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/12 16:09:21 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:39:39 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ bool	builtin_cd(t_cmd *cmd)
 		if (!cd_dir(cmd))
 			return (false);
 	}
-	update_pwd(__environ);
+	update_pwd(g_data.environ);
 	return (true);
 }

@@ -60,7 +60,7 @@ int	execute_cmd(t_cmd *cmd)
 		{
 			if (access(cmd->argv[0], X_OK) != -1)
 			{
-				execv(cmd->argv[0], cmd->argv);
+				execve(cmd->argv[0], cmd->argv, g_data.environ);
 			}
 			else
 			{

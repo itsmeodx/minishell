@@ -21,7 +21,7 @@ t_errorn	ft_check_operatore(t_link *link, t_type target, t_errorn error)
 	{
 		if (tmp->identifier == target
 			&& ((tmp->prev && tmp->prev->identifier != STR)
-			|| (tmp->next && tmp->next->identifier != STR)))
+				|| (tmp->next && tmp->next->identifier != STR)))
 			return (error);
 		tmp = tmp->next;
 	}
@@ -33,10 +33,10 @@ t_errorn	ft_and_or_checker(t_link *link)
 	t_errorn	error;
 
 	error = ft_check_operatore(link, AND, ERROR_AND);
-	if (error)	
+	if (error)
 		return (error);
 	error = ft_check_operatore(link, OR, ERROR_OR);
-	if (error)	
+	if (error)
 		return (error);
 	return (NONE);
 }

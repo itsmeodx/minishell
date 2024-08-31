@@ -68,14 +68,14 @@ t_tree	*ft_parsing(char *input)
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
-	ft_printf_link(link);
 	error = ft_check_quotes(link);
-	printf("error=%d\n", error);
 	tree = ft_create_tree(&tree, tmp);
 	free_2d(split_input);
 	ft_dbl_lstclear(&link);
 	return (tree);
 }
+	//	ft_printf_link(link);
+	//	printf("error=%d\n", error);
 	// ft_generate_spaces(10);
 	// ft_printf_tree(tree, 0, 2);
 	// printf("\n");

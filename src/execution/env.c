@@ -13,19 +13,33 @@
 #include "execution.h"
 #include "parsing.h"
 
+char	*ft_getenv(char *name)
+{
+	int		i;
+
+	i = 0;
+	while (g_data.environ && g_data.environ[i])
+	{
+		if (strncmp(g_data.environ[i], name, strlen(name)) == 0)
+			return (g_data.environ[i] + strlen(name) + 1);
+		i++;
+	}
+	return (NULL);
+}
+
 char	**addtoenv(char **env, char *key, char *value)
 {
 	int		i;
 	char	**new_env;
 
 	i = 0;
-	while (env[i])
+	while (env && env[i])
 		i++;
 	new_env = malloc(sizeof(char *) * (i + 2));
 	if (!new_env)
 		return (NULL);
 	i = 0;
-	while (env[i])
+	while (env && env[i])
 	{
 		new_env[i] = env[i];
 		i++;
@@ -47,7 +61,7 @@ void	check_path(void)
 	{
 		g_data.environ = addtoenv(g_data.environ, "PATH", PATH);
 		if (!g_data.environ)
-			exit(EXIT_FAILURE);
+			ft_exit(EXIT_FAILURE);
 	}
 }
 

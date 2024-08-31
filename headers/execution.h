@@ -46,6 +46,9 @@ void			*extend_2d(char **ptr, size_t size);
 char			*ft_itoa(int n);
 
 // env.c
+char			*ft_getenv(char *name);
+char			**addtoenv(char **env, char *key, char *value);
+void			check_path(void);
 void			update_pwd(char **env);
 void			update_shlvl(char **env);
 void			update_env(char **env, char *key, char *value);
