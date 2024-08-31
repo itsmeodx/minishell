@@ -55,9 +55,6 @@ bool	cd_dash(t_cmd *cmd)
 		return (dprintf(STDERR_FILENO, NAME"cd: %s: invalid option\n",
 				cmd->argv[1]), printf("cd: usage: cd [-] [dir]\n"), false);
 	oldpwd = getenv("OLDPWD");
-	if (!oldpwd)
-		return (dprintf(STDERR_FILENO, NAME"cd: OLDPWD not set\n"),
-			false);
 	if (chdir(oldpwd) == -1)
 		return (dprintf(STDERR_FILENO, NAME"cd: OLDPWD not set\n"),
 			false);
@@ -104,5 +101,6 @@ bool	builtin_cd(t_cmd *cmd)
 		if (!cd_dir(cmd))
 			return (false);
 	}
+	update_pwd(__environ);
 	return (true);
 }

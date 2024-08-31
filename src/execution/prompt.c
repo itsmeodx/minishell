@@ -35,7 +35,7 @@ char	*ft_getprompt(void)
 	tmp = cwd;
 	cwd = ft_strjoin(cwd, " ");
 	free(tmp);
-	if (strncmp(cwd, getenv("HOME"), strlen(getenv("HOME"))) == 0)
+	if (getenv("HOME") && strncmp(cwd, getenv("HOME"), strlen(getenv("HOME"))) == 0)
 		prompt = ft_strjoin("~", cwd + strlen(getenv("HOME")));
 	tmp = prompt;
 	prompt = colorize(prompt, GREEN);

@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
+
+int	ft_exit(int status)
+{
+	ft_treeclear(g_data.tree);
+	free_2d(g_data.environ);
+	exit(status);
+}
 
 static bool	check_status(char *str)
 {
@@ -48,13 +56,13 @@ bool	builtin_exit(t_cmd *cmd)
 		dprintf(STDERR_FILENO, "exit\n");
 		dprintf(STDERR_FILENO,
 			NAME"exit: %s: "NAR"\n", cmd->argv[1]);
-		exit(2);
+		ft_exit(2);
 	}
 	else
 	{
 		status = atoi(cmd->argv[1]);
 		printf("exit\n");
-		exit(status);
+		ft_exit(status);
 	}
 	return (true);
 }

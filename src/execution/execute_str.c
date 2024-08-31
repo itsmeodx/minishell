@@ -13,7 +13,7 @@
 #include "execution.h"
 #include "parsing.h"
 
-void	set_redirections(t_redirection *redirections)
+bool	set_redirections(t_redirection *redirections)
 {
 	int	fd;
 
@@ -26,7 +26,8 @@ void	set_redirections(t_redirection *redirections)
 		else if (redirections->identifier == APPEND)
 			fd = open(redirections->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd == -1)
-			dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", redirections->file);
+			return (dprintf(STDERR_FILENO,
+					NAME "%s: "NSFOD"\n", redirections->file), false);
 		else
 		{
 			if (redirections->identifier == IN)
@@ -37,6 +38,7 @@ void	set_redirections(t_redirection *redirections)
 		}
 		redirections = redirections->next;
 	}
+	return (true);
 }
 
 int	execute_cmd(t_cmd *cmd)
@@ -51,7 +53,8 @@ int	execute_cmd(t_cmd *cmd)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
-		set_redirections(cmd->redirections);
+		if (!set_redirections(cmd->redirections))
+			exit(1);
 		if ((cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 			&& access(cmd->argv[0], F_OK) != -1)
 		{
@@ -62,7 +65,7 @@ int	execute_cmd(t_cmd *cmd)
 			else
 			{
 				dprintf(STDERR_FILENO, NAME "%s: " PD "\n", cmd->argv[0]);
-				exit(126);
+				ft_exit(126);
 			}
 		}
 		else
@@ -72,9 +75,9 @@ int	execute_cmd(t_cmd *cmd)
 				dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
 			else
 				dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
-			exit(127);
+			ft_exit(127);
 		}
-		exit(1);
+		ft_exit(1);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

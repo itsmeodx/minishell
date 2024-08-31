@@ -60,10 +60,7 @@ bool	print_export(char **env)
 
 bool	builtin_export(t_cmd *cmd)
 {
-	char	**env;
-
-	env = __environ;
 	if (cmd->argc == 1)
-		return (print_export(env));
+		return (print_export(g_data.environ));
 	return (true);
 }

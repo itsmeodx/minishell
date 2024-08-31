@@ -3,51 +3,83 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adam <adam@student.42.fr>                  +#+  +:+       +#+         #
+#    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/27 21:03:03 by adam             ###   ########.fr        #
+#    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
+#    Updated: 2024/08/31 17:03:15 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
+CC			=	cc
+RM			=	rm -f
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+INC			=	-I./headers
+SRCDIR		=	src
+OBJDIR		=	obj
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+#Colors
+RED			=	\e[1;31m
+GREEN		=	\e[1;32m
+YELLOW		=	\e[3;33m
+CYAN		=	\e[3;96m
+END			=	\e[0m
 
-SRC = src/main.c \
-	src/parsing/lexer.c \
-	src/parsing/utils/ft_strlen.c src/parsing/utils/ft_split.c \
-	src/parsing/parser.c\
-	src/parsing/tree_utils/ft_treenew.c src/parsing/create_tree.c \
-	src/parsing/utils/ft_strchr.c src/parsing/utils/ft_strdup.c \
-	src/parsing/utils/double_list/ft_dbl_lstnew_bonus.c \
-	src/parsing/utils/double_list/ft_dbl_lstadd_back_bonus.c \
-	src/parsing/utils/double_list/ft_dbl_lstlast_bonus.c \
-	src/parsing/utils/double_list/ft_dbl_lstclear_bonus.c \
-	src/parsing/utils/ft_strncmp.c src/parsing/utils/small_ft.c \
-	src/parsing/search.c src/parsing/printf_tree.c src/parsing/create_cmd.c \
-	src/parsing/redirections.c src/parsing/utils/ft_lst_redi.c \
-	src/parsing/parse_parenthesis.c src/parsing/tree_utils/ft_treeclear.c \
-	src/parsing/quotes_checker.c \
+PARSING		=	parsing/lexer parsing/parser\
+				parsing/utils/ft_strlen parsing/utils/ft_split \
+				parsing/tree_utils/ft_treenew parsing/create_tree \
+				parsing/utils/ft_strchr parsing/utils/ft_strdup \
+				parsing/utils/double_list/ft_dbl_lstnew_bonus \
+				parsing/utils/double_list/ft_dbl_lstadd_back_bonus \
+				parsing/utils/double_list/ft_dbl_lstlast_bonus \
+				parsing/utils/double_list/ft_dbl_lstclear_bonus \
+				parsing/utils/ft_strncmp parsing/utils/small_ft \
+				parsing/search parsing/printf_tree parsing/create_cmd \
+				parsing/redirections parsing/utils/ft_lst_redi \
+				parsing/parse_parenthesis parsing/tree_utils/ft_treeclear \
+				parsing/quotes_checker \
 
-OBJ = ${SRC:.c=.o}
+EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
+				execution/builtins/echo execution/builtins/exit \
+				execution/builtins/export execution/builtins/pwd \
+				execution/env execution/execute_and_or \
+				execution/execute_par execution/execute_pipe \
+				execution/execute_str execution/execution \
+				execution/history execution/prompt \
+				execution/utils/close_pipe execution/utils/extend_2d \
+				execution/utils/ft_itoa
+
+SRC			=	$(addprefix $(SRCDIR)/, main.c) \
+				$(addprefix $(SRCDIR)/, $(addsuffix .c, $(PARSING))) \
+				$(addprefix $(SRCDIR)/, $(addsuffix .c, $(EXECUTION)))
+
+OBJ			=	$(addprefix $(OBJDIR)/, main.o) \
+				$(addprefix $(OBJDIR)/, $(addsuffix .o, $(PARSING))) \
+				$(addprefix $(OBJDIR)/, $(addsuffix .o, $(EXECUTION)))
 
 INC = -I./headers
 
 NAME = minishell
 
-all: ${NAME}
+all: $(NAME)
 
-${NAME}: ${OBJ}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ} -lreadline
 
-%.o: %.c
-	${CC} ${CFLAGS} $(INC) -c $< -o $@
+$(NAME): $(OBJ)
+	@echo "$(YELLOW)Compiling $(CYAN)$(NAME)$(END)"
+	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline
+	@echo "$(CYAN)$(NAME) is ready to use$(END)"
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@echo "$(YELLOW)Compiling $(CYAN)$(notdir $<)$(END)"
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@echo "$(GREEN)Done.$(END)"
 
 clean:
-	rm -f ${OBJ}
+	@echo "$(RED)Cleaning $(OBJDIR)...$(END)"
+	@$(RM) -r $(OBJDIR) || true
 
 fclean: clean
-	rm -f ${NAME}
+	@echo "$(RED)Cleaning $(NAME)...$(END)"
+	@$(RM) $(NAME)
 
 re: fclean all
