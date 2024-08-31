@@ -12,7 +12,7 @@
 
 CC			=	cc
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 INC			=	-I./headers
 SRCDIR		=	src
 OBJDIR		=	obj
