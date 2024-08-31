@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
 
 static char	*get_next_line(int fd)
 {
@@ -29,10 +30,40 @@ static char	*get_next_line(int fd)
 		return (free(str), NULL);
 }
 
-void	ft_add_history(char *line)
+char	*get_last_line(void)
 {
 	int		fd;
+	char	*line;
+	char	*last_line;
 
+	fd = open(".minishell_history", O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	last_line = NULL;
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(last_line);
+		last_line = line;
+		line = get_next_line(fd);
+	}
+	if (last_line)
+		last_line[strlen(last_line) - 1] = 0;
+	close(fd);
+	return (last_line);
+}
+
+void	ft_add_history(char *line)
+{
+	int			fd;
+	static char	*last_line = NULL;
+
+	if (!last_line)
+		last_line = get_last_line();
+	if (last_line && !strcmp(last_line, line))
+		return ;
+	free(last_line);
+	last_line = ft_strdup(line);
 	add_history(line);
 	fd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd == -1)

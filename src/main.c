@@ -43,9 +43,9 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 		free(g_data.prompt);
 		if (!g_data.input)
 			break ;
-		if (*g_data.input)
-			ft_add_history(g_data.input);
 		g_data.tree = ft_parsing(g_data.input);
+		if (g_data.tree && *g_data.input)
+			ft_add_history(g_data.input);
 		free(g_data.input);
 		if (g_data.tree)
 			ft_execution(g_data.tree);
