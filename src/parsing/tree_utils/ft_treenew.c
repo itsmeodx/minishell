@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_treenew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:25:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/25 10:23:12 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/31 17:57:30 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_tree	*ft_treenew(char *cmd, int type)
 		return (NULL);
 	tree->type = type;
 	tree->cmd = ft_cmdnew(cmd);
-	tree->exit_status = -1;
 	tree->redirection = NULL;
 	tree->prev = NULL;
 	tree->left = NULL;
