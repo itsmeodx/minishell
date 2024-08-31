@@ -63,18 +63,19 @@ typedef struct s_link
 	struct s_link	*next;
 }					t_link;
 
-typedef struct s_cmd
-{
-	int				argc;
-	char			**argv;
-}					t_cmd;
-
 typedef struct s_redirection
 {
 	int						identifier;
 	char					*file;
 	struct s_redirection	*next;
 }					t_redirection;
+
+typedef struct s_cmd
+{
+	int				argc;
+	char			**argv;
+	t_redirection	*redirections;
+}					t_cmd;
 
 typedef struct s_tree
 {

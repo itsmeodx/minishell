@@ -11,6 +11,33 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
+
+void	set_redirections(t_redirection *redirections)
+{
+	int	fd;
+
+	while (redirections)
+	{
+		if (redirections->identifier == IN)
+			fd = open(redirections->file, O_RDONLY);
+		else if (redirections->identifier == OUT)
+			fd = open(redirections->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		else if (redirections->identifier == APPEND)
+			fd = open(redirections->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		if (fd == -1)
+			dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", redirections->file);
+		else
+		{
+			if (redirections->identifier == IN)
+				dup2(fd, STDIN_FILENO);
+			else
+				dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
+		redirections = redirections->next;
+	}
+}
 
 int	execute_cmd(t_cmd *cmd)
 {
@@ -24,6 +51,7 @@ int	execute_cmd(t_cmd *cmd)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
+		set_redirections(cmd->redirections);
 		if ((cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 			&& access(cmd->argv[0], F_OK) != -1)
 		{
@@ -60,6 +88,7 @@ int	execute_str(t_tree *tree)
 {
 	int	status;
 
+	tree->cmd->redirections = tree->redirection;
 	if (is_builtin(tree->cmd))
 		status = execute_builtin(tree->cmd);
 	else
