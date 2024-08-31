@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/31 15:25:34 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/31 19:05:53 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_tree	*ft_parsing(char *input)
 	return (tree);
 }
 	//	ft_printf_link(link);
-	//	printf("error=%d\n", error);
 	// ft_generate_spaces(10);
 	// ft_printf_tree(tree, 0, 2);
 	// printf("\n");
+	//	printf("error=%d\n", error);
