@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:52:55 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/27 12:39:06 by adam             ###   ########.fr       */
+/*   Updated: 2024/08/31 14:48:02 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_add_to_argv(t_tree **new, char *command)
 	tmp = malloc(sizeof(char *) * 2);
 	tmp[0] = ft_strdup(command);
 	tmp[1] = NULL;
-	(*new)->cmd->argv = ft_strjoin_2d((*new)->cmd->argv, tmp);
+	(*new)->cmd->argv = ft_strjoin_2d(tmp, (*new)->cmd->argv);
 	(*new)->cmd->argc++;
 }
 

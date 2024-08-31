@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dbl_lstclear_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:22:35 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/08/31 15:13:24 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_dbl_lstclear(t_link **lst)
 		current = current->next;
 		if (twp->command)
 			free(twp->command);
-		if (twp)
-			free(twp);
+		// if (twp)
+		free(twp);
 	}
 	*lst = NULL;
 }
