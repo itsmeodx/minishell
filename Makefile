@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adam <adam@student.42.fr>                  +#+  +:+       +#+         #
+#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/04 23:00:54 by adam              #+#    #+#              #
-#    Updated: 2024/08/27 21:03:03 by adam             ###   ########.fr        #
+#    Updated: 2024/08/31 17:50:30 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 SRC = src/main.c \
 	src/parsing/lexer.c \
