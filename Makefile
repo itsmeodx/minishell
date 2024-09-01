@@ -41,10 +41,10 @@ PARSING		=	parsing/lexer parsing/parser\
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/echo execution/builtins/exit \
 				execution/builtins/export execution/builtins/pwd \
-				execution/env execution/execute_and_or \
+				execution/env execution/exec execution/execute_and_or \
 				execution/execute_par execution/execute_pipe \
 				execution/execute_str execution/execution \
-				execution/history execution/prompt \
+				execution/history execution/prompt execution/redirections \
 				execution/utils/close_pipe execution/utils/extend_2d \
 				execution/utils/ft_itoa
 
