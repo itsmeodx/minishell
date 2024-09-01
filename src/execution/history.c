@@ -68,8 +68,7 @@ void	ft_add_history(char *line)
 	fd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd == -1)
 		return ;
-	dprintf(fd, "%s\n", line);
-	close(fd);
+	return (dprintf(fd, "%s\n", line), (void)close(fd));
 }
 
 void	restore_history(void)
