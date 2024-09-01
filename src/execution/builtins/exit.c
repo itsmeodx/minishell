@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:08 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/17 18:58:08 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:49:19 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	builtin_exit(t_cmd *cmd)
 
 	status = 0;
 	if (cmd->argc == 1)
-		exit(status);
+		ft_exit(status);
 	if (cmd->argc > 2)
 	{
 		dprintf(STDERR_FILENO, "exit\n");

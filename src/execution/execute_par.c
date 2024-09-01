@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 19:39:27 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/26 19:39:27 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:47:29 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	execute_par(t_tree *tree)
 	if (pid == 0)
 	{
 		status = ft_execution(tree->left);
-		exit(status);
+		ft_exit(status);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

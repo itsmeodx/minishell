@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:58:19 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/26 15:58:19 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:47:57 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	first_child(int *fd, t_tree *tree)
 		dup2(fd[1], STDOUT_FILENO);
 		close_pipe(fd);
 		status = ft_execution(tree);
-		exit(status);
+		ft_exit(status);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -43,7 +43,7 @@ static int	second_child(int *fd, t_tree *tree)
 		dup2(fd[0], STDIN_FILENO);
 		close_pipe(fd);
 		status = ft_execution(tree);
-		exit(status);
+		ft_exit(status);
 	}
 	return (EXIT_SUCCESS);
 }
