@@ -13,48 +13,18 @@
 #include "execution.h"
 #include "parsing.h"
 
-bool	set_redirections(t_redirection *redirections)
-{
-	int	fd;
-
-	while (redirections)
-	{
-		if (redirections->identifier == IN)
-			fd = open(redirections->file, O_RDONLY);
-		else if (redirections->identifier == OUT)
-			fd = open(redirections->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		else if (redirections->identifier == APPEND)
-			fd = open(redirections->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		if (fd == -1)
-			return (dprintf(STDERR_FILENO,
-					NAME "%s: "NSFOD"\n", redirections->file), false);
-		else
-		{
-			if (redirections->identifier == IN)
-				dup2(fd, STDIN_FILENO);
-			else
-				dup2(fd, STDOUT_FILENO);
-			close(fd);
-		}
-		redirections = redirections->next;
-	}
-	return (true);
-}
-
 int	execute_cmd(t_cmd *cmd)
 {
 	pid_t	pid;
 	int		status;
 
-	if (!cmd || !cmd->argv || !cmd->argv[0])
-		return (EXIT_FAILURE);
 	pid = fork();
 	if (pid < 0)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
 		if (!set_redirections(cmd->redirections))
-			exit(1);
+			ft_exit(1);
 		if ((cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 			&& access(cmd->argv[0], F_OK) != -1)
 		{
@@ -70,7 +40,7 @@ int	execute_cmd(t_cmd *cmd)
 		}
 		else
 		{
-			execvp(cmd->argv[0], cmd->argv);
+			ft_execvp(cmd->argv[0], cmd->argv);
 			if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 				dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
 			else
@@ -91,6 +61,8 @@ int	execute_str(t_tree *tree)
 {
 	int	status;
 
+	if (!tree || !tree->cmd || !tree->cmd->argv || !tree->cmd->argv[0])
+		return (EXIT_FAILURE);
 	tree->cmd->redirections = tree->redirection;
 	if (is_builtin(tree->cmd))
 		status = execute_builtin(tree->cmd);

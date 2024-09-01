@@ -52,14 +52,14 @@ char	**addtoenv(char **env, char *key, char *value)
 	return (new_env);
 }
 
-void	check_path(void)
+void	check_path(char **env)
 {
 	char	*path;
 
-	path = getenv("PATH");
+	path = ft_getenv("PATH");
 	if (!path)
 	{
-		g_data.environ = addtoenv(g_data.environ, "PATH", PATH);
+		g_data.environ = addtoenv(env, "PATH", PATH);
 		if (!g_data.environ)
 			ft_exit(EXIT_FAILURE);
 	}
@@ -73,29 +73,6 @@ void	update_pwd(char **env)
 	pwd = getcwd(NULL, 0);
 	update_env(env, "PWD", pwd);
 	free(pwd);
-}
-
-void	update_shlvl(char **env)
-{
-	int		i;
-	char	*shlvl;
-	int		lvl;
-
-	i = 0;
-	while (env[i])
-	{
-		if (strncmp(env[i], "SHLVL=", strlen("SHLVL=")) == 0)
-		{
-			lvl = atoi(env[i] + strlen("SHLVL="));
-			lvl++;
-			shlvl = ft_itoa(lvl);
-			free(env[i]);
-			env[i] = ft_strjoin("SHLVL=", shlvl);
-			free(shlvl);
-			break ;
-		}
-		i++;
-	}
 }
 
 void	update_env(char **env, char *key, char *value)
