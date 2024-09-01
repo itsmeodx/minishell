@@ -16,6 +16,29 @@
 // global variable
 struct s_data	g_data;
 
+static void	update_shlvl(char **env)
+{
+	int		i;
+	char	*shlvl;
+	int		lvl;
+
+	i = 0;
+	while (env[i])
+	{
+		if (strncmp(env[i], "SHLVL=", strlen("SHLVL=")) == 0)
+		{
+			lvl = atoi(env[i] + strlen("SHLVL="));
+			lvl++;
+			shlvl = ft_itoa(lvl);
+			free(env[i]);
+			env[i] = ft_strjoin("SHLVL=", shlvl);
+			free(shlvl);
+			break ;
+		}
+		i++;
+	}
+}
+
 void	init_minishell(char **env)
 {
 	g_data = (struct s_data){0};
@@ -29,7 +52,7 @@ void	init_minishell(char **env)
 		g_data.environ[0] = NULL;
 	}
 	update_shlvl(g_data.environ);
-	check_path();
+	check_path(g_data.environ);
 }
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
