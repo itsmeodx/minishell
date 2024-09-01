@@ -6,12 +6,11 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/26 15:47:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-#include "parsing.h"
 
 int	execute_cmd(t_cmd *cmd)
 {
@@ -40,7 +39,7 @@ int	execute_cmd(t_cmd *cmd)
 		}
 		else
 		{
-			ft_execvp(cmd->argv[0], cmd->argv);
+			ft_execvpe(cmd->argv[0], cmd->argv, g_data.environ);
 			if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 				dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
 			else
@@ -51,22 +50,20 @@ int	execute_cmd(t_cmd *cmd)
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
+		g_data.exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		status = WTERMSIG(status) + 128;
-	return (status);
+		g_data.exit_status = WTERMSIG(status) + 128;
+	return (g_data.exit_status);
 }
 
 int	execute_str(t_tree *tree)
 {
-	int	status;
-
 	if (!tree || !tree->cmd || !tree->cmd->argv || !tree->cmd->argv[0])
 		return (EXIT_FAILURE);
-	tree->cmd->redirections = tree->redirection;
-	if (is_builtin(tree->cmd))
-		status = execute_builtin(tree->cmd);
+	tree->cmd->redirections = tree->redirections;
+	if (!execute_builtin(tree->cmd))
+		return (g_data.exit_status);
 	else
-		status = execute_cmd(tree->cmd);
-	return (status);
+		execute_cmd(tree->cmd);
+	return (g_data.exit_status);
 }

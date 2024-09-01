@@ -23,7 +23,6 @@
 
 // builtins/
 // builtins.c
-bool			is_builtin(t_cmd *cmd);
 int				execute_builtin(t_cmd *cmd);
 // cd.c
 bool			builtin_cd(t_cmd *cmd);
@@ -37,6 +36,7 @@ bool			builtin_export(t_cmd *cmd);
 // pwd.c
 bool			builtin_pwd(t_cmd *cmd);
 
+
 // utils/
 // sysutils.c
 int				close_pipe(int *fd);
@@ -44,6 +44,7 @@ int				close_pipe(int *fd);
 void			*extend_2d(char **ptr, size_t size);
 // ft_itoa.c
 char			*ft_itoa(int n);
+
 
 // env.c
 char			*ft_getenv(char *name);
@@ -53,7 +54,7 @@ void			update_pwd(char **env);
 void			update_env(char **env, char *key, char *value);
 
 // exec.c
-int				ft_execvp(char *file, char **argv);
+int				ft_execvpe(char *file, char **argv, char **env);
 
 // execute_and_or.c
 int				execute_and(t_tree *tree);

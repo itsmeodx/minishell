@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_treeclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:12:27 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/31 17:12:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_treeclear_node(t_tree *tree)
 		return ;
 	free_2d(tree->cmd->argv);
 	free(tree->cmd);
-	if (tree->redirection)
-		ft_lstclear_redi(&tree->redirection);
+	if (tree->redirections)
+		ft_lstclear_redi(&tree->redirections);
 	free(tree);
 }
 

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/31 17:57:34 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_tree
 	struct s_tree			*prev;
 	struct s_tree			*left;
 	struct s_tree			*right;
-	struct s_redirection	*redirection;
+	struct s_redirection	*redirections;
 }							t_tree;
 
 typedef struct s_data
@@ -86,7 +86,7 @@ typedef struct s_data
 	char			**environ;
 	char			*input;
 	char			*prompt;
-	int				exit_status;
+	unsigned char	exit_status;
 }					t_data;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/27 12:41:24 by adam             ###   ########.fr       */
+/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_print_cmd(t_tree *tree)
 		printf("  args :%s,", tmp[i]);
 		i++;
 	}
-	redi = tree->redirection;
+	redi = tree->redirections;
 	while (redi)
 	{
 		printf("  redi :%s type: %d", redi->file, redi->identifier);

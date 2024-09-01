@@ -6,32 +6,40 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:38:03 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/17 19:38:03 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:21:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-bool	is_builtin(t_cmd *cmd)
+void	reset_redirections(void)
 {
-	if (!strcmp(cmd->argv[0], "echo") || !strcmp(cmd->argv[0], "cd")
-		|| !strcmp(cmd->argv[0], "pwd") || !strcmp(cmd->argv[0], "export")
-		|| !strcmp(cmd->argv[0], "exit"))
-		return (true);
-	return (false);
+	int	fd;
+
+	fd = open("/dev/tty", O_RDWR);
+	dup2(fd, STDIN_FILENO);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }
 
 int	execute_builtin(t_cmd *cmd)
 {
-	if (!strcmp(cmd->argv[0], "echo"))
-		return (!builtin_echo(cmd));
-	if (!strcmp(cmd->argv[0], "cd"))
-		return (!builtin_cd(cmd));
-	if (!strcmp(cmd->argv[0], "pwd"))
-		return (!builtin_pwd(cmd));
-	if (!strcmp(cmd->argv[0], "export"))
-		return (!builtin_export(cmd));
-	if (!strcmp(cmd->argv[0], "exit"))
-		return (!builtin_exit(cmd));
+	int			i;
+	static char	*builtins[] = {"echo", "cd", "pwd", "export", "exit", NULL};
+	static bool	(*builtin_functions[])(t_cmd *) = {&builtin_echo, &builtin_cd,
+		&builtin_pwd, &builtin_export, &builtin_exit};
+
+	i = -1;
+	while (builtins[++i])
+	{
+		if (!strcmp(cmd->argv[0], builtins[i]))
+		{
+			if (!set_redirections(cmd->redirections))
+				return (g_data.exit_status = 1, EXIT_SUCCESS);
+			builtin_functions[i](cmd);
+			reset_redirections();
+			return (EXIT_SUCCESS);
+		}
+	}
 	return (EXIT_FAILURE);
 }

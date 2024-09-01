@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/31 19:05:41 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_tree	*ft_parse_cmd(t_link *link)
 	if (link->next && target->identifier != OPEN_PAR)
 	{
 		ft_cmd_create(&new, link->next);
-		ft_redirections(link->next, &new->redirection);
+		ft_redirections(link->next, &new->redirections);
 	}
 	if (target->identifier == OPEN_PAR)
 	{

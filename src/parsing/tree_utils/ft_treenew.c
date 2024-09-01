@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:25:15 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/31 17:57:30 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_tree	*ft_treenew(char *cmd, int type)
 		return (NULL);
 	tree->type = type;
 	tree->cmd = ft_cmdnew(cmd);
-	tree->redirection = NULL;
+	tree->redirections = NULL;
 	tree->prev = NULL;
 	tree->left = NULL;
 	tree->right = NULL;

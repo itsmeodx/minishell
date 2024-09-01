@@ -30,7 +30,7 @@ static char	**paths_split(char *path)
 	return (paths);
 }
 
-int	ft_execvp(char *file, char **argv)
+int	ft_execvpe(char *file, char **argv, char **env)
 {
 	int		i;
 	char	*path;
@@ -43,7 +43,7 @@ int	ft_execvp(char *file, char **argv)
 	while (paths[++i])
 	{
 		path = ft_strjoin(paths[i], file);
-		execve(path, argv, g_data.environ);
+		execve(path, argv, env);
 		free(path);
 	}
 	free_2d(paths);
