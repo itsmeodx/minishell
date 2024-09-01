@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/31 18:39:39 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 13:15:24 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 bool	cd_home(void)
 {
-	if (chdir(getenv("HOME")) == -1)
+	if (chdir(ft_getenv("HOME")) == -1)
 		return (dprintf(STDERR_FILENO, NAME"cd: HOME not set\n"), false);
 	return (true);
 }
@@ -30,7 +30,7 @@ bool	cd_tilde(t_cmd *cmd)
 	if (cmd->argv[1][0] == '~' && cmd->argv[1][1] == '~')
 		return (dprintf(STDERR_FILENO, NAME"cd: %s: "NSFOD"\n",
 				cmd->argv[1]), false);
-	home = getenv("HOME");
+	home = ft_getenv("HOME");
 	if (!home)
 		return (dprintf(STDERR_FILENO, NAME"cd: HOME not set\n"), false);
 	home = ft_strjoin(home, "/");
@@ -54,11 +54,11 @@ bool	cd_dash(t_cmd *cmd)
 	if (strlen(cmd->argv[1]) > 1)
 		return (dprintf(STDERR_FILENO, NAME"cd: %s: invalid option\n",
 				cmd->argv[1]), printf("cd: usage: cd [-] [dir]\n"), false);
-	oldpwd = getenv("OLDPWD");
+	oldpwd = ft_getenv("OLDPWD");
 	if (chdir(oldpwd) == -1)
 		return (dprintf(STDERR_FILENO, NAME"cd: OLDPWD not set\n"),
 			false);
-	printf("%s\n", getenv("OLDPWD"));
+	printf("%s\n", ft_getenv("OLDPWD"));
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:21:46 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/31 17:33:31 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/01 13:14:43 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	update_pwd(char **env)
 {
 	char	*pwd;
 
-	update_env(env, "OLDPWD", getenv("PWD"));
+	update_env(env, "OLDPWD", ft_getenv("PWD"));
 	pwd = getcwd(NULL, 0);
 	update_env(env, "PWD", pwd);
 	free(pwd);
