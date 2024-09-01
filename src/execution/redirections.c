@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "execution.h"
+#include "parsing.h"
+
 bool	set_redirections(t_redirection *redirections)
 {
 	int	fd;
@@ -24,7 +27,7 @@ bool	set_redirections(t_redirection *redirections)
 			fd = open(redirections->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd == -1)
 			return (dprintf(STDERR_FILENO,
-							NAME "%s: "NSFOD"\n", redirections->file), false);
+					NAME "%s: "NSFOD"\n", redirections->file), false);
 		else
 		{
 			if (redirections->identifier == IN)
