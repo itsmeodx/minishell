@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   and_or_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 07:07:48 by adam              #+#    #+#             */
-/*   Updated: 2024/08/31 12:51:01 by adam             ###   ########.fr       */
+/*   Updated: 2024/09/01 12:43:07 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_errorn	ft_check_operatore(t_link *link, t_type target, t_errorn error)
+t_errorn	ft_check_operatore(t_link *link, int target, t_errorn error)
 {
 	t_link	*tmp;
 
 	tmp = link;
 	while (tmp)
 	{
-		if (tmp->identifier == target
-			&& ((tmp->prev && tmp->prev->identifier != STR)
-				|| (tmp->next && tmp->next->identifier != STR)))
-			return (error);
+		if (tmp->identifier == target)
+		{
+			if (!tmp->next)
+				return (error);
+			if (!tmp->prev)
+				return (error);
+			if (tmp->prev->identifier != STR || tmp->next->identifier != STR)
+				return (error);
+		}
 		tmp = tmp->next;
 	}
 	return (NONE);
 }
 
-t_errorn	ft_and_or_checker(t_link *link)
+t_errorn	ft_check_and_or(t_link *link)
 {
 	t_errorn	error;
 

@@ -3,44 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   parentheses_checker.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 00:20:34 by adam              #+#    #+#             */
-/*   Updated: 2024/08/28 00:32:44 by adam             ###   ########.fr       */
+/*   Updated: 2024/09/01 11:31:59 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-bool	ft_index_parentheses(char *input)
+int	ft_index_parentheses(t_link *link)
 {
 	int	i;
 	int	valider;
+	t_link	*tmp;
 
+	tmp = link;
 	valider = 0;
 	i = 0;
-	while (input[i])
+	while (tmp)
 	{
-		if (input[i] == '(')
+		if (ft_strncmp(tmp->command, "(", ft_strlen(tmp->command)) == 0)
 			valider++;
-		else if (input[i] == ')')
+		else if (ft_strncmp(tmp->command, ")", ft_strlen(tmp->command)) == 0)
 			valider--;
+		tmp = tmp->next;
 	}
-	if (valider)
-		return (false);
-	return (true);
+	if (valider > 0)
+		return (0);
+	else if (valider < 0)
+		return (-1);
+	else
+		return (true);
 }
 
 t_errorn	ft_check_parentheses(t_link *link)
 {
-	t_link	*tmp;
+	int 	error;
 
-	tmp = link;
-	while (tmp)
-	{
-		if (ft_index_parentheses(tmp->command) == false)
-			return (ERROR_PAREN);
-		tmp = tmp->next;
-	}
+	error = ft_index_parentheses(link);
+	if (error == 0)
+		return (ERROR_OPEN_PAREN);
+	if (error == -1)
+		return (ERROR_CLOSE_PAREN);
 	return (NONE);
 }

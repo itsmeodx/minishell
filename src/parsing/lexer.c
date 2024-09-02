@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/08/24 10:33:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/01 16:51:26 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_count_spaces_bonus(char *input)
 	count = 0;
 	while (input[i])
 	{
-		if (input[i] == '&' || input[i] == '|' || input[i] == ')')
+		if (input[i] == '&' || input[i] == '|' || input[i] == '(')
 			count++;
 		if (input[i + 1] && ((input[i] == '&' && input[i + 1] == '&')
 				|| (input[i] == '|' && input[i + 1] == '|')))
@@ -87,6 +87,7 @@ char	*ft_add_spaces(char *input, int j)
 	i = ft_count_spaces(input) * 2;
 	if (!i)
 		return (ft_strdup(input));
+	printf("i/2 =%d\n", i/2);
 	tmp = malloc(ft_strlen(input) + (i + 1));
 	i = 0;
 	while (input[j])
@@ -100,6 +101,7 @@ char	*ft_add_spaces(char *input, int j)
 					|| input[j] == '>'))
 				tmp[++i] = input[j++];
 			tmp[++i] = ' ';
+			printf("input[j] = %c\n", input[j]);
 			i++;
 		}
 		else
