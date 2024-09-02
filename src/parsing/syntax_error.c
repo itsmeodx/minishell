@@ -38,7 +38,7 @@ int	ft_syntax_error(t_link *link)
 	t_errorn	error;
 
 	// TODO: ls () --> handle this case
-	// TODO: check
+	// TODO: check '<<<'
 	error = ft_check_redirection(link);
 	if (error)
 	{
