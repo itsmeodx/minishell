@@ -20,6 +20,7 @@
 # define PD "Permission denied"
 # define TMA "too many arguments"
 # define NAR "numeric argument required"
+# define ISDIR "Is a directory"
 
 // builtins/
 // builtins.c
@@ -36,7 +37,6 @@ bool			builtin_export(t_cmd *cmd);
 // pwd.c
 bool			builtin_pwd(t_cmd *cmd);
 
-
 // utils/
 // sysutils.c
 int				close_pipe(int *fd);
@@ -44,7 +44,6 @@ int				close_pipe(int *fd);
 void			*extend_2d(char **ptr, size_t size);
 // ft_itoa.c
 char			*ft_itoa(int n);
-
 
 // env.c
 char			*ft_getenv(char *name);

@@ -12,6 +12,44 @@
 
 #include "execution.h"
 
+static bool	isdir(char *path)
+{
+	struct stat	st;
+
+	if (stat(path, &st) == 0)
+	{
+		if (S_ISDIR(st.st_mode))
+			return (true);
+	}
+	return (false);
+}
+
+static void	execute_without_path(t_cmd *cmd)
+{
+	if (access(cmd->argv[0], F_OK) != -1)
+	{
+		if (isdir(cmd->argv[0]))
+			dprintf(STDERR_FILENO, NAME "%s: " ISDIR "\n", cmd->argv[0]);
+		else if (access(cmd->argv[0], X_OK) != -1)
+			execve(cmd->argv[0], cmd->argv, g_data.environ);
+		else
+			dprintf(STDERR_FILENO, NAME "%s: " PD "\n", cmd->argv[0]);
+		ft_exit(126);
+	}
+	else
+	{
+		dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
+		ft_exit(127);
+	}
+}
+
+static void	execute_with_path(t_cmd *cmd)
+{
+	ft_execvpe(cmd->argv[0], cmd->argv, g_data.environ);
+	dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
+	ft_exit(127);
+}
+
 int	execute_cmd(t_cmd *cmd)
 {
 	pid_t	pid;
@@ -24,29 +62,10 @@ int	execute_cmd(t_cmd *cmd)
 	{
 		if (!set_redirections(cmd->redirections))
 			ft_exit(1);
-		if ((cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
-			&& access(cmd->argv[0], F_OK) != -1)
-		{
-			if (access(cmd->argv[0], X_OK) != -1)
-			{
-				execve(cmd->argv[0], cmd->argv, g_data.environ);
-			}
-			else
-			{
-				dprintf(STDERR_FILENO, NAME "%s: " PD "\n", cmd->argv[0]);
-				ft_exit(126);
-			}
-		}
+		if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
+			execute_without_path(cmd);
 		else
-		{
-			ft_execvpe(cmd->argv[0], cmd->argv, g_data.environ);
-			if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
-				dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
-			else
-				dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
-			ft_exit(127);
-		}
-		ft_exit(1);
+			execute_with_path(cmd);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
