@@ -12,7 +12,7 @@
 
 CC			=	cc
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address,leak,undefined
 INC			=	-I./headers
 HEADERS		=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR		=	src
@@ -45,9 +45,10 @@ EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/env execution/exec execution/execute_and_or \
 				execution/execute_par execution/execute_pipe \
 				execution/execute_str execution/execution execution/expansion \
-				execution/history execution/prompt execution/redirections \
-				execution/utils/close_pipe execution/utils/extend_2d \
-				execution/utils/ft_itoa execution/utils/ft_substr
+				execution/gnl execution/history execution/hostname execution/prompt \
+				execution/redirections execution/utils/close_pipe \
+				execution/utils/extend_2d execution/utils/ft_itoa \
+				execution/utils/ft_substr
 
 SRC			=	$(addprefix $(SRCDIR)/, main.c) \
 				$(addprefix $(SRCDIR)/, $(addsuffix .c, $(PARSING))) \
