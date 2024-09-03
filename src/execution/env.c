@@ -16,14 +16,18 @@
 char	*ft_getenv(char *name)
 {
 	int		i;
+	int		len;
 
 	i = 0;
+	name = ft_strjoin(name, "=");
+	len = strlen(name);
 	while (g_data.environ && g_data.environ[i])
 	{
 		if (strncmp(g_data.environ[i], name, strlen(name)) == 0)
-			return (g_data.environ[i] + strlen(name) + 1);
+			return (free(name), g_data.environ[i] + len);
 		i++;
 	}
+	free(name);
 	return (NULL);
 }
 

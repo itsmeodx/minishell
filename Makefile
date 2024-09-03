@@ -14,6 +14,7 @@ CC			=	cc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 INC			=	-I./headers
+HEADERS		=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR		=	src
 OBJDIR		=	obj
 
@@ -43,10 +44,10 @@ EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/export execution/builtins/pwd \
 				execution/env execution/exec execution/execute_and_or \
 				execution/execute_par execution/execute_pipe \
-				execution/execute_str execution/execution \
+				execution/execute_str execution/execution execution/expansion \
 				execution/history execution/prompt execution/redirections \
 				execution/utils/close_pipe execution/utils/extend_2d \
-				execution/utils/ft_itoa
+				execution/utils/ft_itoa execution/utils/ft_substr
 
 SRC			=	$(addprefix $(SRCDIR)/, main.c) \
 				$(addprefix $(SRCDIR)/, $(addsuffix .c, $(PARSING))) \
@@ -68,7 +69,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline
 	@echo "$(CYAN)$(NAME) is ready to use$(END)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	@echo "$(YELLOW)Compiling $(CYAN)$(notdir $<)$(END)"
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@

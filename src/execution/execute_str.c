@@ -80,6 +80,7 @@ int	execute_str(t_tree *tree)
 	if (!tree || !tree->cmd || !tree->cmd->argv || !tree->cmd->argv[0])
 		return (EXIT_FAILURE);
 	tree->cmd->redirections = tree->redirections;
+	ft_expansion(tree->cmd->argv);
 	if (!execute_builtin(tree->cmd))
 		return (g_data.exit_status);
 	else

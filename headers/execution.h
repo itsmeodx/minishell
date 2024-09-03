@@ -44,6 +44,8 @@ int				close_pipe(int *fd);
 void			*extend_2d(char **ptr, size_t size);
 // ft_itoa.c
 char			*ft_itoa(int n);
+// ft_substr.c
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 
 // env.c
 char			*ft_getenv(char *name);
@@ -71,6 +73,9 @@ int				execute_str(t_tree *tree);
 
 // execution.c
 int				ft_execution(t_tree *tree);
+
+// expansion.c
+void			ft_expansion(char **str);
 
 // history.c
 void			ft_add_history(char *line);

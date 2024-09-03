@@ -86,11 +86,6 @@ bool	builtin_cd(t_cmd *cmd)
 		if (!cd_home())
 			return (false);
 	}
-	else if (cmd->argc == 2 && cmd->argv[1][0] == '~')
-	{
-		if (!cd_tilde(cmd))
-			return (false);
-	}
 	else if (cmd->argc == 2 && cmd->argv[1][0] == '-')
 	{
 		if (!cd_dash(cmd))
