@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 00:20:34 by adam              #+#    #+#             */
-/*   Updated: 2024/09/01 11:31:59 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/02 13:38:05 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ int	ft_index_parentheses(t_link *link)
 		return (true);
 }
 
+int	ft_void_parentheses(t_link *link)
+{
+	t_link	*tmp;
+
+	tmp = link;
+	while(tmp)
+	{
+		if (tmp->identifier == OPEN_PAR
+			&& (tmp->next && tmp->next->identifier == CLOSE_PAR))
+			return (ERROR_CLOSE_PAREN);
+		tmp = tmp->next;
+	}
+	return (NONE);
+}
+
 t_errorn	ft_check_parentheses(t_link *link)
 {
 	int 	error;
@@ -45,6 +60,9 @@ t_errorn	ft_check_parentheses(t_link *link)
 	if (error == 0)
 		return (ERROR_OPEN_PAREN);
 	if (error == -1)
+		return (ERROR_CLOSE_PAREN);
+	error = ft_void_parentheses(link);
+	if (error)
 		return (ERROR_CLOSE_PAREN);
 	return (NONE);
 }

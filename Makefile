@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/01 11:14:33 by akhobba          ###   ########.fr        #
+#    Updated: 2024/09/02 15:12:57 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC			=	cc
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 INC			=	-I./headers
+HEADERS		=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR		=	src
 OBJDIR		=	obj
 
@@ -70,7 +71,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline
 	@echo "$(CYAN)$(NAME) is ready to use$(END)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	@echo "$(YELLOW)Compiling $(CYAN)$(notdir $<)$(END)"
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
