@@ -77,9 +77,15 @@ int				ft_execution(t_tree *tree);
 // expansion.c
 void			ft_expansion(char **str);
 
+// gnl.c
+char			*get_next_line(int fd);
+
 // history.c
 void			ft_add_history(char *line);
 void			restore_history(void);
+
+// hostname.c
+void			set_hostname(char **env);
 
 // main.c
 void			init_minishell(char **env);

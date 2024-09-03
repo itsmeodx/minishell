@@ -26,28 +26,47 @@ char	*colorize(char *str, char *color)
 	return (reset);
 }
 
+char	*get_user_host(void)
+{
+	char	*str[2];
+
+	str[0] = ft_strjoin(CYAN, ft_getenv("USER"));
+	str[1] = ft_strjoin(str[0], "@");
+	free(str[0]);
+	str[0] = ft_strjoin(str[1], ft_getenv("HOSTNAME"));
+	free(str[1]);
+	str[1] = ft_strjoin(str[0], RESET);
+	free(str[0]);
+	str[0] = ft_strjoin(str[1], ":> ");
+	free(str[1]);
+	return (str[0]);
+}
+
 char	*ft_getprompt(void)
 {
-	char	*cwd;
-	char	*tmp;
-	char	*prompt;
+	char	*str[4];
 
-	prompt = NULL;
-	cwd = getcwd(NULL, 0);
-	tmp = cwd;
-	cwd = ft_strjoin(cwd, " ");
-	free(tmp);
+	str[0] = NULL;
+	str[3] = get_user_host();
+	str[2] = getcwd(NULL, 0);
+	str[1] = str[2];
+	str[2] = ft_strjoin(str[2], " ");
+	free(str[1]);
 	if (ft_getenv("HOME")
-		&& strncmp(cwd, ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
-		prompt = ft_strjoin("~", cwd + strlen(ft_getenv("HOME")));
+		&& strncmp(str[2], ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
+		str[0] = ft_strjoin("~", str[2] + strlen(ft_getenv("HOME")));
 	else
-		prompt = ft_strdup(cwd);
-	tmp = prompt;
-	prompt = colorize(prompt, GREEN);
-	free(tmp);
-	tmp = prompt;
-	prompt = ft_strjoin(PROMPT, prompt);
-	free(tmp);
-	free(cwd);
-	return (prompt);
+		str[0] = ft_strdup(str[2]);
+	free(str[2]);
+	str[1] = str[0];
+	str[0] = ft_strjoin(YELLOW, str[0]);
+	free(str[1]);
+	str[1] = str[0];
+	str[0] = ft_strjoin(str[0], RESET);
+	free(str[1]);
+	str[1] = str[0];
+	str[0] = ft_strjoin(str[3], str[0]);
+	free(str[1]);
+	free(str[3]);
+	return (str[0]);
 }

@@ -53,6 +53,7 @@ void	init_minishell(char **env)
 	}
 	update_shlvl(g_data.environ);
 	check_path(g_data.environ);
+	set_hostname(g_data.environ);
 }
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
@@ -66,15 +67,16 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 		free(g_data.prompt);
 		if (!g_data.input)
 			break ;
-		g_data.tree = ft_parsing(g_data.input);
-		if (g_data.tree && *g_data.input)
+		if (*g_data.input)
 			ft_add_history(g_data.input);
+		g_data.tree = ft_parsing(g_data.input);
 		free(g_data.input);
 		if (g_data.tree)
 			ft_execution(g_data.tree);
 		ft_treeclear(g_data.tree);
 	}
 	free_2d(g_data.environ);
+	rl_clear_history();
 	printf("exit\n");
 	return (EXIT_SUCCESS);
 }

@@ -13,23 +13,6 @@
 #include "execution.h"
 #include "parsing.h"
 
-static char	*get_next_line(int fd)
-{
-	char	*str;
-	char	*buff;
-
-	str = malloc(1000000);
-	if (!str)
-		return (NULL);
-	buff = str;
-	while (fd != -1 && read(fd, buff, 0) != -1 && read(fd, buff, 1)
-		&& *buff++ != '\n');
-	if (buff > str)
-		return (*buff = 0, str);
-	else
-		return (free(str), NULL);
-}
-
 char	*get_last_line(void)
 {
 	int		fd;
@@ -53,6 +36,15 @@ char	*get_last_line(void)
 	return (last_line);
 }
 
+bool	isempty(char *line)
+{
+	while (*line == ' ' || *line == '\t' || *line == '\n')
+		line++;
+	if (*line)
+		return (false);
+	return (true);
+}
+
 void	ft_add_history(char *line)
 {
 	int			fd;
@@ -60,7 +52,7 @@ void	ft_add_history(char *line)
 
 	if (!last_line)
 		last_line = get_last_line();
-	if (last_line && !strcmp(last_line, line))
+	if ((last_line && !strcmp(last_line, line)) || isempty(line))
 		return ;
 	free(last_line);
 	last_line = ft_strdup(line);
