@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/03 15:35:25 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/04 11:56:42 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ t_tree	*ft_parsing(char *input)
 	t_link		*tmp;
 	t_tree		*tree;
 
-	tree = NULL;
-	// TODO check if where's str before and after parentheses or nothing
-	// TODO check num of herdoc
+	// TODO fix my syntax error []
 	// TODO open herdoc in parsing
 
+	tree = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
+	ft_printf_link(link);
 	if (ft_syntax_error(link))
 		return (NULL);
 	tmp = link;
@@ -79,7 +79,6 @@ t_tree	*ft_parsing(char *input)
 	return (tree);
 }
 
-	// ft_printf_link(link);
 	// ft_generate_spaces(10);
 	// ft_printf_tree(tree, 0, 2);
 	// printf("\n");

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/02 15:13:08 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/04 11:47:02 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef enum e_errorn
 	ERROR_OR,
 	ERROR_AND,
 	ERROR_OPEN_PAREN,
-	ERROR_CLOSE_PAREN
+	ERROR_CLOSE_PAREN,
+	ERROR_NUM_HERDOC
 }				t_errorn;
 
 /* error guide

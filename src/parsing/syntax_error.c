@@ -37,8 +37,6 @@ int	ft_syntax_error(t_link *link)
 {
 	t_errorn	error;
 
-	// TODO: ls () --> handle this case
-	// TODO: check '<<<'
 	error = ft_check_redirection(link);
 	if (error)
 	{
@@ -97,4 +95,8 @@ void	ft_printf_error(t_errorn error)
 		ft_onemsg("<<");
 	else if (error == ERROR_PIPE)
 		ft_onemsg("|");
+	else if (error == ERROR_NUM_HERDOC)
+		dprintf(STDERR_FILENO, "%sminishell%s: maximum here-document count exceeded\n",
+			RED, RESET);
+
 }
