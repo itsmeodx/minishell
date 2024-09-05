@@ -12,7 +12,8 @@
 
 #include "execution.h"
 
-static int	first_child(int *fd, t_tree *tree)
+static
+int	first_child(int *fd, t_tree *tree)
 {
 	pid_t	pid;
 	int		status;
@@ -30,7 +31,8 @@ static int	first_child(int *fd, t_tree *tree)
 	return (EXIT_SUCCESS);
 }
 
-static int	second_child(int *fd, t_tree *tree)
+static
+int	second_child(int *fd, t_tree *tree)
 {
 	pid_t	pid;
 	int		status;

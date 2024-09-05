@@ -60,9 +60,10 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 			char **env)
 {
 	init_minishell(env);
+	rl_replace_line("", 0);
 	while (true)
 	{
-		g_data.prompt = ft_getprompt();
+		g_data.prompt = create_full_prompt();
 		g_data.input = readline(g_data.prompt);
 		free(g_data.prompt);
 		if (!g_data.input)

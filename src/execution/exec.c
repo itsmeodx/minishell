@@ -13,7 +13,8 @@
 #include "execution.h"
 #include "parsing.h"
 
-static char	**paths_split(char *path)
+static
+char	**paths_split(char *path)
 {
 	int		i;
 	char	*tmp;

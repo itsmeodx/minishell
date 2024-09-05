@@ -13,7 +13,8 @@
 #include "execution.h"
 #include "parsing.h"
 
-static char	*expand_tilde(char *str)
+static
+char	*expand_tilde(char *str)
 {
 	char	*home;
 	char	*tmp;
@@ -30,7 +31,8 @@ static char	*expand_tilde(char *str)
 	return (str);
 }
 
-static char	*expandtoval(char *str, char *value, int *i)
+static
+char	*expandtoval(char *str, char *value, int *i)
 {
 	char	*tmp1;
 	char	*tmp2;
@@ -49,7 +51,8 @@ static char	*expandtoval(char *str, char *value, int *i)
 	return (str);
 }
 
-static char	*expandtostatus(char *str, int *i)
+static
+char	*expandtostatus(char *str, int *i)
 {
 	char	*value;
 
@@ -61,7 +64,8 @@ static char	*expandtostatus(char *str, int *i)
 	return (str);
 }
 
-static char	*expand_env(char *str)
+static
+char	*expand_env(char *str)
 {
 	int		i[3];
 	char	*key;

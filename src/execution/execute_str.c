@@ -6,13 +6,14 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/04 22:50:51 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static bool	isdir(char *path)
+static
+bool	isdir(char *path)
 {
 	struct stat	st;
 
@@ -24,7 +25,8 @@ static bool	isdir(char *path)
 	return (false);
 }
 
-static void	execute_without_path(t_cmd *cmd)
+static
+void	execute_without_path(t_cmd *cmd)
 {
 	if (access(cmd->argv[0], F_OK) != -1)
 	{
@@ -43,7 +45,8 @@ static void	execute_without_path(t_cmd *cmd)
 	}
 }
 
-static void	execute_with_path(t_cmd *cmd)
+static
+void	execute_with_path(t_cmd *cmd)
 {
 	ft_execvpe(cmd->argv[0], cmd->argv, g_data.environ);
 	dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
@@ -67,11 +70,15 @@ int	execute_cmd(t_cmd *cmd)
 		else
 			execute_with_path(cmd);
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
 		g_data.exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		g_data.exit_status = WTERMSIG(status) + 128;
+	else if (WIFSTOPPED(status))
+		g_data.exit_status = WSTOPSIG(status) + 128;
+	else
+		g_data.exit_status = 1;
 	return (g_data.exit_status);
 }
 

@@ -26,6 +26,7 @@ char	*colorize(char *str, char *color)
 	return (reset);
 }
 
+static
 char	*get_user_host(void)
 {
 	char	*str[2];
@@ -37,36 +38,64 @@ char	*get_user_host(void)
 	free(str[1]);
 	str[1] = ft_strjoin(str[0], RESET);
 	free(str[0]);
-	str[0] = ft_strjoin(str[1], ":> ");
+	str[0] = ft_strjoin(str[1], "> ");
 	free(str[1]);
 	return (str[0]);
 }
 
+static
+char	*ft_create_spaces(int size)
+{
+	char	*spaces;
+	int		i;
+
+	spaces = malloc(sizeof(char) * (size + 1));
+	if (!spaces)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		spaces[i] = ' ';
+		i++;
+	}
+	spaces[i] = '\0';
+	return (spaces);
+}
+
 char	*ft_getprompt(void)
 {
-	char	*str[4];
+	char	*str[3];
 
-	str[0] = NULL;
-	str[3] = get_user_host();
-	str[2] = getcwd(NULL, 0);
-	str[1] = str[2];
-	str[2] = ft_strjoin(str[2], " ");
+	str[0] = get_user_host();
+	str[1] = getpwd();
+	str[2] = ft_strjoin(str[0], str[1]);
+	free(str[0]);
 	free(str[1]);
-	if (ft_getenv("HOME")
-		&& strncmp(str[2], ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
-		str[0] = ft_strjoin("~", str[2] + strlen(ft_getenv("HOME")));
-	else
-		str[0] = ft_strdup(str[2]);
+	str[0] = ft_strjoin("\n╭──<", str[2]);
 	free(str[2]);
-	str[1] = str[0];
-	str[0] = ft_strjoin(YELLOW, str[0]);
-	free(str[1]);
-	str[1] = str[0];
-	str[0] = ft_strjoin(str[0], RESET);
-	free(str[1]);
-	str[1] = str[0];
-	str[0] = ft_strjoin(str[3], str[0]);
-	free(str[1]);
-	free(str[3]);
 	return (str[0]);
+}
+
+char	*create_full_prompt(void)
+{
+	char	*str[4];
+	int		len[4];
+
+	str[0] = ft_getprompt();
+	str[2] = get_exit_status();
+	len[0] = ft_strlen(str[0]) - (ft_strlen(CYAN) + ft_strlen(YELLOW)
+			+ (ft_strlen(RESET) * 2));
+	len[1] = ft_strlen(str[2]) - (ft_strlen(RED) * (g_data.exit_status != 0)
+			+ ft_strlen(GREEN) * (g_data.exit_status == 0) + ft_strlen(RESET));
+	len[3] = get_term_width();
+	len[2] = len[3] - (len[0] + len[1]) + 14;
+	if (len[2] < 0)
+		len[2] = 0;
+	str[1] = ft_create_spaces(len[2]);
+	str[3] = ft_strjoin(str[0], str[1]);
+	free(str[0]);
+	free(str[1]);
+	str[0] = ft_strjoin(str[3], str[2]);
+	str[1] = ft_strjoin(str[0], "\n╰─$ ");
+	return (free(str[0]), free(str[2]), free(str[3]), str[1]);
 }
