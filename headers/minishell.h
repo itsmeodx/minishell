@@ -93,6 +93,7 @@ typedef struct s_data
 	char			**environ;
 	char			*input;
 	char			*prompt;
+	bool			branch;
 	unsigned char	exit_status;
 }					t_data;
 

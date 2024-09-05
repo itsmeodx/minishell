@@ -64,7 +64,7 @@ char	*ft_create_spaces(int size)
 
 char	*ft_getprompt(void)
 {
-	char	*str[3];
+	char	*str[4];
 
 	str[0] = get_user_host();
 	str[1] = getpwd();
@@ -73,7 +73,9 @@ char	*ft_getprompt(void)
 	free(str[1]);
 	str[0] = ft_strjoin("\n╭──<", str[2]);
 	free(str[2]);
-	return (str[0]);
+	str[3] = get_branch();
+	str[2] = ft_strjoin(str[0], str[3]);
+	return (free(str[3]), free(str[0]), str[2]);
 }
 
 char	*create_full_prompt(void)
@@ -83,12 +85,13 @@ char	*create_full_prompt(void)
 
 	str[0] = ft_getprompt();
 	str[2] = get_exit_status();
-	len[0] = ft_strlen(str[0]) - (ft_strlen(CYAN) + ft_strlen(YELLOW)
-			+ (ft_strlen(RESET) * 2));
-	len[1] = ft_strlen(str[2]) - (ft_strlen(RED) * (g_data.exit_status != 0)
-			+ ft_strlen(GREEN) * (g_data.exit_status == 0) + ft_strlen(RESET));
+	len[0] = ft_strlen(str[0]) - (ft_strlen(CYAN RESET YELLOW RESET)
+			+ (ft_strlen(CYAN RESET) * (g_data.branch == true)) + 1 + (2 * 4));
+	len[1] = ft_strlen(str[2]) - ((ft_strlen(RED RESET) + 6)
+			* (g_data.exit_status != 0) + (ft_strlen(GREEN RESET) + 8)
+			* (g_data.exit_status == 0));
 	len[3] = get_term_width();
-	len[2] = len[3] - (len[0] + len[1]) + 14;
+	len[2] = len[3] - (len[0] + len[1]);
 	if (len[2] < 0)
 		len[2] = 0;
 	str[1] = ft_create_spaces(len[2]);

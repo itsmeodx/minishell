@@ -64,6 +64,10 @@ NAME = minishell
 
 all: $(NAME)
 
+norm:
+	@norminette --use-gitignore . > /dev/null || (echo "$(RED)Norminette failed$(END)" && exit 1)
+	@if [ $$? -eq 0 ]; then echo "$(GREEN)Norminette passed$(END)"; fi
+
 $(NAME): $(OBJ)
 	@echo "$(YELLOW)Compiling $(CYAN)$(NAME)$(END)"
 	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline -lncurses

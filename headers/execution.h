@@ -50,6 +50,7 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*getpwd(void);
 int				get_term_width(void);
 char			*get_exit_status(void);
+char			*get_branch(void);
 
 // env.c
 char			*ft_getenv(char *name);

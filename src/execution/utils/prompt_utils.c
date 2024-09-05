@@ -18,17 +18,17 @@ char	*getpwd(void)
 	char	*str[2];
 
 	str[0] = getcwd(NULL, 0);
-	str[1] = ft_strjoin(str[0], " ");
-	free(str[0]);
 	if (ft_getenv("HOME")
-		&& strncmp(str[1], ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
-		str[0] = ft_strjoin("~", str[1] + strlen(ft_getenv("HOME")));
+		&& strncmp(str[0], ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
+		str[1] = ft_strjoin("~", str[0] + strlen(ft_getenv("HOME")));
 	else
-		str[0] = ft_strdup(str[1]);
-	free(str[1]);
-	str[1] = colorize(str[0], YELLOW);
+		str[1] = ft_strdup(str[0]);
 	free(str[0]);
-	str[0] = ft_strjoin(" ", str[1]);
+	str[0] = colorize(str[1], YELLOW);
+	free(str[1]);
+	str[1] = ft_strjoin(" ", str[0]);
+	free(str[0]);
+	str[0] = ft_strjoin(str[1], " ");
 	free(str[1]);
 	return (str[0]);
 }
@@ -56,7 +56,54 @@ char	*get_exit_status(void)
 	free(str[0]);
 	str[0] = ft_strjoin(str[1], RESET);
 	free(str[1]);
-	str[1] = ft_strjoin(" ", str[0]);
+	return (str[0]);
+}
+
+static
+char	*read_branch(int *fd, int status)
+{
+	char	*str[2];
+	char	*branch;
+
+	str[0] = NULL;
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+		str[0] = get_next_line(fd[0]);
+	close_pipe(fd);
+	if (!str[0])
+		return (g_data.branch = false, NULL);
+	str[0][ft_strlen(str[0]) - 1] = '\0';
+	str[1] = ft_strjoin("(", str[0]);
 	free(str[0]);
-	return (str[1]);
+	str[0] = ft_strjoin(str[1], ")");
+	branch = colorize(str[0], CYAN);
+	free(str[0]);
+	free(str[1]);
+	g_data.branch = true;
+	return (branch);
+}
+
+char	*get_branch(void)
+{
+	pid_t	pid;
+	int		status;
+	int		fd[3];
+
+	if (pipe(fd) == -1)
+		return (NULL);
+	pid = fork();
+	if (pid == -1)
+		return (NULL);
+	if (pid == 0)
+	{
+		fd[2] = open("/dev/null", O_WRONLY);
+		dup2(fd[2], STDERR_FILENO);
+		close(fd[2]);
+		dup2(fd[1], STDOUT_FILENO);
+		close_pipe(fd);
+		execve("/usr/bin/git", (char *[]){"git", "branch", "--show-current",
+			NULL}, g_data.environ);
+		exit(EXIT_FAILURE);
+	}
+	waitpid(pid, &status, 0);
+	return (read_branch(fd, status));
 }
