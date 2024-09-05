@@ -48,7 +48,7 @@ EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/gnl execution/history execution/hostname execution/prompt \
 				execution/redirections execution/utils/close_pipe \
 				execution/utils/extend_2d execution/utils/ft_itoa \
-				execution/utils/ft_substr
+				execution/utils/ft_substr execution/utils/prompt_utils
 
 SRC			=	$(addprefix $(SRCDIR)/, main.c) \
 				$(addprefix $(SRCDIR)/, $(addsuffix .c, $(PARSING))) \
@@ -64,10 +64,9 @@ NAME = minishell
 
 all: $(NAME)
 
-
 $(NAME): $(OBJ)
 	@echo "$(YELLOW)Compiling $(CYAN)$(NAME)$(END)"
-	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline -lncurses
 	@echo "$(CYAN)$(NAME) is ready to use$(END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
@@ -85,3 +84,5 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean NORM
