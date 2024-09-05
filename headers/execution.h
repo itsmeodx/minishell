@@ -46,6 +46,10 @@ void			*extend_2d(char **ptr, size_t size);
 char			*ft_itoa(int n);
 // ft_substr.c
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+// prompt_utils.c
+char			*getpwd(void);
+int				get_term_width(void);
+char			*get_exit_status(void);
 
 // env.c
 char			*ft_getenv(char *name);
@@ -93,6 +97,7 @@ void			init_minishell(char **env);
 // prompt.c
 char			*colorize(char *str, char *color);
 char			*ft_getprompt(void);
+char			*create_full_prompt(void);
 
 // redirections.c
 bool			set_redirections(t_redirection *redirections);

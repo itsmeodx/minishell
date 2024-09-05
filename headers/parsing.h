@@ -101,7 +101,7 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 // // utils
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 char			*ft_strchr_v2(const char *s, int c);
-void			free_2d(char **tab);
+void			free_2d(char **arr);
 char			**ft_strdup_2d(char **s);
 char			*ft_strdup(const char *s);
 int				ft_count_strs(char **s);

@@ -12,17 +12,17 @@
 
 #include "parsing.h"
 
-void	free_2d(char **tab)
+void	free_2d(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (arr[i])
 	{
-		free(tab[i]);
+		free(arr[i]);
 		i++;
 	}
-	free(tab);
+	free(arr);
 }
 
 int	ft_isdigit(int c)
