@@ -41,11 +41,13 @@ PARSING		=	parsing/lexer parsing/parser\
 
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/echo execution/builtins/exit \
-				execution/builtins/export execution/builtins/pwd \
+				execution/builtins/export execution/builtins/unset \
+				 execution/builtins/pwd \
 				execution/env execution/exec execution/execute_and_or \
 				execution/execute_par execution/execute_pipe \
 				execution/execute_str execution/execution execution/expansion \
-				execution/gnl execution/history execution/hostname execution/prompt \
+				execution/ft_readline execution/gnl execution/history \
+				execution/hostname execution/prompt \
 				execution/redirections execution/utils/close_pipe \
 				execution/utils/extend_2d execution/utils/ft_itoa \
 				execution/utils/ft_substr execution/utils/prompt_utils
@@ -70,7 +72,7 @@ norm:
 
 $(NAME): $(OBJ)
 	@echo "$(YELLOW)Compiling $(CYAN)$(NAME)$(END)"
-	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline -lncurses
+	@$(CC) $(CFLAGS) $(OBJ) $(INC) -o $(NAME) -lreadline
 	@echo "$(CYAN)$(NAME) is ready to use$(END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)

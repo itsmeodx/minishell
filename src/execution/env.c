@@ -13,6 +13,22 @@
 #include "execution.h"
 #include "parsing.h"
 
+bool	is_in_env(char *key)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = strlen(key);
+	while (g_data.environ && g_data.environ[i])
+	{
+		if (strncmp(g_data.environ[i], key, len) == 0)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 char	*ft_getenv(char *name)
 {
 	int		i;
@@ -24,7 +40,11 @@ char	*ft_getenv(char *name)
 	while (g_data.environ && g_data.environ[i])
 	{
 		if (strncmp(g_data.environ[i], name, strlen(name)) == 0)
+		{
+			if (g_data.environ[i][len] == '\0')
+				return (free(name), g_data.environ[i] + len - 1);
 			return (free(name), g_data.environ[i] + len);
+		}
 		i++;
 	}
 	free(name);
@@ -54,19 +74,6 @@ char	**addtoenv(char **env, char *key, char *value)
 	new_env[i + 1] = NULL;
 	free(env);
 	return (new_env);
-}
-
-void	check_path(char **env)
-{
-	char	*path;
-
-	path = ft_getenv("PATH");
-	if (!path)
-	{
-		g_data.environ = addtoenv(env, "PATH", PATH);
-		if (!g_data.environ)
-			ft_exit(EXIT_FAILURE);
-	}
 }
 
 void	update_pwd(char **env)

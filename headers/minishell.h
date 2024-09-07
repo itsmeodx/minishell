@@ -88,12 +88,12 @@ typedef struct s_tree
 
 typedef struct s_data
 {
+	int				hfd;
 	char			*path;
 	struct s_tree	*tree;
-	char			**environ;
-	char			*input;
-	char			*prompt;
 	bool			branch;
+	char			*input;
+	char			**environ;
 	unsigned char	exit_status;
 }					t_data;
 

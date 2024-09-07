@@ -36,6 +36,8 @@ bool			builtin_exit(t_cmd *cmd);
 bool			builtin_export(t_cmd *cmd);
 // pwd.c
 bool			builtin_pwd(t_cmd *cmd);
+// unset.c
+bool			builtin_unset(t_cmd *cmd);
 
 // utils/
 // sysutils.c
@@ -53,9 +55,9 @@ char			*get_exit_status(void);
 char			*get_branch(void);
 
 // env.c
+bool			is_in_env(char *key);
 char			*ft_getenv(char *name);
 char			**addtoenv(char **env, char *key, char *value);
-void			check_path(char **env);
 void			update_pwd(char **env);
 void			update_env(char **env, char *key, char *value);
 
@@ -81,6 +83,9 @@ int				ft_execution(t_tree *tree);
 
 // expansion.c
 void			ft_expansion(char **str);
+
+// ft_readline.c
+char			*ft_readline(char *prompt);
 
 // gnl.c
 char			*get_next_line(int fd);

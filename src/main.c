@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/31 18:40:21 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/07 10:17:57 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 // global variable
 struct s_data	g_data;
 
-static void	update_shlvl(char **env)
+static
+void	update_shlvl(char **env)
 {
 	int		i;
 	char	*shlvl;
@@ -36,6 +37,20 @@ static void	update_shlvl(char **env)
 			break ;
 		}
 		i++;
+	}
+}
+
+static
+void	check_path(char **env)
+{
+	char	*path;
+
+	path = ft_getenv("PATH");
+	if (!path)
+	{
+		g_data.environ = addtoenv(env, "PATH", PATH);
+		if (!g_data.environ)
+			ft_exit(EXIT_FAILURE);
 	}
 }
 
@@ -60,24 +75,21 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 			char **env)
 {
 	init_minishell(env);
-	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 	while (true)
 	{
-		g_data.prompt = create_full_prompt();
-		g_data.input = readline(g_data.prompt);
-		free(g_data.prompt);
+		g_data.input = ft_readline(create_full_prompt());
 		if (!g_data.input)
 			break ;
-		if (*g_data.input)
-			ft_add_history(g_data.input);
 		g_data.tree = ft_parsing(g_data.input);
-		free(g_data.input);
 		if (g_data.tree)
 			ft_execution(g_data.tree);
 		ft_treeclear(g_data.tree);
 	}
 	free_2d(g_data.environ);
 	rl_clear_history();
+	close(g_data.hfd);
 	printf("exit\n");
 	return (EXIT_SUCCESS);
 }

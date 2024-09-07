@@ -15,24 +15,21 @@
 
 char	*get_last_line(void)
 {
-	int		fd;
 	char	*line;
 	char	*last_line;
 
-	fd = open(".minishell_history", O_RDONLY);
-	if (fd == -1)
+	if (g_data.hfd == -1)
 		return (NULL);
 	last_line = NULL;
-	line = get_next_line(fd);
+	line = get_next_line(g_data.hfd);
 	while (line)
 	{
 		free(last_line);
 		last_line = line;
-		line = get_next_line(fd);
+		line = get_next_line(g_data.hfd);
 	}
 	if (last_line)
 		last_line[strlen(last_line) - 1] = 0;
-	close(fd);
 	return (last_line);
 }
 
@@ -47,7 +44,6 @@ bool	isempty(char *line)
 
 void	ft_add_history(char *line)
 {
-	int			fd;
 	static char	*last_line = NULL;
 
 	if (!last_line)
@@ -57,15 +53,13 @@ void	ft_add_history(char *line)
 	free(last_line);
 	last_line = ft_strdup(line);
 	add_history(line);
-	fd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
-	if (fd == -1)
+	if (g_data.hfd == -1)
 		return ;
-	return (dprintf(fd, "%s\n", line), (void)close(fd));
+	return (dprintf(g_data.hfd, "%s\n", line), (void) NULL);
 }
 
 void	restore_history(void)
 {
-	int		fd;
 	char	*line;
 
 	if (access(".minishell_history", F_OK) != -1)
@@ -75,16 +69,16 @@ void	restore_history(void)
 		else if (access(".minishell_history", W_OK) == -1)
 			unlink(".minishell_history");
 	}
-	fd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
-	if (fd == -1)
+	g_data.hfd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (g_data.hfd == -1)
 		return ;
-	line = get_next_line(fd);
+	line = get_next_line(g_data.hfd);
 	while (line)
 	{
 		line[strlen(line) - 1] = 0;
 		add_history(line);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(g_data.hfd);
 	}
-	return ((void)close(fd));
+	return ;
 }

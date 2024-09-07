@@ -18,6 +18,10 @@ char	*getpwd(void)
 	char	*str[2];
 
 	str[0] = getcwd(NULL, 0);
+	if (!str[0])
+		str[0] = ft_strdup(ft_getenv("PWD"));
+	if (!str[0])
+		str[0] = ft_strdup("");
 	if (ft_getenv("HOME")
 		&& strncmp(str[0], ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
 		str[1] = ft_strjoin("~", str[0] + strlen(ft_getenv("HOME")));

@@ -25,14 +25,15 @@ void	reset_redirections(void)
 int	execute_builtin(t_cmd *cmd)
 {
 	int			i;
-	static char	*builtins[] = {"echo", "cd", "pwd", "export", "exit", NULL};
+	static char	*builtins[] = {"echo", "cd", "pwd", "export", "unset",
+		"exit", NULL};
 	static bool	(*builtin_functions[])(t_cmd *) = {&builtin_echo, &builtin_cd,
-		&builtin_pwd, &builtin_export, &builtin_exit};
+		&builtin_pwd, &builtin_export, &builtin_unset, &builtin_exit};
 
 	i = -1;
 	while (builtins[++i])
 	{
-		if (!strcmp(cmd->argv[0], builtins[i]))
+		if (cmd && cmd->argv && !strcmp(cmd->argv[0], builtins[i]))
 		{
 			if (!set_redirections(cmd->redirections))
 				return (g_data.exit_status = 1, EXIT_SUCCESS);

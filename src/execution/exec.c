@@ -20,6 +20,8 @@ char	**paths_split(char *path)
 	char	*tmp;
 	char	**paths;
 
+	if (!path)
+		return (NULL);
 	i = -1;
 	paths = ft_split(path, ":");
 	while (paths && paths[++i])

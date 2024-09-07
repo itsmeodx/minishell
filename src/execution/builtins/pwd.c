@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
 
 bool	builtin_pwd(t_cmd *cmd __attribute__((unused)))
 {
@@ -18,11 +19,12 @@ bool	builtin_pwd(t_cmd *cmd __attribute__((unused)))
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
+		cwd = ft_strdup(ft_getenv("PWD"));
+	if (!cwd)
 		return (dprintf(STDERR_FILENO,
 				NAME"pwd: error retrieving current directory: "),
 			dprintf(STDERR_FILENO,
 				"getcwd: cannot access parent directories: "NSFOD"\n"), false);
 	printf("%s\n", cwd);
-	free(cwd);
-	return (true);
+	return (free(cwd), true);
 }

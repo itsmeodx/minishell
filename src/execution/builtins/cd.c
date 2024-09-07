@@ -20,33 +20,6 @@ bool	cd_home(void)
 	return (true);
 }
 
-bool	cd_tilde(t_cmd *cmd)
-{
-	int		i;
-	char	*home;
-	char	*path;
-
-	i = 1;
-	if (cmd->argv[1][0] == '~' && cmd->argv[1][1] == '~')
-		return (dprintf(STDERR_FILENO, NAME"cd: %s: "NSFOD"\n",
-				cmd->argv[1]), false);
-	home = ft_getenv("HOME");
-	if (!home)
-		return (dprintf(STDERR_FILENO, NAME"cd: HOME not set\n"), false);
-	home = ft_strjoin(home, "/");
-	while (cmd->argv[1][i] == '/')
-		i++;
-	path = ft_strjoin(home, cmd->argv[1] + i);
-	free(home);
-	if (!path)
-		return (false);
-	if (chdir(path) == -1)
-		return (dprintf(STDERR_FILENO, NAME"cd: %s: "NSFOD"\n", path),
-			free(path), false);
-	free(path);
-	return (true);
-}
-
 bool	cd_dash(t_cmd *cmd)
 {
 	char	*oldpwd;
@@ -55,7 +28,7 @@ bool	cd_dash(t_cmd *cmd)
 		return (dprintf(STDERR_FILENO, NAME"cd: %s: invalid option\n",
 				cmd->argv[1]), printf("cd: usage: cd [-] [dir]\n"), false);
 	oldpwd = ft_getenv("OLDPWD");
-	if (chdir(oldpwd) == -1)
+	if (!oldpwd || chdir(oldpwd) == -1)
 		return (dprintf(STDERR_FILENO, NAME"cd: OLDPWD not set\n"),
 			false);
 	printf("%s\n", ft_getenv("OLDPWD"));
@@ -78,24 +51,19 @@ bool	cd_dir(t_cmd *cmd)
 
 bool	builtin_cd(t_cmd *cmd)
 {
+	bool	ret;
+
 	if (cmd->argc > 2)
 		return (dprintf(STDERR_FILENO, NAME"cd: too many arguments\n"),
 			false);
 	else if (cmd->argc == 1)
-	{
-		if (!cd_home())
-			return (false);
-	}
+		ret = cd_home();
 	else if (cmd->argc == 2 && cmd->argv[1][0] == '-')
-	{
-		if (!cd_dash(cmd))
-			return (false);
-	}
-	else if (cmd->argc == 2)
-	{
-		if (!cd_dir(cmd))
-			return (false);
-	}
+		ret = cd_dash(cmd);
+	else
+		ret = cd_dir(cmd);
+	if (!ret)
+		return (g_data.exit_status = 1, false);
 	update_pwd(g_data.environ);
-	return (true);
+	return (g_data.exit_status = 0, true);
 }
