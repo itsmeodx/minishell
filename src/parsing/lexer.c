@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/08/24 10:33:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/04 10:49:39 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,23 @@ int	ft_count_spaces_bonus(char *input)
 {
 	int	i;
 	int	count;
+	int	bin;
 
 	i = 0;
 	count = 0;
+	bin = 0;
 	while (input[i])
 	{
-		if (input[i] == '&' || input[i] == '|' || input[i] == ')')
+		if (!(input[i] == '&' || input[i] == '|' || input[i] == '('))
+			bin = 0;
+		if (input[i] == '&' || input[i] == '|' || input[i] == '(')
 			count++;
-		if (input[i + 1] && ((input[i] == '&' && input[i + 1] == '&')
+		if (bin < 1 && input[i + 1] && ((input[i] == '&' && input[i + 1] == '&')
 				|| (input[i] == '|' && input[i + 1] == '|')))
+		{
+			bin += 1;
 			count--;
+		}
 		i++;
 	}
 	return (count);
@@ -35,16 +42,23 @@ int	ft_count_spaces(char *input)
 {
 	int	i;
 	int	count;
+	int bin;
 
 	i = 0;
 	count = 0;
+	bin = 0;
 	while (input[i])
 	{
+		if (!(input[i] == '<' || input[i] == '>' || input[i] == ')'))
+			bin = 0;
 		if (input[i] == '<' || input[i] == '>' || input[i] == ')')
 			count++;
-		if (input[i + 1] && ((input[i] == '<' && input[i + 1] == '<')
+		if (bin < 1 && input[i + 1] && ((input[i] == '<' && input[i + 1] == '<')
 				|| (input[i] == '>' && input[i + 1] == '>')))
+		{
+			bin += 1;
 			count--;
+		}
 		i++;
 	}
 	return (count);
@@ -67,8 +81,7 @@ char	*ft_add_spaces_bonus(char *input, int j)
 		{
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];
-			if (input[j - 1] != '(' && ((input[j] == '&' && input[j - 1] != '|')
-					|| (input[j] == '|' && input[j - 1] != '&')))
+			if (input[j - 1] != '(' && (input[j] == input[j - 1]))
 				tmp[++i] = input[j++];
 			tmp[++i] = ' ';
 			i++;
@@ -96,8 +109,8 @@ char	*ft_add_spaces(char *input, int j)
 		{
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];
-			if (input[j - 1] != '|' && input[j - 1] != ')' && (input[j] == '<'
-					|| input[j] == '>'))
+			if (input[j - 1] != '|' && input[j - 1] != ')'
+				&& ((input[j] == input[j - 1])))
 				tmp[++i] = input[j++];
 			tmp[++i] = ' ';
 			i++;

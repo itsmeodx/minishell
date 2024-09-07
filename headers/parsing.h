@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/29 15:26:51 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:47:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSING_H
 # include "minishell.h"
 # define LEN_ENUM 8
-
+# define HEREDOC "hd_"
 typedef enum e_type
 {
 	STR,
@@ -37,11 +37,13 @@ typedef enum e_errorn
 	ERROR_OUT,
 	ERROR_HERDOC,
 	ERROR_PIPE,
-	ERROR_COMMAND,
-	ERROR_QUOTE,
+	ERROR_SIGNAL_QUOTE,
+	ERROR_DOUBLE_QUOTE,
 	ERROR_OR,
 	ERROR_AND,
-	ERROR_PAREN,
+	ERROR_OPEN_PAREN,
+	ERROR_CLOSE_PAREN,
+	ERROR_NUM_HERDOC
 }				t_errorn;
 
 /* error guide
@@ -79,6 +81,7 @@ t_link			*ft_def_type(char **input);
 t_link			*ft_find_hightest_proirity(t_link *head);
 int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
+int				ft_open_herdoc(t_link *link);
 
 // **tree_ft**
 void			ft_treeadd_back_left(t_tree **tree, t_tree *new);
@@ -109,6 +112,7 @@ int				ft_strlen(const char *str);
 char			*ft_strjoin(char *s1, char const *s2);
 char			*ft_strdup(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
+char			*ft_itoa(int n);
 
 // // rediction_ft
 t_redirection	*ft_lstnew_redi(char *content);
@@ -128,5 +132,14 @@ void			ft_dbl_lstclear(t_link **lst);
 
 // Syntax error fts
 t_errorn		ft_check_quotes(t_link *link);
+t_errorn		ft_check_and_or(t_link *link);
+t_errorn		ft_check_pipe(t_link *link);
+t_errorn		ft_check_in(t_link *link);
+t_errorn		ft_check_out(t_link *link);
+t_errorn		ft_check_append(t_link *link);
+t_errorn		ft_check_herdoc(t_link *link);
+t_errorn		ft_check_parentheses(t_link *link);
+int				ft_syntax_error(t_link *link);
+void			ft_printf_error(t_errorn error);
 
 #endif // PARSING_H

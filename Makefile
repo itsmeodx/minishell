@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
+#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/08/31 17:03:15 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/09/05 14:50:35 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,11 @@ PARSING		=	parsing/lexer parsing/parser\
 				parsing/utils/ft_strncmp parsing/utils/small_ft \
 				parsing/search parsing/printf_tree parsing/create_cmd \
 				parsing/redirections parsing/utils/ft_lst_redi \
-				parsing/parse_parenthesis parsing/tree_utils/ft_treeclear \
-				parsing/quotes_checker \
+				parsing/parse_parentheses parsing/tree_utils/ft_treeclear \
+				parsing/quotes_checker parsing/syntax_error \
+				parsing/and_or_checker parsing/redirections_checker \
+				parsing/parentheses_checker parsing/open_herdoc\
+				parsing/utils/ft_strlcat \
 
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/echo execution/builtins/exit \

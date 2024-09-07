@@ -6,13 +6,13 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:50:16 by adam              #+#    #+#             */
-/*   Updated: 2024/08/31 16:48:23 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/01 11:19:05 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-bool	ft_check_each_node(char *input)
+int	ft_check_each_node(char *input)
 {
 	int		i;
 	char	lock;
@@ -29,7 +29,12 @@ bool	ft_check_each_node(char *input)
 					break ;
 			}
 			if (input[i] == '\0')
-				return (false);
+			{
+				if (lock == '\'')
+					return (-1);
+				else
+					return (0);
+			}
 		}
 		i++;
 	}
@@ -39,12 +44,16 @@ bool	ft_check_each_node(char *input)
 t_errorn	ft_check_quotes(t_link *link)
 {
 	t_link	*tmp;
+	int		error;
 
 	tmp = link;
 	while (tmp)
 	{
-		if (ft_check_each_node(tmp->command) == false)
-			return (ERROR_QUOTE);
+		error = ft_check_each_node(tmp->command);
+		if (error == -1)
+			return (ERROR_SIGNAL_QUOTE);
+		else if (error == 0)
+			return (ERROR_DOUBLE_QUOTE);
 		tmp = tmp->next;
 	}
 	return (NONE);

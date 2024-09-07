@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   printf_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by akhobba           #+#    #+#             */
 /*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
@@ -31,7 +31,7 @@ void	ft_printf_link(t_link *link)
 	tmp = link;
 	while (tmp)
 	{
-		printf("tmp->command: %s\n", tmp->command);
+		printf("tmp->command: %s --- id=%d\n", tmp->command, tmp->identifier);
 		tmp = tmp->next;
 	}
 }
