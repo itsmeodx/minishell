@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/04 11:47:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/05 14:47:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSING_H
 # include "minishell.h"
 # define LEN_ENUM 8
-
+# define HEREDOC "hd_"
 typedef enum e_type
 {
 	STR,
@@ -81,6 +81,7 @@ t_link			*ft_def_type(char **input);
 t_link			*ft_find_hightest_proirity(t_link *head);
 int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
+int				ft_open_herdoc(t_link *link);
 
 // **tree_ft**
 void			ft_treeadd_back_left(t_tree **tree, t_tree *new);
@@ -111,6 +112,7 @@ int				ft_strlen(const char *str);
 char			*ft_strjoin(char *s1, char const *s2);
 char			*ft_strdup(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
+char			*ft_itoa(int n);
 
 // // rediction_ft
 t_redirection	*ft_lstnew_redi(char *content);

@@ -6,11 +6,30 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/31 19:05:41 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/07 11:28:01 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+bool	ft_is_redirection(int identifier)
+{
+	if (identifier == IN || identifier == OUT || identifier == APPEND
+		|| identifier == HERDOC)
+		return (true);
+	return (false);
+}
+
+void	ft_not_command(t_tree **new, t_link *target)
+{
+	if (target->prev && ft_is_redirection(target->prev->identifier))
+	{
+		target = target->prev;
+		*new = ft_treenew(NULL, STR);
+	}
+	else
+		*new = ft_treenew(target->command, target->identifier);
+}
 
 t_tree	*ft_parse_cmd(t_link *link)
 {
@@ -22,14 +41,16 @@ t_tree	*ft_parse_cmd(t_link *link)
 	goal[1] = OPEN_PAR;
 	if (!link)
 		return (NULL);
+	// TODO fix redirections behavior
 	target = ft_search_target(link, goal);
 	if (!target)
 		return (NULL);
-	new = ft_treenew(target->command, target->identifier);
+	ft_not_command(&new, target);
+	// new = ft_treenew(target->command, target->identifier);
 	if (link->next && target->identifier != OPEN_PAR)
 	{
 		ft_cmd_create(&new, link->next);
-		ft_redirections(link->next, &new->redirection);
+		ft_redirections(link, &new->redirection);
 	}
 	if (target->identifier == OPEN_PAR)
 	{
