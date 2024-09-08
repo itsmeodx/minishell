@@ -14,8 +14,8 @@
 
 int	ft_index_parentheses(t_link *link)
 {
-	int	i;
-	int	valider;
+	int		i;
+	int		valider;
 	t_link	*tmp;
 
 	tmp = link;
@@ -42,10 +42,10 @@ int	ft_void_parentheses(t_link *link)
 	t_link	*tmp;
 
 	tmp = link;
-	while(tmp)
+	while (tmp)
 	{
-		if (tmp->identifier == OPEN_PAR
-			&& (tmp->next && tmp->next->identifier == CLOSE_PAR))
+		if (tmp->identifier == OPEN_PAR && (tmp->next
+				&& tmp->next->identifier == CLOSE_PAR))
 			return (ERROR_CLOSE_PAREN);
 		tmp = tmp->next;
 	}
@@ -54,7 +54,7 @@ int	ft_void_parentheses(t_link *link)
 
 t_errorn	ft_check_parentheses(t_link *link)
 {
-	int 	error;
+	int	error;
 
 	error = ft_index_parentheses(link);
 	if (error == 0)

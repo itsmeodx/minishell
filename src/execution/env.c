@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:21:46 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 13:14:43 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:58:49 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ bool	is_in_env(char *key)
 	len = strlen(key);
 	while (g_data.environ && g_data.environ[i])
 	{
-		if (strncmp(g_data.environ[i], key, len) == 0)
+		if (strncmp(g_data.environ[i], key, len) == 0
+			&& (g_data.environ[i][len] == '='
+			|| g_data.environ[i][len] == '\0'))
 			return (true);
 		i++;
 	}
@@ -34,19 +36,13 @@ char	*ft_getenv(char *name)
 	int		i;
 	int		len;
 
-	i = 0;
+	i = -1;
 	name = ft_strjoin(name, "=");
 	len = strlen(name);
-	while (g_data.environ && g_data.environ[i])
-	{
+	while (g_data.environ && g_data.environ[++i])
 		if (strncmp(g_data.environ[i], name, strlen(name)) == 0)
-		{
-			if (g_data.environ[i][len] == '\0')
-				return (free(name), g_data.environ[i] + len - 1);
-			return (free(name), g_data.environ[i] + len);
-		}
-		i++;
-	}
+			return (free(name), g_data.environ[i] + len
+				- (g_data.environ[i][len] == '\0'));
 	free(name);
 	return (NULL);
 }
@@ -68,7 +64,10 @@ char	**addtoenv(char **env, char *key, char *value)
 		new_env[i] = env[i];
 		i++;
 	}
-	key = ft_strjoin(key, "=");
+	if (value)
+		key = ft_strjoin(key, "=");
+	else
+		key = ft_strdup(key);
 	new_env[i] = ft_strjoin(key, value);
 	free(key);
 	new_env[i + 1] = NULL;
@@ -89,18 +88,23 @@ void	update_pwd(char **env)
 void	update_env(char **env, char *key, char *value)
 {
 	int		i;
+	int		len;
 
-	key = ft_strjoin(key, "=");
+	if (!value)
+		return ;
 	i = 0;
+	len = strlen(key);
 	while (env[i])
 	{
-		if (strncmp(env[i], key, strlen(key)) == 0)
+		if (strncmp(env[i], key, len) == 0 && (env[i][len] == '='
+			|| env[i][len] == '\0'))
 		{
+			key = ft_strjoin(key, "=");
 			free(env[i]);
 			env[i] = ft_strjoin(key, value);
+			free(key);
 			break ;
 		}
 		i++;
 	}
-	free(key);
 }

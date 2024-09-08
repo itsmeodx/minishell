@@ -65,7 +65,7 @@ typedef enum e_errorn
 // 	struct s_error	*next;
 // }					t_error;
 
-//extern t_error	*g_error; // global variable to store errors
+// extern t_error	*g_error; // global variable to store errors
 
 // old linked list will be replaced by a new tree
 

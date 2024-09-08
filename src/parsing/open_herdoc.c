@@ -17,7 +17,7 @@ int	ft_name_file(int num_file)
 	char	*num;
 	char	*name;
 	char	*file;
-	int fd;
+	int		fd;
 
 	num = ft_itoa(num_file);
 	name = malloc(ft_strlen(num) + 5);

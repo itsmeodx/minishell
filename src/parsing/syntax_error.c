@@ -66,8 +66,9 @@ int	ft_syntax_error(t_link *link)
 
 void	ft_onemsg(char *error)
 {
-	dprintf(STDERR_FILENO, "%sminishell%s: syntax error near unexpected token `%s'\n",
-		RED, RESET, error);
+	dprintf(STDERR_FILENO,
+		"%sminishell%s: syntax error near unexpected token `%s'\n", RED, RESET,
+		error);
 	g_data.exit_status = 2;
 }
 
@@ -96,7 +97,7 @@ void	ft_printf_error(t_errorn error)
 	else if (error == ERROR_PIPE)
 		ft_onemsg("|");
 	else if (error == ERROR_NUM_HERDOC)
-		dprintf(STDERR_FILENO, "%sminishell%s: maximum here-document count exceeded\n",
-			RED, RESET);
-
+		dprintf(STDERR_FILENO,
+			"%sminishell%s: maximum here-document count exceeded\n", RED,
+			RESET);
 }

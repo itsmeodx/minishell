@@ -42,7 +42,7 @@ int	ft_count_spaces(char *input)
 {
 	int	i;
 	int	count;
-	int bin;
+	int	bin;
 
 	i = 0;
 	count = 0;

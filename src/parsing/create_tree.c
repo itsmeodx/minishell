@@ -23,10 +23,7 @@ bool	ft_is_redirection(int identifier)
 void	ft_not_command(t_tree **new, t_link *target)
 {
 	if (target->prev && ft_is_redirection(target->prev->identifier))
-	{
-		target = target->prev;
 		*new = ft_treenew(NULL, STR);
-	}
 	else
 		*new = ft_treenew(target->command, target->identifier);
 }
@@ -41,12 +38,10 @@ t_tree	*ft_parse_cmd(t_link *link)
 	goal[1] = OPEN_PAR;
 	if (!link)
 		return (NULL);
-	// TODO fix redirections behavior
 	target = ft_search_target(link, goal);
 	if (!target)
 		return (NULL);
 	ft_not_command(&new, target);
-	// new = ft_treenew(target->command, target->identifier);
 	if (link->next && target->identifier != OPEN_PAR)
 	{
 		ft_cmd_create(&new, link->next);
@@ -112,10 +107,4 @@ t_tree	*ft_parse_and_or(t_link *link)
 	if (target->next)
 		ft_treeadd_back_right(&new, ft_parse_and_or(target->next));
 	return (new);
-}
-
-t_tree	*ft_create_tree(t_tree **tree, t_link *link)
-{
-	*tree = ft_parse_and_or(link);
-	return (*tree);
 }

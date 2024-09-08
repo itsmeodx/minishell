@@ -65,6 +65,7 @@ int	execute_cmd(t_cmd *cmd)
 	{
 		if (!set_redirections(cmd->redirections))
 			ft_exit(1);
+		g_data.environ = filter_env(g_data.environ);
 		if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 			execute_without_path(cmd);
 		else

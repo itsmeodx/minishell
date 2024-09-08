@@ -42,6 +42,10 @@ bool			builtin_unset(t_cmd *cmd);
 // utils/
 // sysutils.c
 int				close_pipe(int *fd);
+// env_utils.c
+char			**var_split(char *var);
+char			**remove_from_env(char **env, char *key);
+char			**filter_env(char **env);
 // extend_2d.c
 void			*extend_2d(char **ptr, size_t size);
 // ft_itoa.c

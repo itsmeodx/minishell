@@ -20,9 +20,8 @@ t_errorn	ft_check_pipe(t_link *link)
 	while (tmp)
 	{
 		if (tmp->identifier == PIPE && ((!tmp->next || (tmp->next
-					&& tmp->next->identifier != STR))
-					&& (!tmp->next || (tmp->prev
-					&& tmp->prev->identifier != STR))))
+						&& tmp->next->identifier != STR)) && (!tmp->next
+					|| (tmp->prev && tmp->prev->identifier != STR))))
 			return (ERROR_PIPE);
 		tmp = tmp->next;
 	}
@@ -41,7 +40,7 @@ t_errorn	ft_check_herdoc(t_link *link)
 		if (tmp->identifier == HERDOC)
 		{
 			if (!tmp->next || (tmp->next && tmp->next->identifier != STR))
-			return (ERROR_HERDOC);
+				return (ERROR_HERDOC);
 			num_herdoc++;
 			if (num_herdoc > 16)
 				return (ERROR_NUM_HERDOC);
@@ -59,7 +58,7 @@ t_errorn	ft_check_append(t_link *link)
 	while (tmp)
 	{
 		if (tmp->identifier == APPEND && (!tmp->next || (tmp->next
-				&& tmp->next->identifier != STR)))
+					&& tmp->next->identifier != STR)))
 			return (ERROR_APPEND);
 		tmp = tmp->next;
 	}
@@ -74,7 +73,7 @@ t_errorn	ft_check_out(t_link *link)
 	while (tmp)
 	{
 		if (tmp->identifier == OUT && (!tmp->next || (tmp->next
-				&& tmp->next->identifier != STR)))
+					&& tmp->next->identifier != STR)))
 			return (ERROR_OUT);
 		tmp = tmp->next;
 	}
@@ -89,7 +88,7 @@ t_errorn	ft_check_in(t_link *link)
 	while (tmp)
 	{
 		if (tmp->identifier == IN && (!tmp->next || (tmp->next
-				&& tmp->next->identifier != STR)))
+					&& tmp->next->identifier != STR)))
 			return (ERROR_IN);
 		tmp = tmp->next;
 	}
