@@ -60,9 +60,36 @@ bool	print_export(char **env)
 	return (true);
 }
 
+bool	is_valid_key(char *key, bool *bad_key)
+{
+	int		i;
+	bool	ret;
+	char	**key_value;
+
+	if (!bad_key)
+		bad_key = &ret;
+	key_value = var_split(key);
+	if (!key_value)
+		return (false);
+	if ((!isalpha(*key_value[0]) && *key_value[0] != '_') || !*key_value[0])
+		return (dprintf(STDERR_FILENO,
+				NAME "export: `%s': " NVI "\n", key), *bad_key = true,
+			free_2d(key_value), false);
+	i = -1;
+	while (key_value[0][++i])
+	{
+		if (!isalnum(key_value[0][i]) && key_value[0][i] != '_')
+			return (dprintf(STDERR_FILENO,
+					NAME "export: `%s': " NVI "\n", key), *bad_key = true,
+				free_2d(key_value), false);
+	}
+	return (free_2d(key_value), true);
+}
+
 bool	builtin_export(t_cmd *cmd)
 {
 	int		i;
+	bool	bad_key;
 	char	**key_value;
 
 	if (cmd->argc == 1)
@@ -70,7 +97,9 @@ bool	builtin_export(t_cmd *cmd)
 	i = 0;
 	while (cmd->argv[++i])
 	{
-		key_value = var_split(cmd->argv[1]);
+		if (!is_valid_key(cmd->argv[i], &bad_key))
+			continue ;
+		key_value = var_split(cmd->argv[i]);
 		if (!key_value)
 			return (g_data.exit_status = 1, false);
 		if (is_in_env(key_value[0]))
@@ -80,5 +109,7 @@ bool	builtin_export(t_cmd *cmd)
 					key_value[1]);
 		free_2d(key_value);
 	}
-	return (true);
+	if (bad_key)
+		return (g_data.exit_status = 1, false);
+	return (g_data.exit_status = 0, true);
 }

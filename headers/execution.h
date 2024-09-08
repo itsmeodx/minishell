@@ -21,6 +21,7 @@
 # define TMA "too many arguments"
 # define NAR "numeric argument required"
 # define ISDIR "Is a directory"
+# define NVI "not a valid identifier"
 
 // builtins/
 // builtins.c
