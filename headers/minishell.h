@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:22:24 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ typedef struct s_tree
 	struct s_redirection	*redirections;
 }							t_tree;
 
+typedef struct s_garbage
+{
+	t_link				*ptr;
+	struct s_garbage	*next;
+}					t_garbage;
+
 typedef struct s_data
 {
 	int				hfd;
@@ -95,6 +101,8 @@ typedef struct s_data
 	char			*input;
 	char			**environ;
 	unsigned char	exit_status;
+	struct s_garbage	*garbage;
 }					t_data;
+
 
 #endif

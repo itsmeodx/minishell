@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:17:07 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/08 12:32:02 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s)
 	if (!s)
 		return (NULL);
 	ptr = (char *)s;
-	put = (char *)malloc(ft_strlen(s) + 1);
+	put = malloc(ft_strlen(s) + 1);
 	if (put == NULL)
 		return (NULL);
 	while (ptr[i])
