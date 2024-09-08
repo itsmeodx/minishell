@@ -58,6 +58,9 @@ int				get_term_width(void);
 char			*get_exit_status(void);
 char			*get_branch(void);
 
+// date.c
+char			*set_date(void);
+
 // env.c
 bool			is_in_env(char *key);
 char			*ft_getenv(char *name);

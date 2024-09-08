@@ -47,7 +47,7 @@ int	get_term_width(void)
 
 char	*get_exit_status(void)
 {
-	char	*str[2];
+	char	*str[3];
 
 	if (g_data.exit_status != 0)
 		str[0] = ft_itoa(g_data.exit_status);
@@ -60,7 +60,13 @@ char	*get_exit_status(void)
 	free(str[0]);
 	str[0] = ft_strjoin(str[1], RESET);
 	free(str[1]);
-	return (str[0]);
+	str[1] = set_date();
+	str[2] = ft_strjoin(str[1], "  ");
+	free(str[1]);
+	str[1] = ft_strjoin(" ", str[2]);
+	free(str[2]);
+	str[2] = ft_strjoin(str[0], str[1]);
+	return (free(str[0]), free(str[1]), str[2]);
 }
 
 static

@@ -45,7 +45,7 @@ PARSING		=	parsing/lexer parsing/parser\
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/echo execution/builtins/exit \
 				execution/builtins/export execution/builtins/unset \
-				 execution/builtins/pwd \
+				 execution/builtins/pwd execution/date \
 				execution/env execution/exec execution/execute_and_or \
 				execution/execute_par execution/execute_pipe \
 				execution/execute_str execution/execution execution/expansion \

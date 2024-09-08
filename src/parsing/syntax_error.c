@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:27:21 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/01 10:33:57 akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/08 11:56:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_errorn	ft_check_redirection(t_link *link)
 		return (error);
 	return (NONE);
 }
+
 int	ft_syntax_error(t_link *link)
 {
 	t_errorn	error;
