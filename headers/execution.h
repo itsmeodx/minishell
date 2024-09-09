@@ -44,6 +44,7 @@ bool			builtin_unset(t_cmd *cmd);
 // sysutils.c
 int				close_pipe(int *fd);
 // env_utils.c
+char			*get_home(void);
 char			**var_split(char *var);
 char			**remove_from_env(char **env, char *key);
 char			**filter_env(char **env);
@@ -58,15 +59,14 @@ char			*getpwd(void);
 int				get_term_width(void);
 char			*get_exit_status(void);
 char			*get_branch(void);
-
-// date.c
-char			*set_date(void);
+// output_utils.c
+char			*get_output(char **cmd);
 
 // env.c
 bool			is_in_env(char *key);
 char			*ft_getenv(char *name);
 char			**addtoenv(char **env, char *key, char *value);
-void			update_pwd(char **env, char *pwd);
+void			update_pwd(char **env);
 void			update_env(char **env, char *key, char *value);
 
 // exec.c
@@ -105,7 +105,7 @@ void			restore_history(void);
 // hostname.c
 void			set_hostname(char **env);
 
-// main.c
+// init.c
 void			init_minishell(char **env);
 
 // prompt.c

@@ -93,6 +93,7 @@ typedef struct s_data
 	struct s_tree	*tree;
 	bool			branch;
 	char			*input;
+	char			*home;
 	char			**environ;
 	unsigned char	exit_status;
 }					t_data;
