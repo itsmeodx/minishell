@@ -75,11 +75,12 @@ char	**addtoenv(char **env, char *key, char *value)
 	return (new_env);
 }
 
-void	update_pwd(char **env, char *pwd)
+void	update_pwd(char **env)
 {
+	char	*pwd;
+
 	update_env(env, "OLDPWD", ft_getenv("PWD"));
-	if (!pwd)
-		pwd = getcwd(NULL, 0);
+	pwd = getcwd(NULL, 0);
 	update_env(env, "PWD", pwd);
 	free(pwd);
 }
