@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 15:02:50 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/09 12:44:16 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ t_tree	*ft_parse_pipe(t_link *link)
 	if (!link)
 		return (NULL);
 	target = ft_search_target(link, goal);
-	printf("inside pipe\n");
-	ft_printf_link(link);
 	if (!target)
 	{
 		new = ft_parse_cmd(link);
