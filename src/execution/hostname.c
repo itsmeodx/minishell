@@ -28,6 +28,6 @@ void	set_hostname(char **env)
 	while (isalnum(hostname[i]) || hostname[i] == '-')
 		i++;
 	hostname[i] = 0;
-	g_data.environ = addtoenv(env, "HOSTNAME", hostname);
+	g_data.environ = addtoenv(env, "MINI_HOSTNAME", hostname);
 	free(hostname);
 }

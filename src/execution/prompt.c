@@ -29,36 +29,22 @@ char	*colorize(char *str, char *color)
 static
 char	*get_user_host(void)
 {
-	char	*str[2];
+	char	*str[3];
 
-	str[0] = ft_strjoin(CYAN, ft_getenv("USER"));
+	str[2] = ft_strdup(ft_getenv("USER"));
+	if (!str[2])
+		str[2] = get_output((char *[]){"/usr/bin/whoami", NULL});
+	if (!str[2])
+		str[2] = ft_strdup("user");
+	str[0] = ft_strjoin(CYAN, str[2]);
 	str[1] = ft_strjoin(str[0], "@");
 	free(str[0]);
-	str[0] = ft_strjoin(str[1], ft_getenv("HOSTNAME"));
+	str[0] = ft_strjoin(str[1], ft_getenv("MINI_HOSTNAME"));
 	free(str[1]);
 	str[1] = ft_strjoin(str[0], RESET);
 	free(str[0]);
 	str[0] = ft_strjoin(str[1], "> ");
-	free(str[1]);
-	return (str[0]);
-}
-
-char	*ft_create_spaces(int size)
-{
-	char	*spaces;
-	int		i;
-
-	spaces = malloc(sizeof(char) * (size + 1));
-	if (!spaces)
-		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		spaces[i] = ' ';
-		i++;
-	}
-	spaces[i] = '\0';
-	return (spaces);
+	return (free(str[1]), free(str[2]), str[0]);
 }
 
 char	*ft_getprompt(void)
