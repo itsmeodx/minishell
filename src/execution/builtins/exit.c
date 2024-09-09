@@ -45,18 +45,18 @@ bool	builtin_exit(t_cmd *cmd)
 	status = 0;
 	if (cmd->argc == 1)
 		ft_exit(status);
-	if (cmd->argc > 2)
-	{
-		dprintf(STDERR_FILENO, "exit\n");
-		dprintf(STDERR_FILENO, NAME"exit: "TMA"\n");
-		return (false);
-	}
 	if (!check_status(cmd->argv[1]))
 	{
 		dprintf(STDERR_FILENO, "exit\n");
 		dprintf(STDERR_FILENO,
 			NAME"exit: %s: "NAR"\n", cmd->argv[1]);
 		ft_exit(2);
+	}
+	else if (cmd->argc > 2)
+	{
+		dprintf(STDERR_FILENO, "exit\n");
+		dprintf(STDERR_FILENO, NAME"exit: "TMA"\n");
+		return (g_data.exit_status = 1, false);
 	}
 	else
 	{

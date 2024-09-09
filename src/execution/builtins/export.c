@@ -70,7 +70,7 @@ bool	is_valid_key(char *key, bool *bad_key)
 		bad_key = &ret;
 	key_value = var_split(key);
 	if (!key_value)
-		return (false);
+		return (*bad_key = true, false);
 	if ((!isalpha(*key_value[0]) && *key_value[0] != '_') || !*key_value[0])
 		return (dprintf(STDERR_FILENO,
 				NAME "export: `%s': " NVI "\n", key), *bad_key = true,
@@ -83,8 +83,10 @@ bool	is_valid_key(char *key, bool *bad_key)
 					NAME "export: `%s': " NVI "\n", key), *bad_key = true,
 				free_2d(key_value), false);
 	}
-	return (free_2d(key_value), true);
+	return (free_2d(key_value), *bad_key = false, true);
 }
+
+//bool	export_plus(
 
 bool	builtin_export(t_cmd *cmd)
 {
