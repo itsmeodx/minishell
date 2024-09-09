@@ -99,6 +99,6 @@ char	*create_full_prompt(void)
 	free(str[0]);
 	free(str[1]);
 	str[0] = ft_strjoin(str[3], str[2]);
-	str[1] = ft_strjoin(str[0], "\n╰───> ");
+	str[1] = ft_strjoin(str[0], "\n\001╰───\002>\r\033[6C");
 	return (free(str[0]), free(str[2]), free(str[3]), str[1]);
 }
