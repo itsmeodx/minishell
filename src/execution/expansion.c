@@ -23,6 +23,8 @@ char	*expand_tilde(char *str)
 	{
 		home = ft_getenv("HOME");
 		if (!home)
+			home = get_home();
+		if (!home)
 			return (dprintf(STDERR_FILENO, NAME "HOME not set\n"), str);
 		tmp = ft_strjoin(home, str + 1);
 		free(str);
