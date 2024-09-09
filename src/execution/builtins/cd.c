@@ -52,6 +52,7 @@ bool	cd_dir(t_cmd *cmd)
 bool	builtin_cd(t_cmd *cmd)
 {
 	bool	ret;
+	struct stat	st;
 
 	if (cmd->argc > 2)
 		return (dprintf(STDERR_FILENO, NAME"cd: too many arguments\n"),
@@ -64,6 +65,9 @@ bool	builtin_cd(t_cmd *cmd)
 		ret = cd_dir(cmd);
 	if (!ret)
 		return (g_data.exit_status = 1, false);
-	update_pwd(g_data.environ);
+	if (lstat(cmd->argv[1], &st) == 0 && S_ISLNK(st.st_mode))
+		update_pwd(g_data.environ, ft_strdup(cmd->argv[1]));
+	else
+		update_pwd(g_data.environ, NULL);
 	return (g_data.exit_status = 0, true);
 }

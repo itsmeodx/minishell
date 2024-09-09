@@ -14,7 +14,7 @@
 # define PARSING_H
 # include "minishell.h"
 # define LEN_ENUM 8
-# define HEREDOC "hd_"
+
 typedef enum e_type
 {
 	STR,

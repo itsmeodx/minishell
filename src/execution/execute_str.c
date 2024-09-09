@@ -17,11 +17,8 @@ bool	isdir(char *path)
 {
 	struct stat	st;
 
-	if (stat(path, &st) == 0)
-	{
-		if (S_ISDIR(st.st_mode))
-			return (true);
-	}
+	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
+		return (true);
 	return (false);
 }
 
@@ -63,8 +60,7 @@ int	execute_cmd(t_cmd *cmd)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
-		if (!set_redirections(cmd->redirections))
-			ft_exit(1);
+		(!set_redirections(cmd->redirections)) && ft_exit(1);
 		g_data.environ = filter_env(g_data.environ);
 		if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
 			execute_without_path(cmd);

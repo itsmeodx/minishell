@@ -17,9 +17,9 @@ bool	builtin_pwd(t_cmd *cmd __attribute__((unused)))
 {
 	char	*cwd;
 
-	cwd = getcwd(NULL, 0);
+	cwd = ft_strdup(ft_getenv("PWD"));
 	if (!cwd)
-		cwd = ft_strdup(ft_getenv("PWD"));
+		cwd = getcwd(NULL, 0);
 	if (!cwd)
 		return (dprintf(STDERR_FILENO,
 				NAME"pwd: error retrieving current directory: "),

@@ -66,7 +66,7 @@ char			*set_date(void);
 bool			is_in_env(char *key);
 char			*ft_getenv(char *name);
 char			**addtoenv(char **env, char *key, char *value);
-void			update_pwd(char **env);
+void			update_pwd(char **env, char *pwd);
 void			update_env(char **env, char *key, char *value);
 
 // exec.c

@@ -43,7 +43,6 @@ char	*get_user_host(void)
 	return (str[0]);
 }
 
-static
 char	*ft_create_spaces(int size)
 {
 	char	*spaces;
@@ -80,7 +79,7 @@ char	*ft_getprompt(void)
 
 char	*create_full_prompt(void)
 {
-	char	*str[4];
+	char	*str[5];
 	int		len[4];
 
 	str[0] = ft_getprompt();
@@ -94,11 +93,14 @@ char	*create_full_prompt(void)
 	len[2] = len[3] - (len[0] + len[1]);
 	if (len[2] < 0)
 		len[2] = 0;
-	str[1] = ft_create_spaces(len[2]);
+	str[1] = ft_itoa(len[2]);
+	str[4] = ft_strjoin("\033[", str[1]);
+	free(str[1]);
+	str[1] = ft_strjoin(str[4], "C");
 	str[3] = ft_strjoin(str[0], str[1]);
 	free(str[0]);
 	free(str[1]);
 	str[0] = ft_strjoin(str[3], str[2]);
 	str[1] = ft_strjoin(str[0], "\n\001╰───\002>\r\033[6C");
-	return (free(str[0]), free(str[2]), free(str[3]), str[1]);
+	return (free(str[0]), free(str[2]), free(str[3]), free(str[4]), str[1]);
 }
