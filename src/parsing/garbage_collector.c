@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 11:41:42 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 14:49:22 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/08 15:08:01 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*ft_malloc(size_t size)
 
 void	ft_garbage_new(t_link *ptr)
 {
-	t_garbage *new;
+	t_garbage	*new;
 
 	new = malloc(sizeof(t_garbage));
 	if (!new)

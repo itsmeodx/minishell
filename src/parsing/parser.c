@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 12:15:24 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/09 12:41:39 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,6 @@ t_tree	*ft_parsing(char *input)
 	t_link		*tmp;
 	t_tree		*tree;
 
-	// TODO fix my syntax error []
-	// TODO open herdoc in parsing
-	// TODO fix tree in case [<< delimiter]
-
 	tree = NULL;
 	g_data.garbage = NULL;
 	split_input = ft_lexer(input);
@@ -82,7 +78,10 @@ t_tree	*ft_parsing(char *input)
 	ft_open_herdoc(link);
 	tmp = link;
 	if (ft_syntax_error(tmp))
-		return (NULL);
+	{
+		ft_garbage_clear(&g_data.garbage);
+		return (free_2d(split_input),NULL);
+	}
 	tree = ft_parse_and_or(tmp);
 	free_2d(split_input);
 	ft_garbage_clear(&g_data.garbage);

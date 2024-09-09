@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 12:13:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/08 15:02:50 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_tree	*ft_parse_cmd(t_link *link)
 	goal[1] = OPEN_PAR;
 	if (!link)
 		return (NULL);
-	// TODO fix redirections behavior
 	target = ft_search_target(link, goal);
 	if (!target)
 	{

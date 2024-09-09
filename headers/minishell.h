@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/08 14:22:24 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/08 14:58:42 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,14 @@ typedef struct s_garbage
 
 typedef struct s_data
 {
-	int				hfd;
-	char			*path;
-	struct s_tree	*tree;
-	bool			branch;
-	char			*input;
-	char			**environ;
-	unsigned char	exit_status;
+	int					hfd;
+	char				*path;
+	struct s_tree		*tree;
+	bool				branch;
+	char				*input;
+	char				**environ;
+	unsigned char		exit_status;
 	struct s_garbage	*garbage;
 }					t_data;
-
 
 #endif

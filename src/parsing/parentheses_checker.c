@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 00:20:34 by adam              #+#    #+#             */
-/*   Updated: 2024/09/02 13:38:05 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/08 15:07:45 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_index_parentheses(t_link *link)
 {
-	int	i;
-	int	valider;
+	int		i;
+	int		valider;
 	t_link	*tmp;
 
 	tmp = link;
@@ -42,7 +42,7 @@ int	ft_void_parentheses(t_link *link)
 	t_link	*tmp;
 
 	tmp = link;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->identifier == OPEN_PAR
 			&& (tmp->next && tmp->next->identifier == CLOSE_PAR))
@@ -54,7 +54,7 @@ int	ft_void_parentheses(t_link *link)
 
 t_errorn	ft_check_parentheses(t_link *link)
 {
-	int 	error;
+	int	error;
 
 	error = ft_index_parentheses(link);
 	if (error == 0)
