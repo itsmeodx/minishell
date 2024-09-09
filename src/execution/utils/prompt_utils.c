@@ -62,7 +62,7 @@ char	*get_exit_status(void)
 	free(str[0]);
 	str[0] = ft_strjoin(str[1], RESET);
 	free(str[1]);
-	str[1] = set_date();
+	str[1] = get_output((char *[]){"/usr/bin/date", "+%H:%M:%S %p", NULL});
 	str[2] = ft_strjoin(str[1], "  ");
 	free(str[1]);
 	str[1] = ft_strjoin(" ", str[2]);
