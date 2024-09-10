@@ -60,42 +60,60 @@ bool	print_export(char **env)
 	return (true);
 }
 
-bool	is_valid_key(char *key, bool *bad_key)
+bool	export_plus(char *key)
 {
-	int		i;
-	bool	ret;
+	char	*values[2];
 	char	**key_value;
 
-	if (!bad_key)
-		bad_key = &ret;
 	key_value = var_split(key);
 	if (!key_value)
-		return (*bad_key = true, false);
-	if ((!isalpha(*key_value[0]) && *key_value[0] != '_') || !*key_value[0])
-		return (dprintf(STDERR_FILENO,
-				NAME "export: `%s': " NVI "\n", key), *bad_key = true,
-			free_2d(key_value), false);
-	i = -1;
-	while (key_value[0][++i])
-	{
-		if (!isalnum(key_value[0][i]) && key_value[0][i] != '_')
-			return (dprintf(STDERR_FILENO,
-					NAME "export: `%s': " NVI "\n", key), *bad_key = true,
-				free_2d(key_value), false);
-	}
-	return (free_2d(key_value), *bad_key = false, true);
+		return (false);
+	values[0] = ft_getenv(key_value[0]);
+	printf("values[0]: %s\n", values[0]);
+	values[1] = ft_strjoin(values[0], key_value[1]);
+	if (!values[1])
+		return (g_data.exit_status = 1, free_2d(key_value), false);
+	free(key_value[1]);
+	key_value[1] = values[1];
+	if (is_in_env(key_value[0]))
+		update_env(g_data.environ, key_value[0], key_value[1]);
+	else
+		g_data.environ = addtoenv(g_data.environ, key_value[0], key_value[1]);
+	free_2d(key_value);
+	return (true);
 }
 
-//bool	export_plus(t_cmd *cmd)
-//{
-//
-//}
+bool	export_equal(char *key)
+{
+	char	**key_value;
+
+	key_value = var_split(key);
+	if (!key_value)
+		return (false);
+	if (is_in_env(key_value[0]))
+		update_env(g_data.environ, key_value[0], key_value[1]);
+	else
+		g_data.environ = addtoenv(g_data.environ, key_value[0], key_value[1]);
+	free_2d(key_value);
+	return (true);
+}
+
+bool	is_plus_key(char *key)
+{
+	int	i;
+
+	i = 0;
+	while (key[i] && key[i] != '+' && key[i] != '=')
+		i++;
+	if (key[i] == '+' && key[i + 1] == '=')
+		return (true);
+	return (false);
+}
 
 bool	builtin_export(t_cmd *cmd)
 {
 	int		i;
 	bool	bad_key;
-	char	**key_value;
 
 	if (cmd->argc == 1)
 		return (print_export(g_data.environ));
@@ -104,15 +122,10 @@ bool	builtin_export(t_cmd *cmd)
 	{
 		if (!is_valid_key(cmd->argv[i], &bad_key))
 			continue ;
-		key_value = var_split(cmd->argv[i]);
-		if (!key_value)
-			return (g_data.exit_status = 1, false);
-		if (is_in_env(key_value[0]))
-			update_env(g_data.environ, key_value[0], key_value[1]);
+		if (is_plus_key(cmd->argv[i]))
+			export_plus(cmd->argv[i]);
 		else
-			g_data.environ = addtoenv(g_data.environ, key_value[0],
-					key_value[1]);
-		free_2d(key_value);
+			export_equal(cmd->argv[i]);
 	}
 	if (bad_key)
 		return (g_data.exit_status = 1, false);

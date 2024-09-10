@@ -41,8 +41,7 @@ char	*ft_getenv(char *name)
 	len = strlen(name);
 	while (g_data.environ && g_data.environ[++i])
 		if (strncmp(g_data.environ[i], name, strlen(name)) == 0)
-			return (free(name), g_data.environ[i] + len
-				- (g_data.environ[i][len] == '\0'));
+			return (free(name), g_data.environ[i] + len);
 	free(name);
 	return (NULL);
 }

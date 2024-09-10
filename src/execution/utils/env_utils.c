@@ -48,45 +48,72 @@ char	**var_split(char *var)
 	char	**key_value;
 
 	i = 0;
+	printf("var: %s\n", var);
 	while (var[i] && var[i] != '=' && var[i] != '+')
 		i++;
-	if (var[i] == '+')
+	if (var[i] == '+' && var[i + 1] == '=')
 		i++;
 	key_value = malloc(sizeof(char *) * 3);
 	if (!key_value)
 		return (NULL);
 	key_value = memset(key_value, 0, sizeof(char *) * 3);
-	key_value[0] = ft_substr(var, 0, i - (var[i] == '+'));
+	key_value[0] = ft_substr(var, 0, i + 1 - (var[i] == '=') - (var[i - 1] == '+'));
 	if (var[i] == '=')
 		key_value[1] = ft_strdup(var + i + 1);
+	printf("key_value[1]: %s\n", key_value[1]);
 	return (key_value);
+}
+
+bool	is_valid_key(char *key, bool *bad_key)
+{
+	int		i;
+	bool	ret;
+	char	**key_value;
+
+	if (!bad_key)
+		bad_key = &ret;
+	key_value = var_split(key);
+	if (!key_value)
+		return (*bad_key = true, false);
+	if ((!isalpha(*key_value[0]) && *key_value[0] != '_') || !*key_value[0])
+		return (dprintf(STDERR_FILENO,
+				NAME "export: `%s': " NVI "\n", key), *bad_key = true,
+			free_2d(key_value), false);
+	i = -1;
+	while (key_value[0][++i])
+	{
+		if (!isalnum(key_value[0][i]) && key_value[0][i] != '_')
+			return (dprintf(STDERR_FILENO,
+					NAME "export: `%s': " NVI "\n", key), *bad_key = true,
+				free_2d(key_value), false);
+	}
+	return (free_2d(key_value), *bad_key = false, true);
 }
 
 char	**remove_from_env(char **env, char *key)
 {
-	int		i;
-	int		j;
+	int		i[2];
 	int		len;
 	char	**new_env;
 
-	i = 0;
-	j = 0;
+	i[0] = 0;
+	i[1] = 0;
 	len = strlen(key);
-	while (env && env[i])
-		i++;
-	new_env = malloc(sizeof(char *) * i);
+	while (env && env[i[0]])
+		i[0]++;
+	new_env = malloc(sizeof(char *) * (i[0]));
 	if (!new_env)
-		return (NULL);
-	i = -1;
-	while (env && env[++i])
+		return (free(env), NULL);
+	i[0] = -1;
+	while (env && env[++i[0]])
 	{
-		if (strncmp(env[i], key, len) != 0
-			|| (env[i][len] != '=' && env[i][len] != '\0'))
-			new_env[j++] = env[i];
+		if (strncmp(env[i[0]], key, len) == 0 && (env[i[0]][len] == '='
+			|| env[i[0]][len] == '\0'))
+			free(env[i[0]]);
 		else
-			free(env[i]);
+			new_env[i[1]++] = env[i[0]];
 	}
-	new_env[j] = NULL;
+	new_env[i[1]] = NULL;
 	free(env);
 	return (new_env);
 }
@@ -104,6 +131,7 @@ char	**filter_env(char **env)
 			key_value = var_split(env[i]);
 			env = remove_from_env(env, key_value[0]);
 			free_2d(key_value);
+			i--;
 		}
 	}
 	return (env);

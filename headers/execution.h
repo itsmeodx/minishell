@@ -46,6 +46,7 @@ int				close_pipe(int *fd);
 // env_utils.c
 char			*get_home(void);
 char			**var_split(char *var);
+bool			is_valid_key(char *key, bool *bad_key);
 char			**remove_from_env(char **env, char *key);
 char			**filter_env(char **env);
 // extend_2d.c
