@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/10 18:46:41 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 19:03:38 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,3 @@ int	execute_str(t_tree *tree)
 		execute_cmd(tree->cmd);
 	return (g_data.exit_status);
 }
-

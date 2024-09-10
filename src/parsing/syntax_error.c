@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:27:21 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/10 14:26:39 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 19:01:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	ft_printf_error(t_errorn error)
 	static t_errorn	errorn[] = {ERROR_IN, ERROR_OUT, ERROR_APPEND, ERROR_AND,
 		ERROR_OR, ERROR_SIGNAL_QUOTE, ERROR_DOUBLE_QUOTE, ERROR_OPEN_PAREN,
 		ERROR_CLOSE_PAREN, ERROR_HERDOC, ERROR_PIPE, ERROR_NUM_HERDOC};
-	static char 	*error_msg[] = {"newline", "newline", ">>", "&&", "||", "'", "\"",
-		"(", ")", "<<", "|", "maximum here-document count exceeded"};
+	static char		*error_msg[] = {"newline", "newline", ">>", "&&", "||",
+		"'", "\"", "(", ")", "<<", "|", "maximum here-document count exceeded"};
 
 	i = -1;
 	while (errorn[++i])

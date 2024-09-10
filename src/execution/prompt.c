@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 19:57:59 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/10 18:22:31 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 19:03:25 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,3 @@ char	*create_full_prompt(void)
 	str[1] = ft_strjoin(str[0], "\n╰───>\r\033[6C");
 	return (free(str[0]), free(str[2]), free(str[3]), str[1]);
 }
-		
