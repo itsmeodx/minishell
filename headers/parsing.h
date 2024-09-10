@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/08 14:57:30 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/09 15:35:31 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,7 @@ t_errorn		ft_check_parentheses(t_link *link);
 int				ft_syntax_error(t_link *link);
 void			ft_printf_error(t_errorn error);
 
+// signals
+void			ft_signal(int sig);
+void			ft_do_nothing(int sig);
 #endif // PARSING_H

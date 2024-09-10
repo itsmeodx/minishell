@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/07 10:17:57 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:18:12 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 			char **env)
 {
 	init_minishell(env);
-	rl_on_new_line();
-	rl_redisplay();
+	signal(SIGINT, ft_signal);
+	signal(SIGQUIT, ft_do_nothing);
 	while (true)
 	{
 		g_data.input = ft_readline(create_full_prompt());
