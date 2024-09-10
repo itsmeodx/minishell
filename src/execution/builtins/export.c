@@ -69,7 +69,6 @@ bool	export_plus(char *key)
 	if (!key_value)
 		return (false);
 	values[0] = ft_getenv(key_value[0]);
-	printf("values[0]: %s\n", values[0]);
 	values[1] = ft_strjoin(values[0], key_value[1]);
 	if (!values[1])
 		return (g_data.exit_status = 1, free_2d(key_value), false);

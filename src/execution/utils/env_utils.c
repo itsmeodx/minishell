@@ -57,7 +57,8 @@ char	**var_split(char *var)
 	if (!key_value)
 		return (NULL);
 	key_value = memset(key_value, 0, sizeof(char *) * 3);
-	key_value[0] = ft_substr(var, 0, i + 1 - (var[i] == '=') - (var[i - 1] == '+'));
+	key_value[0] = ft_substr(var, 0, i + 1 - (var[i] == '=')
+			- (var[i - 1] == '+'));
 	if (var[i] == '=')
 		key_value[1] = ft_strdup(var + i + 1);
 	printf("key_value[1]: %s\n", key_value[1]);

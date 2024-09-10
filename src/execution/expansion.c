@@ -14,7 +14,7 @@
 #include "parsing.h"
 
 static
-char	*expand_tilde(char *str)
+char	*expand_pergola(char *str)
 {
 	char	*home;
 	char	*tmp;
@@ -101,7 +101,7 @@ void	ft_expansion(char **str)
 	while (str && str[++i])
 	{
 		if (str[i][0] == '~')
-			str[i] = expand_tilde(str[i]);
+			str[i] = expand_pergola(str[i]);
 		str[i] = expand_env(str[i]);
 	}
 }
