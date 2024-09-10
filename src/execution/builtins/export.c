@@ -86,7 +86,10 @@ bool	is_valid_key(char *key, bool *bad_key)
 	return (free_2d(key_value), *bad_key = false, true);
 }
 
-//bool	export_plus(
+//bool	export_plus(t_cmd *cmd)
+//{
+//
+//}
 
 bool	builtin_export(t_cmd *cmd)
 {
