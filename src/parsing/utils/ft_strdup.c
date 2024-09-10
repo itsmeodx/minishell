@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:17:07 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 12:32:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 11:27:02 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	**ft_strdup_2d(char **ptr)
 	size_t	i;
 
 	i = 0;
+	if (!ptr)
+		return (NULL);
 	size = ft_count_strs(ptr);
 	put = malloc(sizeof(char *) * (size + 1));
 	if (!put)

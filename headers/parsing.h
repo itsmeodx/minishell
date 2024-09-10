@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/09 15:35:31 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 18:49:31 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,4 @@ void			ft_printf_error(t_errorn error);
 
 // signals
 void			ft_signal(int sig);
-void			ft_do_nothing(int sig);
 #endif // PARSING_H

@@ -15,20 +15,15 @@
 
 void	ft_signal(int sig)
 {
+	char	*prompt;
+
 	if (sig == SIGINT)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
+		prompt = create_full_prompt();
+		g_data.exit_status = 128 + sig;
 		rl_replace_line("", 0);
-		rl_redisplay();
-		rl_redisplay();
-		// exit with 128 + signal number
+		printf("\n%s", prompt);
+		free(prompt);
 	}
-}
-
-void	ft_do_nothing(int sig)
-{
-	if (sig == SIGQUIT)
-	{
-	}
+	return ;
 }

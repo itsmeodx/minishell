@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:27:21 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/09 12:39:15 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 14:26:39 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,20 @@ t_errorn	ft_check_redirection(t_link *link)
 
 int	ft_syntax_error(t_link *link)
 {
-	t_errorn	error[4];
+	t_errorn	error;
 
-	error[0] = ft_check_redirection(link);
-	if (error[0])
-		ft_printf_error(error[0]);
-	error[1] = ft_check_parentheses(link);
-	if (error[1])
-		ft_printf_error(error[1]);
-	error[2] = ft_check_quotes(link);
-	if (error[2])
-		ft_printf_error(error[2]);
-	error[3] = ft_check_and_or(link);
-	if (error[3])
-		ft_printf_error(error[3]);
-	if (error[0] || error[1] || error[2] || error[3])
-		return (true);
+	error = ft_check_redirection(link);
+	if (error)
+		return (ft_printf_error(error), true);
+	error = ft_check_parentheses(link);
+	if (error)
+		return (ft_printf_error(error), true);
+	error = ft_check_quotes(link);
+	if (error)
+		return (ft_printf_error(error), true);
+	error = ft_check_and_or(link);
+	if (error)
+		return (ft_printf_error(error), true);
 	return (false);
 }
 
@@ -62,7 +60,7 @@ void	ft_onemsg(char *error, t_errorn errorn)
 			NAME"%s\n", error);
 	else
 		dprintf(STDERR_FILENO,
-			NAME"syntax error near unexpected token `%s'", error);
+			NAME"syntax error near unexpected token `%s'\n", error);
 	g_data.exit_status = 2;
 }
 
@@ -74,6 +72,7 @@ void	ft_printf_error(t_errorn error)
 		ERROR_CLOSE_PAREN, ERROR_HERDOC, ERROR_PIPE, ERROR_NUM_HERDOC};
 	static char 	*error_msg[] = {"newline", "newline", ">>", "&&", "||", "'", "\"",
 		"(", ")", "<<", "|", "maximum here-document count exceeded"};
+
 	i = -1;
 	while (errorn[++i])
 	{

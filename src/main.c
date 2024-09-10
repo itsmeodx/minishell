@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/09 16:18:12 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 18:42:38 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 			char **env)
 {
 	init_minishell(env);
-	signal(SIGINT, ft_signal);
-	signal(SIGQUIT, ft_do_nothing);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	while (true)
 	{
+		signal(SIGINT, ft_signal);
 		g_data.input = ft_readline(create_full_prompt());
 		if (!g_data.input)
 			break ;

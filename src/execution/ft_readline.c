@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 17:13:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/06 17:13:47 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/10 18:07:52 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*ft_readline(char *prompt)
 {
 	char	*line;
+
 
 	line = readline(prompt);
 	free(prompt);
