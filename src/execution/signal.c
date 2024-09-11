@@ -27,8 +27,8 @@ void	ft_signal(int sig)
 
 	if (sig == SIGINT)
 	{
-		prompt = create_full_prompt();
 		g_data.exit_status = 128 + sig;
+		prompt = create_full_prompt();
 		rl_replace_line("", 0);
 		printf("\n%s", prompt);
 		free(prompt);
