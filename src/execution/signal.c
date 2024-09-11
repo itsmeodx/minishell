@@ -10,8 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-#include "execution.h"
+#include "../../headers/parsing.h"
+#include "../../headers/execution.h"
+
+bool	reset_signals(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGTSTP, SIG_DFL);
+	return (true);
+}
 
 void	ft_signal(int sig)
 {

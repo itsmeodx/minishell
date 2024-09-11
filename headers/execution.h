@@ -121,4 +121,8 @@ char			*create_full_prompt(void);
 // redirections.c
 bool			set_redirections(t_redirection *redirections);
 
+// signals.c
+bool			reset_signals(void);
+void			ft_signal(int sig);
+
 #endif //EXECUTION_H

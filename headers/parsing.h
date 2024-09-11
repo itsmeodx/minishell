@@ -149,6 +149,4 @@ t_errorn		ft_check_parentheses(t_link *link);
 int				ft_syntax_error(t_link *link);
 void			ft_printf_error(t_errorn error);
 
-// signals
-void			ft_signal(int sig);
 #endif // PARSING_H

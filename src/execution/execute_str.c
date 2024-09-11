@@ -60,10 +60,7 @@ int	execute_cmd(t_cmd *cmd)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGTSTP, SIG_DFL);
-		(!set_redirections(cmd->redirections)) && ft_exit(1);
+		(reset_signals() && !set_redirections(cmd->redirections)) && ft_exit(1);
 		g_data.environ = filter_env(g_data.environ);
 		if (strchr(cmd->argv[0], '/'))
 			execute_without_path(cmd);
