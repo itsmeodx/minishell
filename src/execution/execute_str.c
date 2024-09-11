@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/04 22:50:51 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:03:38 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
 
 static
 bool	isdir(char *path)
@@ -63,6 +64,9 @@ int	execute_cmd(t_cmd *cmd)
 		return (EXIT_FAILURE);
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGTSTP, SIG_DFL);
 		if (!set_redirections(cmd->redirections))
 			ft_exit(1);
 		if (cmd->argv[0][0] == '.' || cmd->argv[0][0] == '/')
@@ -70,6 +74,7 @@ int	execute_cmd(t_cmd *cmd)
 		else
 			execute_with_path(cmd);
 	}
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
 		g_data.exit_status = WEXITSTATUS(status);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Syntax_error.c                                     :+:      :+:    :+:   */
+/*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:27:21 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/01 10:33:57 akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 19:01:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,70 +33,53 @@ t_errorn	ft_check_redirection(t_link *link)
 		return (error);
 	return (NONE);
 }
+
 int	ft_syntax_error(t_link *link)
 {
 	t_errorn	error;
 
 	error = ft_check_redirection(link);
 	if (error)
-	{
-		ft_printf_error(error);
-		return (true);
-	}
+		return (ft_printf_error(error), true);
 	error = ft_check_parentheses(link);
 	if (error)
-	{
-		ft_printf_error(error);
-		return (true);
-	}
+		return (ft_printf_error(error), true);
 	error = ft_check_quotes(link);
 	if (error)
-	{
-		ft_printf_error(error);
-		return (true);
-	}
+		return (ft_printf_error(error), true);
 	error = ft_check_and_or(link);
 	if (error)
-	{
-		ft_printf_error(error);
-		return (true);
-	}
+		return (ft_printf_error(error), true);
 	return (false);
 }
 
-void	ft_onemsg(char *error)
+void	ft_onemsg(char *error, t_errorn errorn)
 {
-	dprintf(STDERR_FILENO, "%sminishell%s: syntax error near unexpected token `%s'\n",
-		RED, RESET, error);
+	if (errorn == ERROR_NUM_HERDOC)
+		dprintf(STDERR_FILENO,
+			NAME"%s\n", error);
+	else
+		dprintf(STDERR_FILENO,
+			NAME"syntax error near unexpected token `%s'\n", error);
 	g_data.exit_status = 2;
 }
 
 void	ft_printf_error(t_errorn error)
 {
-	if (error == ERROR_IN)
-		ft_onemsg("newline");
-	else if (error == ERROR_OUT)
-		ft_onemsg("newline");
-	else if (error == ERROR_APPEND)
-		ft_onemsg(">>");
-	else if (error == ERROR_AND)
-		ft_onemsg("&&");
-	else if (error == ERROR_OR)
-		ft_onemsg("||");
-	else if (error == ERROR_SIGNAL_QUOTE)
-		ft_onemsg("'");
-	else if (error == ERROR_DOUBLE_QUOTE)
-		ft_onemsg("\"");
-	else if (error == ERROR_OPEN_PAREN)
-		ft_onemsg("(");
-	else if (error == ERROR_CLOSE_PAREN)
-		ft_onemsg(")");
-	else if (error == ERROR_HERDOC)
-		ft_onemsg("<<");
-	else if (error == ERROR_PIPE)
-		ft_onemsg("|");
-	else if (error == ERROR_NUM_HERDOC)
-		dprintf(STDERR_FILENO, "%sminishell%s: maximum here-document count exceeded\n",
-			RED, RESET);
+	int				i;
+	static t_errorn	errorn[] = {ERROR_IN, ERROR_OUT, ERROR_APPEND, ERROR_AND,
+		ERROR_OR, ERROR_SIGNAL_QUOTE, ERROR_DOUBLE_QUOTE, ERROR_OPEN_PAREN,
+		ERROR_CLOSE_PAREN, ERROR_HERDOC, ERROR_PIPE, ERROR_NUM_HERDOC};
+	static char		*error_msg[] = {"newline", "newline", ">>", "&&", "||",
+		"'", "\"", "(", ")", "<<", "|", "maximum here-document count exceeded"};
 
+	i = -1;
+	while (errorn[++i])
+	{
+		if (error == errorn[i])
+		{
+			ft_onemsg(error_msg[i], error);
+			break ;
+		}
+	}
 }

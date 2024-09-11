@@ -6,7 +6,7 @@
 #    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/05 14:50:35 by akhobba          ###   ########.fr        #
+#    Updated: 2024/09/09 15:16:05 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ PARSING		=	parsing/lexer parsing/parser\
 				parsing/quotes_checker parsing/syntax_error \
 				parsing/and_or_checker parsing/redirections_checker \
 				parsing/parentheses_checker parsing/open_herdoc\
-				parsing/utils/ft_strlcat \
+				parsing/utils/ft_strlcat parsing/garbage_collector\
+				parsing/signal \
 
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/echo execution/builtins/exit \

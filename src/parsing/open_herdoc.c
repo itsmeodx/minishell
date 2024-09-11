@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/06 16:43:50by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/08 15:04:00 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_name_file(int num_file)
 	char	*num;
 	char	*name;
 	char	*file;
-	int fd;
+	int		fd;
 
 	num = ft_itoa(num_file);
 	name = malloc(ft_strlen(num) + 5);

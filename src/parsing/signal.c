@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dbl_lstnew_bonus.c                              :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/18 16:36:31 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 14:48:50 by akhobba          ###   ########.fr       */
+/*   Created: 2024/09/09 15:09:51 by akhobba           #+#    #+#             */
+/*   Updated: 2024/09/10 19:02:44 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "execution.h"
 
-t_link	*ft_dbl_lstnew(void *content)
+void	ft_signal(int sig)
 {
-	t_link	*node;
+	char	*prompt;
 
-	node = malloc(sizeof(t_link));
-	if (node == NULL)
-		return (NULL);
-	node->command = ft_strdup(content);
-	node->next = NULL;
-	node->prev = NULL;
-	ft_garbage_new(node);
-	return (node);
+	if (sig == SIGINT)
+	{
+		prompt = create_full_prompt();
+		g_data.exit_status = 128 + sig;
+		rl_replace_line("", 0);
+		printf("\n%s", prompt);
+		free(prompt);
+	}
+	return ;
 }
