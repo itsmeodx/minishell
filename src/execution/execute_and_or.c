@@ -21,7 +21,7 @@ int	execute_and(t_tree *tree)
 
 int	execute_or(t_tree *tree)
 {
-	if (ft_execution(tree->left) == EXIT_FAILURE)
+	if (ft_execution(tree->left) != EXIT_SUCCESS)
 		return (ft_execution(tree->right));
 	return (EXIT_SUCCESS);
 }

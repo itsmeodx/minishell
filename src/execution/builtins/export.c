@@ -14,29 +14,6 @@
 #include "parsing.h"
 
 static
-void	sort_env(char **env)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = -1;
-	while (env[++i])
-	{
-		j = i;
-		while (env[++j])
-		{
-			if (strcmp(env[i], env[j]) > 0)
-			{
-				tmp = env[i];
-				env[i] = env[j];
-				env[j] = tmp;
-			}
-		}
-	}
-}
-
-static
 bool	print_export(char **env)
 {
 	int		i;
@@ -60,6 +37,7 @@ bool	print_export(char **env)
 	return (true);
 }
 
+static
 bool	export_plus(char *key)
 {
 	char	*values[2];
@@ -82,6 +60,7 @@ bool	export_plus(char *key)
 	return (true);
 }
 
+static
 bool	export_equal(char *key)
 {
 	char	**key_value;
@@ -97,6 +76,7 @@ bool	export_equal(char *key)
 	return (true);
 }
 
+static
 bool	is_plus_key(char *key)
 {
 	int	i;
@@ -127,6 +107,6 @@ bool	builtin_export(t_cmd *cmd)
 			export_equal(cmd->argv[i]);
 	}
 	if (bad_key)
-		return (g_data.exit_status = 1, false);
-	return (g_data.exit_status = 0, true);
+		return (g_data.exit_status = EXIT_FAILURE, false);
+	return (g_data.exit_status = EXIT_SUCCESS, true);
 }

@@ -17,10 +17,15 @@ int	ft_exit(int status)
 {
 	ft_treeclear(g_data.tree);
 	free_2d(g_data.environ);
+	rl_clear_history();
+	close(g_data.hfd);
+	free(g_data.home);
+	free(g_data.input);
 	exit(status);
 }
 
-static bool	check_status(char *str)
+static
+bool	check_status(char *str)
 {
 	int	i;
 
@@ -46,23 +51,13 @@ bool	builtin_exit(t_cmd *cmd)
 	if (cmd->argc == 1)
 		ft_exit(status);
 	if (!check_status(cmd->argv[1]))
-	{
-		dprintf(STDERR_FILENO, "exit\n");
-		dprintf(STDERR_FILENO,
-			NAME"exit: %s: "NAR"\n", cmd->argv[1]);
-		ft_exit(2);
-	}
+		return (dprintf(STDERR_FILENO, "exit\n"), dprintf(STDERR_FILENO,
+				NAME"exit: %s: "NAR"\n", cmd->argv[1]), ft_exit(2), false);
 	else if (cmd->argc > 2)
-	{
-		dprintf(STDERR_FILENO, "exit\n");
-		dprintf(STDERR_FILENO, NAME"exit: "TMA"\n");
-		return (g_data.exit_status = 1, false);
-	}
-	else
-	{
-		status = atoi(cmd->argv[1]);
-		printf("exit\n");
-		ft_exit(status);
-	}
+		return (dprintf(STDERR_FILENO, "exit\n"), dprintf(STDERR_FILENO,
+				NAME"exit: "TMA"\n"), g_data.exit_status = 1, false);
+	status = atoi(cmd->argv[1]);
+	printf("exit\n");
+	ft_exit(status);
 	return (true);
 }

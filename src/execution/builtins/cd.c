@@ -63,7 +63,7 @@ bool	builtin_cd(t_cmd *cmd)
 	else
 		ret = cd_dir(cmd);
 	if (!ret)
-		return (g_data.exit_status = 1, false);
+		return (g_data.exit_status = EXIT_FAILURE, false);
 	update_pwd(g_data.environ);
-	return (g_data.exit_status = 0, true);
+	return (g_data.exit_status = EXIT_SUCCESS, true);
 }

@@ -78,9 +78,17 @@ void	update_pwd(char **env)
 {
 	char	*pwd;
 
-	update_env(env, "OLDPWD", ft_getenv("PWD"));
+	pwd = ft_getenv("PWD");
+	if (!pwd)
+		pwd = "";
+	update_env(env, "OLDPWD", pwd);
 	pwd = getcwd(NULL, 0);
-	update_env(env, "PWD", pwd);
+	if (!pwd)
+		return ;
+	if (is_in_env("PWD"))
+		update_env(env, "PWD", pwd);
+	else
+		g_data.environ = addtoenv(g_data.environ, "PWD", pwd);
 	free(pwd);
 }
 

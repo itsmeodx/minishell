@@ -26,9 +26,10 @@ int	execute_builtin(t_cmd *cmd)
 {
 	int			i;
 	static char	*builtins[] = {"echo", "cd", "pwd", "export", "unset",
-		"exit", NULL};
+		"env", "exit", NULL};
 	static bool	(*builtin_functions[])(t_cmd *) = {&builtin_echo, &builtin_cd,
-		&builtin_pwd, &builtin_export, &builtin_unset, &builtin_exit};
+		&builtin_pwd, &builtin_export, &builtin_unset, &builtin_env,
+		&builtin_exit};
 
 	i = -1;
 	while (builtins[++i])

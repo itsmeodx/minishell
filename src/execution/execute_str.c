@@ -72,10 +72,8 @@ int	execute_cmd(t_cmd *cmd)
 		g_data.exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		g_data.exit_status = WTERMSIG(status) + 128;
-	else if (WIFSTOPPED(status))
-		g_data.exit_status = WSTOPSIG(status) + 128;
 	else
-		g_data.exit_status = 1;
+		g_data.exit_status = EXIT_FAILURE;
 	return (g_data.exit_status);
 }
 

@@ -24,7 +24,8 @@ bool	builtin_pwd(t_cmd *cmd __attribute__((unused)))
 		return (dprintf(STDERR_FILENO,
 				NAME"pwd: error retrieving current directory: "),
 			dprintf(STDERR_FILENO,
-				"getcwd: cannot access parent directories: "NSFOD"\n"), false);
+				"getcwd: cannot access parent directories: "NSFOD"\n"),
+			g_data.exit_status = EXIT_FAILURE, false);
 	printf("%s\n", cwd);
-	return (free(cwd), true);
+	return (free(cwd), g_data.exit_status = EXIT_SUCCESS, true);
 }

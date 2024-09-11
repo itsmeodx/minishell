@@ -30,5 +30,7 @@ int	execute_par(t_tree *tree)
 		status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		status = WTERMSIG(status) + 128;
-	return (status);
+	else
+		status = EXIT_FAILURE;
+	return (g_data.exit_status = status, status);
 }

@@ -12,7 +12,7 @@
 
 CC			=	cc
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address,leak,undefined
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=undefined
 INC			=	-I./headers
 HEADERS		=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR		=	src
@@ -43,7 +43,8 @@ PARSING		=	parsing/lexer parsing/parser\
 				parsing/utils/ft_strlcat \
 
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
-				execution/builtins/echo execution/builtins/exit \
+				execution/builtins/echo execution/builtins/env \
+				 execution/builtins/exit \
 				execution/builtins/export execution/builtins/unset \
 				 execution/builtins/pwd execution/env execution/exec \
 				execution/execute_and_or \
@@ -52,7 +53,7 @@ EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/ft_readline execution/gnl execution/history \
 				execution/hostname execution/init execution/prompt \
 				execution/redirections execution/utils/close_pipe \
-				execution/utils/env_utils \
+				execution/utils/env_utils execution/utils/export_utils \
 				execution/utils/extend_2d execution/utils/ft_itoa \
 				execution/utils/ft_substr execution/utils/output_utils \
 				execution/utils/prompt_utils

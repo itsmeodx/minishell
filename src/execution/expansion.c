@@ -93,6 +93,38 @@ char	*expand_env(char *str)
 	return (str);
 }
 
+//void	expand_asterisk(char **str)
+//{
+//	int		i;
+//	int		j;
+//	int		k;
+//	char	*tmp1;
+//	char	*tmp2;
+//	char	**new_str;
+//
+//	i = -1;
+//	while (str[++i])
+//	{
+//		j = -1;
+//		while (str[i][++j])
+//		{
+//			if (str[i][j] == '*')
+//			{
+//				tmp1 = ft_substr(str[i], 0, j);
+//				new_str = expand_dir(tmp1);
+//				k = -1;
+//				while (new_str[++k])
+//				{
+//					tmp2 = ft_strjoin(tmp1, new_str[k]);
+//					free(tmp1);
+//					tmp1 = ft_strjoin(tmp2, str[i] + j + 1);
+//					free(tmp2);
+//				}
+//			}
+//		}
+//	}
+//}
+
 void	ft_expansion(char **str)
 {
 	int		i;

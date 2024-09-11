@@ -30,6 +30,8 @@ int				execute_builtin(t_cmd *cmd);
 bool			builtin_cd(t_cmd *cmd);
 // echo.c
 bool			builtin_echo(t_cmd *cmd);
+// env.c
+bool			builtin_env(t_cmd *cmd);
 // exit.c
 int				ft_exit(int status);
 bool			builtin_exit(t_cmd *cmd);
@@ -49,6 +51,8 @@ char			**var_split(char *var);
 bool			is_valid_key(char *key, bool *bad_key);
 char			**remove_from_env(char **env, char *key);
 char			**filter_env(char **env);
+// export_utils.c
+void			sort_env(char **env);
 // extend_2d.c
 void			*extend_2d(char **ptr, size_t size);
 // ft_itoa.c

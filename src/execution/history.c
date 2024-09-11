@@ -61,17 +61,21 @@ void	ft_add_history(char *line)
 void	restore_history(void)
 {
 	char	*line;
+	char	*history;
 
-	if (access(".minishell_history", F_OK) != -1)
-	{
-		if (access(".minishell_history", R_OK) == -1)
-			unlink(".minishell_history");
-		else if (access(".minishell_history", W_OK) == -1)
-			unlink(".minishell_history");
-	}
-	g_data.hfd = open(".minishell_history", O_CREAT | O_RDWR | O_APPEND, 0644);
-	if (g_data.hfd == -1)
+	history = ft_strjoin(g_data.home, "/.minishell_history");
+	if (!history)
 		return ;
+	if (access(history, F_OK) != -1)
+	{
+		if (access(history, R_OK) == -1)
+			unlink(history);
+		else if (access(history, W_OK) == -1)
+			unlink(history);
+	}
+	g_data.hfd = open(history, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (g_data.hfd == -1)
+		return (free(history));
 	line = get_next_line(g_data.hfd);
 	while (line)
 	{
@@ -80,5 +84,5 @@ void	restore_history(void)
 		free(line);
 		line = get_next_line(g_data.hfd);
 	}
-	return ;
+	return (free(history));
 }

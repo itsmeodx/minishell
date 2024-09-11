@@ -33,5 +33,5 @@ bool	builtin_echo(t_cmd *cmd)
 	}
 	if (!n_flag)
 		printf("\n");
-	return (true);
+	return (g_data.exit_status = EXIT_SUCCESS, true);
 }

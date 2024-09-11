@@ -29,11 +29,8 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 		if (g_data.tree)
 			ft_execution(g_data.tree);
 		ft_treeclear(g_data.tree);
+		g_data.tree = NULL;
 	}
-	free_2d(g_data.environ);
-	rl_clear_history();
-	close(g_data.hfd);
-	free(g_data.home);
 	printf("exit\n");
-	return (g_data.exit_status);
+	ft_exit(g_data.exit_status);
 }

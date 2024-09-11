@@ -78,7 +78,6 @@ void	check_pwd(char **env)
 void	init_minishell(char **env)
 {
 	g_data = (struct s_data){0};
-	restore_history();
 	g_data.environ = ft_strdup_2d(env);
 	if (!g_data.environ)
 	{
@@ -94,4 +93,5 @@ void	init_minishell(char **env)
 	update_shlvl(g_data.environ);
 	check_pwd(g_data.environ);
 	set_hostname(g_data.environ);
+	restore_history();
 }
