@@ -86,16 +86,23 @@ typedef struct s_tree
 	struct s_redirection	*redirections;
 }							t_tree;
 
+typedef struct s_garbage
+{
+	t_link				*ptr;
+	struct s_garbage	*next;
+}						t_garbage;
+
 typedef struct s_data
 {
-	int				hfd;
-	char			*path;
-	struct s_tree	*tree;
-	bool			branch;
-	char			*input;
-	char			*home;
-	char			**environ;
-	unsigned char	exit_status;
-}					t_data;
+	int					hfd;
+	char				*path;
+	struct s_tree		*tree;
+	bool				branch;
+	char				*input;
+	char				*home;
+	char				**environ;
+	unsigned char		exit_status;
+	struct s_garbage	*garbage;
+}						t_data;
 
 #endif

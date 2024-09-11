@@ -20,8 +20,11 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 			char **env)
 {
 	init_minishell(env);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 	while (true)
 	{
+		signal(SIGINT, ft_signal);
 		g_data.input = ft_readline(create_full_prompt());
 		if (!g_data.input)
 			break ;

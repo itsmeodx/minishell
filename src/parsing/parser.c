@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/07 11:15:07 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/10 19:02:23 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ t_link	*ft_def_type(char **input)
 	return (link);
 }
 
+bool	ft_is_redirection(int identifier)
+{
+	if (identifier == IN || identifier == OUT || identifier == APPEND
+		|| identifier == HERDOC)
+		return (true);
+	return (false);
+}
+
 t_tree	*ft_parsing(char *input)
 {
 	t_link	*link;
@@ -64,14 +72,24 @@ t_tree	*ft_parsing(char *input)
 	t_tree	*tree;
 
 	tree = NULL;
+	g_data.garbage = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	ft_open_herdoc(link);
-	if (ft_syntax_error(link))
-		return (NULL);
 	tmp = link;
+	if (ft_syntax_error(tmp))
+	{
+		ft_garbage_clear(&g_data.garbage);
+		return (free_2d(split_input), NULL);
+	}
 	tree = ft_parse_and_or(tmp);
 	free_2d(split_input);
-	ft_dbl_lstclear(&link);
+	ft_garbage_clear(&g_data.garbage);
 	return (tree);
 }
+
+	// ft_printf_link(link);
+	// ft_generate_spaces(10);
+	// ft_printf_tree(tree, 0, 2);
+	// printf("\n");
+	// ft_dbl_lstclear(&link);

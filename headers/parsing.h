@@ -65,7 +65,7 @@ typedef enum e_errorn
 // 	struct s_error	*next;
 // }					t_error;
 
-// extern t_error	*g_error; // global variable to store errors
+//extern t_error	*g_error; // global variable to store errors
 
 // old linked list will be replaced by a new tree
 
@@ -82,6 +82,13 @@ t_link			*ft_find_hightest_proirity(t_link *head);
 int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
 int				ft_open_herdoc(t_link *link);
+bool			ft_is_redirection(int identifier);
+
+// garbage_collector
+void			*ft_malloc(size_t size);
+void			ft_garbage_add_back(t_garbage **garbage, t_garbage *new);
+void			ft_garbage_clear(t_garbage **lst);
+void			ft_garbage_new(t_link *ptr);
 
 // **tree_ft**
 void			ft_treeadd_back_left(t_tree **tree, t_tree *new);
@@ -142,4 +149,6 @@ t_errorn		ft_check_parentheses(t_link *link);
 int				ft_syntax_error(t_link *link);
 void			ft_printf_error(t_errorn error);
 
+// signals
+void			ft_signal(int sig);
 #endif // PARSING_H

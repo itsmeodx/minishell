@@ -6,19 +6,11 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/31 19:05:41 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/09 12:44:16 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-bool	ft_is_redirection(int identifier)
-{
-	if (identifier == IN || identifier == OUT || identifier == APPEND
-		|| identifier == HERDOC)
-		return (true);
-	return (false);
-}
 
 void	ft_not_command(t_tree **new, t_link *target)
 {
@@ -40,7 +32,9 @@ t_tree	*ft_parse_cmd(t_link *link)
 		return (NULL);
 	target = ft_search_target(link, goal);
 	if (!target)
+	{
 		return (NULL);
+	}
 	ft_not_command(&new, target);
 	if (link->next && target->identifier != OPEN_PAR)
 	{
