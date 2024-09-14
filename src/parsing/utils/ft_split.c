@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:21:06 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/01 12:55:16 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/14 12:21:37 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_quote(char *str, int a)
 			j = i + 1;
 			while (str[j] && str[j] != str[i])
 				j++;
-			if (j == ft_strlen(str))
+			if (j == (int)ft_strlen(str))
 				return (0);
 			if (a > i && a < j)
 				return (1);

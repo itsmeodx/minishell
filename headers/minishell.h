@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/14 11:30:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define RESET "\001\033[0m\002"
 
 // heardoc
-# define HEREDOC "hd_"
+# define HEREDOC_PREFIX "/tmp/hd_"
 # define HEREDOC_PROMPT "> "
 
 // Define default PATH
@@ -57,6 +57,7 @@ extern struct s_data	g_data;
 typedef struct s_link
 {
 	char			*command;
+	int				fd;
 	int				identifier;
 	struct s_link	*prev;
 	struct s_link	*next;
@@ -66,6 +67,7 @@ typedef struct s_redirection
 {
 	int						identifier;
 	char					*file;
+	int						fd;
 	struct s_redirection	*next;
 }							t_redirection;
 
@@ -95,6 +97,7 @@ typedef struct s_garbage
 typedef struct s_data
 {
 	int					hfd;
+	int					num_of_file;
 	char				*path;
 	struct s_tree		*tree;
 	bool				branch;

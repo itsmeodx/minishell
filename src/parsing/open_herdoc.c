@@ -6,75 +6,106 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 15:04:00 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/14 11:58:54 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "execution.h"
 
-int	ft_name_file(int num_file)
+// TODO : add error handling
+// TODO : fix ^c int herdoc
+// TODO : handle error in case of no permission
+// TODO : fork and exec in herdoc
+bool	isempty(char	*line);
+
+char	*ft_name_file(int num_file)
 {
 	char	*num;
-	char	*name;
 	char	*file;
-	int		fd;
 
 	num = ft_itoa(num_file);
-	name = malloc(ft_strlen(num) + 5);
-	ft_strlcpy(name, HEREDOC, 4);
-	ft_strlcpy(name + 3, num, ft_strlen(num) + 1);
-	file = ft_strjoin("/tmp/", name);
-	fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	free(name);
-	free(num);
-	free(file);
+	file = ft_strjoin(HEREDOC_PREFIX, num);
+	if (access(file, F_OK) == 0)
+		unlink(file);
+	return (free(num), file);
+}
+int	ft_get_fd(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_CREAT | O_RDWR, 0644);
+	if (fd < 0)
+		return (-1);
 	return (fd);
 }
 
-void	ft_write_inherdoc(char *limit, int num)
+void	ft_write_n(char **line, int fd)
+{
+	write(fd, *line, ft_strlen(*line));
+	write(fd, "\n", 1);
+	free(*line);
+	*line = NULL;
+}
+
+char	*ft_write_heredoc(char *limit, int num)
 {
 	char	*line;
-	char	*line_n;
+	char	*file;
+	int 	line_num;
 	int		fd;
 
-	fd = ft_name_file(num);
+	file = ft_name_file(num);
+	fd = ft_get_fd(file);
+	line_num = 1;
 	while (true)
 	{
 		line = readline("> ");
+		if (line && *line && !isempty(line))
+			add_history(line);
 		if (!line)
-			continue ;
-		line_n = ft_strjoin(line, "\n");
-		write(fd, line_n, ft_strlen(line_n));
-		if (ft_strncmp(line, limit, 5) == 0)
 		{
-			free(line_n);
+			dprintf(STDERR_FILENO,
+			NAME"warning: here-document at line %d delimited by end-of-file (wanted `%s')\n",
+			line_num, limit);
+			break ;
+		}
+		if (ft_strncmp(line, limit, ft_strlen(line)) == 0)
+		{
 			free(line);
 			break ;
 		}
-		num++;
-		free(line);
-		free(line_n);
+		ft_write_n(&line, fd);
+		line_num++;
 	}
+	return (free(limit), close(fd),file);
 }
 
-int	ft_open_herdoc(t_link *link)
+int	ft_open_herdoc(t_link **link)
 {
-	t_link	*tmp;
-	int		num;
+	pid_t	pid;
 
-	num = 0;
-	tmp = link;
-	while (tmp)
+	pid = fork();
+	if (pid == 0)
 	{
-		if (tmp->identifier == HERDOC)
+		signal(SIGINT, SIG_DFL);
+		while (*link)
 		{
-			if (tmp->next && tmp->next->identifier == STR)
-				ft_write_inherdoc(tmp->next->command, num);
-			else
-				return (ERROR_NUM_HERDOC);
-			num++;
+			if ((*link)->identifier == HEREDOC)
+			{
+				if ((*link)->next && (*link)->next->identifier == STR)
+				{
+					(*link)->next->command = ft_write_heredoc((*link)->next->command, g_data.num_of_file++);
+					printf("file name : %s\n", (*link)->next->command);
+				}
+				else
+					return (ERROR_NUM_HERDOC);
+			}
+			*link = (*link)->next;
 		}
-		tmp = tmp->next;
+		ft_exit(EXIT_SUCCESS);
 	}
-	return (true);
+	signal(SIGINT, SIG_IGN);
+	waitpid(pid, NULL, 0);
+	return (NONE);
 }

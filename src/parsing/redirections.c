@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 15:40:27 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/23 11:42:55 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/13 17:52:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ int	ft_check_less(t_link *link, t_redirection **file)
 			return (1);
 		}
 		else
-		{
 			return (0);
-		}
 	}
 	return (1);
 }
@@ -47,9 +45,7 @@ int	ft_check_lessless(t_link *link, t_redirection **file)
 			return (1);
 		}
 		else
-		{
 			return (0);
-		}
 	}
 	return (1);
 }
@@ -68,9 +64,7 @@ int	ft_check_great(t_link *link, t_redirection **file)
 			return (1);
 		}
 		else
-		{
 			return (0);
-		}
 	}
 	return (1);
 }
@@ -79,19 +73,18 @@ int	ft_check_greatgreat(t_link *link, t_redirection **file)
 {
 	t_redirection	*node;
 
-	if (link->identifier == HERDOC)
+	if (link->identifier == HEREDOC)
 	{
 		if (link->next && link->next->identifier == STR)
 		{
 			node = ft_lstnew_redi(link->next->command);
-			node->identifier = HERDOC;
+			node->identifier = HEREDOC;
+			node->fd = link->fd;
 			ft_lstadd_back_redi(file, node);
 			return (1);
 		}
 		else
-		{
 			return (0);
-		}
 	}
 	return (1);
 }
