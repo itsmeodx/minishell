@@ -21,6 +21,7 @@ int	ft_exit(int status)
 	close(g_data.hfd);
 	free(g_data.home);
 	free(g_data.input);
+	free(g_data.last_line);
 	exit(status);
 }
 

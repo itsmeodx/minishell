@@ -54,6 +54,12 @@
 // global variable
 extern struct s_data	g_data;
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
 typedef struct s_link
 {
 	char			*command;
@@ -99,6 +105,7 @@ typedef struct s_data
 	struct s_tree		*tree;
 	bool				branch;
 	char				*input;
+	char				*last_line;
 	char				*home;
 	char				**environ;
 	unsigned char		exit_status;

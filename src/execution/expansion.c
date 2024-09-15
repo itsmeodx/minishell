@@ -6,14 +6,13 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:57:17 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/02 17:06:56 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:50:17 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parsing.h"
 
-static
 char	*expand_pergola(char *str)
 {
 	char	*home;
@@ -33,107 +32,56 @@ char	*expand_pergola(char *str)
 	return (str);
 }
 
-static
-char	*expandtoval(char *str, char *value, int *i)
-{
-	char	*tmp1;
-	char	*tmp2;
-
-	if (value == NULL)
-		value = "";
-	i[2] = ft_strlen(value);
-	tmp1 = ft_substr(str, 0, i[0]);
-	tmp2 = ft_strjoin(tmp1, value);
-	free(tmp1);
-	tmp1 = ft_strjoin(tmp2, str + i[1]);
-	free(tmp2);
-	free(str);
-	str = tmp1;
-	i[0] += i[2] - 1;
-	return (str);
-}
-
-static
-char	*expandtostatus(char *str, int *i)
+char	*expand_status(char *str, int *i)
 {
 	char	*value;
 
 	i[1] = i[0] + 2;
 	value = ft_itoa(g_data.exit_status);
-	str = expandtoval(str, value, i);
+	str = expand_val(str, value, i);
 	i[0] -= i[2] - 1;
 	free(value);
 	return (str);
 }
 
-static
-char	*expand_env(char *str)
+int	expand_argv(t_cmd *cmd, int i, char *(*expand_val)(char *))
 {
-	int		i[3];
-	char	*key;
-	char	*value;
+	int		len;
+	char	*str;
+	char	**tmp[3];
 
-	i[0] = -1;
-	while (str[++i[0]])
-	{
-		if (str[i[0]] == '$' && str[i[0] + 1] == '?')
-			str = expandtostatus(str, i);
-		else if (str[i[0]] == '$' && str[i[0] + 1] != '$'
-			&& str[i[0] + 1] != ' ' && str[i[0] + 1] != '\0')
-		{
-			i[1] = i[0] + 1;
-			while (isalnum(str[i[1]]) || str[i[1]] == '_')
-				i[1]++;
-			key = ft_substr(str, i[0] + 1, i[1] - i[0] - 1);
-			value = ft_getenv(key);
-			free(key);
-			str = expandtoval(str, value, i);
-		}
-	}
-	return (str);
+	cmd->argv[i] = expand_val(cmd->argv[i]);
+	tmp[0] = ft_split(cmd->argv[i], " \t\v\n\r\f");
+	len = ft_count_strs(tmp[0]);
+	if (len == 1)
+		return (free_2d(tmp[0]), i);
+	str = cmd->argv[i];
+	cmd->argv[i] = NULL;
+	tmp[1] = ft_strdup_2d(cmd->argv);
+	tmp[1] = ft_strjoin_2d(tmp[1], tmp[0]);
+	free_2d(tmp[0]);
+	tmp[0] = ft_strjoin_2d(tmp[1], cmd->argv + i + 1);
+	cmd->argv[i] = str;
+	free_2d(cmd->argv);
+	cmd->argv = tmp[0];
+	i += len - 1;
+	cmd->argc += len - 1;
+	return (i);
 }
 
-//void	expand_asterisk(char **str)
-//{
-//	int		i;
-//	int		j;
-//	int		k;
-//	char	*tmp1;
-//	char	*tmp2;
-//	char	**new_str;
-//
-//	i = -1;
-//	while (str[++i])
-//	{
-//		j = -1;
-//		while (str[i][++j])
-//		{
-//			if (str[i][j] == '*')
-//			{
-//				tmp1 = ft_substr(str[i], 0, j);
-//				new_str = expand_dir(tmp1);
-//				k = -1;
-//				while (new_str[++k])
-//				{
-//					tmp2 = ft_strjoin(tmp1, new_str[k]);
-//					free(tmp1);
-//					tmp1 = ft_strjoin(tmp2, str[i] + j + 1);
-//					free(tmp2);
-//				}
-//			}
-//		}
-//	}
-//}
-
-void	ft_expansion(char **str)
+void	ft_expansion(t_cmd *cmd)
 {
 	int		i;
 
 	i = -1;
-	while (str && str[++i])
+	while (cmd->argv && cmd->argv[++i])
 	{
-		if (str[i][0] == '~')
-			str[i] = expand_pergola(str[i]);
-		str[i] = expand_env(str[i]);
+		if (cmd->argv[i][0] == '~')
+			cmd->argv[i] = expand_pergola(cmd->argv[i]);
+		i = expand_argv(cmd, i, &expand_dollar);
+		if (i < 0)
+			continue ;
+		cmd->argv[i] = ft_expanding(cmd->argv[i]);
+		cmd->argv[i] = expand_asterisk(cmd->argv[i]);
 	}
 }

@@ -44,14 +44,12 @@ bool	isempty(char *line)
 
 void	ft_add_history(char *line)
 {
-	static char	*last_line = NULL;
-
-	if (!last_line)
-		last_line = get_last_line();
-	if ((last_line && !strcmp(last_line, line)) || isempty(line))
+	if (!g_data.last_line)
+		g_data.last_line = get_last_line();
+	if ((g_data.last_line && !strcmp(g_data.last_line, line)) || isempty(line))
 		return ;
-	free(last_line);
-	last_line = ft_strdup(line);
+	free(g_data.last_line);
+	g_data.last_line = ft_strdup(line);
 	add_history(line);
 	if (g_data.hfd == -1)
 		return ;

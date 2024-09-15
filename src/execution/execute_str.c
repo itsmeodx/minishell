@@ -13,16 +13,6 @@
 #include "execution.h"
 
 static
-bool	isdir(char *path)
-{
-	struct stat	st;
-
-	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
-		return (true);
-	return (false);
-}
-
-static
 void	execute_without_path(t_cmd *cmd)
 {
 	if (access(cmd->argv[0], F_OK) != -1)
@@ -80,10 +70,12 @@ int	execute_cmd(t_cmd *cmd)
 
 int	execute_str(t_tree *tree)
 {
-	if (!tree || !tree->cmd || !tree->cmd->argv || !tree->cmd->argv[0])
-		return (EXIT_FAILURE);
+	if (!tree || !tree->cmd || !tree->cmd->argv || !*tree->cmd->argv)
+		return (EXIT_SUCCESS);
 	tree->cmd->redirections = tree->redirections;
-	ft_expansion(tree->cmd->argv);
+	ft_expansion(tree->cmd);
+	if (!*tree->cmd->argv || !**tree->cmd->argv)
+		return (g_data.exit_status = 0, EXIT_SUCCESS);
 	if (!execute_builtin(tree->cmd))
 		return (g_data.exit_status);
 	else

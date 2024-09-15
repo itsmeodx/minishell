@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/13 11:11:37 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/13 09:53:47 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,20 @@ bool			builtin_pwd(t_cmd *cmd);
 bool			builtin_unset(t_cmd *cmd);
 
 // utils/
-// sysutils.c
+// close_pipe.c
 int				close_pipe(int *fd);
+// dir_utils.c
+bool			isdir(char *path);
 // env_utils.c
 char			*get_home(void);
 char			**var_split(char *var);
 bool			is_valid_key(char *key, bool *bad_key);
 char			**remove_from_env(char **env, char *key);
 char			**filter_env(char **env);
-// export_utils.c
-void			sort_env(char **env);
+// env_utils_2.c
+void			sort_2d(char **strs);
+char			*expand_val(char *str, char *value, int *i);
+char			*expand_dollar(char *str);
 // extend_2d.c
 void			*extend_2d(char **ptr, size_t size);
 // ft_itoa.c
@@ -67,6 +71,8 @@ char			*get_branch(void);
 // output_utils.c
 char			*get_output(char **cmd);
 
+// asterisk.c
+char			*expand_asterisk(char *str);
 // env.c
 bool			is_in_env(char *key);
 char			*ft_getenv(char *name);
@@ -95,7 +101,11 @@ int				execute_str(t_tree *tree);
 int				ft_execution(t_tree *tree);
 
 // expansion.c
-void			ft_expansion(char **str);
+char			*expand_status(char *str, int *i);
+void			ft_expansion(t_cmd *cmd);
+
+// expanding.c
+char			*ft_expanding(char *str);
 
 // ft_readline.c
 char			*ft_readline(char *prompt);
@@ -117,6 +127,10 @@ void			init_minishell(char **env);
 char			*colorize(char *str, char *color);
 char			*ft_getprompt(void);
 char			*create_full_prompt(void);
+
+// quotes.c
+bool			is_in_quote(char *str, int i);
+int				get_next_quote(char *str, char quote);
 
 // redirections.c
 bool			set_redirections(t_redirection *redirections);

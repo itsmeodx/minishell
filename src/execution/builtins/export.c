@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:09:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/27 15:09:50 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/13 09:52:45 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	print_export(char **env)
 	char	**key_value;
 
 	env = ft_strdup_2d(env);
-	sort_env(env);
+	sort_2d(env);
 	i = -1;
 	while (env[++i])
 	{
