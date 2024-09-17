@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/14 12:20:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/15 10:55:56 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ typedef enum e_errorn
 // src
 char			**ft_lexer(char *input);
 char			**ft_split(char *str, char *c);
-int				check_quote(char *str, int a);
+int				is_inquotes(char *str, int a);
 int				ft_strchr(int c, const char *s);
 t_tree			*ft_parsing(char *input);
 t_link			*ft_def_type(char **input);
 t_link			*ft_find_hightest_proirity(t_link *head);
 int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
-int				ft_open_herdoc(t_link **link);
+int				ft_open_herdoc(t_link **link, bool key_expand);
 bool			ft_is_redirection(int identifier);
 
 // garbage_collector

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/14 12:21:51 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/15 10:55:10 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_tree	*ft_parsing(char *input)
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
-	ft_open_herdoc(&tmp);
+	ft_open_herdoc(&tmp, 0);
 	if (ft_syntax_error(tmp))
 	{
 		ft_garbage_clear(&g_data.garbage);

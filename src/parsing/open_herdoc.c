@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/14 11:58:54 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/15 13:14:17 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_write_n(char **line, int fd)
 	*line = NULL;
 }
 
-char	*ft_write_heredoc(char *limit, int num)
+char	*ft_write_heredoc(char *limit, int num, bool key_expand)
 {
 	char	*line;
 	char	*file;
@@ -75,13 +75,21 @@ char	*ft_write_heredoc(char *limit, int num)
 			free(line);
 			break ;
 		}
+		// expand line before writing
+		if (!key_expand)
+			ft_expansion(&line);
 		ft_write_n(&line, fd);
 		line_num++;
 	}
 	return (free(limit), close(fd),file);
 }
 
-int	ft_open_herdoc(t_link **link)
+bool	ft_read_keyexpand(char *limit)
+{
+	return (is_inquotes(limit, 1));
+}
+
+int	ft_open_herdoc(t_link **link, bool key_expand)
 {
 	pid_t	pid;
 
@@ -95,8 +103,10 @@ int	ft_open_herdoc(t_link **link)
 			{
 				if ((*link)->next && (*link)->next->identifier == STR)
 				{
-					(*link)->next->command = ft_write_heredoc((*link)->next->command, g_data.num_of_file++);
-					printf("file name : %s\n", (*link)->next->command);
+					key_expand = ft_read_keyexpand((*link)->next->command);
+					// remvoe quotes from limit
+					(*link)->next->command = ft_write_heredoc((*link)->next->command, g_data.num_of_file++,
+					key_expand);
 				}
 				else
 					return (ERROR_NUM_HERDOC);
