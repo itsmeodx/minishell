@@ -129,7 +129,7 @@ char			*ft_getprompt(void);
 char			*create_full_prompt(void);
 
 // quotes.c
-bool			is_in_quote(char *str, int i);
+int			is_in_quote(char *str, int i);
 int				get_next_quote(char *str, char quote);
 
 // redirections.c

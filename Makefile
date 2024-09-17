@@ -44,16 +44,20 @@ PARSING		=	parsing/lexer parsing/parser\
 
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/echo execution/builtins/env \
-				 execution/builtins/exit \
+				execution/builtins/exit \
 				execution/builtins/export execution/builtins/unset \
-				 execution/builtins/pwd execution/env execution/exec \
+				execution/builtins/pwd execution/asterisk \
+				execution/env execution/exec \
 				execution/execute_and_or \
 				execution/execute_par execution/execute_pipe \
-				execution/execute_str execution/execution execution/expansion \
+				execution/execute_str execution/execution execution/expanding \
+				execution/expansion \
 				execution/ft_readline execution/gnl execution/history \
 				execution/hostname execution/init execution/prompt \
+				execution/quotes \
 				execution/redirections execution/signal execution/utils/close_pipe \
-				execution/utils/env_utils execution/utils/export_utils \
+				execution/utils/dir_utils \
+				execution/utils/env_utils execution/utils/env_utils_2 \
 				execution/utils/extend_2d execution/utils/ft_itoa \
 				execution/utils/ft_substr execution/utils/output_utils \
 				execution/utils/prompt_utils

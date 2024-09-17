@@ -44,13 +44,15 @@ char	*expand_status(char *str, int *i)
 	return (str);
 }
 
-int	expand_argv(t_cmd *cmd, int i, char *(*expand_val)(char *))
+int	expand_argv(t_cmd *cmd, int i, char *(*expand_func)(char *))
 {
 	int		len;
 	char	*str;
 	char	**tmp[3];
 
-	cmd->argv[i] = expand_val(cmd->argv[i]);
+	printf("before: cmd->argv[i]: %s\n", cmd->argv[i]);
+	cmd->argv[i] = expand_func(cmd->argv[i]);
+	printf("after: cmd->argv[i]: %s\n", cmd->argv[i]);
 	tmp[0] = ft_split(cmd->argv[i], " \t\v\n\r\f");
 	len = ft_count_strs(tmp[0]);
 	if (len == 1)

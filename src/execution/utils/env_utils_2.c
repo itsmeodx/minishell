@@ -63,18 +63,23 @@ char	*expand_dollar(char *str)
 	i[0] = -1;
 	while (str[++i[0]])
 	{
-		if (str[i[0]] == '$' && str[i[0] + 1] == '?')
-			str = expand_status(str, i);
-		else if (str[i[0]] == '$' && str[i[0] + 1] != '$'
-			&& str[i[0] + 1] != ' ' && str[i[0] + 1] != '\0')
+		if (str[i[0]] == '$')
 		{
-			i[1] = i[0] + 1;
-			while (isalnum(str[i[1]]) || str[i[1]] == '_')
-				i[1]++;
-			key = ft_substr(str, i[0] + 1, i[1] - i[0] - 1);
-			value = ft_getenv(key);
-			free(key);
-			str = expand_val(str, value, i);
+			if (is_in_quote(str, i[0]) == '\'')
+				continue ;
+			if (str[i[0] + 1] == '?')
+				str = expand_status(str, i);
+			else if (str[i[0] + 1] != '$'
+				&& (isalnum(str[i[0] + 1]) || str[i[0] + 1] == '_'))
+			{
+				i[1] = i[0] + 1;
+				while (isalnum(str[i[1]]) || str[i[1]] == '_')
+					i[1]++;
+				key = ft_substr(str, i[0] + 1, i[1] - i[0] - 1);
+				value = ft_getenv(key);
+				free(key);
+				str = expand_val(str, value, i);
+			}
 		}
 	}
 	return (str);

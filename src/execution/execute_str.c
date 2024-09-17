@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
 
 static
 void	execute_without_path(t_cmd *cmd)
@@ -74,11 +75,15 @@ int	execute_str(t_tree *tree)
 		return (EXIT_SUCCESS);
 	tree->cmd->redirections = tree->redirections;
 	ft_expansion(tree->cmd);
-	if (!*tree->cmd->argv || !**tree->cmd->argv)
+	if (!*tree->cmd->argv)
 		return (g_data.exit_status = 0, EXIT_SUCCESS);
-	if (!execute_builtin(tree->cmd))
-		return (g_data.exit_status);
-	else
+	if (execute_builtin(tree->cmd))
 		execute_cmd(tree->cmd);
+	if (is_in_env("_"))
+		update_env(g_data.environ, "_",
+			tree->cmd->argv[ft_count_strs(tree->cmd->argv) - 1]);
+	else
+		g_data.environ = addtoenv(g_data.environ, "_",
+				tree->cmd->argv[ft_count_strs(tree->cmd->argv) - 1]);
 	return (g_data.exit_status);
 }

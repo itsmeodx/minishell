@@ -13,13 +13,36 @@
 #include "execution.h"
 #include "parsing.h"
 
+static
+bool	check_file(t_redirection *redirection)
+{
+	t_cmd	*cmd;
+	char	*tmp;
+
+	cmd = &(t_cmd){.argv = ft_strdup_2d((char *[]){redirection->file, NULL}),
+		.argc = 1};
+	ft_expansion(cmd);
+	if (ft_count_strs(cmd->argv) != 1 || !cmd->argv[0])
+		return (dprintf(STDERR_FILENO,
+				NAME "%s: ambiguous redirect\n", redirection->file),
+			free_2d(cmd->argv), false);
+	tmp = redirection->file;
+	redirection->file = cmd->argv[0];
+	cmd->argv[0] = tmp;
+	free_2d(cmd->argv);
+	return (true);
+}
+
 bool	set_redirections(t_redirection *redirections)
 {
 	int	fd;
 
 	while (redirections)
 	{
-		if (redirections->identifier == IN)
+		if (!check_file(redirections))
+			return (false);
+		if (redirections->identifier == IN
+			|| redirections->identifier == HERDOC)
 			fd = open(redirections->file, O_RDONLY);
 		else if (redirections->identifier == OUT)
 			fd = open(redirections->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -28,14 +51,12 @@ bool	set_redirections(t_redirection *redirections)
 		if (fd == -1)
 			return (dprintf(STDERR_FILENO,
 					NAME "%s: ", redirections->file), perror(NULL), false);
+		if (redirections->identifier == IN
+			|| redirections->identifier == HERDOC)
+			dup2(fd, STDIN_FILENO);
 		else
-		{
-			if (redirections->identifier == IN)
-				dup2(fd, STDIN_FILENO);
-			else
-				dup2(fd, STDOUT_FILENO);
-			close(fd);
-		}
+			dup2(fd, STDOUT_FILENO);
+		close(fd);
 		redirections = redirections->next;
 	}
 	return (true);

@@ -12,7 +12,7 @@
 
 #include "execution.h"
 
-bool	is_in_quote(char *str, int i)
+int	is_in_quote(char *str, int i)
 {
 	int		j;
 	int		count;
@@ -37,8 +37,8 @@ bool	is_in_quote(char *str, int i)
 			count++;
 	}
 	if (count % 2 == 0)
-		return (false);
-	return (true);
+		return (0);
+	return (quote);
 }
 
 int	get_next_quote(char *str, char quote)
