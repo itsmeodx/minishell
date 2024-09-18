@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:09:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/13 09:52:45 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ bool	print_export(char **env)
 		key_value = var_split(env[i]);
 		if (!key_value)
 			return (free_2d(env), false);
-		printf("declare -x %s", key_value[0]);
+		ft_printf("declare -x %s", key_value[0]);
 		if (key_value[1])
-			printf("=\"%s\"", key_value[1]);
-		printf("\n");
+			ft_printf("=\"%s\"", key_value[1]);
+		ft_printf("\n");
 		free_2d(key_value);
 	}
 	free_2d(env);

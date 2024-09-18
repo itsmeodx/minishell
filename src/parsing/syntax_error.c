@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:27:21 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/10 19:01:28 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ int	ft_syntax_error(t_link *link)
 void	ft_onemsg(char *error, t_errorn errorn)
 {
 	if (errorn == ERROR_NUM_HERDOC)
-		dprintf(STDERR_FILENO,
+		ft_dprintf(STDERR_FILENO,
 			NAME"%s\n", error);
 	else
-		dprintf(STDERR_FILENO,
+		ft_dprintf(STDERR_FILENO,
 			NAME"syntax error near unexpected token `%s'\n", error);
 	g_data.exit_status = 2;
 }

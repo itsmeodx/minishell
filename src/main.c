@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/07 10:17:57 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 		ft_treeclear(g_data.tree);
 		g_data.tree = NULL;
 	}
-	printf("exit\n");
+	ft_printf("exit\n");
 	ft_exit(g_data.exit_status);
 }

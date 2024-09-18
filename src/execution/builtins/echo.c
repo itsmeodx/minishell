@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:39:42 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ bool	builtin_echo(t_cmd *cmd)
 	}
 	while (i < cmd->argc)
 	{
-		printf("%s", cmd->argv[i]);
+		ft_printf("%s", cmd->argv[i]);
 		if (i + 1 < cmd->argc)
-			printf(" ");
+			ft_printf(" ");
 		i++;
 	}
 	if (!n_flag)
-		printf("\n");
+		ft_printf("\n");
 	return (g_data.exit_status = EXIT_SUCCESS, true);
 }

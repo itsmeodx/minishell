@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 19:18:32 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:51:52 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ char	*expand_asterisk(char *str)
 //	char	*tmp;
 //
 //	tmp = expand_asterisk(str);
-//	printf("%s\n", tmp);
+//	ft_printf("%s\n", tmp);
 //	free(tmp);
 //	return (0);
 //}

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:57:17 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*expand_pergola(char *str)
 		if (!home)
 			home = get_home();
 		if (!home)
-			return (dprintf(STDERR_FILENO, NAME "HOME not set\n"), str);
+			return (ft_dprintf(STDERR_FILENO, NAME "HOME not set\n"), str);
 		tmp = ft_strjoin(home, str + 1);
 		free(str);
 		return (tmp);

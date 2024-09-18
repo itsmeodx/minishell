@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:09:51 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/10 19:02:44 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_signal(int sig)
 		g_data.exit_status = 128 + sig;
 		prompt = create_full_prompt();
 		rl_replace_line("", 0);
-		printf("\n%s", prompt);
+		ft_printf("\n%s", prompt);
 		free(prompt);
 	}
 	return ;

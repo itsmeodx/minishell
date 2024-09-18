@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:40:54 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_add_history(char *line)
 	add_history(line);
 	if (g_data.hfd == -1)
 		return ;
-	return (dprintf(g_data.hfd, "%s\n", line), (void) NULL);
+	return (ft_dprintf(g_data.hfd, "%s\n", line), (void) NULL);
 }
 
 void	restore_history(void)

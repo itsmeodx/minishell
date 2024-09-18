@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_herdoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 15:04:00 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:16:14 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_write_inherdoc(char *limit, int num)
 		if (!line)
 			continue ;
 		line_n = ft_strjoin(line, "\n");
-		write(fd, line_n, ft_strlen(line_n));
+		ft_dprintf(fd, "%s", line_n);
 		if (ft_strncmp(line, limit, 5) == 0)
 		{
 			free(line_n);

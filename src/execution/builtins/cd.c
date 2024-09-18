@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:40:54 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 bool	cd_home(void)
 {
 	if (chdir(ft_getenv("HOME")) == -1)
-		return (dprintf(STDERR_FILENO, NAME"cd: HOME not set\n"), false);
+		return (ft_dprintf(STDERR_FILENO, NAME"cd: HOME not set\n"), false);
 	return (true);
 }
 
@@ -25,13 +25,13 @@ bool	cd_dash(t_cmd *cmd)
 	char	*oldpwd;
 
 	if (ft_strlen(cmd->argv[1]) > 1)
-		return (dprintf(STDERR_FILENO, NAME"cd: %s: invalid option\n",
-				cmd->argv[1]), printf("cd: usage: cd [-] [dir]\n"), false);
+		return (ft_dprintf(STDERR_FILENO, NAME"cd: %s: invalid option\n",
+				cmd->argv[1]), ft_printf("cd: usage: cd [-] [dir]\n"), false);
 	oldpwd = ft_getenv("OLDPWD");
 	if (!oldpwd || chdir(oldpwd) == -1)
-		return (dprintf(STDERR_FILENO, NAME"cd: OLDPWD not set\n"),
+		return (ft_dprintf(STDERR_FILENO, NAME"cd: OLDPWD not set\n"),
 			false);
-	printf("%s\n", ft_getenv("OLDPWD"));
+	ft_printf("%s\n", ft_getenv("OLDPWD"));
 	return (true);
 }
 
@@ -40,10 +40,10 @@ bool	cd_dir(t_cmd *cmd)
 	if (chdir(cmd->argv[1]) == -1)
 	{
 		if (access(cmd->argv[1], F_OK) == -1)
-			return (dprintf(STDERR_FILENO,
+			return (ft_dprintf(STDERR_FILENO,
 					NAME"cd: %s: "NSFOD"\n", cmd->argv[1]), false);
 		else
-			return (dprintf(STDERR_FILENO,
+			return (ft_dprintf(STDERR_FILENO,
 					NAME"cd: %s: "PD"\n", cmd->argv[1]), false);
 	}
 	return (true);
@@ -54,7 +54,7 @@ bool	builtin_cd(t_cmd *cmd)
 	bool	ret;
 
 	if (cmd->argc > 2)
-		return (dprintf(STDERR_FILENO, NAME"cd: too many arguments\n"),
+		return (ft_dprintf(STDERR_FILENO, NAME"cd: too many arguments\n"),
 			false);
 	else if (cmd->argc == 1)
 		ret = cd_home();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:39:35 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_generate_spaces(int n)
 	i = 0;
 	while (i < n)
 	{
-		printf(" ");
+		ft_printf(" ");
 		i++;
 	}
 }
@@ -31,7 +31,7 @@ void	ft_printf_link(t_link *link)
 	tmp = link;
 	while (tmp)
 	{
-		printf("tmp->command: %s --- id=%d\n", tmp->command, tmp->identifier);
+		ft_printf("tmp->command: %s --- id=%d\n", tmp->command, tmp->identifier);
 		tmp = tmp->next;
 	}
 }
@@ -44,17 +44,17 @@ void	ft_print_cmd(t_tree *tree)
 
 	tmp = tree->cmd->argv;
 	i = 0;
-	printf("str: %s type :%d agrc: %d", tree->cmd->argv[0],
+	ft_printf("str: %s type :%d agrc: %d", tree->cmd->argv[0],
 		tree->type, tree->cmd->argc);
 	while (tmp[i])
 	{
-		printf("  args :%s,", tmp[i]);
+		ft_printf("  args :%s,", tmp[i]);
 		i++;
 	}
 	redi = tree->redirections;
 	while (redi)
 	{
-		printf("  redi :%s type: %d", redi->file, redi->identifier);
+		ft_printf("  redi :%s type: %d", redi->file, redi->identifier);
 		redi = redi->next;
 	}
 }
@@ -63,7 +63,7 @@ void	ft_printf_tree(t_tree *tree, int space, int option)
 {
 	if (!tree)
 	{
-		printf("empty");
+		ft_printf("empty");
 		return ;
 	}
 	if (tree)
@@ -73,17 +73,17 @@ void	ft_printf_tree(t_tree *tree, int space, int option)
 		if (option == 2)
 			ft_generate_spaces(5);
 		if (option)
-			printf("\n");
+			ft_printf("\n");
 	}
 	if (tree->left)
 	{
-		printf("left ->>");
+		ft_printf("left ->>");
 		ft_printf_tree(tree->left, space + 5, 0);
 	}
 	if (tree->right)
 	{
-		printf("      ");
-		printf("right ->>");
+		ft_printf("      ");
+		ft_printf("right ->>");
 		ft_printf_tree(tree->right, space, 1);
 	}
 }

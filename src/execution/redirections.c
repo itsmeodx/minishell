@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:00:40 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	check_file(t_redirection *redirection)
 		.argc = 1};
 	ft_expansion(cmd);
 	if (ft_strlen_2d(cmd->argv) != 1 || !cmd->argv[0])
-		return (dprintf(STDERR_FILENO,
+		return (ft_dprintf(STDERR_FILENO,
 				NAME "%s: ambiguous redirect\n", redirection->file),
 			free_2d(cmd->argv), false);
 	tmp = redirection->file;
@@ -49,7 +49,7 @@ bool	set_redirections(t_redirection *redirections)
 		else if (redirections->identifier == APPEND)
 			fd = open(redirections->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd == -1)
-			return (dprintf(STDERR_FILENO,
+			return (ft_dprintf(STDERR_FILENO,
 					NAME "%s: ", redirections->file), perror(NULL), false);
 		if (redirections->identifier == IN
 			|| redirections->identifier == HERDOC)

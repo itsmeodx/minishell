@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:58:41 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ bool	is_valid_key(char *key, bool *bad_key)
 	if (!key_value)
 		return (*bad_key = true, false);
 	if ((!isalpha(*key_value[0]) && *key_value[0] != '_') || !*key_value[0])
-		return (dprintf(STDERR_FILENO,
+		return (ft_dprintf(STDERR_FILENO,
 				NAME "export: `%s': " NVI "\n", key), *bad_key = true,
 			free_2d(key_value), false);
 	i = -1;
 	while (key_value[0][++i])
 	{
 		if (!isalnum(key_value[0][i]) && key_value[0][i] != '_')
-			return (dprintf(STDERR_FILENO,
+			return (ft_dprintf(STDERR_FILENO,
 					NAME "export: `%s': " NVI "\n", key), *bad_key = true,
 				free_2d(key_value), false);
 	}
