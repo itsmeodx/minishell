@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/17 19:30:53 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:39:42 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	builtin_echo(t_cmd *cmd)
 
 	i = 1;
 	n_flag = 0;
-	if (cmd->argc > 1 && !strcmp(cmd->argv[1], "-n"))
+	if (cmd->argc > 1 && !ft_strcmp(cmd->argv[1], "-n"))
 	{
 		n_flag = 1;
 		i++;

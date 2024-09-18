@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/05 14:47:28 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,9 @@ typedef enum e_errorn
 /*Parsing*/
 // src
 char			**ft_lexer(char *input);
-char			**ft_split(char *str, char *c);
+char			**ft_qsplit(char *str, char *c);
 int				check_quote(char *str, int a);
-int				ft_strlen(const char *str);
-int				ft_strchr(int c, const char *s);
+int				ft_strchr_v2(int c, const char *s);
 t_tree			*ft_parsing(char *input);
 t_link			*ft_def_type(char **input);
 t_link			*ft_find_hightest_proirity(t_link *head);
@@ -108,15 +107,12 @@ void			ft_treeclear(t_tree *tree);
 // src fts
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
-// // utils
+// utils
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
-char			*ft_strchr_v2(const char *s, int c);
 void			free_2d(char **arr);
 char			**ft_strdup_2d(char **s);
 char			*ft_strdup(const char *s);
-int				ft_count_strs(char **s);
-int				ft_strlen(const char *str);
-char			*ft_strjoin(char *s1, char const *s2);
+int				ft_strlen_2d(char **s);
 char			*ft_strdup(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 char			*ft_itoa(int n);

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:55:17 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 10:24:28 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:07:45 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,6 @@ int	dir_size(char *dirname)
 		i++;
 	closedir(dir);
 	return (i);
-}
-
-int	ft_strcasecmp(char *s1, char *s2)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-
-	while (*s1 && *s2)
-	{
-		c1 = (*s1 - 32) * (*s1 >= 'a' && *s1 <= 'z')
-			+ *s1 * !(*s1 >= 'a' && *s1 <= 'z');
-		c2 = (*s2 - 32) * (*s2 >= 'a' && *s2 <= 'z')
-			+ *s2 * !(*s2 >= 'a' && *s2 <= 'z');
-		if (c1 != c2)
-			return (c1 - c2);
-		s1++;
-		s2++;
-	}
-	return ((*s1 - 32) * (*s1 >= 'a' && *s1 <= 'z')
-		+ *s1 * !(*s1 >= 'a' && *s1 <= 'z')
-		- (*s2 - 32) * (*s2 >= 'a' && *s2 <= 'z')
-		- *s2 * !(*s2 >= 'a' && *s2 <= 'z'));
 }
 
 void	sort_2d_case(char **strs)

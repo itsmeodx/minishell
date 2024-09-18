@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 14:00:40 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 14:00:57 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	check_file(t_redirection *redirection)
 	cmd = &(t_cmd){.argv = ft_strdup_2d((char *[]){redirection->file, NULL}),
 		.argc = 1};
 	ft_expansion(cmd);
-	if (ft_count_strs(cmd->argv) != 1 || !cmd->argv[0])
+	if (ft_strlen_2d(cmd->argv) != 1 || !cmd->argv[0])
 		return (dprintf(STDERR_FILENO,
 				NAME "%s: ambiguous redirect\n", redirection->file),
 			free_2d(cmd->argv), false);

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:08 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 14:49:19 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:41:23 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	builtin_exit(t_cmd *cmd)
 	else if (cmd->argc > 2)
 		return (dprintf(STDERR_FILENO, "exit\n"), dprintf(STDERR_FILENO,
 				NAME"exit: "TMA"\n"), g_data.exit_status = 1, false);
-	status = atoi(cmd->argv[1]);
+	status = ft_atoi(cmd->argv[1]);
 	printf("exit\n");
 	ft_exit(status);
 	return (true);

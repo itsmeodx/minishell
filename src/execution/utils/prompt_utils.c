@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:18:20 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 09:37:18 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*getpwd(void)
 	if (!str[0])
 		str[0] = ft_strdup("");
 	if (ft_getenv("HOME")
-		&& strncmp(str[0], ft_getenv("HOME"), strlen(ft_getenv("HOME"))) == 0)
-		str[1] = ft_strjoin("~", str[0] + strlen(ft_getenv("HOME")));
+		&& ft_strncmp(str[0], ft_getenv("HOME"), ft_strlen(ft_getenv("HOME"))) == 0)
+		str[1] = ft_strjoin("~", str[0] + ft_strlen(ft_getenv("HOME")));
 	else
 		str[1] = ft_strdup(str[0]);
 	free(str[0]);

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/29 18:03:37 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:40:54 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_last_line(void)
 		line = get_next_line(g_data.hfd);
 	}
 	if (last_line)
-		last_line[strlen(last_line) - 1] = 0;
+		last_line[ft_strlen(last_line) - 1] = 0;
 	return (last_line);
 }
 
@@ -46,7 +46,7 @@ void	ft_add_history(char *line)
 {
 	if (!g_data.last_line)
 		g_data.last_line = get_last_line();
-	if ((g_data.last_line && !strcmp(g_data.last_line, line)) || isempty(line))
+	if ((g_data.last_line && !ft_strcmp(g_data.last_line, line)) || isempty(line))
 		return ;
 	free(g_data.last_line);
 	g_data.last_line = ft_strdup(line);
@@ -77,7 +77,7 @@ void	restore_history(void)
 	line = get_next_line(g_data.hfd);
 	while (line)
 	{
-		line[strlen(line) - 1] = 0;
+		line[ft_strlen(line) - 1] = 0;
 		add_history(line);
 		free(line);
 		line = get_next_line(g_data.hfd);

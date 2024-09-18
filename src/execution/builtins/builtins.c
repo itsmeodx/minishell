@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:38:03 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/04 22:39:10 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:39:42 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	execute_builtin(t_cmd *cmd)
 	i = -1;
 	while (builtins[++i])
 	{
-		if (cmd && cmd->argv && !strcmp(cmd->argv[0], builtins[i]))
+		if (cmd && cmd->argv && !ft_strcmp(cmd->argv[0], builtins[i]))
 		{
 			if (!set_redirections(cmd->redirections))
 				return (g_data.exit_status = 1, EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/04 22:50:51 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int	execute_str(t_tree *tree)
 		execute_cmd(tree->cmd);
 	if (is_in_env("_"))
 		update_env(g_data.environ, "_",
-			tree->cmd->argv[ft_count_strs(tree->cmd->argv) - 1]);
+			tree->cmd->argv[ft_strlen_2d(tree->cmd->argv) - 1]);
 	else
 		g_data.environ = addtoenv(g_data.environ, "_",
-				tree->cmd->argv[ft_count_strs(tree->cmd->argv) - 1]);
+				tree->cmd->argv[ft_strlen_2d(tree->cmd->argv) - 1]);
 	return (g_data.exit_status);
 }

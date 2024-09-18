@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_qsplit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:21:06 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/01 12:55:16 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/18 12:31:47 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_quote(char *str, int a)
 			j = i + 1;
 			while (str[j] && str[j] != str[i])
 				j++;
-			if (j == ft_strlen(str))
+			if (j == (int)ft_strlen(str))
 				return (0);
 			if (a > i && a < j)
 				return (1);
@@ -46,11 +46,11 @@ static int	count_words(char *str, char *charset)
 	count = 0;
 	while (str[i])
 	{
-		while (str[i] && ft_strchr(str[i], charset) && !check_quote(str, i))
+		while (str[i] && ft_strchr_v2(str[i], charset) && !check_quote(str, i))
 			i++;
 		if (str[i])
 			count++;
-		while (str[i] && (!ft_strchr(str[i], charset) || (ft_strchr(str[i],
+		while (str[i] && (!ft_strchr_v2(str[i], charset) || (ft_strchr_v2(str[i],
 						charset) && check_quote(str, i))))
 			i++;
 	}
@@ -62,7 +62,7 @@ static int	char_sep(char *str, char *charset)
 	int	i;
 
 	i = 0;
-	while (str[i] && (!ft_strchr(str[i], charset) || (ft_strchr(str[i], charset)
+	while (str[i] && (!ft_strchr_v2(str[i], charset) || (ft_strchr_v2(str[i], charset)
 				&& check_quote(str, i))))
 		i++;
 	return (i);
@@ -88,7 +88,7 @@ char	*ft_words(char *str, char *charset)
 	return (word);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_qsplit(char *str, char *charset)
 {
 	char	**strings;
 	int		i;
@@ -101,14 +101,14 @@ char	**ft_split(char *str, char *charset)
 	strings = (char **)malloc(sizeof(char *) * (str_len + 1));
 	while (str[j])
 	{
-		while (str[j] && ft_strchr(str[j], charset) && !check_quote(str, j))
+		while (str[j] && ft_strchr_v2(str[j], charset) && !check_quote(str, j))
 			j++;
 		if (str[j])
 		{
 			strings[i] = ft_words(&str[j], charset);
 			i++;
 		}
-		while (str[j] && (!ft_strchr(str[j], charset) || (ft_strchr(str[j],
+		while (str[j] && (!ft_strchr_v2(str[j], charset) || (ft_strchr_v2(str[j],
 						charset) && check_quote(str, j))))
 			j++;
 	}

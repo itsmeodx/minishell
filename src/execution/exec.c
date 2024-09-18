@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:28:01 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 13:28:01 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:03:10 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**paths_split(char *path)
 	if (!path)
 		return (NULL);
 	i = -1;
-	paths = ft_split(path, ":");
+	paths = ft_qsplit(path, ":");
 	while (paths && paths[++i])
 	{
 		tmp = paths[i];

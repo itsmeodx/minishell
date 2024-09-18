@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 13:15:24 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:40:54 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	cd_dash(t_cmd *cmd)
 {
 	char	*oldpwd;
 
-	if (strlen(cmd->argv[1]) > 1)
+	if (ft_strlen(cmd->argv[1]) > 1)
 		return (dprintf(STDERR_FILENO, NAME"cd: %s: invalid option\n",
 				cmd->argv[1]), printf("cd: usage: cd [-] [dir]\n"), false);
 	oldpwd = ft_getenv("OLDPWD");

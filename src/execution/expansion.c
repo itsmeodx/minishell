@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:57:17 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 10:04:48 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	expand_argv(t_cmd *cmd, int i, char *(*expand_func)(char *))
 	char	**tmp[3];
 
 	cmd->argv[i] = expand_func(cmd->argv[i]);
-	tmp[0] = ft_split(cmd->argv[i], " \t\v\n\r\f");
-	len = ft_count_strs(tmp[0]);
+	tmp[0] = ft_qsplit(cmd->argv[i], " \t\v\n\r\f");
+	len = ft_strlen_2d(tmp[0]);
 	if (len == 1)
 		return (free_2d(tmp[0]), i);
 	str = cmd->argv[i];

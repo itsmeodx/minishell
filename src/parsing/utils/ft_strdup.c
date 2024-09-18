@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:17:07 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/10 11:27:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	ft_count_strs(char **s)
+int	ft_strlen_2d(char **s)
 {
 	int	counter;
 
@@ -24,28 +24,6 @@ int	ft_count_strs(char **s)
 	return (counter);
 }
 
-char	*ft_strdup(const char *s)
-{
-	char	*ptr;
-	char	*put;
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	ptr = (char *)s;
-	put = malloc(ft_strlen(s) + 1);
-	if (put == NULL)
-		return (NULL);
-	while (ptr[i])
-	{
-		put[i] = ptr[i];
-		i++;
-	}
-	put[i] = '\0';
-	return (put);
-}
-
 char	**ft_strdup_2d(char **ptr)
 {
 	char	**put;
@@ -55,7 +33,7 @@ char	**ft_strdup_2d(char **ptr)
 	i = 0;
 	if (!ptr)
 		return (NULL);
-	size = ft_count_strs(ptr);
+	size = ft_strlen_2d(ptr);
 	put = malloc(sizeof(char *) * (size + 1));
 	if (!put)
 		return (0);

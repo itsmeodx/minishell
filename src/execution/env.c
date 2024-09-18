@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:21:46 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/07 17:58:49 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ bool	is_in_env(char *key)
 	int		len;
 
 	i = 0;
-	len = strlen(key);
+	len = ft_strlen(key);
 	while (g_data.environ && g_data.environ[i])
 	{
-		if (strncmp(g_data.environ[i], key, len) == 0
+		if (ft_strncmp(g_data.environ[i], key, len) == 0
 			&& (g_data.environ[i][len] == '='
 			|| g_data.environ[i][len] == '\0'))
 			return (true);
@@ -38,9 +38,9 @@ char	*ft_getenv(char *name)
 
 	i = -1;
 	name = ft_strjoin(name, "=");
-	len = strlen(name);
+	len = ft_strlen(name);
 	while (g_data.environ && g_data.environ[++i])
-		if (strncmp(g_data.environ[i], name, strlen(name)) == 0)
+		if (ft_strncmp(g_data.environ[i], name, ft_strlen(name)) == 0)
 			return (free(name), g_data.environ[i] + len);
 	free(name);
 	return (NULL);
@@ -103,10 +103,10 @@ void	update_env(char **env, char *key, char *value)
 	if (!value)
 		return ;
 	i = 0;
-	len = strlen(key);
+	len = ft_strlen(key);
 	while (env[i])
 	{
-		if (strncmp(env[i], key, len) == 0 && (env[i][len] == '='
+		if (ft_strncmp(env[i], key, len) == 0 && (env[i][len] == '='
 			|| env[i][len] == '\0'))
 		{
 			key = ft_strjoin(key, "=");

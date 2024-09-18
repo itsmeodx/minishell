@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:08:39 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 10:01:00 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:03:10 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**get_midfix(char *str, int i)
 	while (str[j] != '*' && j > i)
 		j--;
 	pattern = ft_substr(str, i + 1, j - i - 1);
-	midfix = ft_split(pattern, "*");
+	midfix = ft_qsplit(pattern, "*");
 	free(pattern);
 	return (midfix);
 }

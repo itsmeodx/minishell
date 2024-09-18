@@ -6,12 +6,13 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 09:36:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 11:51:10 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include "ft_printf.h"
 # include <stdio.h>
 # include <sys/wait.h>
 # include <sys/types.h>
@@ -61,12 +62,6 @@
 
 // global variable
 extern struct s_data	g_data;
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 typedef struct s_link
 {

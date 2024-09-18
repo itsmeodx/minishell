@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:46:14 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 10:22:04 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:39:42 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	sort_2d(char **strs)
 	i = -1;
 	while (strs[++i])
 	{
-		if (strs[i + 1] && strcmp(strs[i], strs[i + 1]) > 0)
+		if (strs[i + 1] && ft_strcmp(strs[i], strs[i + 1]) > 0)
 		{
 			tmp = strs[i];
 			strs[i] = strs[i + 1];

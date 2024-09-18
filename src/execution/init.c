@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 17:38:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/09 17:38:50 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	update_shlvl(char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (strncmp(env[i], "SHLVL=", strlen("SHLVL=")) == 0)
+		if (ft_strncmp(env[i], "SHLVL=", ft_strlen("SHLVL=")) == 0)
 		{
-			lvl = atoi(env[i] + strlen("SHLVL="));
+			lvl = ft_atoi(env[i] + ft_strlen("SHLVL="));
 			lvl++;
 			shlvl = ft_itoa(lvl);
 			free(env[i]);
@@ -69,7 +69,7 @@ void	check_pwd(char **env)
 	else
 	{
 		pwd = getcwd(NULL, 0);
-		if (strcmp(pwd, ft_getenv("PWD")) != 0)
+		if (ft_strcmp(pwd, ft_getenv("PWD")) != 0)
 			update_env(env, "PWD", pwd);
 		free(pwd);
 	}

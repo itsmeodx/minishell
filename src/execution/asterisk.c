@@ -6,78 +6,12 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 19:18:32 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 10:00:10 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:51:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parsing.h"
-
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*new_lst;
-
-	new_lst = (t_list *)malloc(sizeof(t_list));
-	if (!new_lst)
-		return (NULL);
-	new_lst->content = content;
-	new_lst->next = NULL;
-	return (new_lst);
-}
-
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (lst && del)
-	{
-		(*del)(lst->content);
-		free(lst);
-	}
-}
-
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*next_node;
-	t_list	*curr_node;
-
-	if (lst && del)
-	{
-		next_node = *lst;
-		while (next_node)
-		{
-			curr_node = next_node;
-			next_node = next_node->next;
-			ft_lstdelone(curr_node, del);
-		}
-		*lst = NULL;
-	}
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	t_list	*last_node;
-
-	if (!lst)
-		return (NULL);
-	last_node = lst;
-	while (last_node->next)
-		last_node = last_node->next;
-	return (last_node);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*last_node;
-
-	if (!lst || !new)
-		return ;
-	if (*lst)
-	{
-		last_node = ft_lstlast(*lst);
-		last_node->next = new;
-	}
-	else
-		*lst = new;
-}
 
 //char	**get_entries(char	*dirname)
 //{

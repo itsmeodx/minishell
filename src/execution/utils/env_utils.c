@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:58:41 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/07 19:58:41 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_home(void)
 	{
 		free(g_data.home);
 		g_data.home = get_next_line(fd[0]);
-		g_data.home[strlen(g_data.home) - 1] = '\0';
+		g_data.home[ft_strlen(g_data.home) - 1] = '\0';
 	}
 	return (close_pipe(fd), g_data.home);
 }
@@ -97,7 +97,7 @@ char	**remove_from_env(char **env, char *key)
 
 	i[0] = 0;
 	i[1] = 0;
-	len = strlen(key);
+	len = ft_strlen(key);
 	while (env && env[i[0]])
 		i[0]++;
 	new_env = malloc(sizeof(char *) * (i[0]));
@@ -106,7 +106,7 @@ char	**remove_from_env(char **env, char *key)
 	i[0] = -1;
 	while (env && env[++i[0]])
 	{
-		if (strncmp(env[i[0]], key, len) == 0 && (env[i[0]][len] == '='
+		if (ft_strncmp(env[i[0]], key, len) == 0 && (env[i[0]][len] == '='
 			|| env[i[0]][len] == '\0'))
 			free(env[i[0]]);
 		else
