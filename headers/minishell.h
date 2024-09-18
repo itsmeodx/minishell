@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 14:55:09 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:36:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@
 # define BLUE "\001\033[1;34m\002"
 # define MAGENTA "\001\033[1;35m\002"
 # define CYAN "\001\033[1;36m\002"
+# define GRAY "\001\033[1;37m\002"
+# define BOLD "\001\033[1m\002"
+# define UNDERLINE "\001\033[4m\002"
+# define BLINK "\001\033[5m\002"
+# define REVERSE "\001\033[7m\002"
+# define HIDDEN "\001\033[8m\002"
+# define WHITE "\001\033[1;37m\002"
+# define BLACK "\001\033[1;30m\002"
 # define RESET "\001\033[0m\002"
 
 // heardoc

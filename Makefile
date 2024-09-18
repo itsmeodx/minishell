@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
+#    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/09 15:16:05 by akhobba          ###   ########.fr        #
+#    Updated: 2024/09/18 09:34:07 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/ft_readline execution/gnl execution/history \
 				execution/hostname execution/init execution/prompt \
 				execution/quotes \
-				execution/redirections execution/signal execution/utils/close_pipe \
+				execution/redirections execution/signal execution/utils/asterisk_utils \
+				execution/utils/close_pipe \
 				execution/utils/dir_utils \
 				execution/utils/env_utils execution/utils/env_utils_2 \
 				execution/utils/extend_2d execution/utils/ft_itoa \

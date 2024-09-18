@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 19:18:32 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/12 19:18:32 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:00:10 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,48 +126,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 //	return (entries);
 //}
 
-int	dir_size(char *dirname)
-{
-	int				i;
-	DIR				*dir;
-
-	dir = opendir(dirname);
-	if (!dir)
-		return (0);
-	i = 0;
-	while (readdir(dir))
-		i++;
-	closedir(dir);
-	return (i);
-}
-
-char	**get_entries(void)
-{
-	DIR				*dir;
-	struct dirent	*entry;
-	char			**entries;
-	int				i;
-
-	i = dir_size(".");
-	entries = malloc(sizeof(char *) * (i + 1));
-	if (!entries)
-		return (NULL);
-	i = 0;
-	dir = opendir(".");
-	if (!dir)
-		return (free(entries), NULL);
-	entry = readdir(dir);
-	while (entry)
-	{
-		entries[i++] = ft_strdup(entry->d_name);
-		entry = readdir(dir);
-	}
-	entries[i] = NULL;
-	sort_2d(entries);
-	closedir(dir);
-	return (entries);
-}
-
 //char	*ft_2d_to_str(char **entries)
 //{
 //	int		i;
@@ -193,51 +151,6 @@ char	**get_entries(void)
 //	}
 //	return (str);
 //}
-
-char	*get_prefix(char *str, int i)
-{
-	int		j;
-	char	*tmp;
-
-	j = i;
-	while (j >= 0 && str[j] != ' ' && str[j] != '\t')
-		j--;
-	tmp = ft_substr(str, j + 1, i - j - 1);
-	return (tmp);
-}
-
-char	**get_midfix(char *str, int i)
-{
-	int		j;
-	char	**midfix;
-	char	*pattern;
-
-	j = i;
-	while (str[j] && str[j] != ' ' && str[j] != '\t')
-		j++;
-	while (str[j] != '*' && j > i)
-		j--;
-	pattern = ft_substr(str, i + 1, j - i - 1);
-	midfix = ft_split(pattern, "*");
-	free(pattern);
-	return (midfix);
-}
-
-char	*get_suffix(char *str, int i)
-{
-	int		j;
-	int		k;
-	char	*tmp;
-
-	j = i;
-	while (str[j] && str[j] != ' ' && str[j] != '\t')
-		j++;
-	k = j;
-	while (str[j] != '*' && j > i)
-		j--;
-	tmp = ft_substr(str, j + 1, k - j - 1);
-	return (tmp);
-}
 
 char	*ft_lst_to_str(t_list *head)
 {
@@ -265,69 +178,34 @@ char	*ft_lst_to_str(t_list *head)
 	return (str);
 }
 
-bool	check_midfix(char *entry, char **midfix)
-{
-	int		i;
-	int		j;
-	int		k;
-
-	i = -1;
-	j = 0;
-	while (entry && entry[++i])
-	{
-		if (midfix && midfix[j] && entry[i] == midfix[j][0])
-		{
-			k = 0;
-			while (entry[i + k] == midfix[j][k] && midfix[j][k])
-				k++;
-			if (!midfix[j][k])
-			{
-				j++;
-				i += k - 1;
-			}
-		}
-	}
-	if (midfix && !midfix[j])
-		return (true);
-	return (false);
-}
-
 char	*filter_entries(char **entries, char *prefix, char **midfix,
 							char *suffix)
 {
 	int		i;
 	int		j;
-	char	*tmp[3];
+	char	*tmp;
 	t_list	*head;
 
 	head = NULL;
 	i = -1;
 	while (entries && entries[++i])
 	{
-		if (*prefix && ft_strncmp(entries[i], prefix, ft_strlen(prefix)) != 0)
+		if (prefix && *prefix && ft_strncmp(entries[i], prefix,
+				ft_strlen(prefix)) != 0)
 			continue ;
 		j = ft_strlen(entries[i]) - ft_strlen(suffix);
 		if (j < 0)
 			j = 0;
-		if (*suffix && ft_strncmp(entries[i] + j, suffix,
+		if (suffix && *suffix && ft_strncmp(entries[i] + j, suffix,
 				ft_strlen(suffix)) != 0)
 			continue ;
-		tmp[0] = ft_substr(entries[i] + ft_strlen(prefix), 0,
-				ft_strlen(entries[i]) - ft_strlen(suffix));
-		if (check_midfix(tmp[0], midfix))
-		{
-			if (entries[i][0] == '.' && prefix[0] != '.')
-			{
-				free(tmp[0]);
-				continue ;
-			}
+		if (check_midfix(entries[i], prefix, midfix, suffix)
+			&& !(entries[i][0] == '.' && prefix[0] != '.'))
 			ft_lstadd_back(&head, ft_lstnew(ft_strdup(entries[i])));
-		}
-		free(tmp[0]);
 	}
-	tmp[1] = ft_lst_to_str(head);
+	tmp = ft_lst_to_str(head);
 	ft_lstclear(&head, free);
-	return (tmp[1]);
+	return (tmp);
 }
 
 char	*expand_asterisk(char *str)

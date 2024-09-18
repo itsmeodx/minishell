@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/13 09:53:47 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:14:28 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,18 @@ bool			builtin_pwd(t_cmd *cmd);
 bool			builtin_unset(t_cmd *cmd);
 
 // utils/
+// asterisk_utils.c
+char			*get_prefix(char *str, int i);
+char			**get_midfix(char *str, int i);
+char			*get_suffix(char *str, int i);
+bool			check_midfix(char *entry, char *prefix, char **midfix,
+					char *suffix);
 // close_pipe.c
 int				close_pipe(int *fd);
 // dir_utils.c
 bool			isdir(char *path);
+int				dir_size(char *dirname);
+char			**get_entries(void);
 // env_utils.c
 char			*get_home(void);
 char			**var_split(char *var);
@@ -129,7 +137,7 @@ char			*ft_getprompt(void);
 char			*create_full_prompt(void);
 
 // quotes.c
-int			is_in_quote(char *str, int i);
+int				is_in_quote(char *str, int i);
 int				get_next_quote(char *str, char quote);
 
 // redirections.c

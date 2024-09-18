@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:18:20 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/05 15:18:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:37:18 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*read_branch(int *fd, int status)
 	str[1] = ft_strjoin("(", str[0]);
 	free(str[0]);
 	str[0] = ft_strjoin(str[1], ")");
-	branch = colorize(str[0], CYAN);
+	branch = colorize(str[0], GREEN);
 	free(str[0]);
 	free(str[1]);
 	g_data.branch = true;

@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:46:14 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/13 09:53:30 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:22:04 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,17 @@
 void	sort_2d(char **strs)
 {
 	int		i;
-	int		j;
 	char	*tmp;
 
 	i = -1;
 	while (strs[++i])
 	{
-		j = i;
-		while (strs[++j])
+		if (strs[i + 1] && strcmp(strs[i], strs[i + 1]) > 0)
 		{
-			if (strcmp(strs[i], strs[j]) > 0)
-			{
-				tmp = strs[i];
-				strs[i] = strs[j];
-				strs[j] = tmp;
-			}
+			tmp = strs[i];
+			strs[i] = strs[i + 1];
+			strs[i + 1] = tmp;
+			i = -1;
 		}
 	}
 }
@@ -63,23 +59,20 @@ char	*expand_dollar(char *str)
 	i[0] = -1;
 	while (str[++i[0]])
 	{
-		if (str[i[0]] == '$')
+		if (str[i[0]] == '$' && is_in_quote(str, i[0]) == '\'')
+			continue ;
+		if (str[i[0]] == '$' && str[i[0] + 1] == '?')
+			str = expand_status(str, i);
+		else if (str[i[0]] == '$' && str[i[0] + 1] != '$'
+			&& (isalnum(str[i[0] + 1]) || str[i[0] + 1] == '_'))
 		{
-			if (is_in_quote(str, i[0]) == '\'')
-				continue ;
-			if (str[i[0] + 1] == '?')
-				str = expand_status(str, i);
-			else if (str[i[0] + 1] != '$'
-				&& (isalnum(str[i[0] + 1]) || str[i[0] + 1] == '_'))
-			{
-				i[1] = i[0] + 1;
-				while (isalnum(str[i[1]]) || str[i[1]] == '_')
-					i[1]++;
-				key = ft_substr(str, i[0] + 1, i[1] - i[0] - 1);
-				value = ft_getenv(key);
-				free(key);
-				str = expand_val(str, value, i);
-			}
+			i[1] = i[0] + 1;
+			while (isalnum(str[i[1]]) || str[i[1]] == '_')
+				i[1]++;
+			key = ft_substr(str, i[0] + 1, i[1] - i[0] - 1);
+			value = ft_getenv(key);
+			free(key);
+			str = expand_val(str, value, i);
 		}
 	}
 	return (str);

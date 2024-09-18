@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:57:17 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/12 17:50:17 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 10:04:48 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int	expand_argv(t_cmd *cmd, int i, char *(*expand_func)(char *))
 	char	*str;
 	char	**tmp[3];
 
-	printf("before: cmd->argv[i]: %s\n", cmd->argv[i]);
 	cmd->argv[i] = expand_func(cmd->argv[i]);
-	printf("after: cmd->argv[i]: %s\n", cmd->argv[i]);
 	tmp[0] = ft_split(cmd->argv[i], " \t\v\n\r\f");
 	len = ft_count_strs(tmp[0]);
 	if (len == 1)
@@ -80,10 +78,10 @@ void	ft_expansion(t_cmd *cmd)
 	{
 		if (cmd->argv[i][0] == '~')
 			cmd->argv[i] = expand_pergola(cmd->argv[i]);
+		cmd->argv[i] = expand_asterisk(cmd->argv[i]);
 		i = expand_argv(cmd, i, &expand_dollar);
 		if (i < 0)
 			continue ;
 		cmd->argv[i] = ft_expanding(cmd->argv[i]);
-		cmd->argv[i] = expand_asterisk(cmd->argv[i]);
 	}
 }
