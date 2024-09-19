@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parentheses_checker.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 00:20:34 by adam              #+#    #+#             */
-/*   Updated: 2024/09/08 15:07:45 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/17 11:58:54 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int	ft_index_parentheses(t_link *link)
 {
-	int		i;
 	int		valider;
 	t_link	*tmp;
 
 	tmp = link;
 	valider = 0;
-	i = 0;
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->command, "(", ft_strlen(tmp->command)) == 0)

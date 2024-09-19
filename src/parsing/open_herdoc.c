@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   open_herdoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/15 13:14:17 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/19 09:47:52 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "execution.h"
 
-// TODO : add error handling
-// TODO : fix ^c int herdoc
-// TODO : handle error in case of no permission
-// TODO : fork and exec in herdoc
 bool	isempty(char	*line);
 
 char	*ft_name_file(int num_file)
@@ -30,6 +26,7 @@ char	*ft_name_file(int num_file)
 		unlink(file);
 	return (free(num), file);
 }
+
 int	ft_get_fd(char *file)
 {
 	int	fd;
@@ -52,7 +49,7 @@ char	*ft_write_heredoc(char *limit, int num, bool key_expand)
 {
 	char	*line;
 	char	*file;
-	int 	line_num;
+	int		line_num;
 	int		fd;
 
 	file = ft_name_file(num);
@@ -65,28 +62,22 @@ char	*ft_write_heredoc(char *limit, int num, bool key_expand)
 			add_history(line);
 		if (!line)
 		{
-			dprintf(STDERR_FILENO,
-			NAME"warning: here-document at line %d delimited by end-of-file (wanted `%s')\n",
-			line_num, limit);
+			dprintf(STDERR_FILENO, NAME
+				"warning: here-document at line %d delimited by end-of-file (wanted `%s')\n",
+				line_num, limit);
 			break ;
 		}
-		if (ft_strncmp(line, limit, ft_strlen(line)) == 0)
+		if (*line && ft_strncmp(line, limit, ft_strlen(line)) == 0)
 		{
 			free(line);
 			break ;
 		}
-		// expand line before writing
 		if (!key_expand)
-			ft_expansion(&line);
+			line = expand_env(line);
 		ft_write_n(&line, fd);
 		line_num++;
 	}
 	return (free(limit), close(fd),file);
-}
-
-bool	ft_read_keyexpand(char *limit)
-{
-	return (is_inquotes(limit, 1));
 }
 
 int	ft_open_herdoc(t_link **link, bool key_expand)
@@ -99,18 +90,14 @@ int	ft_open_herdoc(t_link **link, bool key_expand)
 		signal(SIGINT, SIG_DFL);
 		while (*link)
 		{
-			if ((*link)->identifier == HEREDOC)
-			{
-				if ((*link)->next && (*link)->next->identifier == STR)
+			if ((*link)->identifier == HEREDOC &&
+				((*link)->next && (*link)->next->identifier == STR))
 				{
-					key_expand = ft_read_keyexpand((*link)->next->command);
-					// remvoe quotes from limit
+					key_expand = is_inquotes((*link)->next->command, 1);
+					(*link)->next->command = ft_tmp_rmquotes((*link)->next->command);
 					(*link)->next->command = ft_write_heredoc((*link)->next->command, g_data.num_of_file++,
 					key_expand);
 				}
-				else
-					return (ERROR_NUM_HERDOC);
-			}
 			*link = (*link)->next;
 		}
 		ft_exit(EXIT_SUCCESS);

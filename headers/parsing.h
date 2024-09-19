@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/15 10:55:56 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/17 14:49:29 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
 int				ft_open_herdoc(t_link **link, bool key_expand);
 bool			ft_is_redirection(int identifier);
+char			*ft_tmp_rmquotes(char *str);
 
 // garbage_collector
 void			*ft_malloc(size_t size);
@@ -147,5 +148,6 @@ t_errorn		ft_check_herdoc(t_link *link);
 t_errorn		ft_check_parentheses(t_link *link);
 int				ft_syntax_error(t_link *link);
 void			ft_printf_error(t_errorn error);
+int				ft_check_each_node(char *input);
 
 #endif // PARSING_H
