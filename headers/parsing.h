@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/17 14:49:29 by adam             ###   ########.fr       */
+/*   Updated: 2024/09/19 11:06:40 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char			**ft_strjoin_2d(char **s1, char **s2);
 int				ft_open_herdoc(t_link **link, bool key_expand);
 bool			ft_is_redirection(int identifier);
 char			*ft_tmp_rmquotes(char *str);
+char			*ft_name_file(int num_file);
 
 // garbage_collector
 void			*ft_malloc(size_t size);
