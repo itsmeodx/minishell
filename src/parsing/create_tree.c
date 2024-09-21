@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/09 12:44:16 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/19 12:13:13 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_tree	*ft_parse_cmd(t_link *link)
 	}
 	if (target->identifier == OPEN_PAR)
 	{
-		ft_limit_link(&link);
 		ft_parse_parenthesis(&new, link->next);
 	}
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/19 11:06:40 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/19 12:31:34 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_link			*ft_find_hightest_proirity(t_link *head);
 int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
 int				ft_open_herdoc(t_link **link, bool key_expand);
-bool			ft_is_redirection(int identifier);
 char			*ft_tmp_rmquotes(char *str);
 char			*ft_name_file(int num_file);
 
@@ -104,7 +103,7 @@ void			ft_add_to_argv(t_tree **new, char *command);
 void			ft_cmd_create(t_tree **new, t_link *link);
 t_tree			*ft_parse_and_or(t_link *link);
 t_tree			*ft_parse_parenthesis(t_tree **tree, t_link *link);
-void			ft_limit_link(t_link **link);
+t_link			*ft_limit_link(t_link **link);
 void			ft_treeclear(t_tree *tree);
 // src fts
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -126,6 +125,7 @@ char			*ft_itoa(int n);
 t_redirection	*ft_lstnew_redi(char *content);
 void			ft_lstadd_back_redi(t_redirection **list, t_redirection *node);
 void			ft_lstclear_redi(t_redirection **list);
+bool			ft_is_redirection(int identifier);
 
 // // link_ft
 t_link			*ft_create_new_link(t_link *link, t_link *limit);
