@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-int	check_quote(char *str, int a)
+int	is_inquotes(char *str, int a)
 {
 	int	i;
 	int	j;
@@ -46,12 +46,12 @@ static int	count_words(char *str, char *charset)
 	count = 0;
 	while (str[i])
 	{
-		while (str[i] && ft_strchr_v2(str[i], charset) && !check_quote(str, i))
+		while (str[i] && ft_strchr_v2(str[i], charset) && !is_inquotes(str, i))
 			i++;
 		if (str[i])
 			count++;
 		while (str[i] && (!ft_strchr_v2(str[i], charset)
-				|| (ft_strchr_v2(str[i], charset) && check_quote(str, i))))
+				|| (ft_strchr_v2(str[i], charset) && is_inquotes(str, i))))
 			i++;
 	}
 	return (count);
@@ -64,7 +64,7 @@ static int	char_sep(char *str, char *charset)
 	i = 0;
 	while (str[i] && (!ft_strchr_v2(str[i], charset)
 			|| (ft_strchr_v2(str[i], charset)
-				&& check_quote(str, i))))
+				&& is_inquotes(str, i))))
 		i++;
 	return (i);
 }
@@ -102,7 +102,7 @@ char	**ft_qsplit(char *str, char *charset)
 	strings = (char **)malloc(sizeof(char *) * (str_len + 1));
 	while (str[j])
 	{
-		while (str[j] && ft_strchr_v2(str[j], charset) && !check_quote(str, j))
+		while (str[j] && ft_strchr_v2(str[j], charset) && !is_inquotes(str, j))
 			j++;
 		if (str[j])
 		{
@@ -110,7 +110,7 @@ char	**ft_qsplit(char *str, char *charset)
 			i++;
 		}
 		while (str[j] && (!ft_strchr_v2(str[j], charset)
-				|| (ft_strchr_v2(str[j], charset) && check_quote(str, j))))
+				|| (ft_strchr_v2(str[j], charset) && is_inquotes(str, j))))
 			j++;
 	}
 	strings[i] = (void *)0;

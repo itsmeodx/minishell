@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:35:31 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_set_type(t_link **node, char *input)
 	else if (!ft_strncmp(input, ">", ft_strlen(input)))
 		(*node)->identifier = OUT;
 	else if (!ft_strncmp(input, "<<", ft_strlen(input)))
-		(*node)->identifier = HERDOC;
+		(*node)->identifier = HEREDOC;
 	else if (!ft_strncmp(input, ">>", ft_strlen(input)))
 		(*node)->identifier = APPEND;
 	else if (!ft_strncmp(input, "|", ft_strlen(input)))
@@ -59,7 +59,7 @@ t_link	*ft_def_type(char **input)
 bool	ft_is_redirection(int identifier)
 {
 	if (identifier == IN || identifier == OUT || identifier == APPEND
-		|| identifier == HERDOC)
+		|| identifier == HEREDOC)
 		return (true);
 	return (false);
 }
@@ -75,8 +75,8 @@ t_tree	*ft_parsing(char *input)
 	g_data.garbage = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
-	ft_open_herdoc(link);
 	tmp = link;
+	ft_open_herdoc(&tmp, 0, 0);
 	if (ft_syntax_error(tmp))
 	{
 		ft_garbage_clear(&g_data.garbage);
@@ -89,7 +89,7 @@ t_tree	*ft_parsing(char *input)
 }
 
 	// ft_printf_link(link);
+	// ft_dbl_lstclear(&link);
 	// ft_generate_spaces(10);
 	// ft_printf_tree(tree, 0, 2);
-	// ft_printf("\n");
-	// ft_dbl_lstclear(&link);
+	// printf("\n");

@@ -42,7 +42,7 @@ bool	set_redirections(t_redirection *redirections)
 		if (!check_file(redirections))
 			return (false);
 		if (redirections->identifier == IN
-			|| redirections->identifier == HERDOC)
+			|| redirections->identifier == HEREDOC)
 			fd = open(redirections->file, O_RDONLY);
 		else if (redirections->identifier == OUT)
 			fd = open(redirections->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -52,7 +52,7 @@ bool	set_redirections(t_redirection *redirections)
 			return (ft_dprintf(STDERR_FILENO,
 					NAME "%s: ", redirections->file), perror(NULL), false);
 		if (redirections->identifier == IN
-			|| redirections->identifier == HERDOC)
+			|| redirections->identifier == HEREDOC)
 			dup2(fd, STDIN_FILENO);
 		else
 			dup2(fd, STDOUT_FILENO);

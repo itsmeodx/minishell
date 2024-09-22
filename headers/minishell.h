@@ -54,7 +54,7 @@
 # define RESET "\001\033[0m\002"
 
 // heardoc
-# define HEREDOC "hd_"
+# define HEREDOC_PREFIX "/tmp/hd_"
 # define HEREDOC_PROMPT "> "
 
 // Define default PATH

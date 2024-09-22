@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:08:25 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:31:34 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef enum e_type
 	IN,
 	OUT,
 	APPEND,
-	HERDOC,
+	HEREDOC,
 	PIPE,
 	OR,
 	AND,
@@ -73,15 +73,16 @@ typedef enum e_errorn
 // src
 char			**ft_lexer(char *input);
 char			**ft_qsplit(char *str, char *c);
-int				check_quote(char *str, int a);
+int				is_inquotes(char *str, int a);
 int				ft_strchr_v2(int c, const char *s);
 t_tree			*ft_parsing(char *input);
 t_link			*ft_def_type(char **input);
 t_link			*ft_find_hightest_proirity(t_link *head);
 int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
-int				ft_open_herdoc(t_link *link);
-bool			ft_is_redirection(int identifier);
+int				ft_open_herdoc(t_link **link, bool key_expand, int num);
+char			*ft_tmp_rmquotes(char *str);
+char			*ft_name_file(int num_file);
 
 // garbage_collector
 void			*ft_malloc(size_t size);
@@ -102,7 +103,7 @@ void			ft_add_to_argv(t_tree **new, char *command);
 void			ft_cmd_create(t_tree **new, t_link *link);
 t_tree			*ft_parse_and_or(t_link *link);
 t_tree			*ft_parse_parenthesis(t_tree **tree, t_link *link);
-void			ft_limit_link(t_link **link);
+t_link			*ft_limit_link(t_link **link);
 void			ft_treeclear(t_tree *tree);
 // src fts
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -121,6 +122,7 @@ char			*ft_itoa(int n);
 t_redirection	*ft_lstnew_redi(char *content);
 void			ft_lstadd_back_redi(t_redirection **list, t_redirection *node);
 void			ft_lstclear_redi(t_redirection **list);
+bool			ft_is_redirection(int identifier);
 
 // // link_ft
 t_link			*ft_create_new_link(t_link *link, t_link *limit);
@@ -144,5 +146,6 @@ t_errorn		ft_check_herdoc(t_link *link);
 t_errorn		ft_check_parentheses(t_link *link);
 int				ft_syntax_error(t_link *link);
 void			ft_printf_error(t_errorn error);
+int				ft_check_each_node(char *input);
 
 #endif // PARSING_H

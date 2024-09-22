@@ -43,8 +43,8 @@ PARSING			=	parsing/lexer parsing/parser\
 					parsing/parse_parentheses parsing/tree_utils/ft_treeclear \
 					parsing/quotes_checker parsing/syntax_error \
 					parsing/and_or_checker parsing/redirections_checker \
-					parsing/parentheses_checker parsing/open_herdoc\
-					parsing/garbage_collector\
+					parsing/parentheses_checker parsing/open_heredoc\
+					parsing/garbage_collector parsing/rm_quotes \
 
 EXECUTION		=	execution/builtins/builtins execution/builtins/cd \
 					execution/builtins/echo execution/builtins/env \

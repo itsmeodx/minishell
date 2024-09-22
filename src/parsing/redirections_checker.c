@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 00:58:26 by adam              #+#    #+#             */
-/*   Updated: 2024/09/08 15:02:30 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/13 17:52:18 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_errorn	ft_check_herdoc(t_link *link)
 	num_herdoc = 0;
 	while (tmp)
 	{
-		if (tmp->identifier == HERDOC)
+		if (tmp->identifier == HEREDOC)
 		{
 			if (!tmp->next || (tmp->next && tmp->next->identifier != STR))
 				return (ERROR_HERDOC);
