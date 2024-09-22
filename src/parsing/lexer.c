@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 23:31:30 by adam              #+#    #+#             */
-/*   Updated: 2024/09/08 15:08:53 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/15 10:49:48 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*ft_add_spaces_bonus(char *input, int j)
 	while (input[j])
 	{
 		if ((input[j] == '&' || input[j] == '(' || input[j] == '|')
-			&& !check_quote(input, j))
+			&& !is_inquotes(input, j))
 		{
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];
@@ -105,7 +105,7 @@ char	*ft_add_spaces(char *input, int j)
 	while (input[j])
 	{
 		if ((input[j] == ')' || input[j] == '<' || input[j] == '>')
-			&& !check_quote(input, j))
+			&& !is_inquotes(input, j))
 		{
 			tmp[i] = ' ';
 			tmp[++i] = input[j++];

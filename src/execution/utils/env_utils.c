@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:58:41 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/07 19:58:41 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/12 08:27:40 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	**var_split(char *var)
 	char	**key_value;
 
 	i = 0;
-	printf("var: %s\n", var);
 	while (var[i] && var[i] != '=' && var[i] != '+')
 		i++;
 	if (var[i] == '+' && var[i + 1] == '=')
@@ -61,7 +60,6 @@ char	**var_split(char *var)
 			- (var[i - 1] == '+'));
 	if (var[i] == '=')
 		key_value[1] = ft_strdup(var + i + 1);
-	printf("key_value[1]: %s\n", key_value[1]);
 	return (key_value);
 }
 

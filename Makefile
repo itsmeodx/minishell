@@ -1,16 +1,16 @@
 # **************************************************************************** #
-#                                                                              #
+#
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
+#    By: adam <adam@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/09 15:16:05 by akhobba          ###   ########.fr        #
+#    Updated: 2024/09/17 11:58:25 by adam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC			=	cc
+CC			=	clang
 RM			=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address,leak,undefined
 INC			=	-I./headers
@@ -41,6 +41,7 @@ PARSING		=	parsing/lexer parsing/parser\
 				parsing/and_or_checker parsing/redirections_checker \
 				parsing/parentheses_checker parsing/open_herdoc\
 				parsing/utils/ft_strlcat parsing/garbage_collector\
+				parsing/rm_quotes \
 
 EXECUTION	=	execution/builtins/builtins execution/builtins/cd \
 				execution/builtins/echo execution/builtins/env \

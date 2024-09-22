@@ -6,13 +6,13 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 11:21:06 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/01 12:55:16 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/15 10:49:48 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	check_quote(char *str, int a)
+int	is_inquotes(char *str, int a)
 {
 	int	i;
 	int	j;
@@ -25,7 +25,7 @@ int	check_quote(char *str, int a)
 			j = i + 1;
 			while (str[j] && str[j] != str[i])
 				j++;
-			if (j == ft_strlen(str))
+			if (j == (int)ft_strlen(str))
 				return (0);
 			if (a > i && a < j)
 				return (1);
@@ -46,12 +46,12 @@ static int	count_words(char *str, char *charset)
 	count = 0;
 	while (str[i])
 	{
-		while (str[i] && ft_strchr(str[i], charset) && !check_quote(str, i))
+		while (str[i] && ft_strchr(str[i], charset) && !is_inquotes(str, i))
 			i++;
 		if (str[i])
 			count++;
 		while (str[i] && (!ft_strchr(str[i], charset) || (ft_strchr(str[i],
-						charset) && check_quote(str, i))))
+						charset) && is_inquotes(str, i))))
 			i++;
 	}
 	return (count);
@@ -63,7 +63,7 @@ static int	char_sep(char *str, char *charset)
 
 	i = 0;
 	while (str[i] && (!ft_strchr(str[i], charset) || (ft_strchr(str[i], charset)
-				&& check_quote(str, i))))
+				&& is_inquotes(str, i))))
 		i++;
 	return (i);
 }
@@ -101,7 +101,7 @@ char	**ft_split(char *str, char *charset)
 	strings = (char **)malloc(sizeof(char *) * (str_len + 1));
 	while (str[j])
 	{
-		while (str[j] && ft_strchr(str[j], charset) && !check_quote(str, j))
+		while (str[j] && ft_strchr(str[j], charset) && !is_inquotes(str, j))
 			j++;
 		if (str[j])
 		{
@@ -109,7 +109,7 @@ char	**ft_split(char *str, char *charset)
 			i++;
 		}
 		while (str[j] && (!ft_strchr(str[j], charset) || (ft_strchr(str[j],
-						charset) && check_quote(str, j))))
+						charset) && is_inquotes(str, j))))
 			j++;
 	}
 	strings[i] = (void *)0;
