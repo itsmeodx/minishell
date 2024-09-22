@@ -6,82 +6,62 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:57:17 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:50:43 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parsing.h"
 
-char	*expand_pergola(char *str)
+void	printf_lst(t_list *lst)
 {
-	char	*home;
-	char	*tmp;
+	t_list	*tmp;
 
-	if (str[1] == '\0' || str[1] == '/')
+	tmp = lst;
+	while (tmp)
 	{
-		home = ft_getenv("HOME");
-		if (!home)
-			home = get_home();
-		if (!home)
-			return (ft_dprintf(STDERR_FILENO, NAME "HOME not set\n"), str);
-		tmp = ft_strjoin(home, str + 1);
-		free(str);
-		return (tmp);
+		printf("printf_lst: %s\n", (char *)tmp->content);
+		tmp = tmp->next;
 	}
-	return (str);
 }
 
-char	*expand_status(char *str, int *i)
+char	**expand_argv(t_list *argv_lst)
 {
-	char	*value;
+	char	**argv;
+	char	**tmp;
+	t_list	*lst;
 
-	i[1] = i[0] + 2;
-	value = ft_itoa(g_data.exit_status);
-	str = expand_val(str, value, i);
-	i[0] -= i[2] - 1;
-	free(value);
-	return (str);
-}
-
-int	expand_argv(t_cmd *cmd, int i, char *(*expand_func)(char *))
-{
-	int		len;
-	char	*str;
-	char	**tmp[3];
-
-	cmd->argv[i] = expand_func(cmd->argv[i]);
-	tmp[0] = ft_qsplit(cmd->argv[i], " \t\v\n\r\f");
-	len = ft_strlen_2d(tmp[0]);
-	if (len == 1)
-		return (free_2d(tmp[0]), i);
-	str = cmd->argv[i];
-	cmd->argv[i] = NULL;
-	tmp[1] = ft_strdup_2d(cmd->argv);
-	tmp[1] = ft_strjoin_2d(tmp[1], tmp[0]);
-	free_2d(tmp[0]);
-	tmp[0] = ft_strjoin_2d(tmp[1], cmd->argv + i + 1);
-	cmd->argv[i] = str;
-	free_2d(cmd->argv);
-	cmd->argv = tmp[0];
-	i += len - 1;
-	cmd->argc += len - 1;
-	return (i);
+	argv = NULL;
+	while (argv_lst)
+	{
+		lst = argv_lst->content;
+		tmp = lst_to_argv(lst);
+		ft_lstclear(&lst, free);
+		argv = ft_strjoin_2d(argv, tmp);
+		free_2d(tmp);
+		argv_lst->content = NULL;
+		argv_lst = argv_lst->next;
+	}
+	return (argv);
 }
 
 void	ft_expansion(t_cmd *cmd)
 {
 	int		i;
+	t_list	*lst;
+	t_list	*argv_lst;
 
+	lst = NULL;
+	argv_lst = NULL;
 	i = -1;
 	while (cmd->argv && cmd->argv[++i])
 	{
-		if (cmd->argv[i][0] == '~')
-			cmd->argv[i] = expand_pergola(cmd->argv[i]);
-		cmd->argv[i] = expand_asterisk(cmd->argv[i]);
-		i = expand_argv(cmd, i, &expand_dollar);
-		if (i < 0)
-			continue ;
-		cmd->argv[i] = ft_expanding(cmd->argv[i]);
+		ft_expanding(&lst, cmd->argv[i]);
+		ft_lstadd_back(&argv_lst, ft_lstnew(lst));
+		lst = NULL;
 	}
+	free(cmd->argv);
+	cmd->argv = expand_argv(argv_lst);
+	cmd->argc = ft_strlen_2d(cmd->argv);
+	ft_lstclear(&argv_lst, free);
 }

@@ -31,7 +31,8 @@ void	ft_printf_link(t_link *link)
 	tmp = link;
 	while (tmp)
 	{
-		ft_printf("tmp->command: %s --- id=%d\n", tmp->command, tmp->identifier);
+		ft_printf("tmp->command: %s --- id=%d\n",
+			tmp->command, tmp->identifier);
 		tmp = tmp->next;
 	}
 }

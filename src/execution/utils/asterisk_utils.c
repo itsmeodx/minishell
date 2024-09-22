@@ -28,9 +28,20 @@ char	*get_prefix(char *str, int i)
 char	**get_midfix(char *str, int i)
 {
 	int		j;
+	int		count;
 	char	**midfix;
 	char	*pattern;
 
+	j = i;
+	count = 0;
+	while (str[j] && str[j] != ' ' && str[j] != '\t')
+	{
+		if (str[j] == '*')
+			count++;
+		j++;
+	}
+	if (count < 2)
+		return (NULL);
 	j = i;
 	while (str[j] && str[j] != ' ' && str[j] != '\t')
 		j++;
@@ -82,7 +93,7 @@ bool	check_midfix(char *entry, char *prefix, char **midfix, char *suffix)
 		}
 	}
 	free(tmp);
-	if (midfix && !midfix[i[1]])
+	if ((midfix && !midfix[i[1]]) || !midfix)
 		return (true);
 	return (false);
 }

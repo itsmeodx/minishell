@@ -22,7 +22,7 @@ bool	check_file(t_redirection *redirection)
 	cmd = &(t_cmd){.argv = ft_strdup_2d((char *[]){redirection->file, NULL}),
 		.argc = 1};
 	ft_expansion(cmd);
-	if (ft_strlen_2d(cmd->argv) != 1 || !cmd->argv[0])
+	if (cmd->argc != 1 || !cmd->argv[0])
 		return (ft_dprintf(STDERR_FILENO,
 				NAME "%s: ambiguous redirect\n", redirection->file),
 			free_2d(cmd->argv), false);
@@ -47,7 +47,7 @@ bool	set_redirections(t_redirection *redirections)
 		else if (redirections->identifier == OUT)
 			fd = open(redirections->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		else if (redirections->identifier == APPEND)
-			fd = open(redirections->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			fd = open(redirections->file, O_WRONLY | O_APPEND, 0644);
 		if (fd == -1)
 			return (ft_dprintf(STDERR_FILENO,
 					NAME "%s: ", redirections->file), perror(NULL), false);

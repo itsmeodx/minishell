@@ -53,3 +53,13 @@ int	get_next_quote(char *str, char quote)
 	}
 	return (-1);
 }
+
+char	*ft_subquote(char *str, int start)
+{
+	int		i;
+	char	quote;
+
+	quote = str[start];
+	i = get_next_quote(str + start + 1, quote);
+	return (ft_substr(str, start + 1, i));
+}

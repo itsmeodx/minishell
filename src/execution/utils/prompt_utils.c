@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:18:20 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:35:38 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	*getpwd(void)
 	if (!str[0])
 		str[0] = ft_strdup("");
 	if (ft_getenv("HOME")
-		&& ft_strncmp(str[0], ft_getenv("HOME"), ft_strlen(ft_getenv("HOME"))) == 0)
+		&& ft_strncmp(str[0], ft_getenv("HOME"),
+			ft_strlen(ft_getenv("HOME"))) == 0)
 		str[1] = ft_strjoin("~", str[0] + ft_strlen(ft_getenv("HOME")));
 	else
 		str[1] = ft_strdup(str[0]);
@@ -80,14 +81,14 @@ char	*read_branch(int *fd, int status)
 	str[0] = NULL;
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
 		str[0] = get_next_line(fd[0]);
-	close_pipe(fd);
+	close(fd[0]);
 	if (!str[0])
 		return (g_data.branch = false, NULL);
 	str[0][ft_strlen(str[0]) - 1] = '\0';
 	str[1] = ft_strjoin("(", str[0]);
 	free(str[0]);
 	str[0] = ft_strjoin(str[1], ")");
-	branch = colorize(str[0], GREEN);
+	branch = colorize(str[0], CYAN);
 	free(str[0]);
 	free(str[1]);
 	g_data.branch = true;
@@ -116,6 +117,7 @@ char	*get_branch(void)
 			NULL}, g_data.environ);
 		exit(EXIT_FAILURE);
 	}
-	waitpid(pid, &status, 0);
+	close(fd[1]);
+	waitpid(pid, &status, WUNTRACED);
 	return (read_branch(fd, status));
 }

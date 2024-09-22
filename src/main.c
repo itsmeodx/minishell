@@ -29,10 +29,15 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 		if (!g_data.input)
 			break ;
 		g_data.tree = ft_parsing(g_data.input);
-		if (g_data.tree)
-			ft_execution(g_data.tree);
+		if (!g_data.tree)
+			continue ;
+		ft_execution(g_data.tree);
 		ft_treeclear(g_data.tree);
 		g_data.tree = NULL;
+		if (g_data.exit_status == SIGINT + 128)
+			ft_printf("\n");
+		else if (g_data.exit_status == SIGQUIT + 128)
+			ft_printf("Quit (core dumped)\n");
 	}
 	ft_printf("exit\n");
 	ft_exit(g_data.exit_status);

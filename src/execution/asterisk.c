@@ -86,32 +86,6 @@
 //	return (str);
 //}
 
-char	*ft_lst_to_str(t_list *head)
-{
-	char	*tmp[2];
-	char	*str;
-
-	str = NULL;
-	while (head)
-	{
-		if (head->next)
-			tmp[0] = ft_strjoin(head->content, " ");
-		else
-			tmp[0] = ft_strdup(head->content);
-		if (!str)
-			str = ft_strdup(tmp[0]);
-		else
-		{
-			tmp[1] = ft_strjoin(str, tmp[0]);
-			free(str);
-			str = tmp[1];
-		}
-		free(tmp[0]);
-		head = head->next;
-	}
-	return (str);
-}
-
 char	*filter_entries(char **entries, char *prefix, char **midfix,
 							char *suffix)
 {
@@ -134,10 +108,10 @@ char	*filter_entries(char **entries, char *prefix, char **midfix,
 				ft_strlen(suffix)) != 0)
 			continue ;
 		if (check_midfix(entries[i], prefix, midfix, suffix)
-			&& !(entries[i][0] == '.' && prefix[0] != '.'))
+			&& !(entries[i][0] == '.' && (prefix && prefix[0] != '.')))
 			ft_lstadd_back(&head, ft_lstnew(ft_strdup(entries[i])));
 	}
-	tmp = ft_lst_to_str(head);
+	tmp = ft_lst_to_str(head, true);
 	ft_lstclear(&head, free);
 	return (tmp);
 }
@@ -155,7 +129,7 @@ char	*expand_asterisk(char *str)
 	i = -1;
 	while (str && str[++i])
 	{
-		if (str[i] == '*' && !is_in_quote(str, i))
+		if (str[i] == '*')
 		{
 			prefix = get_prefix(str, i);
 			midfix = get_midfix(str, i);

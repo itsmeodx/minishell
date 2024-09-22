@@ -69,8 +69,15 @@ char			*expand_dollar(char *str);
 void			*extend_2d(char **ptr, size_t size);
 // ft_itoa.c
 char			*ft_itoa(int n);
+// ft_lstexpand.c
+void			ft_lstexpand(t_list **lst, char id, char *str);
+char			**lst_to_argv(t_list *lst);
+// ft_splits.c
+char			**ft_splits(char *str, char *charset);
 // ft_substr.c
 char			*ft_substr(char const *s, unsigned int start, size_t len);
+// lst_utils.c
+char			*ft_lst_to_str(t_list *head, bool flag);
 // prompt_utils.c
 char			*getpwd(void);
 int				get_term_width(void);
@@ -109,11 +116,12 @@ int				execute_str(t_tree *tree);
 int				ft_execution(t_tree *tree);
 
 // expansion.c
-char			*expand_status(char *str, int *i);
 void			ft_expansion(t_cmd *cmd);
 
 // expanding.c
-char			*ft_expanding(char *str);
+char			*expand_pergola(char *str);
+char			*expand_status(char *str, int *i);
+void			ft_expanding(t_list **lst, char *str);
 
 // ft_readline.c
 char			*ft_readline(char *prompt);
@@ -122,6 +130,7 @@ char			*ft_readline(char *prompt);
 char			*get_next_line(int fd);
 
 // history.c
+bool			isempty(char *line);
 void			ft_add_history(char *line);
 void			restore_history(void);
 
@@ -139,6 +148,7 @@ char			*create_full_prompt(void);
 // quotes.c
 int				is_in_quote(char *str, int i);
 int				get_next_quote(char *str, char quote);
+char			*ft_subquote(char *str, int start);
 
 // redirections.c
 bool			set_redirections(t_redirection *redirections);

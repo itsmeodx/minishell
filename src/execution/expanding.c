@@ -6,38 +6,73 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:59:07 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/12 18:04:44 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/22 22:32:43 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parsing.h"
 
-char	*ft_expanding(char *str)
+char	*expand_pergola(char *str)
 {
-	int		i[3];
-	char	*tmp[3];
+	char	*home;
+	char	*tmp;
 
-	i[0] = -1;
-	while (str && str[++i[0]])
+	if (str[0] == '~' && (str[1] == '\0' || str[1] == '/'))
 	{
-		if (str[i[0]] == '\'' || str[i[0]] == '\"')
-		{
-			i[1] = i[0] + get_next_quote(str + i[0] + 1, str[i[0]]);
-			tmp[0] = ft_substr(str, 0, i[0]);
-			tmp[2] = ft_substr(str, i[0] + 1, i[1] - i[0]);
-			if (str[i[0]] == '\"')
-				tmp[2] = expand_dollar(tmp[2]);
-			i[2] = ft_strlen(tmp[2]);
-			tmp[1] = ft_strjoin(tmp[0], tmp[2]);
-			free(tmp[0]);
-			free(tmp[2]);
-			tmp[0] = ft_strjoin(tmp[1], str + i[1] + 2);
-			free(tmp[1]);
-			free(str);
-			str = tmp[0];
-			i[0] += i[2] - 1;
-		}
+		home = ft_getenv("HOME");
+		if (!home)
+			home = get_home();
+		if (!home)
+			return (ft_dprintf(STDERR_FILENO, NAME "HOME not set\n"), str);
+		tmp = ft_strjoin(home, str + 1);
+		free(str);
+		return (tmp);
 	}
 	return (str);
+}
+
+char	*expand_status(char *str, int *i)
+{
+	char	*value;
+
+	i[1] = i[0] + 2;
+	value = ft_itoa(g_data.exit_status);
+	str = expand_val(str, value, i);
+	i[0] -= i[2] - 1;
+	free(value);
+	return (str);
+}
+
+void	handle_quotes(t_list **lst, char *str, int *i)
+{
+	int	j;
+
+	j = *i - (*i - 1 > 0);
+	while (j > 0 && (str[j - (j > 0)] != '\'' && str[j] != '\'')
+		&& (str[j - (j > 0)] != '\"' && str[j] != '\"'))
+		j--;
+	if (*i != 0)
+		ft_lstexpand(lst, 0,
+			ft_substr(str, j, *i - j - (str[j] == '\'' || str[j] == '\"')));
+	ft_lstexpand(lst, str[*i], ft_subquote(str, *i));
+	*i += get_next_quote(str + *i + 1, str[*i]) + 1;
+}
+
+void	ft_expanding(t_list **lst, char *str)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '\"' || str[i] == '\'')
+			handle_quotes(lst, str, &i);
+	j = i;
+	while (j > 0 && str[j] != '\'' && str[j] != '\"')
+		j--;
+	if (!(str[j] == '\'' || (str[j] == '\"' && j == i - 1)))
+		ft_lstexpand(lst, 0, ft_substr(str,
+				j + (str[j] == '\'' || str[j] == '\"'), i - j));
+	free(str);
 }

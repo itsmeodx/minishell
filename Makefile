@@ -6,7 +6,7 @@
 #    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/18 12:38:09 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/09/18 14:39:08 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,9 @@ EXECUTION		=	execution/builtins/builtins execution/builtins/cd \
 					execution/utils/dir_utils \
 					execution/utils/env_utils execution/utils/env_utils_2 \
 					execution/utils/extend_2d execution/utils/ft_itoa \
-					execution/utils/ft_substr execution/utils/output_utils \
+					execution/utils/ft_lstexpand execution/utils/ft_splits \
+					execution/utils/ft_substr execution/utils/lst_utils \
+					execution/utils/output_utils \
 					execution/utils/prompt_utils
 
 SRC				=	$(addprefix $(SRCDIR)/, main.c) \
@@ -113,4 +115,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean NORM
+.PHONY: all clean norm

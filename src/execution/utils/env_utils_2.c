@@ -59,8 +59,6 @@ char	*expand_dollar(char *str)
 	i[0] = -1;
 	while (str[++i[0]])
 	{
-		if (str[i[0]] == '$' && is_in_quote(str, i[0]) == '\'')
-			continue ;
 		if (str[i[0]] == '$' && str[i[0] + 1] == '?')
 			str = expand_status(str, i);
 		else if (str[i[0]] == '$' && str[i[0] + 1] != '$'

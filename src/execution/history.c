@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:08:35 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,26 @@ char	*get_last_line(void)
 {
 	char	*line;
 	char	*last_line;
+	char	*history;
+	int		fd;
 
-	if (g_data.hfd == -1)
+	history = ft_strjoin(g_data.home, "/.msh_history");
+	if (!history)
 		return (NULL);
+	fd = open(history, O_RDONLY);
+	if (fd == -1)
+		return (free(history), NULL);
 	last_line = NULL;
-	line = get_next_line(g_data.hfd);
+	line = get_next_line(fd);
 	while (line)
 	{
 		free(last_line);
 		last_line = line;
-		line = get_next_line(g_data.hfd);
+		line = get_next_line(fd);
 	}
 	if (last_line)
 		last_line[ft_strlen(last_line) - 1] = 0;
-	return (last_line);
+	return (close(fd), free(history), last_line);
 }
 
 bool	isempty(char *line)
@@ -46,7 +52,8 @@ void	ft_add_history(char *line)
 {
 	if (!g_data.last_line)
 		g_data.last_line = get_last_line();
-	if ((g_data.last_line && !ft_strcmp(g_data.last_line, line)) || isempty(line))
+	if ((g_data.last_line && !ft_strcmp(g_data.last_line, line))
+		|| isempty(line))
 		return ;
 	free(g_data.last_line);
 	g_data.last_line = ft_strdup(line);
@@ -61,7 +68,7 @@ void	restore_history(void)
 	char	*line;
 	char	*history;
 
-	history = ft_strjoin(g_data.home, "/.minishell_history");
+	history = ft_strjoin(g_data.home, "/.msh_history");
 	if (!history)
 		return ;
 	if (access(history, F_OK) != -1)

@@ -50,8 +50,8 @@ static int	count_words(char *str, char *charset)
 			i++;
 		if (str[i])
 			count++;
-		while (str[i] && (!ft_strchr_v2(str[i], charset) || (ft_strchr_v2(str[i],
-						charset) && check_quote(str, i))))
+		while (str[i] && (!ft_strchr_v2(str[i], charset)
+				|| (ft_strchr_v2(str[i], charset) && check_quote(str, i))))
 			i++;
 	}
 	return (count);
@@ -62,7 +62,8 @@ static int	char_sep(char *str, char *charset)
 	int	i;
 
 	i = 0;
-	while (str[i] && (!ft_strchr_v2(str[i], charset) || (ft_strchr_v2(str[i], charset)
+	while (str[i] && (!ft_strchr_v2(str[i], charset)
+			|| (ft_strchr_v2(str[i], charset)
 				&& check_quote(str, i))))
 		i++;
 	return (i);
@@ -108,8 +109,8 @@ char	**ft_qsplit(char *str, char *charset)
 			strings[i] = ft_words(&str[j], charset);
 			i++;
 		}
-		while (str[j] && (!ft_strchr_v2(str[j], charset) || (ft_strchr_v2(str[j],
-						charset) && check_quote(str, j))))
+		while (str[j] && (!ft_strchr_v2(str[j], charset)
+				|| (ft_strchr_v2(str[j], charset) && check_quote(str, j))))
 			j++;
 	}
 	strings[i] = (void *)0;
