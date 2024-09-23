@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 10:14:28 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:33:53 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char			*get_branch(void);
 char			*get_output(char **cmd);
 
 // asterisk.c
-char			*expand_asterisk(char *str);
+char			*expand_asterisk(char *str, int i);
 // env.c
 bool			is_in_env(char *key);
 char			*ft_getenv(char *name);

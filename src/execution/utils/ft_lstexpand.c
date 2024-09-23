@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 10:23:44 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/22 22:24:38 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:34:01 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_lstexpand(t_list **lst, char id, char *str)
 	{
 		str = expand_pergola(str);
 		str = expand_dollar(str);
-		str = expand_asterisk(str);
+		str = expand_asterisk(str, -1);
 	}
 	if (id == '\"' || id == '\'')
 		tmp = ft_strjoin(str, "00");

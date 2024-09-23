@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:59:39 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/21 14:58:10 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/23 10:45:45 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ t_link	*ft_limit_link(t_link **link)
 	last = NULL;
 	while (tmp)
 	{
-		printf("in limit tmp->command: %s\n", tmp->command);
 		if (tmp->identifier == CLOSE_PAR)
 		{
 			last = tmp->next;
-			printf("last->command: %s\n", last->command);
 			tmp->prev->next = NULL;
 			break ;
 		}
@@ -43,7 +41,6 @@ t_tree	*ft_parse_parenthesis(t_tree **tree, t_link *link)
 
 	new = NULL;
 	last = ft_limit_link(&link);
-	ft_printf_link(link);
 	if (!tree)
 		return (NULL);
 	if (!link)

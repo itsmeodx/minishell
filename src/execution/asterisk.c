@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 19:18:32 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:35:07 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,51 @@ char	*filter_entries(char **entries, char *prefix, char **midfix,
 	return (tmp);
 }
 
-char	*expand_asterisk(char *str)
+void	handle_no_match(char *str, int *i, char	**one_d, char ***two_d)
 {
-	int		i;
+	free(one_d[0]);
+	free(one_d[1]);
+	free_2d(two_d[0]);
+	free_2d(two_d[1]);
+	while (str[*i] && str[*i] != ' ' && str[*i] != '\t')
+		(*i)++;
+	(*i)--;
+}
+
+char	*handle_match(char *str, int *i, char **one_d, char ***two_d)
+{
 	int		j;
+	char	**tmp;
+
+	tmp = two_d[0];
+	tmp[1] = ft_substr(str, 0, (*i) - ft_strlen(one_d[0]));
+	j = (*i) + 1;
+	while (str[j] && str[j] != ' ' && str[j] != '\t')
+		j++;
+	tmp[2] = ft_substr(str, j, ft_strlen(str) - j);
+	tmp[3] = ft_strjoin(tmp[1], tmp[0]);
+	tmp[4] = ft_strjoin(tmp[3], tmp[2]);
+	(*i) = ft_strlen(tmp[3]) - 1;
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp[2]);
+	free(tmp[3]);
+	free(one_d[0]);
+	free_2d(two_d[1]);
+	free(one_d[1]);
+	free_2d(two_d[2]);
+	free(str);
+	return (tmp[4]);
+}
+
+char	*expand_asterisk(char *str, int i)
+{
 	char	*suffix;
 	char	**midfix;
 	char	**entries;
 	char	*prefix;
 	char	*tmp[5];
 
-	i = -1;
 	while (str && str[++i])
 	{
 		if (str[i] == '*')
@@ -137,34 +171,12 @@ char	*expand_asterisk(char *str)
 			entries = get_entries();
 			tmp[0] = filter_entries(entries, prefix, midfix, suffix);
 			if (!tmp[0])
-			{
-				free(prefix);
-				free_2d(midfix);
-				free(suffix);
-				free_2d(entries);
-				while (str[i] && str[i] != ' ' && str[i] != '\t')
-					i++;
-				i--;
-				continue ;
-			}
-			tmp[1] = ft_substr(str, 0, i - ft_strlen(prefix));
-			j = i + 1;
-			while (str[j] && str[j] != ' ' && str[j] != '\t')
-				j++;
-			tmp[2] = ft_substr(str, j, ft_strlen(str) - j);
-			tmp[3] = ft_strjoin(tmp[1], tmp[0]);
-			tmp[4] = ft_strjoin(tmp[3], tmp[2]);
-			i = ft_strlen(tmp[3]) - 1;
-			free(tmp[0]);
-			free(tmp[1]);
-			free(tmp[2]);
-			free(tmp[3]);
-			free(prefix);
-			free_2d(midfix);
-			free(suffix);
-			free_2d(entries);
-			free(str);
-			str = tmp[4];
+				handle_no_match(str, &i,
+					(char *[]){prefix, suffix}, ((char **[]){midfix, entries}));
+			else
+				str = handle_match(str, &i,
+						(char *[]){prefix, suffix},
+						(char **[]){tmp, midfix, entries});
 		}
 	}
 	return (str);

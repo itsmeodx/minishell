@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/19 11:10:44 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/23 11:07:06 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_get_fd(char *file)
 
 void	ft_error_msg(char *limit, int line_num)
 {
-	dprintf(STDERR_FILENO, NAME
+	ft_dprintf(STDERR_FILENO, NAME
 		"%s %d delimited by end-of-file (wanted `%s')\n",
 		"warning: here-document at line", line_num, limit);
 }
@@ -34,7 +34,7 @@ void	ft_write_n(char **line, int fd, int key_expand)
 {
 	if (!key_expand)
 		*line = expand_dollar(*line);
-	dprintf(fd, "%s\n", *line);
+	ft_dprintf(fd, "%s\n", *line);
 	free(*line);
 	*line = NULL;
 }
