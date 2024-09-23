@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/19 12:31:34 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/23 10:52:36 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,15 @@ t_link			*ft_def_type(char **input);
 t_link			*ft_find_hightest_proirity(t_link *head);
 int				ft_redirections(t_link *link, t_redirection **redirectoin);
 char			**ft_strjoin_2d(char **s1, char **s2);
+
+// heredoc
 int				ft_open_herdoc(t_link **link, bool key_expand, int num);
 char			*ft_tmp_rmquotes(char *str);
 char			*ft_name_file(int num_file);
+void			ft_write_n(char **line, int fd, int key_expand);
+int				ft_get_fd(char *file);
+void			ft_error_msg(char *limit, int line_num);
+int				ft_fork_heredoc(char *limit, int fd, int key_expand);
 
 // garbage_collector
 void			*ft_malloc(size_t size);

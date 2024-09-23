@@ -1,0 +1,10 @@
+c
+ft_printf
+headers
+LICENSE
+ls
+Makefile
+minishell
+obj
+README.md
+src
