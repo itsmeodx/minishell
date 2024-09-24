@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/24 19:17:07 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 21:37:03 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_tree	*ft_parsing(char *input)
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
+	free_2d(split_input);
 	ft_open_herdoc(&tmp, 0, 0);
 	if (ft_syntax_error(tmp))
 	{
@@ -86,7 +87,6 @@ t_tree	*ft_parsing(char *input)
 	ft_generate_spaces(10);
 	ft_printf_tree(tree, 0, 2);
 	printf("\n");
-	free_2d(split_input);
 	ft_garbage_clear(&g_data.garbage);
 	return (tree);
 }

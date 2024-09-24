@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/09/24 20:56:25 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 21:36:13 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_fork_heredoc(char *limit, int fd, int key_expand)
 		}
 		ft_write_n(&line, fd, key_expand);
 	}
-	return (free(limit), close(fd), ft_exit(EXIT_SUCCESS), true);
+	return (close(fd), ft_exit(EXIT_SUCCESS), true);
 }
 
 char	*ft_name_file(int num_file)

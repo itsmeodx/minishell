@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/24 20:56:03 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 21:38:28 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ char	*ft_write_heredoc(char *limit, int num, bool key_expand)
 	fd = ft_get_fd(line);
 	pid = fork();
 	if (pid == 0)
+	{
+		free(line);
 		ft_fork_heredoc(limit, fd, key_expand);
+	}
 	waitpid(pid, NULL, 0);
 	return (free(limit), close(fd), line);
 }

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/24 21:20:33 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 21:24:41 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,8 @@ t_tree	*ft_parse_and_or(t_link *link)
 {
 	t_tree	*new;
 	t_link	*target;
-	int		goal[2];
+	static int		goal[2] =  {OR, AND};
 
-	goal[0] = OR;
-	goal[1] = AND;
 	if (!link)
 		return (NULL);
 	target = ft_search_target_rev(link, goal);
