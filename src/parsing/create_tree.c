@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/24 21:24:41 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 21:44:51 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ t_tree	*ft_parse_cmd(t_link *link)
 	goal[1] = OPEN_PAR;
 	if (!link)
 		return (NULL);
-	printf("inside ft_parse_cmd\n");
-	ft_printf_link(link);
-	printf("-----------------\n");
 	target = ft_search_target(link, goal);
 	if (!target)
 	{
@@ -80,9 +77,9 @@ t_tree	*ft_parse_pipe(t_link *link)
 
 t_tree	*ft_parse_and_or(t_link *link)
 {
-	t_tree	*new;
-	t_link	*target;
-	static int		goal[2] =  {OR, AND};
+	t_tree		*new;
+	t_link		*target;
+	static int	goal[2] = {OR, AND};
 
 	if (!link)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/24 21:37:03 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 21:47:07 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,15 @@ t_tree	*ft_parsing(char *input)
 	if (ft_syntax_error(tmp))
 	{
 		ft_garbage_clear(&g_data.garbage);
-		return (free_2d(split_input), NULL);
+		return (NULL);
 	}
 	tree = ft_parse_and_or(tmp);
-	ft_generate_spaces(10);
-	ft_printf_tree(tree, 0, 2);
-	printf("\n");
 	ft_garbage_clear(&g_data.garbage);
 	return (tree);
 }
 
 	// ft_printf_link(link);
 	// ft_dbl_lstclear(&link);
+	// ft_generate_spaces(10);
+	// ft_printf_tree(tree, 0, 2);
+	// printf("\n");
