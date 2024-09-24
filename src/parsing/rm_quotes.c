@@ -6,11 +6,39 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/09/19 11:07:14 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/23 10:52:24 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "execution.h"
+
+int	ft_fork_heredoc(char *limit, int fd, int key_expand)
+{
+	char	*line;
+	int		line_num;
+
+	line_num = 0;
+	signal(SIGINT, SIG_DFL);
+	while (true)
+	{
+		line = readline("> ");
+		if (line && *line && !isempty(line))
+			add_history(line);
+		if (++line_num && !line)
+		{
+			ft_error_msg(limit, line_num);
+			break ;
+		}
+		if (*line && ft_strncmp(line, limit, ft_strlen(line)) == 0)
+		{
+			free(line);
+			break ;
+		}
+		ft_write_n(&line, fd, key_expand);
+	}
+	return (free(limit), close(fd), ft_exit(EXIT_SUCCESS), true);
+}
 
 char	*ft_name_file(int num_file)
 {
