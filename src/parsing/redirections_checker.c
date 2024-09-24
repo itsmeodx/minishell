@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 00:58:26 by adam              #+#    #+#             */
-/*   Updated: 2024/09/13 17:52:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 19:27:07 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_errorn	ft_check_pipe(t_link *link)
 	while (tmp)
 	{
 		if (tmp->identifier == PIPE && ((!tmp->next || (tmp->next
-						&& tmp->next->identifier != STR)) && (!tmp->next
+						&& tmp->next->identifier != STR)) || (!tmp->prev
 					|| (tmp->prev && tmp->prev->identifier != STR))))
 			return (ERROR_PIPE);
 		tmp = tmp->next;

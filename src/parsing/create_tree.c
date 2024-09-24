@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/19 12:13:13 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/24 21:20:33 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ t_tree	*ft_parse_cmd(t_link *link)
 	goal[1] = OPEN_PAR;
 	if (!link)
 		return (NULL);
+	printf("inside ft_parse_cmd\n");
+	ft_printf_link(link);
+	printf("-----------------\n");
 	target = ft_search_target(link, goal);
 	if (!target)
 	{
@@ -85,7 +88,7 @@ t_tree	*ft_parse_and_or(t_link *link)
 	goal[1] = AND;
 	if (!link)
 		return (NULL);
-	target = ft_search_target(link, goal);
+	target = ft_search_target_rev(link, goal);
 	if (!target)
 	{
 		new = ft_parse_pipe(link);
@@ -95,9 +98,12 @@ t_tree	*ft_parse_and_or(t_link *link)
 	if (target->prev)
 	{
 		target->prev->next = NULL;
-		ft_treeadd_back_left(&new, ft_parse_pipe(link));
+		ft_treeadd_back_left(&new, ft_parse_and_or(link));
 	}
 	if (target->next)
-		ft_treeadd_back_right(&new, ft_parse_and_or(target->next));
+	{
+		target->next->prev = NULL;
+		ft_treeadd_back_right(&new, ft_parse_pipe(target->next));
+	}
 	return (new);
 }
