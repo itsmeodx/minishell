@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/09/24 21:36:13 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:49:39 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_fork_heredoc(char *limit, int fd, int key_expand)
 	int		line_num;
 
 	line_num = 0;
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, ft_sigheredoc);
 	while (true)
 	{
 		line = readline("> ");

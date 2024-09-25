@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:09:51 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:01:21 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/parsing.h"
-#include "../../headers/execution.h"
+#include "parsing.h"
+#include "execution.h"
 
 bool	reset_signals(void)
 {
@@ -19,6 +19,12 @@ bool	reset_signals(void)
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
 	return (true);
+}
+
+void	ft_sigheredoc(int sig)
+{
+	if (sig == SIGINT)
+		ft_exit(130);
 }
 
 void	ft_signal(int sig)
