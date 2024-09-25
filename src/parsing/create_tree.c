@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/19 12:13:13 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 10:55:19 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ t_tree	*ft_parse_cmd(t_link *link)
 		return (NULL);
 	target = ft_search_target(link, goal);
 	if (!target)
-	{
 		return (NULL);
-	}
 	ft_not_command(&new, target);
 	if (link->next && target->identifier != OPEN_PAR)
 	{
@@ -42,9 +40,7 @@ t_tree	*ft_parse_cmd(t_link *link)
 		ft_redirections(link, &new->redirections);
 	}
 	if (target->identifier == OPEN_PAR)
-	{
 		ft_parse_parenthesis(&new, link->next);
-	}
 	return (new);
 }
 
@@ -77,15 +73,13 @@ t_tree	*ft_parse_pipe(t_link *link)
 
 t_tree	*ft_parse_and_or(t_link *link)
 {
-	t_tree	*new;
-	t_link	*target;
-	int		goal[2];
+	t_tree		*new;
+	t_link		*target;
+	static int	goal[2] = {OR, AND};
 
-	goal[0] = OR;
-	goal[1] = AND;
 	if (!link)
 		return (NULL);
-	target = ft_search_target(link, goal);
+	target = ft_search_target_rev(link, goal);
 	if (!target)
 	{
 		new = ft_parse_pipe(link);
@@ -95,9 +89,12 @@ t_tree	*ft_parse_and_or(t_link *link)
 	if (target->prev)
 	{
 		target->prev->next = NULL;
-		ft_treeadd_back_left(&new, ft_parse_pipe(link));
+		ft_treeadd_back_left(&new, ft_parse_and_or(link));
 	}
 	if (target->next)
-		ft_treeadd_back_right(&new, ft_parse_and_or(target->next));
+	{
+		target->next->prev = NULL;
+		ft_treeadd_back_right(&new, ft_parse_pipe(target->next));
+	}
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/23 10:52:36 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 10:36:17 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,12 @@ bool			ft_is_redirection(int identifier);
 // // link_ft
 t_link			*ft_create_new_link(t_link *link, t_link *limit);
 t_link			*ft_search_target(t_link *head, int target[2]);
+t_link			*ft_search_target_rev(t_link *head, int target[2]);
 void			ft_printf_link(t_link *link);
 
 // dbl link_ft
 void			ft_dbl_lstadd_back(t_link **lst, t_link *new);
+t_link			*ft_dbl_lstadd_front(t_link **lst, t_link *new);
 t_link			*ft_dbl_lstnew(void *content);
 t_link			*ft_dbl_lstlast(t_link *lst);
 void			ft_dbl_lstclear(t_link **lst);

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:52:55 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/31 19:08:18 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 10:53:23 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ void	ft_add_to_argv(t_tree **new, char *command)
 
 void	ft_cmd_create(t_tree **new, t_link *link)
 {
+	if (!link)
+		return ;
 	while (link)
 	{
-		if (link->prev->identifier == STR && link->identifier == STR)
+		if ((link->prev && link->prev->identifier == STR)
+			&& link->identifier == STR)
 		{
 			ft_add_to_argv(new, link->command);
 		}

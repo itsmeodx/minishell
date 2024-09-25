@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/23 10:50:32 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 15:50:31 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	ft_write_n(char **line, int fd, int key_expand)
 	*line = NULL;
 }
 
-char	*ft_write_heredoc(char *limit, int num, bool key_expand)
+char	*ft_write_heredoc(char *limit, int num, bool key_expand,
+			int *status)
 {
 	char	*line;
 	int		fd;
@@ -49,17 +50,25 @@ char	*ft_write_heredoc(char *limit, int num, bool key_expand)
 	fd = ft_get_fd(line);
 	pid = fork();
 	if (pid == 0)
+	{
+		free(line);
 		ft_fork_heredoc(limit, fd, key_expand);
-	waitpid(pid, NULL, 0);
+	}
+	waitpid(pid, status, 0);
+	if (WIFEXITED(*status))
+		*status = WEXITSTATUS(*status);
 	return (free(limit), close(fd), line);
 }
 
 int	ft_open_herdoc(t_link **link, bool key_expand, int num)
 {
 	t_link	*tmp;
+	int		status;
 
 	tmp = *link;
-	while (tmp)
+	status = 0;
+	signal(SIGINT, SIG_IGN);
+	while (tmp && status != 130)
 	{
 		if ((tmp)->identifier == HEREDOC
 			&& ((tmp)->next && (tmp)->next->identifier == STR))
@@ -69,10 +78,13 @@ int	ft_open_herdoc(t_link **link, bool key_expand, int num)
 				= ft_tmp_rmquotes((tmp->next->command));
 			(tmp)->next->command
 				= ft_write_heredoc((tmp)->next->command,
-					num++, key_expand);
+					num++, key_expand, &status);
 		}
 		tmp = (tmp)->next;
 	}
-	signal(SIGINT, SIG_IGN);
-	return (NONE);
+	if (status == 130)
+		*link = NULL;
+	signal(SIGINT, ft_signal);
+	return (g_data.exit_status = status, NONE);
 }
+

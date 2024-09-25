@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/09/23 10:52:24 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 15:55:51 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_fork_heredoc(char *limit, int fd, int key_expand)
 	int		line_num;
 
 	line_num = 0;
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, ft_sigheredoc);
 	while (true)
 	{
 		line = readline("> ");
@@ -37,7 +37,7 @@ int	ft_fork_heredoc(char *limit, int fd, int key_expand)
 		}
 		ft_write_n(&line, fd, key_expand);
 	}
-	return (free(limit), close(fd), ft_exit(EXIT_SUCCESS), true);
+	return (close(fd), ft_exit(EXIT_SUCCESS), true);
 }
 
 char	*ft_name_file(int num_file)
@@ -78,7 +78,7 @@ char	*ft_tmp_rmquotes(char *str)
 
 	j = 0;
 	i = 0;
-	ptr = malloc(ft_cal_whitoutquotes(str) + 1);
+	ptr = malloc(ft_cal_whitoutquotes(str) + 2);
 	if (!ptr)
 		return (NULL);
 	while (str[i])

@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
+#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/18 14:39:08 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/09/25 15:50:51 by akhobba          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	cc
 RM				=	rm -f
-CFLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address,leak,undefined
+CFLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address,leak,undefined
 INC				=	-I./headers
 HEADERS			=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR			=	src
