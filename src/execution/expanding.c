@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:59:07 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/22 22:32:43 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:48:54 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_expanding(t_list **lst, char *str)
 	j = i;
 	while (j > 0 && str[j] != '\'' && str[j] != '\"')
 		j--;
-	if (!(str[j] == '\'' || (str[j] == '\"' && j == i - 1)))
+	if (!((str[j] == '\'' && j == i - 1) || (str[j] == '\"' && j == i - 1)))
 		ft_lstexpand(lst, 0, ft_substr(str,
 				j + (str[j] == '\'' || str[j] == '\"'), i - j));
 	free(str);
