@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/09/25 09:49:39 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 15:55:51 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*ft_tmp_rmquotes(char *str)
 
 	j = 0;
 	i = 0;
-	ptr = malloc(ft_cal_whitoutquotes(str) + 1);
+	ptr = malloc(ft_cal_whitoutquotes(str) + 2);
 	if (!ptr)
 		return (NULL);
 	while (str[i])
