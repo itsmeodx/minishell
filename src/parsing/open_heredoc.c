@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/25 15:50:31 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 20:44:04 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,3 @@ int	ft_open_herdoc(t_link **link, bool key_expand, int num)
 	signal(SIGINT, ft_signal);
 	return (g_data.exit_status = status, NONE);
 }
-
