@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 14:26:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/24 20:58:38 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 10:51:07 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_link	*ft_search_target(t_link *head, int target[2])
 {
 	t_link	*tmp;
 
+	if (!head)
+		return (NULL);
 	tmp = head;
 	while (tmp)
 	{

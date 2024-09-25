@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/24 20:54:12 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 10:36:17 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void			ft_printf_link(t_link *link);
 
 // dbl link_ft
 void			ft_dbl_lstadd_back(t_link **lst, t_link *new);
+t_link			*ft_dbl_lstadd_front(t_link **lst, t_link *new);
 t_link			*ft_dbl_lstnew(void *content);
 t_link			*ft_dbl_lstlast(t_link *lst);
 void			ft_dbl_lstclear(t_link **lst);

@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 15:05:30 by akhobba           #+#    #+#             */
-/*   Updated: 2024/08/11 20:45:58 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/25 10:35:44 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,14 @@ void	ft_dbl_lstadd_back(t_link **lst, t_link *new)
 	last = ft_dbl_lstlast(*lst);
 	last->next = new;
 	new->prev = last;
+}
+
+t_link	*ft_dbl_lstadd_front(t_link **lst, t_link *new)
+{
+	if (NULL == lst)
+		return (NULL);
+	if (NULL == *lst)
+		return (new);
+	new->next = *lst;
+	return (new);
 }
