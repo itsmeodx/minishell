@@ -16,7 +16,9 @@
 void	ft_lstexpand(t_list **lst, char id, char *str)
 {
 	char	*tmp;
+	bool	is_empty;
 
+	is_empty = !str[0];
 	if (id == '\"')
 		str = expand_dollar(str);
 	else if (id == '\0')
@@ -32,7 +34,7 @@ void	ft_lstexpand(t_list **lst, char id, char *str)
 	tmp[ft_strlen(tmp) - 2] = 0;
 	free(str);
 	str = tmp;
-	if (*str)
+	if (*str || (is_empty && !str[0]))
 		ft_lstadd_back(lst, ft_lstnew(str));
 	else
 		free(str);
@@ -40,7 +42,9 @@ void	ft_lstexpand(t_list **lst, char id, char *str)
 
 char	**array_split(t_list *lst, char **array)
 {
-	if (((char *)lst->content)[ft_strlen((char *)lst->content) + 1] == '1')
+	if (!((char *)lst->content)[0])
+		array = ft_strdup_2d((char *[]){"", NULL});
+	else if (((char *)lst->content)[ft_strlen((char *)lst->content) + 1] == '1')
 		array = ft_splits((char *)lst->content, " \t\n");
 	else
 		array = ft_strdup_2d((char *[]){(char *)lst->content, NULL});

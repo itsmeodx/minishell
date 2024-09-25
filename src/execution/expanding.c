@@ -48,7 +48,7 @@ void	handle_quotes(t_list **lst, char *str, int *i)
 {
 	int	j;
 
-	j = *i - (*i - 1 > 0);
+	j = *i - (*i - 1 >= 0);
 	while (j > 0 && (str[j - (j > 0)] != '\'' && str[j] != '\'')
 		&& (str[j - (j > 0)] != '\"' && str[j] != '\"'))
 		j--;
@@ -66,8 +66,10 @@ void	ft_expanding(t_list **lst, char *str)
 
 	i = -1;
 	while (str[++i])
+	{
 		if (str[i] == '\"' || str[i] == '\'')
 			handle_quotes(lst, str, &i);
+	}
 	j = i;
 	while (j > 0 && str[j] != '\'' && str[j] != '\"')
 		j--;

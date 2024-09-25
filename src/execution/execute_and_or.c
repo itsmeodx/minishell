@@ -14,14 +14,20 @@
 
 int	execute_and(t_tree *tree)
 {
-	if (ft_execution(tree->left) == EXIT_SUCCESS)
+	int	status;
+
+	status = ft_execution(tree->left);
+	if (status == EXIT_SUCCESS)
 		return (ft_execution(tree->right));
-	return (EXIT_FAILURE);
+	return (status);
 }
 
 int	execute_or(t_tree *tree)
 {
-	if (ft_execution(tree->left) != EXIT_SUCCESS)
+	int	status;
+
+	status = ft_execution(tree->left);
+	if (status != EXIT_SUCCESS && status != 130)
 		return (ft_execution(tree->right));
 	return (EXIT_SUCCESS);
 }

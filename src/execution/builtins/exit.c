@@ -50,7 +50,7 @@ bool	builtin_exit(t_cmd *cmd)
 
 	status = 0;
 	if (cmd->argc == 1)
-		ft_exit(status);
+		ft_exit(g_data.exit_status);
 	if (!check_status(cmd->argv[1]))
 		return (ft_dprintf(STDERR_FILENO, "exit\n"), ft_dprintf(STDERR_FILENO,
 				NAME"exit: %s: "NAR"\n", cmd->argv[1]), ft_exit(2), false);

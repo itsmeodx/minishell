@@ -37,7 +37,10 @@ static
 void	execute_with_path(t_cmd *cmd)
 {
 	ft_execvpe(cmd->argv[0], cmd->argv, g_data.environ);
-	ft_dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
+	if (ft_getenv("PATH") && *ft_getenv("PATH"))
+		ft_dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
+	else
+		ft_dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
 	ft_exit(127);
 }
 
@@ -75,7 +78,7 @@ int	execute_str(t_tree *tree)
 		return (EXIT_SUCCESS);
 	tree->cmd->redirections = tree->redirections;
 	ft_expansion(tree->cmd);
-	if (!*tree->cmd->argv)
+	if (!tree->cmd->argv || !*tree->cmd->argv)
 		return (g_data.exit_status = 0, EXIT_SUCCESS);
 	if (execute_builtin(tree->cmd))
 		execute_cmd(tree->cmd);

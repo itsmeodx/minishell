@@ -24,7 +24,8 @@ int	execute_par(t_tree *tree)
 	{
 		(tree->right && !set_redirections(tree->right->redirections)
 			&& ft_exit(EXIT_FAILURE));
-		ft_exit(ft_execution(tree->left));
+		status = ft_execution(tree->left);
+		ft_exit(status);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
