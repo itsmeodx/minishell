@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/25 22:54:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:20:53 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ static
 void	execute_with_path(t_cmd *cmd)
 {
 	ft_execvpe(cmd->argv[0], cmd->argv, g_data.environ);
-	if (ft_getenv("PATH") && *ft_getenv("PATH"))
-		ft_dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
-	else
-		ft_dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
+	ft_dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
 	ft_exit(127);
 }
 
@@ -56,7 +53,7 @@ int	execute_cmd(t_cmd *cmd)
 	{
 		(reset_signals() && !set_redirections(cmd->redirections)) && ft_exit(1);
 		g_data.environ = filter_env(g_data.environ);
-		if (strchr(cmd->argv[0], '/'))
+		if (strchr(cmd->argv[0], '/') || !ft_getenv("PATH"))
 			execute_without_path(cmd);
 		else
 			execute_with_path(cmd);

@@ -6,13 +6,13 @@
 #    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/26 16:08:30 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/09/26 16:11:11 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	cc
 RM				=	rm -f
-CFLAGS			=	-Wall -Wextra -Werror -g3 -fsanitize=address,leak,undefined
+CFLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address,leak,undefined
 INC				=	-I./headers
 HEADERS			=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR			=	src
