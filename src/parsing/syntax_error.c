@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:27:21 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/26 16:20:20 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_onemsg(char *error, t_errorn errorn)
 	else
 		ft_dprintf(STDERR_FILENO,
 			NAME"syntax error near unexpected token `%s'\n", error);
-	g_data.exit_status = 2;
+	g_data()->exit_status = 2;
 }
 
 void	ft_printf_error(t_errorn error)

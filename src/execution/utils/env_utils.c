@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 19:58:41 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ char	*get_home(void)
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
 	{
-		free(g_data.home);
-		g_data.home = get_next_line(fd[0]);
-		g_data.home[ft_strlen(g_data.home) - 1] = '\0';
+		free(g_data()->home);
+		g_data()->home = get_next_line(fd[0]);
+		g_data()->home[ft_strlen(g_data()->home) - 1] = '\0';
 	}
-	return (close_pipe(fd), g_data.home);
+	return (close_pipe(fd), g_data()->home);
 }
 
 char	**var_split(char *var)

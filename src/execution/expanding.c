@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:59:07 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/25 21:48:54 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*expand_status(char *str, int *i)
 	char	*value;
 
 	i[1] = i[0] + 2;
-	value = ft_itoa(g_data.exit_status);
+	value = ft_itoa(g_data()->exit_status);
 	str = expand_val(str, value, i);
 	i[0] -= i[2] - 1;
 	free(value);

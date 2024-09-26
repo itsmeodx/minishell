@@ -6,15 +6,22 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 16:15:51 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:12:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "execution.h"
 
-// global variable
-struct s_data	g_data;
+/*
+** global variable
+*/
+struct s_data	*g_data(void)
+{
+	static t_data	data;
+
+	return (&data);
+}
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 			char **env)
@@ -25,20 +32,20 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 	while (true)
 	{
 		signal(SIGINT, ft_signal);
-		g_data.input = ft_readline(create_full_prompt());
-		if (!g_data.input)
+		g_data()->input = ft_readline(create_full_prompt());
+		if (!g_data()->input)
 			break ;
-		g_data.tree = ft_parsing(g_data.input);
-		if (!g_data.tree)
+		g_data()->tree = ft_parsing(g_data()->input);
+		if (!g_data()->tree)
 			continue ;
-		ft_execution(g_data.tree);
-		ft_treeclear(g_data.tree);
-		g_data.tree = NULL;
-		if (g_data.exit_status == SIGINT + 128)
+		ft_execution(g_data()->tree);
+		ft_treeclear(g_data()->tree);
+		g_data()->tree = NULL;
+		if (g_data()->exit_status == SIGINT + 128)
 			ft_printf("\n");
-		else if (g_data.exit_status == SIGQUIT + 128)
+		else if (g_data()->exit_status == SIGQUIT + 128)
 			ft_printf("Quit (core dumped)\n");
 	}
 	ft_printf("exit\n");
-	ft_exit(g_data.exit_status);
+	ft_exit(g_data()->exit_status);
 }

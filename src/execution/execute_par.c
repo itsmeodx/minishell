@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 19:39:27 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/01 14:47:29 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int	execute_par(t_tree *tree)
 		status = WTERMSIG(status) + 128;
 	else
 		status = EXIT_FAILURE;
-	return (g_data.exit_status = status, status);
+	return (g_data()->exit_status = status, status);
 }

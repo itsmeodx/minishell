@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:38:03 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:39:42 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	execute_builtin(t_cmd *cmd)
 		if (cmd && cmd->argv && !ft_strcmp(cmd->argv[0], builtins[i]))
 		{
 			if (!set_redirections(cmd->redirections))
-				return (g_data.exit_status = 1, EXIT_SUCCESS);
+				return (g_data()->exit_status = 1, EXIT_SUCCESS);
 			builtin_functions[i](cmd);
 			reset_redirections();
 			return (EXIT_SUCCESS);

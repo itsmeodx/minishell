@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:09:51 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/26 10:56:03 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_signal(int sig)
 
 	if (sig == SIGINT)
 	{
-		g_data.exit_status = 128 + sig;
+		g_data()->exit_status = 128 + sig;
 		prompt = create_full_prompt();
 		rl_replace_line("", 0);
 		ft_printf("\n%s", prompt);

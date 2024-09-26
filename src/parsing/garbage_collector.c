@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 11:41:42 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/08 15:08:01 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_garbage_new(t_link *ptr)
 		return ;
 	new->ptr = ptr;
 	new->next = NULL;
-	ft_garbage_add_back(&g_data.garbage, new);
+	ft_garbage_add_back(&g_data()->garbage, new);
 }
 
 void	ft_garbage_clear(t_garbage **lst)

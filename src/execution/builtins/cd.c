@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	builtin_cd(t_cmd *cmd)
 	else
 		ret = cd_dir(cmd);
 	if (!ret)
-		return (g_data.exit_status = EXIT_FAILURE, false);
-	update_pwd(g_data.environ);
-	return (g_data.exit_status = EXIT_SUCCESS, true);
+		return (g_data()->exit_status = EXIT_FAILURE, false);
+	update_pwd(g_data()->environ);
+	return (g_data()->exit_status = EXIT_SUCCESS, true);
 }

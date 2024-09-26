@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 19:57:59 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 09:38:19 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ char	*create_full_prompt(void)
 	str[0] = ft_getprompt();
 	str[2] = get_exit_status();
 	len[0] = ft_strlen(str[0]) - (ft_strlen(CYAN RESET YELLOW RESET)
-			+ (ft_strlen(CYAN RESET) * (g_data.branch == true)) + 1 + (2 * 4));
+			+ (ft_strlen(CYAN RESET)
+				* (g_data()->branch == true)) + 1 + (2 * 4));
 	len[1] = ft_strlen(str[2]) - ((ft_strlen(RED RESET) + 6)
-			* (g_data.exit_status != 0) + (ft_strlen(GREEN RESET) + 8)
-			* (g_data.exit_status == 0));
+			* (g_data()->exit_status != 0) + (ft_strlen(GREEN RESET) + 8)
+			* (g_data()->exit_status == 0));
 	len[3] = get_term_width();
 	len[2] = len[3] - (len[0] + len[1]);
 	if (len[2] < 0)

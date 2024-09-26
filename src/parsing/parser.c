@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/26 16:16:17 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_tree	*ft_parsing(char *input)
 	t_tree	*tree;
 
 	tree = NULL;
-	g_data.garbage = NULL;
+	g_data()->garbage = NULL;
 	split_input = ft_lexer(input);
 	link = ft_def_type(split_input);
 	tmp = link;
@@ -81,15 +81,15 @@ t_tree	*ft_parsing(char *input)
 	{
 		ft_dprintf(STDERR_FILENO,
 			NAME"%s\n", "maximum here-document count exceeded");
-		return (ft_garbage_clear(&g_data.garbage), NULL);
+		return (ft_garbage_clear(&g_data()->garbage), NULL);
 	}
 	ft_open_herdoc(&tmp, 0, 0);
 	if (!tmp)
-		return (ft_garbage_clear(&g_data.garbage), NULL);
+		return (ft_garbage_clear(&g_data()->garbage), NULL);
 	if (ft_syntax_error(tmp))
-		return (ft_garbage_clear(&g_data.garbage), NULL);
+		return (ft_garbage_clear(&g_data()->garbage), NULL);
 	tree = ft_parse_and_or(tmp);
-	ft_garbage_clear(&g_data.garbage);
+	ft_garbage_clear(&g_data()->garbage);
 	return (tree);
 }
 

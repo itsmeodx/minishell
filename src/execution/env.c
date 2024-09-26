@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:21:46 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ bool	is_in_env(char *key)
 
 	i = 0;
 	len = ft_strlen(key);
-	while (g_data.environ && g_data.environ[i])
+	while (g_data()->environ && g_data()->environ[i])
 	{
-		if (ft_strncmp(g_data.environ[i], key, len) == 0
-			&& (g_data.environ[i][len] == '='
-			|| g_data.environ[i][len] == '\0'))
+		if (ft_strncmp(g_data()->environ[i], key, len) == 0
+			&& (g_data()->environ[i][len] == '='
+			|| g_data()->environ[i][len] == '\0'))
 			return (true);
 		i++;
 	}
@@ -39,9 +39,9 @@ char	*ft_getenv(char *name)
 	i = -1;
 	name = ft_strjoin(name, "=");
 	len = ft_strlen(name);
-	while (g_data.environ && g_data.environ[++i])
-		if (ft_strncmp(g_data.environ[i], name, ft_strlen(name)) == 0)
-			return (free(name), g_data.environ[i] + len);
+	while (g_data()->environ && g_data()->environ[++i])
+		if (ft_strncmp(g_data()->environ[i], name, ft_strlen(name)) == 0)
+			return (free(name), g_data()->environ[i] + len);
 	free(name);
 	return (NULL);
 }

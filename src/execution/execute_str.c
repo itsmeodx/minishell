@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 16:31:34 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	execute_without_path(t_cmd *cmd)
 		if (isdir(cmd->argv[0]))
 			ft_dprintf(STDERR_FILENO, NAME "%s: " ISDIR "\n", cmd->argv[0]);
 		else if (access(cmd->argv[0], X_OK) != -1)
-			execve(cmd->argv[0], cmd->argv, g_data.environ);
+			execve(cmd->argv[0], cmd->argv, g_data()->environ);
 		else
 			ft_dprintf(STDERR_FILENO, NAME "%s: " PD "\n", cmd->argv[0]);
 		ft_exit(126);
@@ -37,7 +37,7 @@ void	execute_without_path(t_cmd *cmd)
 static
 void	execute_with_path(t_cmd *cmd)
 {
-	ft_execvpe(cmd->argv[0], cmd->argv, g_data.environ);
+	ft_execvpe(cmd->argv[0], cmd->argv, g_data()->environ);
 	ft_dprintf(STDERR_FILENO, "%s: " CNF "\n", cmd->argv[0]);
 	ft_exit(127);
 }
@@ -53,7 +53,7 @@ int	execute_cmd(t_cmd *cmd)
 	if (pid == 0)
 	{
 		(reset_signals() && !set_redirections(cmd->redirections)) && ft_exit(1);
-		g_data.environ = filter_env(g_data.environ);
+		g_data()->environ = filter_env(g_data()->environ);
 		if (strchr(cmd->argv[0], '/') || !ft_getenv("PATH"))
 			execute_without_path(cmd);
 		else
@@ -62,32 +62,32 @@ int	execute_cmd(t_cmd *cmd)
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, WUNTRACED);
 	if (WIFEXITED(status))
-		g_data.exit_status = WEXITSTATUS(status);
+		g_data()->exit_status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		g_data.exit_status = WTERMSIG(status) + 128;
+		g_data()->exit_status = WTERMSIG(status) + 128;
 	else
-		g_data.exit_status = EXIT_FAILURE;
-	return (g_data.exit_status);
+		g_data()->exit_status = EXIT_FAILURE;
+	return (g_data()->exit_status);
 }
 
 int	execute_str(t_tree *tree)
 {
 	if (!tree || !tree->cmd || !tree->cmd->argv || !*tree->cmd->argv)
-		return (g_data.exit_status = !set_redirections(tree->redirections),
-			dup2(g_data.stds[0], STDIN_FILENO),
-			dup2(g_data.stds[1], STDOUT_FILENO),
+		return (g_data()->exit_status = !set_redirections(tree->redirections),
+			dup2(g_data()->stds[0], STDIN_FILENO),
+			dup2(g_data()->stds[1], STDOUT_FILENO),
 			EXIT_SUCCESS);
 	tree->cmd->redirections = tree->redirections;
 	ft_expansion(tree->cmd);
 	if (!tree->cmd->argv || !*tree->cmd->argv)
-		return (g_data.exit_status = 0, EXIT_SUCCESS);
+		return (g_data()->exit_status = 0, EXIT_SUCCESS);
 	if (execute_builtin(tree->cmd))
 		execute_cmd(tree->cmd);
 	if (is_in_env("_"))
-		update_env(g_data.environ, "_",
+		update_env(g_data()->environ, "_",
 			tree->cmd->argv[ft_strlen_2d(tree->cmd->argv) - 1]);
 	else
-		g_data.environ = addtoenv(g_data.environ, "_",
-				tree->cmd->argv[ft_strlen_2d(tree->cmd->argv) - 1]);
-	return (g_data.exit_status);
+		g_data()->environ = addtoenv(g_data()->environ, "_",
+			tree->cmd->argv[ft_strlen_2d(tree->cmd->argv) - 1]);
+	return (g_data()->exit_status);
 }

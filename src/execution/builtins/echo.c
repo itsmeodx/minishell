@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 15:03:37 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ bool	builtin_echo(t_cmd *cmd)
 
 	i = parse_n_flag(cmd, &n_flag);
 	print_arguments(cmd, i, n_flag);
-	return (g_data.exit_status = EXIT_SUCCESS, true);
+	return (g_data()->exit_status = EXIT_SUCCESS, true);
 }

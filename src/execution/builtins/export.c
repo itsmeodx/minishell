@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:09:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ bool	export_plus(char *key)
 	values[0] = ft_getenv(key_value[0]);
 	values[1] = ft_strjoin(values[0], key_value[1]);
 	if (!values[1])
-		return (g_data.exit_status = 1, free_2d(key_value), false);
+		return (g_data()->exit_status = 1, free_2d(key_value), false);
 	free(key_value[1]);
 	key_value[1] = values[1];
 	if (is_in_env(key_value[0]))
-		update_env(g_data.environ, key_value[0], key_value[1]);
+		update_env(g_data()->environ, key_value[0], key_value[1]);
 	else
-		g_data.environ = addtoenv(g_data.environ, key_value[0], key_value[1]);
+		g_data()->environ = addtoenv(g_data()->environ,
+			key_value[0], key_value[1]);
 	free_2d(key_value);
 	return (true);
 }
@@ -69,9 +70,10 @@ bool	export_equal(char *key)
 	if (!key_value)
 		return (false);
 	if (is_in_env(key_value[0]))
-		update_env(g_data.environ, key_value[0], key_value[1]);
+		update_env(g_data()->environ, key_value[0], key_value[1]);
 	else
-		g_data.environ = addtoenv(g_data.environ, key_value[0], key_value[1]);
+		g_data()->environ = addtoenv(g_data()->environ,
+			key_value[0], key_value[1]);
 	free_2d(key_value);
 	return (true);
 }
@@ -95,7 +97,7 @@ bool	builtin_export(t_cmd *cmd)
 	bool	bad_key;
 
 	if (cmd->argc == 1)
-		return (print_export(g_data.environ));
+		return (print_export(g_data()->environ));
 	i = 0;
 	while (cmd->argv[++i])
 	{
@@ -107,6 +109,6 @@ bool	builtin_export(t_cmd *cmd)
 			export_equal(cmd->argv[i]);
 	}
 	if (bad_key)
-		return (g_data.exit_status = EXIT_FAILURE, false);
-	return (g_data.exit_status = EXIT_SUCCESS, true);
+		return (g_data()->exit_status = EXIT_FAILURE, false);
+	return (g_data()->exit_status = EXIT_SUCCESS, true);
 }

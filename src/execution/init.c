@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 17:38:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/25 22:53:41 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:13:36 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	check_path(char **env)
 	path = ft_getenv("PATH");
 	if (!path)
 	{
-		g_data.environ = addtoenv(env, "PATH", PATH);
-		if (!g_data.environ)
+		g_data()->environ = addtoenv(env, "PATH", PATH);
+		if (!g_data()->environ)
 			ft_exit(EXIT_FAILURE);
 	}
 }
@@ -62,8 +62,8 @@ void	check_pwd(char **env)
 		pwd = getcwd(NULL, 0);
 		if (!pwd)
 			return ;
-		g_data.environ = addtoenv(env, "PWD", pwd);
-		if (!g_data.environ)
+		g_data()->environ = addtoenv(env, "PWD", pwd);
+		if (!g_data()->environ)
 			ft_exit(EXIT_FAILURE);
 	}
 	else
@@ -77,24 +77,24 @@ void	check_pwd(char **env)
 
 void	init_minishell(char **env)
 {
-	g_data = (struct s_data){0};
-	g_data.environ = ft_strdup_2d(env);
-	if (!g_data.environ)
+	*g_data() = (struct s_data){0};
+	g_data()->environ = ft_strdup_2d(env);
+	if (!g_data()->environ)
 	{
-		g_data.environ = malloc(sizeof(char *));
-		if (!g_data.environ)
+		g_data()->environ = malloc(sizeof(char *));
+		if (!g_data()->environ)
 			ft_exit(EXIT_FAILURE);
-		g_data.environ[0] = NULL;
+		g_data()->environ[0] = NULL;
 	}
-	check_path(g_data.environ);
-	g_data.home = get_home();
+	check_path(g_data()->environ);
+	g_data()->home = get_home();
 	if (!is_in_env("HOME"))
-		g_data.environ = addtoenv(g_data.environ, "HOME", g_data.home);
-	update_shlvl(g_data.environ);
-	check_pwd(g_data.environ);
-	set_hostname(g_data.environ);
+		g_data()->environ = addtoenv(g_data()->environ, "HOME", g_data()->home);
+	update_shlvl(g_data()->environ);
+	check_pwd(g_data()->environ);
+	set_hostname(g_data()->environ);
 	restore_history();
-	g_data.stds[0] = dup(STDIN_FILENO);
-	g_data.stds[1] = dup(STDOUT_FILENO);
-	g_data.stds[2] = dup(STDERR_FILENO);
+	g_data()->stds[0] = dup(STDIN_FILENO);
+	g_data()->stds[1] = dup(STDOUT_FILENO);
+	g_data()->stds[2] = dup(STDERR_FILENO);
 }

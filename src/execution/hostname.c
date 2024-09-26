@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:20:32 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/03 14:20:32 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	set_hostname(char **env)
 	while (isalnum(hostname[i]) || hostname[i] == '-')
 		i++;
 	hostname[i] = 0;
-	g_data.environ = addtoenv(env, "MINI_HOSTNAME", hostname);
+	g_data()->environ = addtoenv(env, "MINI_HOSTNAME", hostname);
 	free(hostname);
 }

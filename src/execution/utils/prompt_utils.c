@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:18:20 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 14:35:38 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ char	*get_exit_status(void)
 {
 	char	*str[3];
 
-	if (g_data.exit_status != 0)
-		str[0] = ft_itoa(g_data.exit_status);
+	if (g_data()->exit_status != 0)
+		str[0] = ft_itoa(g_data()->exit_status);
 	else
 		str[0] = ft_strdup("✔");
-	if (g_data.exit_status != 0)
+	if (g_data()->exit_status != 0)
 		str[1] = colorize(str[0], RED);
 	else
 		str[1] = colorize(str[0], GREEN);
@@ -83,7 +83,7 @@ char	*read_branch(int *fd, int status)
 		str[0] = get_next_line(fd[0]);
 	close(fd[0]);
 	if (!str[0])
-		return (g_data.branch = false, NULL);
+		return (g_data()->branch = false, NULL);
 	str[0][ft_strlen(str[0]) - 1] = '\0';
 	str[1] = ft_strjoin("(", str[0]);
 	free(str[0]);
@@ -91,7 +91,7 @@ char	*read_branch(int *fd, int status)
 	branch = colorize(str[0], CYAN);
 	free(str[0]);
 	free(str[1]);
-	g_data.branch = true;
+	g_data()->branch = true;
 	return (branch);
 }
 
@@ -114,7 +114,7 @@ char	*get_branch(void)
 		dup2(fd[1], STDOUT_FILENO);
 		close_pipe(fd);
 		execve("/usr/bin/git", (char *[]){"git", "branch", "--show-current",
-			NULL}, g_data.environ);
+			NULL}, g_data()->environ);
 		exit(EXIT_FAILURE);
 	}
 	close(fd[1]);
