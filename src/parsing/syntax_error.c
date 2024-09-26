@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:27:21 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:20:20 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int	ft_syntax_error(t_link *link)
 {
 	t_errorn	error;
 
+	error = ft_check_and_or(link);
+	if (error)
+		return (ft_printf_error(error), true);
 	error = ft_check_redirection(link);
 	if (error)
 		return (ft_printf_error(error), true);
@@ -45,9 +48,6 @@ int	ft_syntax_error(t_link *link)
 	if (error)
 		return (ft_printf_error(error), true);
 	error = ft_check_quotes(link);
-	if (error)
-		return (ft_printf_error(error), true);
-	error = ft_check_and_or(link);
 	if (error)
 		return (ft_printf_error(error), true);
 	return (false);
