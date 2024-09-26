@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 13:14:52 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:54:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int	execute_cmd(t_cmd *cmd)
 int	execute_str(t_tree *tree)
 {
 	if (!tree || !tree->cmd || !tree->cmd->argv || !*tree->cmd->argv)
-		return (EXIT_SUCCESS);
+		return (g_data.exit_status = !set_redirections(tree->redirections),
+			dup2(g_data.stds[0], STDIN_FILENO),
+			dup2(g_data.stds[1], STDOUT_FILENO),
+			EXIT_SUCCESS);
 	tree->cmd->redirections = tree->redirections;
 	ft_expansion(tree->cmd);
 	if (!tree->cmd->argv || !*tree->cmd->argv)

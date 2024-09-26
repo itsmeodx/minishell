@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 11:51:10 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:53:08 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_garbage
 typedef struct s_data
 {
 	int					hfd;
+	int					stds[3];
 	char				*path;
 	struct s_tree		*tree;
 	bool				branch;

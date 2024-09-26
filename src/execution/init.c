@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 17:38:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:42:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:53:41 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,7 @@ void	init_minishell(char **env)
 	check_pwd(g_data.environ);
 	set_hostname(g_data.environ);
 	restore_history();
+	g_data.stds[0] = dup(STDIN_FILENO);
+	g_data.stds[1] = dup(STDOUT_FILENO);
+	g_data.stds[2] = dup(STDERR_FILENO);
 }
