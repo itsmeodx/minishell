@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+         #
+#    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/25 20:32:12 by akhobba          ###   ########.fr        #
+#    Updated: 2024/09/26 16:08:30 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,12 +105,22 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 
 clean:
 	@echo "$(RED)Cleaning $(OBJDIR)...$(END)"
-	@make -C $(FT_PRINTF_DIR) clean > /dev/null
+	@echo -n "$(YELLOW)Do you want to clean libftprintf objs?$(END) [$(RED)y$(END)/$(GREEN)N$(END)]"
+	@read -p "" -r REPLY; \
+	if [ "$$REPLY" = "Y" ] || [ "$$REPLY" = "y" ]; then \
+		echo "$(RED)Cleaning libftprintf objs...$(END)"; \
+		make -C $(FT_PRINTF_DIR) clean > /dev/null; \
+	fi
 	@$(RM) -r $(OBJDIR) || true
 
 fclean: clean
 	@echo "$(RED)Cleaning $(NAME)...$(END)"
-	@make -C $(FT_PRINTF_DIR) fclean > /dev/null
+	@echo -n "$(YELLOW)Do you want to clean libftprintf?$(END) [$(RED)y$(END)/$(GREEN)N$(END)]"
+	@read -p "" -r REPLY; \
+	if [ "$$REPLY" = "Y" ] || [ "$$REPLY" = "y" ]; then \
+		echo "$(RED)Cleaning libftprintf...$(END)"; \
+		make -C $(FT_PRINTF_DIR) fclean > /dev/null; \
+	fi
 	@$(RM) $(NAME)
 
 re: fclean all
