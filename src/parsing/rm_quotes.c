@@ -19,7 +19,7 @@ int	ft_fork_heredoc(char *limit, int fd, int key_expand)
 	int		line_num;
 
 	line_num = 0;
-	signal(SIGINT, ft_sigheredoc);
+	signal(SIGINT, ft_sigexit);
 	while (true)
 	{
 		line = readline("> ");

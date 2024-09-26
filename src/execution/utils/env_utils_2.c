@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:46:14 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:39:42 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:39:08 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,58 @@
 void	sort_2d(char **strs)
 {
 	int		i;
+	int		j;
 	char	*tmp;
 
-	i = -1;
-	while (strs[++i])
+	i = ft_strlen_2d(strs);
+	while (i--)
 	{
-		if (strs[i + 1] && ft_strcmp(strs[i], strs[i + 1]) > 0)
+		j = 0;
+		while (strs[j])
 		{
-			tmp = strs[i];
-			strs[i] = strs[i + 1];
-			strs[i + 1] = tmp;
-			i = -1;
+			if (strs[j + 1] && ft_strcmp(strs[j], strs[j + 1]) > 0)
+			{
+				tmp = strs[j];
+				strs[j] = strs[j + 1];
+				strs[j + 1] = tmp;
+			}
+			j++;
+		}
+	}
+}
+
+int	ft_envcmp(char *s1, char *s2)
+{
+	char	**key_value[2];
+	int		i;
+
+	key_value[0] = var_split(s1);
+	key_value[1] = var_split(s2);
+	i = ft_strcmp(key_value[0][0], key_value[1][0]);
+	free_2d(key_value[0]);
+	free_2d(key_value[1]);
+	return (i);
+}
+
+void	sort_env(char **strs)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = ft_strlen_2d(strs);
+	while (i--)
+	{
+		j = 0;
+		while (strs[j])
+		{
+			if (strs[j + 1] && ft_envcmp(strs[j], strs[j + 1]) > 0)
+			{
+				tmp = strs[j];
+				strs[j] = strs[j + 1];
+				strs[j + 1] = tmp;
+			}
+			j++;
 		}
 	}
 }

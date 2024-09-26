@@ -21,7 +21,7 @@ bool	reset_signals(void)
 	return (true);
 }
 
-void	ft_sigheredoc(int sig)
+void	ft_sigexit(int sig)
 {
 	if (sig == SIGINT)
 	{

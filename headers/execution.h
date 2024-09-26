@@ -63,19 +63,17 @@ char			**remove_from_env(char **env, char *key);
 char			**filter_env(char **env);
 // env_utils_2.c
 void			sort_2d(char **strs);
+int				ft_envcmp(char *s1, char *s2);
+void			sort_env(char **strs);
 char			*expand_val(char *str, char *value, int *i);
 char			*expand_dollar(char *str);
 // extend_2d.c
 void			*extend_2d(char **ptr, size_t size);
-// ft_itoa.c
-char			*ft_itoa(int n);
 // ft_lstexpand.c
 void			ft_lstexpand(t_list **lst, char id, char *str);
 char			**lst_to_argv(t_list *lst);
 // ft_splits.c
 char			**ft_splits(char *str, char *charset);
-// ft_substr.c
-char			*ft_substr(char const *s, unsigned int start, size_t len);
 // lst_utils.c
 char			*ft_lst_to_str(t_list *head, bool flag);
 // prompt_utils.c
@@ -155,7 +153,7 @@ bool			set_redirections(t_redirection *redirections);
 
 // signals.c
 bool			reset_signals(void);
-void			ft_sigheredoc(int sig);
+void			ft_sigexit(int sig);
 void			ft_signal(int sig);
 
 #endif //EXECUTION_H

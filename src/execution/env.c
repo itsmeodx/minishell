@@ -81,17 +81,11 @@ void	update_pwd(char **env)
 	pwd = ft_getenv("PWD");
 	if (!pwd)
 		pwd = "";
-	if (is_in_env("OLDPWD"))
-		update_env(env, "OLDPWD", pwd);
-	else
-		g_data.environ = addtoenv(g_data.environ, "OLDPWD", pwd);
+	update_env(env, "OLDPWD", pwd);
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		return ;
-	if (is_in_env("PWD"))
-		update_env(env, "PWD", pwd);
-	else
-		g_data.environ = addtoenv(g_data.environ, "PWD", pwd);
+	update_env(env, "PWD", pwd);
 	free(pwd);
 }
 

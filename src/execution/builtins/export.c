@@ -20,7 +20,7 @@ bool	print_export(char **env)
 	char	**key_value;
 
 	env = ft_strdup_2d(env);
-	sort_2d(env);
+	sort_env(env);
 	i = -1;
 	while (env[++i])
 	{
