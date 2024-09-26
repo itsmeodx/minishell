@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 16:20:53 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:31:34 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	execute_without_path(t_cmd *cmd)
 	}
 	else
 	{
-		ft_dprintf(STDERR_FILENO, NAME "%s: " NSFOD "\n", cmd->argv[0]);
+		ft_dprintf(STDERR_FILENO, NAME);
+		perror(cmd->argv[0]);
 		ft_exit(127);
 	}
 }
