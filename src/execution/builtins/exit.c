@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:08 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/24 21:32:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/26 17:28:45 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ bool	check_status(char *str)
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-		i++;
+		if (str[i + 1])
+			i++;
 	while (isdigit(str[i]))
 		i++;
 	while (str[i] >= 9 & str[i] <= 13 || str[i] == 32)
@@ -52,7 +53,7 @@ bool	builtin_exit(t_cmd *cmd)
 	status = 0;
 	if (cmd->argc == 1)
 		ft_exit(g_data.exit_status);
-	if (!check_status(cmd->argv[1]))
+	if (!check_status(cmd->argv[1]) && ft_strcmp(cmd->argv[1], "--"))
 		return (ft_dprintf(STDERR_FILENO, "exit\n"), ft_dprintf(STDERR_FILENO,
 				NAME"exit: %s: "NAR"\n", cmd->argv[1]), ft_exit(2), false);
 	else if (cmd->argc > 2)
