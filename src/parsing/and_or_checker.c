@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 07:07:48 by adam              #+#    #+#             */
-/*   Updated: 2024/09/26 15:35:07 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/26 15:53:27 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ t_errorn	ft_check_operatore(t_link *link, int target, t_errorn error)
 		if (tmp->identifier == target)
 		{
 			if (!tmp->next || (tmp->next
-				&& (tmp->next->identifier == PIPE || tmp->next->identifier == AND
-					|| tmp->next->identifier == OR)))
+					&& (tmp->next->identifier == PIPE
+						|| tmp->next->identifier == AND
+						|| tmp->next->identifier == OR)))
 				return (error);
 			if (!tmp->prev || (tmp->prev && (tmp->prev->identifier == PIPE
-				|| tmp->prev->identifier == AND || tmp->prev->identifier == OR)))
+						|| tmp->prev->identifier == AND
+						|| tmp->prev->identifier == OR)))
 				return (error);
 			if (tmp->identifier == AND
 				&& ft_strncmp(tmp->command, "&&", 3) != 0)
