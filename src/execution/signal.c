@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:09:51 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/25 10:01:21 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/26 10:56:03 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ bool	reset_signals(void)
 void	ft_sigheredoc(int sig)
 {
 	if (sig == SIGINT)
+	{
+		ft_printf("\n");
 		ft_exit(130);
+	}
 }
 
 void	ft_signal(int sig)
