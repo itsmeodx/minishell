@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:46:14 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 16:39:08 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:51:24 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*expand_dollar(char *str)
 			while (isalnum(str[i[1]]) || str[i[1]] == '_')
 				i[1]++;
 			key = ft_substr(str, i[0] + 1, i[1] - i[0] - 1);
-			value = ft_getenv(key);
+			value = ft_getenv(key, g_data()->environ);
 			free(key);
 			str = expand_val(str, value, i);
 		}

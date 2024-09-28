@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:48:37 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:29:14 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	builtin_unset(t_cmd *cmd)
 	i = 1;
 	while (cmd->argv[i])
 	{
-		if (is_in_env(cmd->argv[i]))
+		if (is_in_env(cmd->argv[i], g_data()->environ))
 			g_data()->environ = remove_from_env(g_data()->environ,
 				cmd->argv[i]);
 		if (!g_data()->environ)

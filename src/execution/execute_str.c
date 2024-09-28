@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:47:12 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:53:54 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	execute_cmd(t_cmd *cmd)
 	{
 		(reset_signals() && !set_redirections(cmd->redirections)) && ft_exit(1);
 		g_data()->environ = filter_env(g_data()->environ);
-		if (strchr(cmd->argv[0], '/') || !ft_getenv("PATH"))
+		if (strchr(cmd->argv[0], '/') || !ft_getenv("PATH", g_data()->environ)
+			|| !*ft_getenv("PATH", g_data()->environ))
 			execute_without_path(cmd);
 		else
 			execute_with_path(cmd);
@@ -73,17 +74,18 @@ int	execute_cmd(t_cmd *cmd)
 int	execute_str(t_tree *tree)
 {
 	if (!tree || !tree->cmd || !tree->cmd->argv || !*tree->cmd->argv)
-		return (g_data()->exit_status = !set_redirections(tree->redirections),
-			dup2(g_data()->stds[0], STDIN_FILENO),
-			dup2(g_data()->stds[1], STDOUT_FILENO),
-			EXIT_SUCCESS);
+	{
+		if (tree)
+			g_data()->exit_status = !set_redirections(tree->redirections);
+		return (reset_redirections(), EXIT_SUCCESS);
+	}
 	tree->cmd->redirections = tree->redirections;
 	ft_expansion(tree->cmd);
 	if (!tree->cmd->argv || !*tree->cmd->argv)
 		return (g_data()->exit_status = 0, EXIT_SUCCESS);
 	if (execute_builtin(tree->cmd))
 		execute_cmd(tree->cmd);
-	if (is_in_env("_"))
+	if (is_in_env("_", g_data()->environ))
 		update_env(g_data()->environ, "_",
 			tree->cmd->argv[ft_strlen_2d(tree->cmd->argv) - 1]);
 	else

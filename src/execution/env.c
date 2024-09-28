@@ -6,32 +6,32 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:21:46 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:49:20 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parsing.h"
 
-bool	is_in_env(char *key)
+bool	is_in_env(char *key, char **env)
 {
 	int		i;
 	int		len;
 
 	i = 0;
 	len = ft_strlen(key);
-	while (g_data()->environ && g_data()->environ[i])
+	while (env && env[i])
 	{
-		if (ft_strncmp(g_data()->environ[i], key, len) == 0
-			&& (g_data()->environ[i][len] == '='
-			|| g_data()->environ[i][len] == '\0'))
+		if (ft_strncmp(env[i], key, len) == 0
+			&& (env[i][len] == '='
+			|| env[i][len] == '\0'))
 			return (true);
 		i++;
 	}
 	return (false);
 }
 
-char	*ft_getenv(char *name)
+char	*ft_getenv(char *name, char **env)
 {
 	int		i;
 	int		len;
@@ -39,9 +39,9 @@ char	*ft_getenv(char *name)
 	i = -1;
 	name = ft_strjoin(name, "=");
 	len = ft_strlen(name);
-	while (g_data()->environ && g_data()->environ[++i])
-		if (ft_strncmp(g_data()->environ[i], name, ft_strlen(name)) == 0)
-			return (free(name), g_data()->environ[i] + len);
+	while (env && env[++i])
+		if (ft_strncmp(env[i], name, ft_strlen(name)) == 0)
+			return (free(name), env[i] + len);
 	free(name);
 	return (NULL);
 }
@@ -78,7 +78,7 @@ void	update_pwd(char **env)
 {
 	char	*pwd;
 
-	pwd = ft_getenv("PWD");
+	pwd = ft_getenv("PWD", env);
 	if (!pwd)
 		pwd = "";
 	update_env(env, "OLDPWD", pwd);

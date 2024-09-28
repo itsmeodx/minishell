@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:59:07 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:49:56 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*expand_pergola(char *str)
 
 	if (str[0] == '~' && (str[1] == '\0' || str[1] == '/'))
 	{
-		home = ft_getenv("HOME");
+		home = ft_getenv("HOME", g_data()->environ);
 		if (!home)
 			home = get_home();
 		if (!home)

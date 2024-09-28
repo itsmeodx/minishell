@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:09:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:56:27 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ bool	export_plus(char *key)
 	key_value = var_split(key);
 	if (!key_value)
 		return (false);
-	values[0] = ft_getenv(key_value[0]);
+	values[0] = ft_getenv(key_value[0], g_data()->environ);
 	values[1] = ft_strjoin(values[0], key_value[1]);
 	if (!values[1])
 		return (g_data()->exit_status = 1, free_2d(key_value), false);
 	free(key_value[1]);
 	key_value[1] = values[1];
-	if (is_in_env(key_value[0]))
+	if (is_in_env(key_value[0], g_data()->environ))
 		update_env(g_data()->environ, key_value[0], key_value[1]);
 	else
 		g_data()->environ = addtoenv(g_data()->environ,
@@ -69,7 +69,7 @@ bool	export_equal(char *key)
 	key_value = var_split(key);
 	if (!key_value)
 		return (false);
-	if (is_in_env(key_value[0]))
+	if (is_in_env(key_value[0], g_data()->environ))
 		update_env(g_data()->environ, key_value[0], key_value[1]);
 	else
 		g_data()->environ = addtoenv(g_data()->environ,
@@ -108,7 +108,5 @@ bool	builtin_export(t_cmd *cmd)
 		else
 			export_equal(cmd->argv[i]);
 	}
-	if (bad_key)
-		return (g_data()->exit_status = EXIT_FAILURE, false);
-	return (g_data()->exit_status = EXIT_SUCCESS, true);
+	return (g_data()->exit_status = bad_key, true);
 }

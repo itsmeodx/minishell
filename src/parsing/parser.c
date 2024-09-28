@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:01:27 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "execution.h"
 
 void	ft_set_type(t_link **node, char *input)
 {
@@ -81,7 +82,7 @@ t_tree	*ft_parsing(char *input)
 	{
 		ft_dprintf(STDERR_FILENO,
 			NAME"%s\n", "maximum here-document count exceeded");
-		return (ft_garbage_clear(&g_data()->garbage), NULL);
+		return (ft_garbage_clear(&g_data()->garbage), ft_exit(2), NULL);
 	}
 	ft_open_herdoc(&tmp, 0, 0);
 	if (!tmp)

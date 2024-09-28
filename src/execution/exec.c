@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:28:01 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/18 12:03:10 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:49:31 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_execvpe(char *file, char **argv, char **env)
 	char	*path;
 	char	**paths;
 
-	paths = paths_split(ft_getenv("PATH"));
+	paths = paths_split(ft_getenv("PATH", env));
 	if (!paths)
 		return (-1);
 	i = -1;

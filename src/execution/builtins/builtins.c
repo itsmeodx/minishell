@@ -6,30 +6,20 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:38:03 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:19:15 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	reset_redirections(void)
-{
-	int	fd;
-
-	fd = open("/dev/tty", O_RDWR);
-	dup2(fd, STDIN_FILENO);
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
-}
-
 int	execute_builtin(t_cmd *cmd)
 {
 	int			i;
-	static char	*builtins[] = {"echo", "cd", "pwd", "export", "unset",
-		"env", "exit", NULL};
-	static bool	(*builtin_functions[])(t_cmd *) = {&builtin_echo, &builtin_cd,
-		&builtin_pwd, &builtin_export, &builtin_unset, &builtin_env,
-		&builtin_exit};
+	static char	*builtins[] = {"alias", "echo", "cd", "pwd", "export",
+		"unset", "env", "exit", "unalias", NULL};
+	static bool	(*builtin_functions[])(t_cmd *) = {&builtin_alias,
+		&builtin_echo, &builtin_cd, &builtin_pwd, &builtin_export,
+		&builtin_unset, &builtin_env, &builtin_exit, &builtin_unalias};
 
 	i = -1;
 	while (builtins[++i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/25 09:49:02 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/28 19:19:34 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@
 # define NAR "numeric argument required"
 # define ISDIR "Is a directory"
 # define NVI "not a valid identifier"
+# define IAN "invalid alias name"
 
 // builtins/
+// alias.c
+bool			builtin_alias(t_cmd *cmd);
 // builtins.c
 int				execute_builtin(t_cmd *cmd);
 // cd.c
@@ -39,6 +42,8 @@ bool			builtin_exit(t_cmd *cmd);
 bool			builtin_export(t_cmd *cmd);
 // pwd.c
 bool			builtin_pwd(t_cmd *cmd);
+// unalias.c
+bool			builtin_unalias(t_cmd *cmd);
 // unset.c
 bool			builtin_unset(t_cmd *cmd);
 
@@ -87,8 +92,8 @@ char			*get_output(char **cmd);
 // asterisk.c
 char			*expand_asterisk(char *str, int i);
 // env.c
-bool			is_in_env(char *key);
-char			*ft_getenv(char *name);
+bool			is_in_env(char *key, char **env);
+char			*ft_getenv(char *name, char **env);
 char			**addtoenv(char **env, char *key, char *value);
 void			update_pwd(char **env);
 void			update_env(char **env, char *key, char *value);
@@ -149,6 +154,7 @@ int				get_next_quote(char *str, char quote);
 char			*ft_subquote(char *str, int start);
 
 // redirections.c
+void			reset_redirections(void);
 bool			set_redirections(t_redirection *redirections);
 
 // signals.c

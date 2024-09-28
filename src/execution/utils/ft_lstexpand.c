@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 10:23:44 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/23 09:34:01 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:34:35 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_lstexpand(t_list **lst, char id, char *str)
 	tmp[ft_strlen(tmp) - 2] = 0;
 	free(str);
 	str = tmp;
-	if (*str || (is_empty && !str[0]))
+	if (*str || (is_empty && !str[0]) || id == '\"' || id == '\'')
 		ft_lstadd_back(lst, ft_lstnew(str));
 	else
 		free(str);

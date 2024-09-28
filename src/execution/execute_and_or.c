@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:49:06 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/26 15:57:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:07:05 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int	execute_or(t_tree *tree)
 	status = ft_execution(tree->left);
 	if (status != EXIT_SUCCESS && status != 130)
 		return (ft_execution(tree->right));
-	return (EXIT_SUCCESS);
+	return (status);
 }
