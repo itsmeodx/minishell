@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/25 10:36:17 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/09/29 10:03:04 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char			**ft_strjoin_2d(char **s1, char **s2);
 
 // heredoc
 int				ft_open_herdoc(t_link **link, bool key_expand, int num);
-char			*ft_tmp_rmquotes(char *str);
+char			*ft_tmp_rmquotes(char **str);
 char			*ft_name_file(int num_file);
 void			ft_write_n(char **line, int fd, int key_expand);
 int				ft_get_fd(char *file);
