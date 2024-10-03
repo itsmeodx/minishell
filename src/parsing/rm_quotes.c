@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/09/27 16:14:39 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/10/03 10:23:11 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_name_file(int num_file)
 	return (free(num), file);
 }
 
-size_t	ft_cal_whitoutquotes(char *str)
+size_t	ft_cal_whitoutquotes(char (*str))
 {
 	size_t	len;
 	size_t	i;
@@ -69,27 +69,40 @@ size_t	ft_cal_whitoutquotes(char *str)
 	}
 	return (len);
 }
-
-char	*ft_tmp_rmquotes(char *str)
+char	*ft_tmp_rmquotes(char *(*str))
 {
-	char	*ptr;
+	char	c;
 	int		i;
 	int		j;
+	int		key;
 
 	j = 0;
 	i = 0;
-	ptr = malloc(ft_cal_whitoutquotes(str) + 2);
-	if (!ptr)
+	key = 0;
+	c = 0;
+	if (!str || !(*str))
 		return (NULL);
-	while (str[i])
+	while ((*str)[i])
 	{
-		if (!(str[i] == '"' || str[i] == '\''))
+		if ((*str)[i] && ((*str)[i] == '"' || (*str)[i] == '\''))
 		{
-			ptr[j] = str[i];
-			j++;
+			c = (*str)[i++];
+			while ((*str)[i])
+			{
+				if ((*str)[i] == c)
+				{
+					i++;
+					c = 0;
+				}
+				(*str)[j++] = (*str)[i++];
+			}
+			if (!(*str)[i])
+			{
+				(*str)[j] = 0;
+				break;
+			}
 		}
-		i++;
+			(*str)[j++] = (*str)[i++];
 	}
-	ptr[j] = '\0';
-	return (free(str), ptr);
+	return (NULL);
 }

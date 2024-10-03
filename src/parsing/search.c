@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 14:26:16 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/27 17:56:30 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/10/03 10:23:25 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ t_link	*ft_search_target_rev(t_link *head, int target[2])
 	int		key;
 
 	key = 0;
-	tmp = ft_dbl_lstlast(head);
+	tmp = head;
+	while (tmp->next)
+		tmp = tmp->next;
 	while (tmp)
 	{
-		if (tmp->identifier == CLOSE_PAR)
+		while (tmp && tmp->identifier == CLOSE_PAR)
 		{
-			while (tmp)
+			while (tmp && tmp->identifier != OPEN_PAR && key == 0)
 			{
-				(tmp->identifier == CLOSE_PAR) && (key++);
-				if (tmp->identifier == OPEN_PAR)
-					if (key-- == 0)
-						break ;
+				if (tmp->identifier == CLOSE_PAR)
+					key++;
+				else if (tmp->identifier == OPEN_PAR)
+					key--;
 				tmp = tmp->prev;
 			}
 		}
-		if (!tmp)
-			return (NULL);
-		if ((tmp->identifier == target[0] || tmp->identifier == target[1]))
+		if (tmp->identifier == target[0] || tmp->identifier == target[1])
 			return (tmp);
 		tmp = tmp->prev;
 	}
