@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:38:03 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/28 19:19:15 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:58:53 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ int	execute_builtin(t_cmd *cmd)
 {
 	int			i;
 	static char	*builtins[] = {"alias", "echo", "cd", "pwd", "export",
-		"unset", "env", "exit", "unalias", NULL};
+		"unset", "env", "exit", "unalias", "help", NULL};
 	static bool	(*builtin_functions[])(t_cmd *) = {&builtin_alias,
 		&builtin_echo, &builtin_cd, &builtin_pwd, &builtin_export,
-		&builtin_unset, &builtin_env, &builtin_exit, &builtin_unalias};
+		&builtin_unset, &builtin_env, &builtin_exit, &builtin_unalias,
+		&builtin_help};
 
 	i = -1;
 	while (builtins[++i])

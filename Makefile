@@ -6,13 +6,13 @@
 #    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/28 21:40:15 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/10/03 13:25:27 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	cc
 RM				=	rm -f
-CFLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address,leak,undefined
+CFLAGS			=	-Wall -Wextra -Werror -O2 -Ofast -g3 #-fsanitize=address,leak,undefined
 INC				=	-I./headers
 HEADERS			=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR			=	src
@@ -49,7 +49,7 @@ PARSING			=	parsing/lexer parsing/parser\
 EXECUTION		=	execution/builtins/alias execution/builtins/builtins execution/builtins/cd \
 					execution/builtins/echo execution/builtins/env \
 					execution/builtins/exit \
-					execution/builtins/export execution/builtins/pwd \
+					execution/builtins/export execution/builtins/help execution/builtins/pwd \
 					execution/builtins/unalias execution/builtins/unset execution/asterisk \
 					execution/env execution/exec \
 					execution/execute_and_or \

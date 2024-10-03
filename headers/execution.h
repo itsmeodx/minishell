@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/28 19:19:34 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:24:58 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int				ft_exit(int status);
 bool			builtin_exit(t_cmd *cmd);
 // export.c
 bool			builtin_export(t_cmd *cmd);
+// help.c
+bool			builtin_help(t_cmd *cmd);
 // pwd.c
 bool			builtin_pwd(t_cmd *cmd);
 // unalias.c
