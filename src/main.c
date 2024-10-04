@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/10/04 15:59:07 by adam             ###   ########.fr       */
+/*   Updated: 2024/10/04 16:11:59 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 		g_data()->input = ft_readline(create_full_prompt());
 		if (!g_data()->input)
 			break ;
-		// g_data()->tree = ft_parsing(g_data()->input);
+		g_data()->tree = ft_parsing(g_data()->input);
 		// ptr = ft_semicolon(g_data()->input);		
 		// int i = 0;
 		// while (ptr[i])

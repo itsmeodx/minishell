@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/10/04 15:05:07 by adam             ###   ########.fr       */
+/*   Updated: 2024/10/04 16:09:51 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,31 +73,30 @@ size_t	ft_cal_whitoutquotes(char (*str))
 char	*ft_tmp_rmquotes(char *(*str))
 {
 	char		c;
-	int	i;
-	int	j;
+	int	i[2];
 
 	c = 0;
-	i = 0;
-	j = 0;
+	i[0]= 0;
+	i[1] = 0;
 	if (!str || !(*str))
 		return (NULL);
-	while ((*str)[i])
+	while ((*str)[i[0]])
 	{
-		if ((*str)[i] && ((*str)[i] == '"' || (*str)[i] == '\''))
+		if ((*str)[i[0]] && ((*str)[i[0]] == '"' || (*str)[i[0]] == '\''))
 		{
-			c = (*str)[i++];
-			while ((*str)[i])
+			c = (*str)[i[0]++];
+			while ((*str)[i[0]])
 			{
-				((*str)[i] == c) && (i++ && (c = 0));
-				(*str)[j++] = (*str)[i++];
+				((*str)[i[0]] == c) && (i[0]++ && (c = 0));
+				(*str)[i[1]++] = (*str)[i[0]++];
 			}
-			if (!(*str)[i])
+			if (!(*str)[i[0]])
 			{
-				(*str)[j] = 0;
+				(*str)[i[1]] = 0;
 				break ;
 			}
 		}
-		(*str)[j++] = (*str)[i++];
+		(*str)[i[1]++] = (*str)[i[0]++];
 	}
 	return (NULL);
 }
