@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/10/03 17:19:06 by adam             ###   ########.fr       */
+/*   Updated: 2024/10/04 15:59:07 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	*ft_semicolon(char *input)
 
 	i = 0;
 	split_input = ft_qsplit(input, ";");
+	///
+	while (split_input[i])
+		printf("%s\n", split_input[i++]);
+	///
+	i = 0;
 	len = ft_strlen_2d(split_input);
 	ptr = malloc(sizeof(t_tree) * (len + 1)); 
 	if (!ptr)
@@ -48,6 +53,8 @@ void	*ft_semicolon(char *input)
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 			char **env)
 {
+	// void	**ptr;
+
 	init_minishell(env);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
@@ -57,7 +64,17 @@ int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
 		g_data()->input = ft_readline(create_full_prompt());
 		if (!g_data()->input)
 			break ;
-		g_data()->tree = ft_parsing(g_data()->input);
+		// g_data()->tree = ft_parsing(g_data()->input);
+		// ptr = ft_semicolon(g_data()->input);		
+		// int i = 0;
+		// while (ptr[i])
+		// {
+		// 	ft_generate_spaces(10);
+		// 	ft_printf_tree((t_tree *)ptr[i], 0, 2);
+		// 	printf("\n");
+		// 	i++;	
+		// }
+		break; // do what you schould do
 		if (!g_data()->tree)
 			continue ;
 		ft_execution(g_data()->tree);

@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/10/03 16:35:44 by adam             ###   ########.fr       */
+/*   Updated: 2024/10/04 15:05:07 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,16 @@ size_t	ft_cal_whitoutquotes(char (*str))
 	}
 	return (len);
 }
+
 char	*ft_tmp_rmquotes(char *(*str))
 {
-	char	c;
-	int		i;
-	int		j;
+	char		c;
+	int	i;
+	int	j;
 
-	j = 0;
-	i = 0;
 	c = 0;
+	i = 0;
+	j = 0;
 	if (!str || !(*str))
 		return (NULL);
 	while ((*str)[i])
@@ -87,20 +88,16 @@ char	*ft_tmp_rmquotes(char *(*str))
 			c = (*str)[i++];
 			while ((*str)[i])
 			{
-				if ((*str)[i] == c)
-				{
-					i++;
-					c = 0;
-				}
+				((*str)[i] == c) && (i++ && (c = 0));
 				(*str)[j++] = (*str)[i++];
 			}
 			if (!(*str)[i])
 			{
 				(*str)[j] = 0;
-				break;
+				break ;
 			}
 		}
-			(*str)[j++] = (*str)[i++];
+		(*str)[j++] = (*str)[i++];
 	}
 	return (NULL);
 }
