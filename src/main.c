@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:12:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/03 17:19:06 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,28 @@ struct s_data	*g_data(void)
 	static t_data	data;
 
 	return (&data);
+}
+
+void	*ft_semicolon(char *input)
+{
+	char	**split_input;
+	int		len;
+	void	**ptr;	
+	int		i;
+
+	i = 0;
+	split_input = ft_qsplit(input, ";");
+	len = ft_strlen_2d(split_input);
+	ptr = malloc(sizeof(t_tree) * (len + 1)); 
+	if (!ptr)
+		return (NULL);
+	while(split_input[i])
+	{
+	 	ptr[i] = ft_parsing(split_input[i]);
+		i++;
+	}
+	ptr[i] = NULL;
+	return (ptr);
 }
 
 int	main(int argc __attribute__((unused)), char **argv __attribute__((unused)),

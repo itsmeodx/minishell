@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/10/03 10:23:11 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:35:44 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,9 @@ char	*ft_tmp_rmquotes(char *(*str))
 	char	c;
 	int		i;
 	int		j;
-	int		key;
 
 	j = 0;
 	i = 0;
-	key = 0;
 	c = 0;
 	if (!str || !(*str))
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/10/03 10:22:03 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/03 17:08:25 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ t_tree	*ft_parsing(char *input)
 	t_link	*tmp;
 	t_tree	*tree;
 
+	// TODO slpit the input before lexer(use ft_qslipt)
+	// TODO create an array to store multi trees
+	// TODO count size of our array
+	// TODO don't forget to check if all leaks cleaned
 	tree = NULL;
 	g_data()->garbage = NULL;
 	split_input = ft_lexer(input);
@@ -90,12 +94,12 @@ t_tree	*ft_parsing(char *input)
 	if (ft_syntax_error(tmp))
 		return (ft_garbage_clear(&g_data()->garbage), NULL);
 	tree = ft_parse_and_or(tmp);
-	ft_generate_spaces(10);
-	ft_printf_tree(tree, 0, 2);
-	// printf("\n");
 	ft_garbage_clear(&g_data()->garbage);
 	return (tree);
 }
 
+	// printf("\n");
+	// ft_generate_spaces(10);
+	// ft_printf_tree(tree, 0, 2);
 	// ft_printf_link(link);
 	// ft_dbl_lstclear(&link);

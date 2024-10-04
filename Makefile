@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
+#    By: adam <adam@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/10/03 13:25:27 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/10/04 11:18:38 by adam             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC				=	cc
+CC				=	clang
 RM				=	rm -f
 CFLAGS			=	-Wall -Wextra -Werror -O2 -Ofast -g3 #-fsanitize=address,leak,undefined
 INC				=	-I./headers
