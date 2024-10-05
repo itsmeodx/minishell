@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:58:08 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:34:08 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_exit(int status)
 {
-	ft_treeclear(g_data()->tree);
+	ft_treesclear(g_data()->trees);
 	free_2d(g_data()->environ);
 	rl_clear_history();
 	close(g_data()->hfd);
@@ -52,7 +52,10 @@ bool	builtin_exit(t_cmd *cmd)
 
 	status = 0;
 	if (cmd->argc == 1)
+	{
+		ft_printf("exit\n");
 		ft_exit(g_data()->exit_status);
+	}
 	if (!check_status(cmd->argv[1]) && ft_strcmp(cmd->argv[1], "--"))
 		return (ft_dprintf(STDERR_FILENO, "exit\n"), ft_dprintf(STDERR_FILENO,
 				NAME"exit: %s: "NAR"\n", cmd->argv[1]), ft_exit(2), false);

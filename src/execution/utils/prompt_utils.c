@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:18:20 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/28 19:05:47 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:45:52 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*get_exit_status(void)
 	free(str[1]);
 	str[1] = get_output((char *[]){"/usr/bin/date", "+%H:%M:%S %p", NULL});
 	str[2] = ft_strjoin(str[1], "  ");
+	
 	free(str[1]);
 	str[1] = ft_strjoin(" ", str[2]);
 	free(str[2]);

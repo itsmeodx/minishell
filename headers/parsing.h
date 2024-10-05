@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/29 10:03:04 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/10/05 12:28:15 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ t_tree			*ft_parse_and_or(t_link *link);
 t_tree			*ft_parse_parenthesis(t_tree **tree, t_link *link);
 t_link			*ft_limit_link(t_link **link);
 void			ft_treeclear(t_tree *tree);
+void			ft_treesclear(t_tree **trees);
+
 // src fts
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
