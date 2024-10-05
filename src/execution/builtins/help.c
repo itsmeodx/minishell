@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:47:25 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/10/03 21:46:02 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:52:34 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ bool	builtin_help(t_cmd *cmd __attribute__((unused)))
 {
 	ft_printf("Welcome to 42minishell!\n");
 	ft_printf("Available built-in commands:\n");
-	ft_printf(" cd\t\t[dir/-]\t\t- Change directory to [dir] or previous (-).\n");
+	ft_printf(" cd\t\t[dir/-]\t\t- Change directory to [dir] "
+		"or previous (-).\n");
 	ft_printf(" echo\t\t[-n][str]\t- Display [str] with optional newline.\n");
 	ft_printf(" env\t\t\t\t- List environment variables.\n");
 	ft_printf(" exit\t\t[status]\t- Exit shell with [status].\n");

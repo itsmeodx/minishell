@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/10/05 12:31:46 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:49:37 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	*ft_semicolon(char *input)
 	ptr = malloc(sizeof(t_tree) * (len + 1));
 	if (!ptr)
 		return (NULL);
-	while(split_input[i])
+	while (split_input[i])
 	{
-	 	ptr[i] = ft_parsing(split_input[i]);
+		ptr[i] = ft_parsing(split_input[i]);
 		i++;
 	}
 	ptr[i] = NULL;
