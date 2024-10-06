@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/10/04 16:09:51 by adam             ###   ########.fr       */
+/*   Updated: 2024/10/06 18:18:20 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,14 @@ size_t	ft_cal_whitoutquotes(char (*str))
 	return (len);
 }
 
-char	*ft_tmp_rmquotes(char *(*str))
+void	ft_tmp_rmquotes(char *(*str))
 {
-	char		c;
-	int	i[2];
+	char	c;
+	int		i[2];
 
 	c = 0;
-	i[0]= 0;
+	i[0] = 0;
 	i[1] = 0;
-	if (!str || !(*str))
-		return (NULL);
 	while ((*str)[i[0]])
 	{
 		if ((*str)[i[0]] && ((*str)[i[0]] == '"' || (*str)[i[0]] == '\''))
@@ -98,5 +96,4 @@ char	*ft_tmp_rmquotes(char *(*str))
 		}
 		(*str)[i[1]++] = (*str)[i[0]++];
 	}
-	return (NULL);
 }

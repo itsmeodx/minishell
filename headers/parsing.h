@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/10/05 12:28:15 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:12:57 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char			**ft_strjoin_2d(char **s1, char **s2);
 
 // heredoc
 int				ft_open_herdoc(t_link **link, bool key_expand, int num);
-char			*ft_tmp_rmquotes(char **str);
+void			ft_tmp_rmquotes(char **str);
 char			*ft_name_file(int num_file);
 void			ft_write_n(char **line, int fd, int key_expand);
 int				ft_get_fd(char *file);
@@ -135,7 +135,7 @@ bool			ft_is_redirection(int identifier);
 // // link_ft
 t_link			*ft_create_new_link(t_link *link, t_link *limit);
 t_link			*ft_search_target(t_link *head, int target[2]);
-t_link			*ft_search_target_rev(t_link *head, int target[2]);
+t_link			*ft_search_target_rev(t_link *head, int target[2], int key);
 void			ft_printf_link(t_link *link);
 
 // dbl link_ft

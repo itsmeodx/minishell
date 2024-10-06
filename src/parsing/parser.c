@@ -6,7 +6,7 @@
 /*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/10/04 16:00:54 by adam             ###   ########.fr       */
+/*   Updated: 2024/10/06 18:21:22 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ bool	ft_is_redirection(int identifier)
 	return (false);
 }
 
+// TODO handle ; in syntax error
 t_tree	*ft_parsing(char *input)
 {
 	t_link	*link;
@@ -72,10 +73,6 @@ t_tree	*ft_parsing(char *input)
 	t_link	*tmp;
 	t_tree	*tree;
 
-	// TODO slpit the input before lexer(use ft_qslipt)
-	// TODO create an array to store multi trees
-	// TODO count size of our array
-	// TODO don't forget to check if all leaks cleaned
 	tree = NULL;
 	g_data()->garbage = NULL;
 	split_input = ft_lexer(input);
@@ -94,12 +91,12 @@ t_tree	*ft_parsing(char *input)
 	if (ft_syntax_error(tmp))
 		return (ft_garbage_clear(&g_data()->garbage), NULL);
 	tree = ft_parse_and_or(tmp);
-	// ft_generate_spaces(10);
-	// ft_printf_tree(tree, 0, 2);
-	// printf("\n");
 	ft_garbage_clear(&g_data()->garbage);
 	return (tree);
 }
 
+	// ft_generate_spaces(10);
+	// ft_printf_tree(tree, 0, 2);
+	// printf("\n");
 	// ft_printf_link(link);
 	// ft_dbl_lstclear(&link)
