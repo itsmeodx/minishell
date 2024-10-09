@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/28 18:02:03 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:19:30 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct s_data
 	int					hfd;
 	char				*path;
 	char				**aliases;
-	struct s_tree		*tree;
+	struct s_tree		**trees;
 	bool				branch;
 	char				*input;
 	char				*last_line;

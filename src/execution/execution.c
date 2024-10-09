@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:13:33 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/08/26 15:56:41 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/05 12:25:15 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 
 int	ft_execution(t_tree *tree)
 {
+	int	ret;
+
+	ret = EXIT_SUCCESS;
 	if (tree->type == STR)
-		return (execute_str(tree));
+		ret = execute_str(tree);
 	else if (tree->type == PIPE)
-		return (execute_pipe(tree));
+		ret = execute_pipe(tree);
 	else if (tree->type == AND)
-		return (execute_and(tree));
+		ret = execute_and(tree);
 	else if (tree->type == OR)
-		return (execute_or(tree));
+		ret = execute_or(tree);
 	else if (tree->type == OPEN_PAR)
-		return (execute_par(tree));
-	return (EXIT_FAILURE);
+		ret = execute_par(tree);
+	if (g_data()->exit_status == SIGINT + 128)
+		ft_printf("\n");
+	else if (g_data()->exit_status == SIGQUIT + 128)
+		ft_printf("Quit (core dumped)\n");
+	return (ret);
 }

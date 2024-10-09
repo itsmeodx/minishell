@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 20:57:26 by akhobba           #+#    #+#             */
-/*   Updated: 2024/10/09 11:48:09by akhobba          ###   ########.fr       */
+/*   Updated: 2024/10/09 12:02:04 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ bool	ft_is_redirection(int identifier)
 	return (false);
 }
 
+// TODO handle ; in syntax error
 t_tree	*ft_parsing(char *input)
 {
 	t_link	*link;
@@ -98,4 +99,4 @@ t_tree	*ft_parsing(char *input)
 	// ft_printf_tree(tree, 0, 2);
 	// printf("\n");
 	// ft_printf_link(link);
-	// ft_dbl_lstclear(&link);
+	// ft_dbl_lstclear(&link)

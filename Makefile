@@ -6,29 +6,30 @@
 #    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/28 21:40:15 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/10/05 12:39:48 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC				=	cc
+CC				=	clang
 RM				=	rm -f
-CFLAGS			=	-Wall -Wextra -Werror -g3 #-fsanitize=address,leak,undefined
+CFLAGS			=	-Wall -Wextra -Werror -O2 -Ofast -g3 #-fsanitize=address,leak,undefined
 INC				=	-I./headers
 HEADERS			=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR			=	src
 OBJDIR			=	obj
 
-#libftprintf
+# libftprintf
 FT_PRINTF		=	ft_printf/libftprintf.a
 FT_PRINTF_DIR	=	ft_printf
 
-#Colors
+# Colors
 RED				=	\e[1;31m
 GREEN			=	\e[1;32m
 YELLOW			=	\e[3;33m
 CYAN			=	\e[3;96m
 END				=	\e[0m
 
+# Parsing Files
 PARSING			=	parsing/lexer parsing/parser\
 					parsing/utils/ft_qsplit parsing/utils/ft_strchr_v2\
 					parsing/tree_utils/ft_treenew parsing/create_tree \
@@ -46,10 +47,11 @@ PARSING			=	parsing/lexer parsing/parser\
 					parsing/parentheses_checker parsing/open_heredoc\
 					parsing/garbage_collector parsing/rm_quotes \
 
+# Execution Files
 EXECUTION		=	execution/builtins/alias execution/builtins/builtins execution/builtins/cd \
 					execution/builtins/echo execution/builtins/env \
 					execution/builtins/exit \
-					execution/builtins/export execution/builtins/pwd \
+					execution/builtins/export execution/builtins/help execution/builtins/pwd \
 					execution/builtins/unalias execution/builtins/unset execution/asterisk \
 					execution/env execution/exec \
 					execution/execute_and_or \

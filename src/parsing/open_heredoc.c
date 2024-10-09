@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:58:46 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/29 10:02:10 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/10/06 18:18:07 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	ft_open_herdoc(t_link **link, bool key_expand, int num)
 			&& ((tmp)->next && (tmp)->next->identifier == STR))
 		{
 			key_expand = is_inquotes((tmp)->next->command, 1);
-			ft_tmp_rmquotes(&(tmp->next->command));
+			if (tmp->next->command)
+				ft_tmp_rmquotes(&(tmp->next->command));
 			(tmp)->next->command
 				= ft_write_heredoc((tmp)->next->command,
 					num++, key_expand, &status);

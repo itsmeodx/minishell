@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: adam <adam@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:23:41 by akhobba           #+#    #+#             */
-/*   Updated: 2024/09/25 19:14:38 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/10/06 18:07:07 by adam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_tree	*ft_parse_and_or(t_link *link)
 
 	if (!link)
 		return (NULL);
-	target = ft_search_target_rev(link, goal);
+	target = ft_search_target_rev(link, goal, 0);
 	if (!target)
 	{
 		new = ft_parse_pipe(link);
