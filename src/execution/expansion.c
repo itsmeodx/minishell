@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:57:17 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/22 15:50:43 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:11:32 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ char	**expand_argv(t_list *argv_lst)
 	return (argv);
 }
 
+static
+void	ft_alias_expansion(char **str)
+{
+	char	*tmp;
+
+	if (!str || !*str || !is_in_env(*str, g_data()->aliases))
+		return ;
+	tmp = ft_getenv(*str, g_data()->aliases);
+	free(*str);
+	*str = ft_strdup(tmp);
+}
+
 void	ft_expansion(t_cmd *cmd)
 {
 	int		i;
@@ -54,6 +66,7 @@ void	ft_expansion(t_cmd *cmd)
 	lst = NULL;
 	argv_lst = NULL;
 	i = -1;
+	ft_alias_expansion(&cmd->argv[0]);
 	while (cmd->argv && cmd->argv[++i])
 	{
 		ft_expanding(&lst, cmd->argv[i]);

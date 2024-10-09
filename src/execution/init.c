@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 17:38:50 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:13:36 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:50:56 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_path(char **env)
 {
 	char	*path;
 
-	path = ft_getenv("PATH");
+	path = ft_getenv("PATH", env);
 	if (!path)
 	{
 		g_data()->environ = addtoenv(env, "PATH", PATH);
@@ -56,20 +56,21 @@ void	check_pwd(char **env)
 {
 	char	*pwd;
 
-	pwd = ft_getenv("PWD");
+	pwd = ft_getenv("PWD", env);
 	if (!pwd)
 	{
 		pwd = getcwd(NULL, 0);
 		if (!pwd)
 			return ;
 		g_data()->environ = addtoenv(env, "PWD", pwd);
+		free(pwd);
 		if (!g_data()->environ)
 			ft_exit(EXIT_FAILURE);
 	}
 	else
 	{
 		pwd = getcwd(NULL, 0);
-		if (ft_strcmp(pwd, ft_getenv("PWD")) != 0)
+		if (ft_strcmp(pwd, ft_getenv("PWD", env)) != 0)
 			update_env(env, "PWD", pwd);
 		free(pwd);
 	}
@@ -88,13 +89,10 @@ void	init_minishell(char **env)
 	}
 	check_path(g_data()->environ);
 	g_data()->home = get_home();
-	if (!is_in_env("HOME"))
+	if (!is_in_env("HOME", g_data()->environ))
 		g_data()->environ = addtoenv(g_data()->environ, "HOME", g_data()->home);
 	update_shlvl(g_data()->environ);
 	check_pwd(g_data()->environ);
 	set_hostname(g_data()->environ);
 	restore_history();
-	g_data()->stds[0] = dup(STDIN_FILENO);
-	g_data()->stds[1] = dup(STDOUT_FILENO);
-	g_data()->stds[2] = dup(STDERR_FILENO);
 }

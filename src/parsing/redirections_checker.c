@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 00:58:26 by adam              #+#    #+#             */
-/*   Updated: 2024/09/26 18:08:20 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:34:57 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ t_errorn	ft_check_herdoc(t_link *link)
 		if (tmp->identifier == HEREDOC)
 		{
 			if (!tmp->next || (tmp->next && (tmp->next->identifier == AND
-						|| tmp->next->identifier == OR)))
+						|| tmp->next->identifier == OR
+						|| ft_is_redirection(tmp->next->identifier))))
 				return (ERROR_HERDOC);
 			num_herdoc++;
 			if (num_herdoc > 16)

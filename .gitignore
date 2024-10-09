@@ -94,9 +94,9 @@ cmake-build-debug
 git/
 
 # readline
-readline.supp
+# readline.supp
 
-# MiniShell
+# minishell files
 minishell
 .minishell_history
 minishell_tester

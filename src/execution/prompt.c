@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 19:57:59 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 12:51:19 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_user_host(void)
 {
 	char	*str[3];
 
-	str[2] = ft_strdup(ft_getenv("USER"));
+	str[2] = ft_strdup(ft_getenv("USER", g_data()->environ));
 	if (!str[2])
 		str[2] = get_output((char *[]){"/usr/bin/whoami", NULL});
 	if (!str[2])
@@ -39,7 +39,7 @@ char	*get_user_host(void)
 	str[0] = ft_strjoin(CYAN, str[2]);
 	str[1] = ft_strjoin(str[0], "@");
 	free(str[0]);
-	str[0] = ft_strjoin(str[1], ft_getenv("MINI_HOSTNAME"));
+	str[0] = ft_strjoin(str[1], ft_getenv("MINI_HOSTNAME", g_data()->environ));
 	free(str[1]);
 	str[1] = ft_strjoin(str[0], RESET);
 	free(str[0]);

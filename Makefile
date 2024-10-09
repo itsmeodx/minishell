@@ -6,7 +6,7 @@
 #    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/09/26 16:11:11 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/09/28 21:40:15 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,11 +46,11 @@ PARSING			=	parsing/lexer parsing/parser\
 					parsing/parentheses_checker parsing/open_heredoc\
 					parsing/garbage_collector parsing/rm_quotes \
 
-EXECUTION		=	execution/builtins/builtins execution/builtins/cd \
+EXECUTION		=	execution/builtins/alias execution/builtins/builtins execution/builtins/cd \
 					execution/builtins/echo execution/builtins/env \
 					execution/builtins/exit \
-					execution/builtins/export execution/builtins/unset \
-					execution/builtins/pwd execution/asterisk \
+					execution/builtins/export execution/builtins/pwd \
+					execution/builtins/unalias execution/builtins/unset execution/asterisk \
 					execution/env execution/exec \
 					execution/execute_and_or \
 					execution/execute_par execution/execute_pipe \

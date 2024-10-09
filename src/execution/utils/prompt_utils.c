@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:18:20 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:05:47 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@ char	*getpwd(void)
 {
 	char	*str[2];
 
-	str[0] = ft_strdup(ft_getenv("PWD"));
+	str[0] = ft_strdup(ft_getenv("PWD", g_data()->environ));
 	if (!str[0])
 		str[0] = getcwd(NULL, 0);
 	if (!str[0])
-		str[0] = ft_strdup(ft_getenv("PWD"));
+		str[0] = ft_strdup(ft_getenv("PWD", g_data()->environ));
 	if (!str[0])
 		str[0] = ft_strdup("");
-	if (ft_getenv("HOME")
-		&& ft_strncmp(str[0], ft_getenv("HOME"),
-			ft_strlen(ft_getenv("HOME"))) == 0)
-		str[1] = ft_strjoin("~", str[0] + ft_strlen(ft_getenv("HOME")));
+	if (ft_getenv("HOME", g_data()->environ)
+		&& ft_strncmp(str[0], ft_getenv("HOME", g_data()->environ),
+			ft_strlen(ft_getenv("HOME", g_data()->environ))) == 0)
+		str[1] = ft_strjoin("~", str[0]
+				+ ft_strlen(ft_getenv("HOME", g_data()->environ)));
 	else
 		str[1] = ft_strdup(str[0]);
 	free(str[0]);

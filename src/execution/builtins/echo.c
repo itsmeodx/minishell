@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 1970/01/01 01:00:00 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/09/26 18:11:12 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:19:35 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_n_flag(t_cmd *cmd, int *n_flag)
 		j = 1;
 		while (cmd->argv[i][j] == 'n')
 			j++;
-		if (cmd->argv[i][j] == 0)
+		if (cmd->argv[i][j] == 0 && cmd->argv[i][j - 1] != '-')
 		{
 			*n_flag = 1;
 			i++;

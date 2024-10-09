@@ -6,7 +6,7 @@
 /*   By: akhobba <akhobba@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 12:26:20 by adam              #+#    #+#             */
-/*   Updated: 2024/09/29 10:17:29 by akhobba          ###   ########.fr       */
+/*   Updated: 2024/10/09 11:52:04 by akhobba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,40 +69,29 @@ size_t	ft_cal_whitoutquotes(char (*str))
 	}
 	return (len);
 }
-char	*ft_tmp_rmquotes(char *(*str))
+
+char	*ft_tmp_rmquotes(char *str)
 {
-	char	c;
+	char	*ptr;
 	int		i;
 	int		j;
-	int		key;
 
 	j = 0;
 	i = 0;
-	key = 0;
-	c = 0;
-	if (!str || !(*str))
+	ptr = malloc(ft_cal_whitoutquotes(str) + 2);
+	if (!ptr)
 		return (NULL);
-	while ((*str)[i])
+	while (str[i])
 	{
-		if ((*str)[i] && ((*str)[i] == '"' || (*str)[i] == '\''))
+		if (!(str[i] == '"' || str[i] == '\''))
 		{
-			c = (*str)[i++];
-			while ((*str)[i])
-			{
-				if ((*str)[i] == c)
-				{
-					i++;
-					c = 0;
-				}
-				(*str)[j++] = (*str)[i++];
-			}
-			if (!(*str)[i])
-			{
-				(*str)[j] = 0;
-				break;
-			}
+			ptr[j] = str[i];
+			j++;
 		}
-			(*str)[j++] = (*str)[i++];
+		i++;
 	}
-	return (NULL);
+	ptr[j] = '\0';
+	return (free(str), ptr);
 }
+
+
