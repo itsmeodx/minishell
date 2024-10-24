@@ -6,7 +6,7 @@
 /*   By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:47:25 by oouaadic          #+#    #+#             */
-/*   Updated: 2024/10/05 12:52:34 by oouaadic         ###   ########.fr       */
+/*   Updated: 2024/10/05 14:02:26 by oouaadic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ bool	builtin_help(t_cmd *cmd __attribute__((unused)))
 	ft_printf(" pwd\t\t\t\t- Print working directory.\n");
 	ft_printf(" unset\t\t[var]\t\t- Unset environment variable.\n");
 	ft_printf("\nSupports piping, redirection, and subshells:\n");
-	ft_printf(" cmd | cmd\t\t\t- Pipe output of first cmd to second.\n");
+	ft_printf(" cmd1 | cmd2\t\t\t- Pipe output of cmd1 to cmd2.\n");
 	ft_printf(" cmd > file\t\t\t- Redirect output to file.\n");
 	ft_printf(" cmd >> file\t\t\t- Append output to file.\n");
 	ft_printf(" cmd < file\t\t\t- Use file as input.\n");
 	ft_printf(" cmd << delim\t\t\t- Read input until delim.\n");
-	ft_printf(" cmd && cmd\t\t\t- Run second cmd if first succeeds.\n");
-	ft_printf(" cmd || cmd\t\t\t- Run second cmd if first fails.\n");
+	ft_printf(" cmd1 && cmd2\t\t\t- Run cmd2 if cmd1 succeeds.\n");
+	ft_printf(" cmd1 || cmd2\t\t\t- Run cmd2 if cmd1 fails.\n");
 	ft_printf(" $var\t\t\t\t- Substitute variable value.\n");
 	ft_printf(" (cmd)\t\t\t\t- Run cmd in subshell.\n");
 	ft_printf("\nCtrl+C to terminate, Ctrl+D to exit.\n");

@@ -90,9 +90,9 @@ norm:
 	@if [ $$? -eq 0 ]; then echo "$(GREEN)Norminette passed$(END)"; fi
 
 $(NAME): $(FT_PRINTF) $(OBJ)
-	@echo "$(YELLOW)Compiling $(CYAN)$(NAME)$(END)"
+	@echo "\033[K\r$(YELLOW)Compiling $(CYAN)$(NAME)$(END)"
 	@$(CC) $(CFLAGS) $(OBJ) $(FT_PRINTF) $(INC) -o $(NAME) -lreadline
-	@echo "$(CYAN)$(NAME) is ready to use$(END)"
+	@echo "\033[1F\r\033[K$(CYAN)$(NAME) is ready to use$(END)"
 
 $(FT_PRINTF):
 	@echo "$(YELLOW)Compiling $(CYAN)libftprintf.a$(END)"
@@ -100,10 +100,10 @@ $(FT_PRINTF):
 	@echo "$(GREEN)Done.$(END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
-	@echo "$(YELLOW)Compiling $(CYAN)$(notdir $<)$(END)"
+	@echo -n "$(YELLOW)Compiling $(CYAN)$(notdir $<)$(END)\033[K\r"
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
-	@echo "$(GREEN)Done.$(END)"
+#	@echo "$(GREEN)Done.$(END)"
 
 clean:
 	@echo "$(RED)Cleaning $(OBJDIR)...$(END)"
@@ -114,6 +114,7 @@ clean:
 		make -C $(FT_PRINTF_DIR) clean > /dev/null; \
 	fi
 	@$(RM) -r $(OBJDIR) || true
+	@echo -n "\033[1F\033[K\033[1F\033[K"
 
 fclean: clean
 	@echo "$(RED)Cleaning $(NAME)...$(END)"
@@ -124,6 +125,7 @@ fclean: clean
 		make -C $(FT_PRINTF_DIR) fclean > /dev/null; \
 	fi
 	@$(RM) $(NAME)
+	@echo -n "\033[1F\033[K\033[1F\033[K"
 
 re: fclean all
 
