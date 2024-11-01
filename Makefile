@@ -6,7 +6,7 @@
 #    By: oouaadic <oouaadic@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 16:47:21 by oouaadic          #+#    #+#              #
-#    Updated: 2024/10/05 12:39:48 by oouaadic         ###   ########.fr        #
+#    Updated: 2024/11/01 15:40:43 by oouaadic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,9 +95,9 @@ $(NAME): $(FT_PRINTF) $(OBJ)
 	@echo "\033[1F\r\033[K$(CYAN)$(NAME) is ready to use$(END)"
 
 $(FT_PRINTF):
-	@echo "$(YELLOW)Compiling $(CYAN)libftprintf.a$(END)"
+	@echo -n "$(YELLOW)Compiling $(CYAN)libftprintf.a$(END)\033[K\r"
 	@make -C $(FT_PRINTF_DIR) > /dev/null
-	@echo "$(GREEN)Done.$(END)"
+#	 @echo "$(GREEN)Done.$(END)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS)
 	@echo -n "$(YELLOW)Compiling $(CYAN)$(notdir $<)$(END)\033[K\r"
