@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # Shell
-SHELL			=	/bin/bash
+SHELL			=	/bin/zsh
 
 # Compilation
 CC				=	clang
@@ -90,8 +90,8 @@ NAME = minishell
 all: $(NAME)
 
 norm:
-	@norminette --use-gitignore . > /dev/null || (echo "$(RED)Norminette failed$(END)" && exit 1)
-	@if [ $$? -eq 0 ]; then echo "$(GREEN)Norminette passed$(END)"; fi
+	@zsh -c "(norminette $(SRCDIR) headers > /dev/null && echo \"$(GREEN)Norminette passed$(END)\") \
+	|| echo \"$(RED)Norminette failed$(END)\""
 
 $(NAME): $(FT_PRINTF) $(OBJ)
 	@echo "\033[K\r$(YELLOW)Compiling $(CYAN)$(NAME)$(END)"
