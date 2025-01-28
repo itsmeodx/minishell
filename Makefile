@@ -10,6 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+# Shell
+SHELL			=	/bin/bash
+
+# Compilation
 CC				=	clang
 RM				=	rm -f
 CFLAGS			=	-Wall -Wextra -Werror -O2 -Ofast -g3 #-fsanitize=address,leak,undefined
