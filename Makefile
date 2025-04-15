@@ -16,7 +16,7 @@ SHELL			=	/bin/zsh
 # Compilation
 CC				=	clang
 RM				=	rm -f
-CFLAGS			=	-Wall -Wextra -Werror -O2 -Ofast -g3 #-fsanitize=address,leak,undefined
+CFLAGS			=	-Wall -Wextra -Werror -O2 #-g3 -fsanitize=address,leak,undefined
 INC				=	-I./headers
 HEADERS			=	headers/minishell.h headers/execution.h headers/parsing.h
 SRCDIR			=	src
