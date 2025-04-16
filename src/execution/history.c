@@ -20,7 +20,7 @@ char	*get_last_line(void)
 	char	*history;
 	int		fd;
 
-	history = ft_strjoin(g_data()->home, "/.msh_history");
+	history = ft_strjoin(g_data()->home, "/" HISTORY_FILE);
 	if (!history)
 		return (NULL);
 	fd = open(history, O_RDONLY);
@@ -68,15 +68,15 @@ void	restore_history(void)
 	char	*line;
 	char	*history;
 
-	history = ft_strjoin(g_data()->home, "/.msh_history");
+	history = ft_strjoin(g_data()->home, "/" HISTORY_FILE);
 	if (!history)
 		return ;
-	if (access(history, F_OK) != -1)
+	if (access(history, F_OK) != -1 && access(history, R_OK) == -1)
 	{
-		if (access(history, R_OK) == -1)
-			unlink(history);
-		else if (access(history, W_OK) == -1)
-			unlink(history);
+		ft_dprintf(2, NAME "Warning: %s: %s\n"
+			"\t   Minishell won't be able to maintain it's history.\n",
+			history, strerror(errno));
+		return (g_data()->hfd = -1, free(history));
 	}
 	g_data()->hfd = open(history, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (g_data()->hfd == -1)
