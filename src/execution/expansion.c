@@ -46,15 +46,18 @@ char	**expand_argv(t_list *argv_lst)
 }
 
 static
-void	ft_alias_expansion(char **str)
+void	ft_alias_expansion(char ***str)
 {
 	char	*tmp;
+	char	**tmp_array;
 
-	if (!str || !*str || !is_in_env(*str, g_data()->aliases))
+	if (!*str || !**str || !is_in_env(**str, g_data()->aliases))
 		return ;
-	tmp = ft_getenv(*str, g_data()->aliases);
-	free(*str);
-	*str = ft_strdup(tmp);
+	tmp = ft_getenv(**str, g_data()->aliases);
+	tmp_array = ft_qsplit(tmp, " \t\n");
+	tmp_array = ft_strjoin_2d(tmp_array, (*str) + 1);
+	free_2d(*str);
+	*str = tmp_array;
 }
 
 void	ft_expansion(t_cmd *cmd)
@@ -66,7 +69,7 @@ void	ft_expansion(t_cmd *cmd)
 	lst = NULL;
 	argv_lst = NULL;
 	i = -1;
-	ft_alias_expansion(&cmd->argv[0]);
+	ft_alias_expansion(&cmd->argv);
 	while (cmd->argv && cmd->argv[++i])
 	{
 		ft_expanding(&lst, cmd->argv[i]);
