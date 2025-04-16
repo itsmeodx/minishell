@@ -53,14 +53,20 @@
 # define BLACK "\001\033[1;30m\002"
 # define RESET "\001\033[0m\002"
 
-// heardoc
+// Heardoc
 # define HEREDOC_PREFIX "/tmp/hd_"
 # define HEREDOC_PROMPT "> "
 
-// Define default PATH
+// Default PATH
 # define PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-// global variable
+// History file
+# define HISTORY_FILE ".minish_history"
+
+// Config file
+# define CONFIG_FILE ".minishrc"
+
+// Global variable
 struct s_data	*g_data(void);
 
 typedef struct s_link
