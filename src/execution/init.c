@@ -76,6 +76,36 @@ void	check_pwd(char **env)
 	}
 }
 
+static
+void	set_config(void)
+{
+	char	*configfile;
+	int		fd;
+	char	*line;
+	t_tree	*tree;
+
+	configfile = ft_strjoin(g_data()->home, "/" CONFIG_FILE);
+	if (!configfile || access(configfile, F_OK | R_OK) == -1)
+		return (free(configfile));
+	fd = open(configfile, O_RDONLY);
+	if (fd == -1)
+		return (free(configfile));
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (line[0] != '#' && !isempty(line))
+		{
+			tree = ft_parsing(line);
+			if (tree)
+				ft_execution(tree);
+			ft_treeclear(tree);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (close(fd), free(line), free(configfile));
+}
+
 void	init_minishell(char **env)
 {
 	*g_data() = (struct s_data){0};
@@ -95,4 +125,5 @@ void	init_minishell(char **env)
 	check_pwd(g_data()->environ);
 	set_hostname(g_data()->environ);
 	restore_history();
+	set_config();
 }
