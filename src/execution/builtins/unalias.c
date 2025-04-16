@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "execution.h"
+#include "parsing.h"
 
 bool	builtin_unalias(t_cmd *cmd)
 {
@@ -18,11 +19,11 @@ bool	builtin_unalias(t_cmd *cmd)
 	bool	bad_key;
 
 	if (cmd->argc == 1)
-	{
-		ft_dprintf(STDERR_FILENO, "unalias: usage: unalias name [name ...]\n");
-		g_data()->exit_status = 2;
-		return (false);
-	}
+		return (ft_dprintf(STDERR_FILENO, "unalias: usage: unalias "
+				"name [name ...]\n"), g_data()->exit_status = 2, false);
+	if (cmd->argc == 2 && ft_strcmp(cmd->argv[1], "-a") == 0)
+		return (free_2d(g_data()->aliases), g_data()->aliases = NULL,
+			g_data()->exit_status = 0, true);
 	i = 0;
 	bad_key = false;
 	while (cmd->argv && cmd->argv[++i])
