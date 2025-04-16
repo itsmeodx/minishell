@@ -17,6 +17,7 @@ int	ft_exit(int status)
 {
 	ft_treesclear(g_data()->trees);
 	free_2d(g_data()->environ);
+	free_2d(g_data()->aliases);
 	rl_clear_history();
 	close(g_data()->hfd);
 	free(g_data()->home);
