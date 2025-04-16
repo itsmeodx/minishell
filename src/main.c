@@ -42,6 +42,7 @@ void	*ft_semicolon(char *input)
 		i++;
 	}
 	ptr[i] = NULL;
+	free_2d(split_input);
 	return (ptr);
 }
 
