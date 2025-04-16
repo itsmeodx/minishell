@@ -68,7 +68,7 @@ void	set_alias(char **key_value, char ***aliases, bool *bad_key)
 	if (!check_alias(key_value[0]))
 	{
 		*bad_key = true;
-		ft_printf(NAME"alias: %s: " IAN "\n", key_value[0]);
+		ft_dprintf(2, NAME"alias: %s: " IAN "\n", key_value[0]);
 	}
 	else if (is_in_env(key_value[0], *aliases))
 		update_env(*aliases, key_value[0], key_value[1]);
